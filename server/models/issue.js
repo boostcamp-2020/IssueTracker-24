@@ -28,9 +28,14 @@ module.exports = (sequelize, DataTypes) => {
   );
   issue.associate = (models) => {
     issue.belongsTo(models.User, {
-      foreignKey: 'user_id',
+      foreignKey: 'userId',
       onDelete: 'no action',
       onUpdate: 'no action',
+    });
+    issue.belongsToMany(models.User, {
+      as: 'users',
+      through: 'issue_user',
+      foreignKey: 'issue_id',
     });
   };
   return issue;
