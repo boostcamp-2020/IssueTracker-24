@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   issue.associate = (models) => {
     issue.belongsTo(models.User, {
-      foreignKey: 'userId',
+      foreignKey: 'user_id',
       onDelete: 'no action',
       onUpdate: 'no action',
     });

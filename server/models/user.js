@@ -8,16 +8,16 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      profileImage: {
+      profile_image: {
         type: DataTypes.STRING(200),
       },
-      userId: {
+      user_id: {
         type: DataTypes.STRING(100),
       },
       password: {
         type: DataTypes.STRING(100),
       },
-      snsId: {
+      sns_id: {
         type: DataTypes.STRING(200),
       },
       provider: {
