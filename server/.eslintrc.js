@@ -14,7 +14,12 @@ module.exports = {
     'import/no-unresolved': [2, { caseSensitive: false }],
     'import/no-dynamic-require': 0,
     'global-require': 0,
-    'prettier/prettier': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'no-unused-vars': 'warn',
   },
 };
