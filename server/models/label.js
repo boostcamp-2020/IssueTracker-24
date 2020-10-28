@@ -27,6 +27,12 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     },
   );
-
+  label.associate = (models) => {
+    label.belongsToMany(models.Issue, {
+      as: 'issues',
+      through: 'issue_label',
+      timestamps: false,
+    });
+  };
   return label;
 };

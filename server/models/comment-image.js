@@ -21,9 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   commentImage.associate = (models) => {
     commentImage.belongsTo(models.Comment, {
-      targetKey: 'id',
-      onDelete: 'no action',
-      onUpdate: 'no action',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   };
   return commentImage;

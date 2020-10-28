@@ -32,10 +32,26 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'no action',
       onUpdate: 'no action',
     });
+    issue.hasMany(models.Comment, {
+      as: 'comments',
+    });
     issue.belongsToMany(models.User, {
       as: 'users',
       through: 'issue_user',
       foreignKey: 'issue_id',
+      timestamps: false,
+    });
+    issue.hasMany(models.IssueImage, {
+      as: 'issueImages',
+    });
+    issue.belongsTo(models.Milestone, {
+      onDelete: 'no action',
+      onUpdate: 'no action',
+    });
+    issue.belongsToMany(models.Label, {
+      as: 'labels',
+      through: 'issue_label',
+      timestamps: false,
     });
   };
   return issue;

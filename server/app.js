@@ -6,7 +6,7 @@ const startServer = async () => {
 
   await require('./loaders')(app);
 
-  app.listen(config.PORT, () => console.log(config.PORT, '번 포트에서 대기중'));
+  app.listen(config.port, () => console.log(config.port, '번 포트에서 대기중'));
 };
 
 startServer();
