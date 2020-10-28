@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) =>{
     const issueImage = sequelize.define(
-       'issue_image',{
+       'issueImage',{
            id:{
             type: DataTypes.INTEGER,
             allowNull: false,
