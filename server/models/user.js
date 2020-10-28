@@ -30,5 +30,12 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     },
   );
+  user.associate = (models) => {
+    user.belongsToMany(models.Issue, {
+      as: 'issues',
+      through: 'issue_user',
+      foreignKey: 'user_id',
+    });
+  };
   return user;
 };

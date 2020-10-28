@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'no action',
       onUpdate: 'no action',
     });
+    issue.belongsToMany(models.User, {
+      as: 'users',
+      through: 'issue_user',
+      foreignKey: 'issue_id',
+    });
   };
   return issue;
 };

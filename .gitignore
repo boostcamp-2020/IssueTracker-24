@@ -3,3 +3,4 @@ node_modules
 
 #file
 .env
+*.env
