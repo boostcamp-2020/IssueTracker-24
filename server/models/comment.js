@@ -8,12 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      // issue_id: {
-      //   type: DataTypes.INTEGER,
-      // },
-      // user_id: {
-      //   type: DataTypes.INTEGER,
-      // },
       content: {
         type: DataTypes.STRING(1000),
         allowNull: false,
@@ -27,19 +21,19 @@ module.exports = (sequelize, DataTypes) => {
   );
   comment.associate = (models) => {
     comment.belongsTo(models.User, {
-      targetKey: 'id',
-      onDelete: 'no action',
-      onUpdate: 'no action',
+      foreignKey: 'user_id',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
     comment.belongsTo(models.Issue, {
-      targetKey: 'id',
-      onDelete: 'no action',
-      onUpdate: 'no action',
+      foreignKey: 'issue_id',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
     comment.hasMany(models.CommentImage, {
-      sourceKey: 'id',
-      onDelete: 'no action',
-      onUpdate: 'no action',
+      as: 'commentImages',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   };
   return comment;
