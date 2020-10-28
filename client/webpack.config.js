@@ -29,7 +29,7 @@ module.exports = {
     ],
   },
   entry: {
-    app: ['./src/hello'],
+    app: ['./src/Hi'],
   },
   output: {
     path: path.join(__dirname, 'dist'),
