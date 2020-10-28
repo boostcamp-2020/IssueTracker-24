@@ -4,7 +4,7 @@ const config = require(`${__dirname}/../config/index`).db;
 const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
-console.log(config);
+
 db.User = require('./user')(sequelize, Sequelize.DataTypes);
 db.Issue = require('./issue')(sequelize, Sequelize.DataTypes);
 db.Comment = require('./comment')(sequelize, Sequelize.DataTypes);
