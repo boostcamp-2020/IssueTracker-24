@@ -21,15 +21,19 @@ module.exports = (sequelize, DataTypes) => {
   );
   comment.associate = (models) => {
     comment.belongsTo(models.User, {
+      foreignKey: 'user_id',
       onDelete: 'cascade',
       onUpdate: 'cascade',
     });
     comment.belongsTo(models.Issue, {
+      foreignKey: 'issue_id',
       onDelete: 'cascade',
       onUpdate: 'cascade',
     });
     comment.hasMany(models.CommentImage, {
       as: 'commentImages',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   };
   return comment;

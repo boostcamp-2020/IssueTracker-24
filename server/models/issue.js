@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     issue.hasMany(models.Comment, {
       as: 'comments',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
     issue.belongsToMany(models.User, {
       as: 'users',
@@ -43,8 +45,11 @@ module.exports = (sequelize, DataTypes) => {
     });
     issue.hasMany(models.IssueImage, {
       as: 'issueImages',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
     issue.belongsTo(models.Milestone, {
+      foreignKey: 'milestone_id',
       onDelete: 'no action',
       onUpdate: 'no action',
     });

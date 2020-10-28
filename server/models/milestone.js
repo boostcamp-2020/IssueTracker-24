@@ -33,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
   milestone.associate = (models) => {
     milestone.hasMany(models.Issue, {
       as: 'issues',
+      onDelete: 'no action',
+      onUpdate: 'no action',
     });
   };
   return milestone;

@@ -39,6 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     user.hasMany(models.Comment, {
       as: 'comments',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   };
   return user;

@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   issueImage.associate = (models) => {
     issueImage.belongsTo(models.Issue, {
+      foreignKey: 'issue_id',
       onDelete: 'cascade',
       onUpdate: 'cascade',
     });
