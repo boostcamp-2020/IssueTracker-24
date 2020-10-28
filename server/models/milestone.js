@@ -18,8 +18,6 @@ module.exports = (sequelize, DataTypes) =>{
            },
            due_date:{
                type:'TIMESTAMP',
-               defaultValue: sequelize.literal('current_timestamp'),
-               allowNull:false,
            },
            state:{
                type:DataTypes.STRING(200),
