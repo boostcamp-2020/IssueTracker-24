@@ -1,8 +1,20 @@
+@mixin colors($color, $backgroundColor, $radius){
+    color:$color;
+    background-color:$backgroundColor;
+    border-radius:$radius;
+}
+@mixin flexLayout($display, $justify, $align){
+    display:$display;
+    @if  $justify{
+        justify-content: $justify;
+    }
+    @if $align{
+        align-items: $align;
+    }
+}
 .input-container{
     height:250px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    @include flexLayout(flex, center, center);
     .input-title{
         font-weight:bold;
         margin:10px 0;
@@ -10,7 +22,6 @@
     .input-value{
         width:200px;
         height:30px;
-        display:flex;
         line-height:normal;
         font-family: inherit; 
         border: 1px solid #999;
@@ -18,31 +29,25 @@
     }
     button{
         cursor:pointer;
-        color:#fff;
-        background-color:#04c584;
         border:0;
-        border-radius:4px;
-    }
-    button:hover{ 
-        background-color:#10df99;
+        @include colors(#fff,#04c584,4px);
+        &:hover{ 
+            background-color:#10df99;
+        }
     }
     .input-common-button{
-        display:flex;
-        justify-content: space-around;
+        @include flexLayout(flex, space-around,null);
         margin:10px;
     }
 }
 
 .input-github-button{
-    display:flex;
-    justify-content: center;
+    @include flexLayout(flex, center, null);
     button{
-        background-color:#6E6E6E;
         width:50%;
-        color:#fff;
-        border-radius:4px;
-    }
-    button:hover{
-        background-color: #2E2E2E;
+        @include colors(#fff, #6E6E6E, 4px);
+        &:hover{
+            background-color: #2E2E2E;
+        }
     }
 }
