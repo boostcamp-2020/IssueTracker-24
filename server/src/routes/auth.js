@@ -1,10 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
+const authController = require('../controllers/auth-controller');
 
-router.post('login', (req, res, next) => {
-  console.log('login');
-  res.end();
-});
+router.get('/github/login', authController.githubLogin);
 
 module.exports = router;
