@@ -1,10 +1,29 @@
-.input-value{
-    width:200px;
-    display:flex;
-}
 .input-container{
+    height:200px;
     display:flex;
-    justify-content:center;
-    align-items:center;
-
+    justify-content: center;
+    align-items: center;
+    .input-title{
+        font-weight:bold;
+        margin:10px 0;
+    }
+    .input-value{
+        width:200px;
+        display:flex;
+    }
+    .input-common-button{
+        display:flex;
+        justify-content: space-around;
+        margin:10px;
+        button{
+            cursor:pointer;
+            color:#fff;
+            background-color:#04c584;
+            border:0;
+            border-radius:4px;
+        }
+        button:hover{
+            background-color:#10df99;
+        }
+    }
 }
