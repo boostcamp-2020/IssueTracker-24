@@ -17,8 +17,22 @@ const LoginBlock= styled.div`
   display: flex;
   flex-direction: column;
 `;
-const LoginContainer = ({ children }) =>{
-    return <LoginBlock>{children}</LoginBlock>;
+const LoginTitle = styled.div`
+  display:flex;
+  justify-content:center;
+  font-weight:bold;
+  font-size:30px;
+`;
+const LoginContainer = ({children}) =>{
+    return (
+        <>
+         <LoginBlock>
+             <LoginTitle>이슈 트래커</LoginTitle>
+            {children}
+         </LoginBlock>
+      </>
+    );
+  
 }
   
 export default LoginContainer;

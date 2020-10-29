@@ -14,7 +14,7 @@ module.exports = {
     publicPath: "/",
     host: "localhost",
     overlay: true,
-    port: 8200,
+    port: 8300,
     stats: "errors-only",
   },
   module: {
