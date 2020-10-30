@@ -12,6 +12,10 @@
 |J188|정지찬|[jch422](https://github.com/jch422)|
 
 ## 기술 스택
+![Javascript](https://img.shields.io/badge/javascript-ES6+-yellow?logo=javascript)
+![React](https://img.shields.io/badge/react-16.13-1cf?logo=react)
+![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
+![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
 FE
 - React
 - SCSS
@@ -20,6 +24,8 @@ BE
 - Express
 - Sequelize
 - Passport
+- Mysql
+- Nodejs
 
 ## ERD
 ![image](https://user-images.githubusercontent.com/38288479/97277282-a00a3680-187b-11eb-91c3-fcc242d0176d.png)
