@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 
-const User = require('../models/user');
+const { User } = require('../models');
 const { github } = require('../config');
 
 module.exports = () => {
@@ -15,7 +15,7 @@ module.exports = () => {
       async (accessToken, refreshToken, profile, done) => {
         try {
           const exUser = await User.findOne({
-            where: { snsId: profile.id, provider: 'github' },
+            where: { sns_id: profile.id, provider: 'github' },
           });
           if (exUser) {
             done(null, exUser);
