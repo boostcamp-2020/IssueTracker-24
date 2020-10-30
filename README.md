@@ -16,16 +16,9 @@
 ![React](https://img.shields.io/badge/react-16.13-1cf?logo=react)
 ![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
 ![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
-FE
-- React
-- SCSS
 
-BE
-- Express
-- Sequelize
-- Passport
-- Mysql
-- Nodejs
+![image](https://user-images.githubusercontent.com/38288479/97653804-f8704c80-1aa4-11eb-8854-292fd45852b1.png)
+
 
 ## ERD
 ![image](https://user-images.githubusercontent.com/38288479/97277282-a00a3680-187b-11eb-91c3-fcc242d0176d.png)
