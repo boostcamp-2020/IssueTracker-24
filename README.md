@@ -17,6 +17,9 @@
 ![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
 ![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
 
+- Frontend: Ract, Sass, Webpack, Babel
+- Backend: Express, Mysql, Sequlize ORM, Github Oauth, JWT, Jest
+- Deploy: NCloud, Nginx
 ![image](https://user-images.githubusercontent.com/38288479/97653804-f8704c80-1aa4-11eb-8854-292fd45852b1.png)
 
 
