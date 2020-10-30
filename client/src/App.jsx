@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import LoginContainer from './components/login/loginContainer/loginContainer';
 import LoginFormContainer from './components/login/loginForm/loginForm';
@@ -14,15 +9,11 @@ const GlobalStyle = createGlobalStyle`
       background:#e9ecef;
   }
 `;
-export default () => {
- return(
+export default () => (
   <>
-    <GlobalStyle/>
+    <GlobalStyle />
     <LoginContainer>
-        <LoginFormContainer>
-        </LoginFormContainer>
+      <LoginFormContainer />
     </LoginContainer>
   </>
- );
-
-}
+);
