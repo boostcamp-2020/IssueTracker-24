@@ -21,6 +21,7 @@
 - Backend: Express, Mysql, Sequlize ORM
 - Auth: Passport-Github, JWT
 - Infra: NCloud, Nginx
+
 ![image](https://user-images.githubusercontent.com/38288479/97653804-f8704c80-1aa4-11eb-8854-292fd45852b1.png)
 
 
