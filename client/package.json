@@ -58,7 +58,8 @@
       "arrow-body-style": [
         "error",
         "as-needed"
-      ]
+      ],
+      "react/button-has-type": false
     },
     "env": {
       "browser": true
