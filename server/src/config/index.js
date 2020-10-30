@@ -2,10 +2,8 @@ const dotenv = require('dotenv');
 
 const environment = process.env.NODE_ENV || 'development';
 dotenv.config({
-  path: `${__dirname}/../../${environment}.env`,
+  path: `../${environment}.env`,
 });
-
-console.log(environment);
 
 module.exports = {
   port: parseInt(process.env.PORT, 10),
@@ -15,5 +13,13 @@ module.exports = {
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     dialect: process.env.DB_DIALECT,
+  },
+  github: {
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL,
+  },
+  jwt: {
+    secretKey: process.env.JWT_SECRET,
   },
 };
