@@ -19,4 +19,7 @@ module.exports = {
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL,
   },
+  jwt: {
+    secretKey: process.env.JWT_SECRET,
+  },
 };
