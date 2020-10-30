@@ -11,5 +11,15 @@
 |J099|송진현|[thdwlsgus0](https://github.com/thdwlsgus0)|
 |J188|정지찬|[jch422](https://github.com/jch422)|
 
+## 기술 스택
+FE
+- React
+- SCSS
+
+BE
+- Express
+- Sequelize
+- Passport
+
 ## ERD
 ![image](https://user-images.githubusercontent.com/38288479/97277282-a00a3680-187b-11eb-91c3-fcc242d0176d.png)
