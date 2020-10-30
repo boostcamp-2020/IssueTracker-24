@@ -4,7 +4,7 @@
 - [Wiki](https://github.com/boostcamp-2020/IssueTracker-24/wiki)
 
 ## :raised_hands: 팀원 소개
-|캠퍼번호|이름|Github|
+|캠퍼번호|이름|GitHub|
 |------|---|---|
 |J004|강민수|[mu1616](https://github.com/mu1616)|
 |J073|박기호|[qkrrlgh519](https://github.com/qkrrlgh519)|
@@ -20,8 +20,7 @@
 - Frontend: React, Sass, Webpack, Babel
 - Backend: Express, Mysql, Sequlize ORM
 - Auth: Passport-Github, JWT
-- Test: Jest
-- Deploy: NCloud, Nginx
+- Infra: NCloud, Nginx
 ![image](https://user-images.githubusercontent.com/38288479/97653804-f8704c80-1aa4-11eb-8854-292fd45852b1.png)
 
 
