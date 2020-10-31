@@ -12,19 +12,19 @@ module.exports = () => {
         clientSecret: github.clientSecret,
         callbackURL: github.callbackURL,
       },
-      async (accessToken, refreshToken, profile, done) => {
+      async (accessToken, refreshToken, { username }, done) => {
         try {
           const exUser = await User.findOne({
-            where: { sns_id: profile.id, provider: 'github' },
+            where: { sns_id: username, provider: 'github' },
           });
           if (exUser) {
-            done(null, exUser);
+            done(null, exUser.sns_id);
           } else {
             const newUser = await User.create({
-              sns_id: profile.id,
-              provider: profile.provider,
+              sns_id: username,
+              provider: 'github',
             });
-            done(null, newUser);
+            done(null, newUser.sns_id);
           }
         } catch (err) {
           done(err);
