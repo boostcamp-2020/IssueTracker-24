@@ -1,7 +1,7 @@
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
-const User = require('../models/user');
+const { User } = require('../models');
 const config = require('../config');
 
 const opts = {};
@@ -12,24 +12,18 @@ module.exports = () => {
   passport.use(
     new JwtStrategy(opts, (jwtPayload, done) => {
       const findOption = {};
-      if (jwtPayload.snsId) {
+      if (jwtPayload.sns_id) {
         // github-login
-        findOption.sns_id = jwtPayload.snsId;
+        findOption.sns_id = jwtPayload.sns_id;
         findOption.provider = jwtPayload.provider;
       } else {
         // local-login
-        findOption.user_id = jwtPayload.userId;
+        findOption.user_id = jwtPayload.user_id;
       }
 
-      User.findOne(findOption, (err, user) => {
-        if (err) {
-          return done(err, false);
-        }
-        if (user) {
-          return done(null, user);
-        }
-        return done(null, false);
-      });
+      return User.findOne({ where: findOption })
+        .then((user) => done(null, user))
+        .catch((err) => done(err));
     }),
   );
 };
