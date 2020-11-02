@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react';
-import './loginForm.scss';
+import './login-form.scss';
 import { useHistory } from 'react-router-dom';
 import { setCookie, getCookie, deleteCookie } from '../../../utils/cookie';
 
