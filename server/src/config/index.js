@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 
 const environment = process.env.NODE_ENV || 'development';
 dotenv.config({
-  path: `../${environment}.env`,
+  path: `${__dirname}/../../${environment}.env`,
 });
 
 module.exports = {
