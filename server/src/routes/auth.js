@@ -3,11 +3,12 @@ const passport = require('passport');
 
 const router = express.Router();
 const AuthController = require('../controllers/auth');
+const { isAuth } = require('../middlewares/auth');
 
 router.get('/github/login', passport.authenticate('github'));
+
 router.get('/github/callback', AuthController.githubAuth);
 
-// TODO: logout을 위한 controller 작성 필요
-// router.get('/logout',);
+router.get('/logout', isAuth, AuthController.logout);
 
 module.exports = router;
