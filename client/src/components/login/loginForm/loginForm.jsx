@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react';
 import './loginForm.scss';
 import { useHistory } from 'react-router-dom';
-import { setCookie, getCookie } from '../../../utils/cookie';
+import { setCookie, getCookie, deleteCookie } from '../../../utils/cookie';
 
 const LoginFormContainer = () => {
   const [id, setId] = useState('');
@@ -19,7 +19,7 @@ const LoginFormContainer = () => {
     const token = getCookie('jwt');
     if (token) {
       localStorage.jwt = token;
-      setCookie('jwt', '');
+      deleteCookie('jwt');
       history.push('/issues');
     }
   }, []);
