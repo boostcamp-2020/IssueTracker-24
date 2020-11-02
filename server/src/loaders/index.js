@@ -3,6 +3,7 @@ const passport = require('passport');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const createError = require('http-errors');
+const cors = require('cors');
 const passportConfig = require('../passport');
 const { sequelize } = require('../models');
 const authRouter = require('../routes/auth');
@@ -25,6 +26,7 @@ module.exports = (app) => {
   app.use(express.urlencoded({ extended: false }));
   app.use(morgan('dev'));
   app.use(cookieParser());
+  app.use(cors());
   app.use('/auth', authRouter);
 
   app.use((req, res, next) => {
