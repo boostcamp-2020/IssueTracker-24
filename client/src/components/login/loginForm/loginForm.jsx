@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './loginForm.scss';
-
+import {gitHubLogin}from '../../../system/user';
 const LoginFormContainer = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -10,6 +10,10 @@ const LoginFormContainer = () => {
   const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
+  const onGithubSubmit = async (e) =>{
+     e.preventDefault();
+     const githubResponse = await gitHubLogin();
+  } 
   return (
     <>
       <form className="input-container">
@@ -35,6 +39,7 @@ const LoginFormContainer = () => {
         </div>
       </form>
       <div className="input-github-button button">
+        <a href="http://localhost:3000/auth/github/login">
         <button>
           Sign in with GitHub
           <svg width="20" height="10">
@@ -44,6 +49,7 @@ const LoginFormContainer = () => {
             />
           </svg>
         </button>
+        </a>
       </div>
     </>
   );
