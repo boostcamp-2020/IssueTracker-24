@@ -44,7 +44,8 @@
 .input-github-button{
     @include flexLayout(flex, center, null);
     button{
-        width:50%;
+        width:140%;
+        margin-left:-20%;
         @include colors(#fff, #6E6E6E, 4px);
         &:hover{
             background-color: #2E2E2E;
