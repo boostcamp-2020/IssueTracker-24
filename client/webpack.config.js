@@ -16,6 +16,18 @@ module.exports = {
     overlay: true,
     port: 8200,
     stats: "errors-only",
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        pathRewrite: {"^/api" : ""}
+      }
+    },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    }
   },
   module: {
     rules: [
@@ -24,6 +36,11 @@ module.exports = {
         use: {
           loader: "babel-loader",
         },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
         exclude: /node_modules/,
       },
     ],
