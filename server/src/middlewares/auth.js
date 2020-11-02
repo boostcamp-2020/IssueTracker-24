@@ -1,13 +1,24 @@
 const passport = require('passport');
 
-const isAuthenticated = passport.authenticate('jwt', { session: false });
+const isAuth = (req, res, next) => {
+  passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    if (err) return next(err);
 
-const isNotAuthenticated = (req, res, next) => {
-  if (req.headers.authorization) {
-    return res.json({ msg: '이미 로그인 된 상태입니다' });
-  }
+    if (info) {
+      const error = new Error(info.message);
+      error.status = 401; // 401 Unauthorized
+      return next(error);
+    }
 
-  return next();
+    if (!user) {
+      const error = new Error('Authentication failed');
+      error.status = 401;
+      return next(error);
+    }
+
+    req.user = user;
+    return next();
+  })(req, res, next);
 };
 
-module.exports = { isAuthenticated, isNotAuthenticated };
+module.exports = { isAuth };
