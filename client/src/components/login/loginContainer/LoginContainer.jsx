@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import './LoginContainer.scss';
+import './login-container.scss';
 
 const LoginContainer = ({ children }) => (
   <>
