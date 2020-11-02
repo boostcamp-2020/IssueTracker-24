@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import './loginForm.scss';
 import { useHistory } from 'react-router-dom';
 import { setCookie, getCookie } from '../../../utils/cookie';
@@ -15,7 +15,7 @@ const LoginFormContainer = () => {
     setPassword(e.target.value);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const token = getCookie('jwt');
     if (token) {
       localStorage.jwt = token;

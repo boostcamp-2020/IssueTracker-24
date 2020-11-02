@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import LoginPage from './pages/login-page';
-import IssueListPage from './pages/issue-list-page';
+import LoginPage from './pages/LoginPage';
+import IssueListPage from './pages/IssueListPage';
 
 const GlobalStyle = createGlobalStyle`
   body{
