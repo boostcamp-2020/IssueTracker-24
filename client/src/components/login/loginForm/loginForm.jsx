@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './loginForm.scss';
-import { gitHubLogin } from '../../../system/user';
+import { useHistory } from 'react-router-dom';
 import { setCookie, getCookie } from '../../../utils/cookie';
 
-const LoginFormContainer = ({ history }) => {
+const LoginFormContainer = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
+
   const onChangeId = (e) => {
     setId(e.target.value);
   };
@@ -18,7 +20,7 @@ const LoginFormContainer = ({ history }) => {
     if (token) {
       localStorage.jwt = token;
       setCookie('jwt', '');
-      // history.push('/issues');
+      history.push('/issues');
     }
   }, []);
 

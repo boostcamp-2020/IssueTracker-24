@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import LoginContainer from './components/login/loginContainer/loginContainer';
-import LoginFormContainer from './components/login/loginForm/loginForm';
+import LoginPage from './pages/login-page';
+import IssueListPage from './pages/issue-list-page';
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -11,9 +11,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 export default () => (
   <>
-    <GlobalStyle />
-    <LoginContainer>
-      <LoginFormContainer />
-    </LoginContainer>
+    <Router>
+      <GlobalStyle />
+      <Switch>
+        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/issues" component={IssueListPage} />
+      </Switch>
+    </Router>
   </>
 );
