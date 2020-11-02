@@ -8,8 +8,8 @@ const githubAuth = async (req, res, next) => {
     }
     const payload = { sns_id, provider: 'github' };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
-
-    return res.status(200).json({ jwt: token });
+    res.cookie('jwt', token);
+    return res.redirect('http://localhost:8200');
   })(req, res, next);
 };
 

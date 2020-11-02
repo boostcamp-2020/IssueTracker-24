@@ -14,6 +14,7 @@ export const login = async (id, password) => {
 };
 
 export const gitHubLogin = async () => {
+
   const response = await getData(url.GITHUB_LOGIN);
   return response;
 };

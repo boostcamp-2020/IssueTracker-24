@@ -7,7 +7,7 @@ const API_URL =
     : `${process.env.DEV_URL}`;
 
 const getOptions = (body) => {
-  const headers = { 'Content-Type': 'application/json; charset=UTF-8' };
+  const headers = { 'Content-Type': 'application/json; charset=UTF-8'};
   const options = {
     mode: 'cors',
     credentials: 'include',
@@ -28,8 +28,7 @@ const getOptions = (body) => {
 
 const getData = async (url, body) => {
   const options = getOptions(body);
-
-  const response = await axios.get(`${API_URL}${url}`, options);
+  const response =  await axios.get(`${API_URL}${url}`, options);
   return response;
 };
 
