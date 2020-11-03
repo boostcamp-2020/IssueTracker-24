@@ -3,15 +3,17 @@ import styled from 'styled-components';
 
 const FilterBarWrapper = styled.div`
   display: flex;
+  width: 60%;
 `;
 
 const FilterButton = styled.button`
   font-size: 15px;
+  width: 20%;
   width: 100px;
   height: 35px;
   margin-right: 0;
   box-sizing: border-box;
-  border: 2px solid #eaecef;
+  border: 1px solid #eaecef;
   border-radius: 4px;
   background-color: #fafbfc;
   outline: 0;
@@ -34,9 +36,11 @@ const FilterText = styled.input.attrs({
   height: 35px;
   width: 300px;
   box-sizing: border-box;
-  border: 2px solid #eaecef;
+  border: 1px solid #eaecef;
   outline: 0;
   border-radius: 0 4px 4px 0;
+  background-color: #fafbfc;
+  width: 80%;
 `;
 
 const FilterBar = () => {
