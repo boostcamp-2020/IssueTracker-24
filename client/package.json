@@ -42,8 +42,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
-    "webpack-dev-server": "webpack-dev-server --hot --progress"
+    "build": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "dev": "webpack-dev-server --hot --progress"
   },
   "eslintConfig": {
     "extends": [
