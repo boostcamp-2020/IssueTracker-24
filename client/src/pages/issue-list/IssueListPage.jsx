@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
-import IssuesContext from '../context/issues-context';
-import IssueContainer from '../components/issue/IssueContainer';
-import reducer from '../reducers/checked-issue-reducer';
+import IssuesContext from '../../context/issues-context';
+import IssueContainer from '../../components/issue/IssueContainer';
+import reducer from './reducer';
 
 const dummyIssues = [
   { id: '1', title: '리액트 환경설정' },
@@ -11,6 +11,7 @@ const dummyIssues = [
 
 const initialState = {
   checkedIssues: [],
+  issues: dummyIssues,
 };
 
 const IssueListPage = () => {
