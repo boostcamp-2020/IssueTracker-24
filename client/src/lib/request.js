@@ -24,36 +24,56 @@ const getOptions = (body) => {
 const getData = async (url) => {
   const options = getOptions();
 
-  const response = await axios.get(url, options);
-  return response.data;
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const postData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.post(url, options);
-  return response.data;
+  try {
+    const response = await axios.post(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const patchData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.patch(url, options);
-  return response.data;
+  try {
+    const response = await axios.patch(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const putData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.put(url, options);
-  return response.data;
+  try {
+    const response = await axios.put(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const deleteData = async (url) => {
   const options = getOptions();
 
-  const response = await axios.delete(url, options);
-  return response.data;
+  try {
+    const response = await axios.delete(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export { getData, postData, patchData, putData, deleteData };
