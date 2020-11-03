@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import LoginPage from './pages/LoginPage';
-import IssueListPage from './pages/IssueListPage';
+import IssueListPage from './pages/issue-list/IssueListPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const GlobalStyle = createGlobalStyle`

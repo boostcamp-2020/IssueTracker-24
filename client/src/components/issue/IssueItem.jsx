@@ -3,23 +3,20 @@ import styled from 'styled-components';
 import IssueLogo from './IssueLogo';
 import IssueContent from './IssueContent';
 import IssueContext from '../../context/issues-context';
-import {
-  CHECK_ISSUE,
-  UNCHECK_ISSUE,
-} from '../../reducers/checked-issue-reducer';
+import { CHECK_ISSUE, UNCHECK_ISSUE } from '../../pages/issue-list/reducer';
 
 const IssueItemWrapper = styled.div`
   width: 80%;
   height: 50px;
   font-size: 14px;
   display: flex;
-  margin:0 auto;
-  margin-top:-1px;
-  padding:20px; 
+  margin: 0 auto;
+  margin-top: -1px;
+  padding: 20px;
   &:hover {
     background-color: #e9e9e9;
   }
-  border:1px solid #EAECEF;
+  border: 1px solid #eaecef;
 `;
 const IssueItem = ({ issue }) => {
   const { dispatch } = useContext(IssueContext);
@@ -36,8 +33,8 @@ const IssueItem = ({ issue }) => {
     <>
       <IssueItemWrapper>
         <input type="checkbox" onClick={onCheckBoxChange} />
-        <IssueLogo/>
-        <IssueContent issue={issue}/>
+        <IssueLogo />
+        <IssueContent issue={issue} />
       </IssueItemWrapper>
     </>
   );
