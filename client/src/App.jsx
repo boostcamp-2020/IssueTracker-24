@@ -7,7 +7,7 @@ import NotFoundPage from './pages/NotFoundPage';
 
 const GlobalStyle = createGlobalStyle`
   body{
-      background:#e9ecef;
+      background:#ffffff;
   }
 `;
 export default () => (
