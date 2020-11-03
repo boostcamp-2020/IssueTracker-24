@@ -9,7 +9,7 @@ const githubAuth = async (req, res, next) => {
     const payload = { sns_id, provider: 'github' };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
     res.cookie('jwt', token);
-    return res.redirect('http://localhost:8200');
+    return res.redirect(`http://${process.env.HOST}:${process.env.FRONT_PORT}`);
   })(req, res, next);
 };
 

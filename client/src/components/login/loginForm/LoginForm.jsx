@@ -7,7 +7,7 @@ const LoginFormContainer = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-
+  console.log(process.env.NODE_ENV);
   const onChangeId = (e) => {
     setId(e.target.value);
   };
@@ -17,6 +17,7 @@ const LoginFormContainer = () => {
 
   useLayoutEffect(() => {
     const token = getCookie('jwt');
+    console.log(token);
     if (token) {
       localStorage.jwt = token;
       deleteCookie('jwt');
@@ -49,7 +50,13 @@ const LoginFormContainer = () => {
         </div>
       </form>
       <div className="input-github-button button">
-        <a href="http://localhost:3000/auth/github/login">
+        <a
+          href={
+            process.env.NODE_ENV === 'development'
+              ? 'http://127.0.0.1:3000/auth/github/login'
+              : `${process.env.PROD_URL}auth/github/login`
+          }
+        >
           <button>
             Sign in with GitHub
             <svg width="20" height="10">
