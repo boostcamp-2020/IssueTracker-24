@@ -1,7 +1,10 @@
 # IssueTracker-24
 - [기획서](https://docs.google.com/presentation/d/1iA-tpumHl_TpR_yUwgYcnb_X8GbW6XvjZOTh2Ucvu0A/preview?pru=AAABdYa_uas*Fuku9RAcUdMBG7REzgBhIg&slide=id.g8582887c3d_0_0)
 - [제품 백로그](https://docs.google.com/spreadsheets/d/1wukp65G0J8GofRCyOa-qqhg4Cei2ReM6sOE9rPNDIJc/edit#gid=503039929)
-- [Wiki](https://github.com/boostcamp-2020/IssueTracker-24/wiki)
+- [Wiki](https://github.com/boostcamp-2020/IssueTracker-24/wiki)  
+
+## :exclamation: 배포 Link 
+- [IssueTracker-24](http://49.50.162.165/)    
 
 ## :raised_hands: 팀원 소개
 |캠퍼번호|이름|GitHub|
