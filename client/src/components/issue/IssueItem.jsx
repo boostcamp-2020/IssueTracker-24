@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import IssueLogo from './IssueLogo';
 import IssueContent from './IssueContent';
+import IssueContext from '../../context/issues-context';
+import {
+  CHECK_ISSUE,
+  UNCHECK_ISSUE,
+} from '../../reducers/checked-issue-reducer';
+
 const IssueItemWrapper = styled.div`
   width: 80%;
   height: 50px;
@@ -16,10 +22,20 @@ const IssueItemWrapper = styled.div`
   border:1px solid #EAECEF;
 `;
 const IssueItem = ({ issue }) => {
+  const { dispatch } = useContext(IssueContext);
+
+  const onCheckBoxChange = (e) => {
+    if (e.target.checked) {
+      dispatch({ type: CHECK_ISSUE, id: issue.id });
+    } else {
+      dispatch({ type: UNCHECK_ISSUE, id: issue.id });
+    }
+  };
+
   return (
     <>
       <IssueItemWrapper>
-        <input type="checkbox" />
+        <input type="checkbox" onClick={onCheckBoxChange} />
         <IssueLogo/>
         <IssueContent issue={issue}/>
       </IssueItemWrapper>
