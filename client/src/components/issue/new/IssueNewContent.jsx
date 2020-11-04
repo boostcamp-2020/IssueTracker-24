@@ -20,12 +20,39 @@ const IssueNewContentWrapper = styled.div`
         border-color:rgba(255,255,255,1) transparent;
         border-style:solid solid outset;
       }
+
+    .write-btn{
+        width:70px;
+        height:40px;
+        border-radius:6px 6px 0 0;
+        border:1px solid #E8E9EC;
+        border-bottom:0px;
+        margin-left:20px;
+        background-color:#fff;
+        z-index:1;
+        cursor:pointer;
+    }
+    .write-content{
+        border:1px solid #F4F4F6;
+        margin-top:-2px;
+        border-bottom:0px;
+    }
+    .main-content{
+        margin-top:20px;
+        margin-left:20px;
+    }
 `;
 const IssueNewContent = () =>{
   return(
     <>
       <IssueNewContentWrapper>
       <IssueNewTitle/>
+      <div className="tabnav-tabs">
+          <button className="write-btn">Write</button>
+      </div>
+      <div className="write-content">
+          <textarea className="main-content" cols="70" rows="15" placeholder="Leave a comment"></textarea>
+      </div>
       </IssueNewContentWrapper>
     </>
   );
