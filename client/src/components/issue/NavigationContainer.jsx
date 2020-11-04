@@ -16,8 +16,8 @@ const NavigationContainer = () => {
   return (
     <>
       <NavigationContainerWrapper>
-        <Navigation title="Label" num={labels.length} />
-        <Navigation title="Milestone" num={milestones.length} />
+        <Navigation title="Labels" num={labels.length} />
+        <Navigation title="Milestones" num={milestones.length} />
       </NavigationContainerWrapper>
     </>
   );
