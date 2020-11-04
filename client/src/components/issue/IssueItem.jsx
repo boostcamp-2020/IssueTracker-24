@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import IssueLogo from './IssueLogo';
 import IssueContent from './IssueContent';
 import IssueContext from '../../context/issues-context';
+
 import { CHECK_ISSUE, UNCHECK_ISSUE } from '../../pages/issue-list/reducer';
 
 const IssueItemWrapper = styled.div`
