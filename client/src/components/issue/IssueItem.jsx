@@ -11,7 +11,6 @@ const IssueItemWrapper = styled.div`
   font-size: 14px;
   display: flex;
   margin: 0 auto;
-  margin-top: -1px;
   padding: 20px;
   &:hover {
     background-color: #e9e9e9;
