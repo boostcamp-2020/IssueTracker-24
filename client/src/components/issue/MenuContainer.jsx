@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import FilterBar from './filter/FilterBar';
 import NavigationContainer from './NavigationContainer';
 import CreateButton from './CreateButton';
+import FilterMenuDropDown from './filter/FilterMenuDropDown';
 
 const Div = styled.div`
   display: flex;
@@ -14,13 +15,17 @@ const Div = styled.div`
 `;
 
 const MenuContainer = () => {
+  const [showFilterMenu, setFilterMenu] = useState(false);
+  const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
+
   return (
     <>
       <Div>
-        <FilterBar />
+        <FilterBar onClickFilterButton={onClickFilterButton} />
         <NavigationContainer />
         <CreateButton />
       </Div>
+      {showFilterMenu && <FilterMenuDropDown />}
     </>
   );
 };
