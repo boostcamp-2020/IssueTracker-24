@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import IssueLabel from './IssueLabel';
+import Label from '../label/Label';
 
 const IssueContentWrapper = styled.div`
   .issue-title {
@@ -19,7 +19,7 @@ const IssueContent = ({ issue }) => {
         <div className="issue-title issue-content">
           <a>{issue.title}</a>
           {issue.labels.map((label) => (
-            <IssueLabel key={label.id} label={label} />
+            <Label key={label.id} label={label} />
           ))}
         </div>
         <div className="issue-content">

@@ -3,6 +3,7 @@ import IssuesContext from '../../context/issues-context';
 import IssueContainer from '../../components/issue/IssueContainer';
 import Header from '../../components/Header';
 import reducer from './reducer';
+import MenuContainer from '../../components/issue/MenuContainer';
 
 const dummyIssues = [
   {
@@ -43,6 +44,7 @@ const IssueListPage = () => {
   return (
     <IssuesContext.Provider value={value}>
       <Header/>
+      <MenuContainer />   
       <IssueContainer />
     </IssuesContext.Provider>
   );

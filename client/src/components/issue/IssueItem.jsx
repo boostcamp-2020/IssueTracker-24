@@ -8,16 +8,16 @@ import { CHECK_ISSUE, UNCHECK_ISSUE } from '../../pages/issue-list/reducer';
 
 const IssueItemWrapper = styled.div`
   width: 80%;
-  height: 50px;
+  height: 75px;
   font-size: 14px;
   display: flex;
   margin: 0 auto;
-  margin-top: -1px;
   padding: 20px;
   &:hover {
     background-color: #e9e9e9;
   }
   border: 1px solid #eaecef;
+  box-sizing: border-box;
 `;
 const IssueItem = ({ issue }) => {
   const { dispatch } = useContext(IssueContext);
