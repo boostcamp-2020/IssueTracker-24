@@ -8,6 +8,8 @@ import NotFoundPage from './pages/NotFoundPage';
 const GlobalStyle = createGlobalStyle`
   body{
       background:#ffffff;
+      margin:0;
+      padding:0;
   }
 `;
 export default () => (

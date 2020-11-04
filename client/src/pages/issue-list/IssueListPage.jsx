@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import IssuesContext from '../../context/issues-context';
 import IssueContainer from '../../components/issue/IssueContainer';
+import Header from '../../components/Header';
 import reducer from './reducer';
 import MenuContainer from '../../components/issue/MenuContainer';
 
@@ -42,7 +43,8 @@ const IssueListPage = () => {
 
   return (
     <IssuesContext.Provider value={value}>
-      <MenuContainer />
+      <Header/>
+      <MenuContainer />   
       <IssueContainer />
     </IssuesContext.Provider>
   );
