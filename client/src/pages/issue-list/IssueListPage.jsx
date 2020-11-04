@@ -3,7 +3,6 @@ import IssueContainer from '../../components/issue/IssueContainer';
 import Header from '../../components/Header';
 import reducer from './reducer';
 import MenuContainer from '../../components/issue/MenuContainer';
-import NavigationContainer from '../../components/issue/NavigationContainer';
 
 export const IssuesContext = React.createContext();
 

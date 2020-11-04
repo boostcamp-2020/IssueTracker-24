@@ -6,6 +6,9 @@ const NavigationWrapper = styled.div`
   display: flex;
   cursor: pointer;
   padding: 5px 10px 5px 10px;
+  &:hover {
+    background-color: #f6f8fa;
+  }
   svg {
     margin-right: 5px;
   }
