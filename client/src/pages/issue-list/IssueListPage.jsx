@@ -1,9 +1,11 @@
 import React, { useReducer } from 'react';
-import IssuesContext from '../../context/issues-context';
 import IssueContainer from '../../components/issue/IssueContainer';
 import Header from '../../components/Header';
 import reducer from './reducer';
 import MenuContainer from '../../components/issue/MenuContainer';
+import NavigationContainer from '../../components/issue/NavigationContainer';
+
+export const IssuesContext = React.createContext();
 
 const dummyIssues = [
   {
@@ -35,16 +37,26 @@ const dummyIssues = [
 const initialState = {
   checkedIssues: [],
   issues: dummyIssues,
+  labels: [
+    { id: 1, title: 'bug', color: '#f9d0c4' },
+    { id: 2, title: 'refactor', color: '#fcc7f5' },
+    { id: 3, title: 'Must', color: '#028e87' },
+    { id: 4, title: 'frontend', color: '#AAED8B' },
+  ],
+  milestones: [
+    { id: 1, title: 'week-1' },
+    { id: 2, title: 'week-2' },
+    { id: 3, title: 'week-3' },
+  ],
 };
 
 const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value = { issues: dummyIssues, dispatch };
 
   return (
-    <IssuesContext.Provider value={value}>
-      <Header/>
-      <MenuContainer />   
+    <IssuesContext.Provider value={{ state, dispatch }}>
+      <Header />
+      <MenuContainer />
       <IssueContainer />
     </IssuesContext.Provider>
   );

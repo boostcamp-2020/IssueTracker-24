@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import IssueItem from './IssueItem';
-import IssuesContext from '../../context/issues-context';
+import { IssuesContext } from '../../pages/issue-list/IssueListPage';
 
 const IssueContainer = () => {
-  const { issues } = useContext(IssuesContext);
+  const { state } = useContext(IssuesContext);
+  const { issues } = state;
+
   return issues.map((issue) => <IssueItem key={issue.id} issue={issue} />);
 };
 
