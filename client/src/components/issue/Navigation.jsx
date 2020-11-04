@@ -6,6 +6,10 @@ const NavigationWrapper = styled.div`
   display: flex;
   cursor: pointer;
   padding: 5px 10px 5px 10px;
+  &:nth-child(1){
+    border-right:1px solid #E1E4E8;
+  }
+
   &:hover {
     background-color: #f6f8fa;
   }

@@ -5,7 +5,6 @@ import Navigation from './Navigation';
 
 const NavigationContainerWrapper = styled.div`
   display: inline-flex;
-  flex-direction: row;
   border: 1px solid #eaecef;
   border-radius: 4px;
 `;

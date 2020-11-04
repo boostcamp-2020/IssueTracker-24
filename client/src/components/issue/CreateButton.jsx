@@ -9,6 +9,9 @@ const CreateButtonWrapper = styled.div`
   font-size: 14px;
   font-weight: bold;
   padding: 0px 15px 0px 15px;
+  &:hover{
+    background-color:#04c584;
+  }
 `;
 
 const CreateButton = () => {
