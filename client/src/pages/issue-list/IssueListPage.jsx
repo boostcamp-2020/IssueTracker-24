@@ -47,6 +47,12 @@ const initialState = {
     { id: 2, title: 'week-2' },
     { id: 3, title: 'week-3' },
   ],
+  users: [
+    { id: 1, sns_id: 'qkrrlgh519' },
+    { id: 2, sns_id: 'mu1616' },
+    { id: 3, sns_id: 'jch422' },
+    { id: 4, sns_id: 'thdwlsgus0' },
+  ],
 };
 
 const IssueListPage = () => {
