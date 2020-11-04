@@ -16,6 +16,7 @@ const FilterButton = styled.button`
   border-radius: 4px;
   background-color: #fafbfc;
   outline: 0;
+  cursor: pointer;
   &:hover {
     background-color: #f3f4f6;
   }
@@ -42,11 +43,11 @@ const FilterText = styled.input.attrs({
   width: 85%;
 `;
 
-const FilterBar = () => {
+const FilterBar = ({ onClickFilterButton }) => {
   return (
     <>
       <FilterBarWrapper>
-        <FilterButton>
+        <FilterButton onClick={onClickFilterButton}>
           Filters
           <DropDownIcon className="material-icons">
             arrow_drop_down
