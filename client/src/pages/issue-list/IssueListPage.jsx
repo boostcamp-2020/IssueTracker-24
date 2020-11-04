@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import IssuesContext from '../../context/issues-context';
 import IssueContainer from '../../components/issue/IssueContainer';
-import IssueHeader from '../../components/issue/IssueHeader';
+import Header from '../../components/Header';
 import reducer from './reducer';
 
 const dummyIssues = [
@@ -42,7 +42,7 @@ const IssueListPage = () => {
 
   return (
     <IssuesContext.Provider value={value}>
-      <IssueHeader/>
+      <Header/>
       <IssueContainer />
     </IssuesContext.Provider>
   );
