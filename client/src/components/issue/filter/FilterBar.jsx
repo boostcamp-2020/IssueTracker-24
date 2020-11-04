@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const FilterBarWrapper = styled.div`
   display: flex;
-  width: 70%;
+  width: 60%;
 `;
 
 const FilterButton = styled.button`
@@ -39,7 +39,7 @@ const FilterText = styled.input.attrs({
   outline: 0;
   border-radius: 0 4px 4px 0;
   background-color: #fafbfc;
-  width: 100%;
+  width: 85%;
 `;
 
 const FilterBar = ({ onClickFilterButton }) => {
