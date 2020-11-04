@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import IssueLogo from './IssueLogo';
 import IssueContent from './IssueContent';
-import IssueContext from '../../context/issues-context';
-
+import { IssuesContext } from '../../pages/issue-list/IssueListPage';
 import { CHECK_ISSUE, UNCHECK_ISSUE } from '../../pages/issue-list/reducer';
 
 const IssueItemWrapper = styled.div`
@@ -20,7 +19,7 @@ const IssueItemWrapper = styled.div`
   box-sizing: border-box;
 `;
 const IssueItem = ({ issue }) => {
-  const { dispatch } = useContext(IssueContext);
+  const { dispatch } = useContext(IssuesContext);
 
   const onCheckBoxChange = (e) => {
     if (e.target.checked) {
