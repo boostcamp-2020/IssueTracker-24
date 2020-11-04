@@ -29,6 +29,7 @@ const getData = async (url) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
   }
 };
 
@@ -40,6 +41,7 @@ const postData = async (url, body) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
   }
 };
 
@@ -51,6 +53,7 @@ const patchData = async (url, body) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
   }
 };
 
@@ -62,6 +65,7 @@ const putData = async (url, body) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
   }
 };
 
@@ -73,6 +77,7 @@ const deleteData = async (url) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
   }
 };
 
