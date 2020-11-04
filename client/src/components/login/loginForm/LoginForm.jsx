@@ -3,6 +3,8 @@ import './login-form.scss';
 import { useHistory } from 'react-router-dom';
 import { setCookie, getCookie, deleteCookie } from '../../../utils/cookie';
 import svg from '../../../utils/svg';
+import { setToken } from '../../../utils/token';
+
 const LoginFormContainer = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +21,7 @@ const LoginFormContainer = () => {
     const token = getCookie('jwt');
     console.log(token);
     if (token) {
-      localStorage.jwt = token;
+      setToken(token);
       deleteCookie('jwt');
       history.push('/issues');
     }

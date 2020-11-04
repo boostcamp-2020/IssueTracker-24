@@ -4,10 +4,16 @@ import svg from '../../utils/svg';
 
 const NavigationWrapper = styled.div`
   display: flex;
+  overflow: hidden;
+  justify-content: center;
   cursor: pointer;
   padding: 5px 10px 5px 10px;
-  &:nth-child(1){
-    border-right:1px solid #E1E4E8;
+  &:nth-child(1) {
+    border-right: 1px solid #e1e4e8;
+    width: 40%;
+  }
+  &:nth-child(2) {
+    width: 60%;
   }
 
   &:hover {
