@@ -8,8 +8,7 @@ const FilterBarWrapper = styled.div`
 
 const FilterButton = styled.button`
   font-size: 15px;
-  width: 20%;
-  width: 100px;
+  width: 15%;
   height: 35px;
   margin-right: 0;
   box-sizing: border-box;
@@ -40,7 +39,7 @@ const FilterText = styled.input.attrs({
   outline: 0;
   border-radius: 0 4px 4px 0;
   background-color: #fafbfc;
-  width: 80%;
+  width: 85%;
 `;
 
 const FilterBar = () => {
