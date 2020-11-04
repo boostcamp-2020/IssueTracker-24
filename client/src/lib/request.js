@@ -24,36 +24,61 @@ const getOptions = (body) => {
 const getData = async (url) => {
   const options = getOptions();
 
-  const response = await axios.get(url, options);
-  return response.data;
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
+  }
 };
 
 const postData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.post(url, options);
-  return response.data;
+  try {
+    const response = await axios.post(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
+  }
 };
 
 const patchData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.patch(url, options);
-  return response.data;
+  try {
+    const response = await axios.patch(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
+  }
 };
 
 const putData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.put(url, options);
-  return response.data;
+  try {
+    const response = await axios.put(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
+  }
 };
 
 const deleteData = async (url) => {
   const options = getOptions();
 
-  const response = await axios.delete(url, options);
-  return response.data;
+  try {
+    const response = await axios.delete(url, options);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    alert('오류가 발생하여 요청에 실패했습니다.');
+  }
 };
 
 export { getData, postData, patchData, putData, deleteData };
