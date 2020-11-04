@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken } from '../utils/token';
+import { getToken } from '../../utils/token';
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === 'production'

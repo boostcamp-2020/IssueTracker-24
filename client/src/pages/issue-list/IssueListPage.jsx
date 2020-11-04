@@ -3,7 +3,9 @@ import IssueContainer from '../../components/issue/IssueContainer';
 import Header from '../../components/Header';
 import reducer from './reducer';
 import MenuContainer from '../../components/issue/MenuContainer';
-import { getData } from '../../lib/request';
+import { getAllIssues } from '../../lib/axios/issue';
+import { getAllLabels } from '../../lib/axios/label';
+import { getAllMilestones } from '../../lib/axios/milestone';
 import { INIT_DATA } from '../../pages/issue-list/reducer';
 
 export const IssuesContext = React.createContext();
@@ -25,9 +27,9 @@ const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
-    const issues = await getData('issues');
-    const labels = await getData('labels');
-    const milestones = await getData('milestones');
+    const issues = await getAllIssues();
+    const labels = await getAllLabels();
+    const milestones = await getAllMilestones();
     // TODO
     //const users = await getData('users');
     dispatch({ type: INIT_DATA, data: { issues, labels, milestones } }); // TODO: add users
