@@ -39,7 +39,7 @@ const FilterMenuDropDown = () => {
     <>
       <Div>
         <MenuItem>Filter Issues</MenuItem>
-        <MenuItem>Open Issues</MenuItem>
+        <MenuItem>Open issues</MenuItem>
         <MenuItem>Your issues</MenuItem>
         <MenuItem>Everything assigned to you</MenuItem>
         <MenuItem>Everything mentioning you</MenuItem>
