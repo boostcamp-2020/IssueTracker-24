@@ -6,6 +6,14 @@ axios.defaults.baseURL =
     ? `${process.env.PROD_URL}`
     : `${process.env.DEV_URL}`;
 
+const informError = (error) => {
+  console.error(error);
+  const message = error.response.data.message
+    ? error.response.data.message
+    : '오류가 발생하여 요청에 실패하였습니다.';
+  alert(message);
+};
+
 const getOptions = (body) => {
   const options = {
     mode: 'cors',
@@ -28,8 +36,7 @@ const getData = async (url) => {
     const response = await axios.get(url, options);
     return response.data;
   } catch (error) {
-    console.error(error);
-    alert('오류가 발생하여 요청에 실패했습니다.');
+    informError(error);
   }
 };
 
@@ -40,8 +47,7 @@ const postData = async (url, body) => {
     const response = await axios.post(url, options);
     return response.data;
   } catch (error) {
-    console.error(error);
-    alert('오류가 발생하여 요청에 실패했습니다.');
+    informError(error);
   }
 };
 
@@ -52,8 +58,7 @@ const patchData = async (url, body) => {
     const response = await axios.patch(url, options);
     return response.data;
   } catch (error) {
-    console.error(error);
-    alert('오류가 발생하여 요청에 실패했습니다.');
+    informError(error);
   }
 };
 
@@ -64,8 +69,7 @@ const putData = async (url, body) => {
     const response = await axios.put(url, options);
     return response.data;
   } catch (error) {
-    console.error(error);
-    alert('오류가 발생하여 요청에 실패했습니다.');
+    informError(error);
   }
 };
 
@@ -76,8 +80,7 @@ const deleteData = async (url) => {
     const response = await axios.delete(url, options);
     return response.data;
   } catch (error) {
-    console.error(error);
-    alert('오류가 발생하여 요청에 실패했습니다.');
+    informError(error);
   }
 };
 
