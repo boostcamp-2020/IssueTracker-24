@@ -1,8 +1,10 @@
 const express = require('express');
 const config = require('./config');
 
+let app;
+
 const startServer = async () => {
-  const app = express();
+  app = express();
 
   await require('./loaders')(app);
 
@@ -10,3 +12,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+module.exports = app;
