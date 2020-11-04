@@ -5,7 +5,6 @@ import Navigation from './Navigation';
 
 const NavigationContainerWrapper = styled.div`
   display: inline-flex;
-  flex-direction: row;
   border: 1px solid #eaecef;
   border-radius: 4px;
 `;
@@ -17,8 +16,8 @@ const NavigationContainer = () => {
   return (
     <>
       <NavigationContainerWrapper>
-        <Navigation title="Label" num={labels.length} />
-        <Navigation title="Milestone" num={milestones.length} />
+        <Navigation title="Labels" num={labels.length} />
+        <Navigation title="Milestones" num={milestones.length} />
       </NavigationContainerWrapper>
     </>
   );

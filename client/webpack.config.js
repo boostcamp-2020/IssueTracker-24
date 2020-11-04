@@ -16,6 +16,7 @@ module.exports = {
     overlay: true,
     port: 8200,
     stats: "errors-only",
+    historyApiFallback:true,
     proxy: {
       "/api": {
         target: "http://localhost:3000",
