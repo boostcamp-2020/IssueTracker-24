@@ -39,13 +39,7 @@ const reducer = (state, action) => {
       };
     }
     case INIT_DATA: {
-      const {
-        issues,
-        labels,
-        milestones,
-        currentUser,
-        checkedIssues,
-      } = action.data;
+      const { issues, labels, milestones, currentUser } = action.data;
       const addedRenderedIssues = addChecked(issues);
       const renderedIssues = [...addedRenderedIssues];
       return {
@@ -55,7 +49,6 @@ const reducer = (state, action) => {
         milestones,
         renderedIssues,
         currentUser,
-        checkedIssues,
       }; // TODO: add users
     }
     case CHECK_WHOLE_ISSUES: {
