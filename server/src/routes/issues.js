@@ -6,5 +6,5 @@ const router = express.Router();
 
 // TODO: isAuth 미들웨어 추가
 router.get('/', isAuth, issueController.getAllIssues);
-router.post('/', isAuth, issueController.createAllIssues);
+router.post('/', isAuth, issueController.createIssue);
 module.exports = router;
