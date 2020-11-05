@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import IssueNewTitle from './IssueNewTitle';
 const IssueNewContentWrapper = styled.div`
     width:50%;
     height:500px;
@@ -8,6 +7,16 @@ const IssueNewContentWrapper = styled.div`
     border-radius:4px;
     border:1px solid #E8E9EC;
     margin-left:50px;
+    .issue-title{
+      width:85%;
+      height:30px;
+      border:1px solid #E8EAED;
+      margin:20px 20px;
+      background-color:#FAFBFC;
+      font-weight:bold;
+      color:#D7DADD;
+      padding:0 20px;
+    }
     &:before{
         position:absolute;
         display:block;
@@ -57,7 +66,6 @@ const IssueNewContentWrapper = styled.div`
       background-color:#FAFBFC;
       z-index:-1;
       cursor:pointer;
-      overflow: hidden;
     }
     .file-container{
       position:relative;
@@ -75,10 +83,38 @@ const IssueNewContentWrapper = styled.div`
     border-radius:5px;
     pointer-events:none;
     }
+    .btn-content{
+      display:flex;
+      justify-content:space-between;
+      width:91%;
+      margin-left:20px;
+      margin-top:20px;
+    }
+    .cancel-btn{
+       font-weight:bold;
+       font-size:15px;
+       border:0px;
+       border-radius:5px;
+    }
+    .submit-btn{
+      background-color:${props=>(props.disabled===''? '#30C453':'#94D3A2')};
+      width:150px;
+      height:30px;
+      color:#ffffff;
+      border-radius:5px;
+      border:0;
+    }
 `;
 const IssueNewContent = () =>{
-  const [value, setValue] = useState([0]);
+  const [value, setValue] = useState(0);
   const [results, setResults] = useState(['']); 
+  const [activeBtn, setActiveBtn] = useState('disabled');
+  const [title, setTitle] = useState('Title');
+  const onChangeTitle = (e) =>{
+      if(e.target.value.length>0)setActiveBtn('');
+      else setActiveBtn('disabled');
+      setTitle(e.target.value);
+  }
   const onChangeTextarea = (e) =>{
       setValue(e.target.value);
   }
@@ -97,8 +133,8 @@ const IssueNewContent = () =>{
   
   return(
     <>
-      <IssueNewContentWrapper>
-      <IssueNewTitle/>
+      <IssueNewContentWrapper disabled={activeBtn}>
+      <input type="text" className="issue-title"  onChange={onChangeTitle} value={title}></input>
       <div className="tabnav-tabs">
           <button className="write-btn">Write</button>
       </div>
@@ -108,6 +144,10 @@ const IssueNewContent = () =>{
           <div className="file-container">
             <label className="input-label">Attach files by dragging & dropping, selecting or pasting them.</label>
             <input type="file" className="input-file-content"></input>
+          </div>
+          <div className="btn-content">
+            <button type="button" className="cancel-btn">Cancel</button>
+            <button type="button" className="submit-btn" disabled={activeBtn}>Submit new issue</button>
           </div>
       </form>
       </IssueNewContentWrapper>
