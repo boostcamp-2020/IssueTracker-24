@@ -6,10 +6,13 @@ import { getTimeInfo } from '../../utils/time';
 const IssueContentWrapper = styled.div`
   .issue-title {
     font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 20px;
   }
   .issue-content {
     margin-left: 20px;
+    color: grey;
   }
 `;
 
@@ -17,7 +20,7 @@ const IssueContent = ({ issue }) => {
   return (
     <IssueContentWrapper>
       <div>
-        <div className="issue-title issue-content">
+        <div className="issue-title">
           <a>{issue.title}</a>
           {issue.labels.map((label) => (
             <Label key={label.id} label={label} />
