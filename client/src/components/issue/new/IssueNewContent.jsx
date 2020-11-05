@@ -98,6 +98,7 @@ const IssueNewContentWrapper = styled.div`
     font-size: 15px;
     border: 0px;
     border-radius: 5px;
+    padding: 5px;
   }
   .submit-btn {
     background-color: ${(props) =>
