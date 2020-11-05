@@ -1,6 +1,7 @@
 export const CHECK_ISSUE = 'check issue';
 export const UNCHECK_ISSUE = 'uncheck issue';
 export const INIT_DATA = 'init data';
+export const FILTER_YOUR_ISSUE = 'filter issues written by current user';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,6 +30,12 @@ const reducer = (state, action) => {
         renderedIssues,
         currentUser,
       }; // TODO: add users
+    }
+    case FILTER_YOUR_ISSUE: {
+      const renderedIssues = state.issues.filter(
+        (issue) => issue.user.id === action.id,
+      );
+      return { ...state, renderedIssues };
     }
   }
 };

@@ -14,19 +14,21 @@ const Div = styled.div`
   margin-bottom: 40px;
 `;
 
+export const FilterMenuContext = React.createContext();
+
 const MenuContainer = () => {
   const [showFilterMenu, setFilterMenu] = useState(false);
   const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
 
   return (
-    <>
+    <FilterMenuContext.Provider value={{ onClickFilterButton }}>
       <Div>
         <FilterBar onClickFilterButton={onClickFilterButton} />
         <NavigationContainer />
         <CreateButton />
       </Div>
       {showFilterMenu && <FilterMenuDropDown />}
-    </>
+    </FilterMenuContext.Provider>
   );
 };
 

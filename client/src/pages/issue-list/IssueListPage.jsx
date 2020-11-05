@@ -41,7 +41,7 @@ const IssueListPage = () => {
       data: { issues, labels, milestones, currentUser },
     }); // TODO: add users
   }, []);
-  console.log(state);
+
   return (
     <IssuesContext.Provider value={{ state, dispatch }}>
       <Header />
