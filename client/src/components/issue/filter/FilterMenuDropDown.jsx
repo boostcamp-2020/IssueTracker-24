@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
-import { FILTER_YOUR_ISSUE } from '../../../pages/issue-list/reducer';
+import {
+  FILTER_YOUR_ISSUES,
+  FILTER_OPEN_ISSUES,
+} from '../../../pages/issue-list/reducer';
 import { FilterMenuContext } from '../MenuContainer';
 const Div = styled.div`
   width: 300px;
@@ -42,7 +45,12 @@ const FilterMenuDropDown = () => {
 
   const onClickYourIssues = () => {
     const userId = state.currentUser.id;
-    dispatch({ type: FILTER_YOUR_ISSUE, id: Number(userId) });
+    dispatch({ type: FILTER_YOUR_ISSUES, id: Number(userId) });
+    onClickFilterButton();
+  };
+
+  const onClickOpenIssues = () => {
+    dispatch({ type: FILTER_OPEN_ISSUES });
     onClickFilterButton();
   };
 
@@ -50,7 +58,7 @@ const FilterMenuDropDown = () => {
     <>
       <Div>
         <MenuItem>Filter Issues</MenuItem>
-        <MenuItem>Open issues</MenuItem>
+        <MenuItem onClick={onClickOpenIssues}>Open issues</MenuItem>
         <MenuItem onClick={onClickYourIssues}>Your issues</MenuItem>
         <MenuItem>Everything assigned to you</MenuItem>
         <MenuItem>Everything mentioning you</MenuItem>
