@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Label from '../label/Label';
+import { getTimeInfo } from '../../utils/time';
 
 const IssueContentWrapper = styled.div`
   .issue-title {
@@ -23,7 +24,15 @@ const IssueContent = ({ issue }) => {
           ))}
         </div>
         <div className="issue-content">
-          <span>#{issue.id} opened yesterday by songjinhyun</span>
+          <span>
+            {issue.state === 'open'
+              ? `#${issue.id} opened ${getTimeInfo(issue.created_at)} by ${
+                  issue.user.sns_id
+                }`
+              : `#${issue.id} by ${issue.user.sns_id} was closed ${getTimeInfo(
+                  issue.closed_at,
+                )}`}
+          </span>
         </div>
       </div>
     </IssueContentWrapper>

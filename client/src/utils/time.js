@@ -1,5 +1,5 @@
-export const getTimeInfo = () => {
-  const date = new Date(this.time);
+export const getTimeInfo = (time) => {
+  const date = new Date(time);
   const currentDate = new Date();
   const timeDiff = currentDate - date; // milliseconds
   const oneSecond = 1000;

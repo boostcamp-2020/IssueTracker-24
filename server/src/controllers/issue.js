@@ -2,7 +2,7 @@ const { Issue, User, Label, Milestone } = require('../models');
 
 const getAllIssues = async (req, res, next) => {
   const issues = await Issue.findAll({
-    attributes: ['id', 'title', 'content', 'state', 'created_at'],
+    attributes: ['id', 'title', 'content', 'state', 'created_at', 'closed_at'],
     include: [
       {
         model: User,
