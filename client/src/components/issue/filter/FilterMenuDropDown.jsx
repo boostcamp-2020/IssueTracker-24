@@ -5,8 +5,10 @@ import {
   FILTER_YOUR_ISSUES,
   FILTER_OPEN_ISSUES,
   FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER,
+  FILTER_CLOSED_ISSUES,
 } from '../../../pages/issue-list/reducer';
 import { FilterMenuContext } from '../MenuContainer';
+
 const Div = styled.div`
   width: 300px;
   position: absolute;
@@ -63,6 +65,11 @@ const FilterMenuDropDown = () => {
     });
     onClickFilterButton();
   };
+
+  const onClickClosedIssues = () => {
+    dispatch({ type: FILTER_CLOSED_ISSUES });
+    onClickFilterButton();
+  };
   return (
     <>
       <Div>
@@ -72,8 +79,7 @@ const FilterMenuDropDown = () => {
         <MenuItem onClick={onClickAssignedToYou}>
           Everything assigned to you
         </MenuItem>
-        <MenuItem>Everything mentioning you</MenuItem>
-        <MenuItem>Closed issues</MenuItem>
+        <MenuItem onClick={onClickClosedIssues}>Closed issues</MenuItem>
       </Div>
     </>
   );
