@@ -2,15 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import svg from '../../utils/svg';
 const IssueLogoWrapper = styled.div`
-   margin-left:10px;
+  margin-left: 10px;
+  fill: green;
+  .close-logo {
+    fill: red;
+  }
+  .open-logo {
+    fill: green;
+  }
 `;
 
-const IssueLogo = () =>{
-  return(
-    <IssueLogoWrapper>
-      {svg['IssuesLogo']}
-   </IssueLogoWrapper>
-  );
-}
+const IssueLogo = ({ issue }) => {
+  return <IssueLogoWrapper>{svg[`${issue.state}Logo`]}</IssueLogoWrapper>;
+};
 
 export default IssueLogo;

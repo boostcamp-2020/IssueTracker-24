@@ -33,7 +33,7 @@ const IssueItem = ({ issue }) => {
     <>
       <IssueItemWrapper>
         <input type="checkbox" onClick={onCheckBoxChange} />
-        <IssueLogo />
+        <IssueLogo issue={issue} />
         <IssueContent issue={issue} />
       </IssueItemWrapper>
     </>
