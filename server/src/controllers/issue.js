@@ -28,7 +28,7 @@ const getAllIssues = async (req, res, next) => {
   });
   res.status(200).json(issues);
 };
-const createAllIssues = async (req, res, next) => {
+const createIssue = async (req, res, next) => {
   const { title, content, user_id } = { ...req.body };
   const issue = await Issue.create({
     title,
@@ -37,4 +37,4 @@ const createAllIssues = async (req, res, next) => {
   });
   res.status(200).json(issue);
 };
-module.exports = { getAllIssues, createAllIssues };
+module.exports = { getAllIssues, createIssue };
