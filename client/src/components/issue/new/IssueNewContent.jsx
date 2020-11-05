@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+
 const IssueNewContentWrapper = styled.div`
     width:50%;
     height:500px;
@@ -146,7 +148,7 @@ const IssueNewContent = () =>{
             <input type="file" className="input-file-content"></input>
           </div>
           <div className="btn-content">
-            <button type="button" className="cancel-btn">Cancel</button>
+            <Link to="/issues"><button type="button" className="cancel-btn">Cancel</button></Link>
             <button type="button" className="submit-btn" disabled={activeBtn}>Submit new issue</button>
           </div>
       </form>
