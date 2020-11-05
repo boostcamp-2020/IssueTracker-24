@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
 
 const IssueNewContentWrapper = styled.div`
-  width: 50%;
+  width: 100%;
   height: 500px;
   background-color: #ffffff;
   border-radius: 4px;
@@ -57,9 +57,10 @@ const IssueNewContentWrapper = styled.div`
     width: 90%;
   }
   .character-length {
-    position: absolute;
+    position: relative;
     float: right;
-    right: 10px;
+    right: 6%;
+    bottom: 30px;
   }
   .input-file-content {
     margin-left: 20px;
