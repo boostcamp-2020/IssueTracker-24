@@ -23,7 +23,7 @@ const UserOptionContentImage = styled.div`
   height: 15px;
   border: 1px solid gray;
   border-radius: 5px;
-  margin-right: 5px;
+  margin-right: 10px;
 `;
 
 const UserOption = ({ data }) => {
