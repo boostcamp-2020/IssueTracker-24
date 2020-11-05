@@ -6,12 +6,18 @@ const getAllIssues = async (req, res, next) => {
     include: [
       {
         model: User,
-        attributes: ['user_id', 'sns_id'],
+        attributes: ['id', 'user_id', 'sns_id'],
       },
       {
         model: Label,
         as: 'labels',
         attributes: ['id', 'title', 'description', 'color'],
+        through: { attributes: [] },
+      },
+      {
+        model: User,
+        as: 'assignees',
+        attributes: ['id', 'user_id', 'sns_id'],
         through: { attributes: [] },
       },
       {

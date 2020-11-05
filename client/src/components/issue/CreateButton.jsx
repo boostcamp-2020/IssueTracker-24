@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 
 const CreateButtonWrapper = styled.div`
   background-color: #2c974b;
@@ -13,12 +14,20 @@ const CreateButtonWrapper = styled.div`
   &:hover {
     background-color: #04c584;
   }
+  .create-issue{
+    color:#ffffff;
+  }
+  .issue-new-btn{
+    text-decoration:none;
+  }
 `;
 
 const CreateButton = () => {
   return (
     <CreateButtonWrapper>
-      <div className="create-issue btn">New issue</div>
+      <Link to="/issues/new" className="issue-new-btn">
+        <div className="create-issue btn">New issue</div>
+      </Link>
     </CreateButtonWrapper>
   );
 };

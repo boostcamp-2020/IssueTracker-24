@@ -30,9 +30,10 @@ const IssueListPage = () => {
     const issues = await getAllIssues();
     const labels = await getAllLabels();
     const milestones = await getAllMilestones();
+
     // TODO
     //const users = await getData('users');
-    dispatch({ type: INIT_DATA, data: { issues, labels, milestones } }); // TODO: add users
+    dispatch({ type: INIT_DATA, data: { issues , labels, milestones } }); // TODO: add users
   }, []);
 
   return (
