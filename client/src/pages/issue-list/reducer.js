@@ -21,10 +21,11 @@ const reducer = (state, action) => {
     case INIT_DATA: {
       const data = action.data;
       const issues = [...state.issues, ...data.issues];
+      const renderedIssues = [...state.renderedIssues, ...data.issues];
       const labels = [...state.labels, ...data.labels];
       const milestones = [...state.milestones, ...data.milestones];
       // const users = [...state.users, ...data.users]; // TODO
-      return { ...state, issues, labels, milestones }; // TODO: add users
+      return { ...state, issues, labels, milestones, renderedIssues }; // TODO: add users
     }
   }
 };

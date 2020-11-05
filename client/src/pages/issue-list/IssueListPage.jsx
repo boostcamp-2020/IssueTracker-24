@@ -12,6 +12,7 @@ export const IssuesContext = React.createContext();
 
 const initialState = {
   checkedIssues: [],
+  renderedIssues: [],
   issues: [],
   labels: [],
   milestones: [],
@@ -33,7 +34,7 @@ const IssueListPage = () => {
 
     // TODO
     //const users = await getData('users');
-    dispatch({ type: INIT_DATA, data: { issues , labels, milestones } }); // TODO: add users
+    dispatch({ type: INIT_DATA, data: { issues, labels, milestones } }); // TODO: add users
   }, []);
 
   return (
