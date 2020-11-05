@@ -28,5 +28,13 @@ const getAllIssues = async (req, res, next) => {
   });
   res.status(200).json(issues);
 };
-
-module.exports = { getAllIssues };
+const createIssue = async (req, res, next) => {
+  const { title, content, user_id } = { ...req.body };
+  const issue = await Issue.create({
+    title,
+    content,
+    user_id,
+  });
+  res.status(200).json(issue);
+};
+module.exports = { getAllIssues, createIssue };
