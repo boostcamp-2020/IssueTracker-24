@@ -6,11 +6,13 @@ import MenuContainer from '../../components/issue/MenuContainer';
 import { getAllIssues } from '../../lib/axios/issue';
 import { getAllLabels } from '../../lib/axios/label';
 import { getAllMilestones } from '../../lib/axios/milestone';
+import { getCurrentUser } from '../../lib/axios/user';
 import { INIT_DATA } from '../../pages/issue-list/reducer';
 
 export const IssuesContext = React.createContext();
 
 const initialState = {
+  currentUser: null,
   checkedIssues: [],
   renderedIssues: [],
   issues: [],
@@ -31,12 +33,15 @@ const IssueListPage = () => {
     const issues = await getAllIssues();
     const labels = await getAllLabels();
     const milestones = await getAllMilestones();
-
+    const currentUser = await getCurrentUser();
     // TODO
     //const users = await getData('users');
-    dispatch({ type: INIT_DATA, data: { issues, labels, milestones } }); // TODO: add users
+    dispatch({
+      type: INIT_DATA,
+      data: { issues, labels, milestones, currentUser },
+    }); // TODO: add users
   }, []);
-
+  console.log(state);
   return (
     <IssuesContext.Provider value={{ state, dispatch }}>
       <Header />
