@@ -6,13 +6,16 @@ import MenuContainer from '../../components/issue/MenuContainer';
 import { getAllIssues } from '../../lib/axios/issue';
 import { getAllLabels } from '../../lib/axios/label';
 import { getAllMilestones } from '../../lib/axios/milestone';
+import { getCurrentUser } from '../../lib/axios/user';
 import { INIT_DATA } from '../../pages/issue-list/reducer';
 import ToolBarContainer from '../../components/issue/ToolBarContainer';
 export const IssuesContext = React.createContext();
 
 const initialState = {
   wholeCheck: false,
+  currentUser: null,
   checkedIssues: [],
+  renderedIssues: [],
   issues: [],
   labels: [],
   milestones: [],
@@ -35,12 +38,12 @@ const IssueListPage = () => {
       id: issue.id,
       checked: false,
     }));
-
+    const currentUser = await getCurrentUser();
     // TODO
     //const users = await getData('users');
     dispatch({
       type: INIT_DATA,
-      data: { issues, labels, milestones, checkedIssues },
+      data: { issues, labels, milestones, checkedIssues, currentUser },
     }); // TODO: add users
   }, []);
 

@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       state: {
         type: DataTypes.STRING(100),
+        defaultValue: 'open',
       },
       closed_at: {
         type: DataTypes.DATE,

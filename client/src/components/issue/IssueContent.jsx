@@ -20,8 +20,8 @@ const IssueContent = ({ issue }) => {
   return (
     <IssueContentWrapper>
       <div>
-        <div className="issue-title">
-          <a>{issue.title}</a>
+        <div>
+          <a className="issue-title">{issue.title}</a>
           {issue.labels.map((label) => (
             <Label key={label.id} label={label} />
           ))}
