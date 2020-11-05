@@ -18,9 +18,10 @@ const getCurrentUser = async (req, res, next) => {
   }
 
   const token = authorizationHeaderValue.slice(7, authorizationHeaderValue.length).trimLeft();
-  jwt.verify(token, config.jwt.secretKey, (err, decoded) => {
+  jwt.verify(token, config.jwt.secretKey, async (err, decoded) => {
     if (err) next(err);
-    res.status(200).json({ sns_id: decoded.sns_id });
+    const currentUser = await User.findOne({ where: { sns_id: decoded.sns_id }, attributes: ['id', 'sns_id'] });
+    res.status(200).json(currentUser);
   });
 };
 module.exports = { getAllUser, getCurrentUser };
