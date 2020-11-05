@@ -25,12 +25,12 @@ const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
-    const issues = await getData('issues');
-    const labels = await getData('labels');
-    const milestones = await getData('milestones');
+    let issues = await getData('issues');
+    let labels = await getData('labels');
+    let milestones = await getData('milestones');
     // TODO
     //const users = await getData('users');
-    dispatch({ type: INIT_DATA, data: { issues, labels, milestones } }); // TODO: add users
+    dispatch({ type: INIT_DATA, data: { issues , labels, milestones } }); // TODO: add users
   }, []);
 
   return (
