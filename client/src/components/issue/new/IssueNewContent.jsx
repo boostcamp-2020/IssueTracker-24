@@ -47,16 +47,17 @@ const IssueNewContentWrapper = styled.div`
       position:absolute;
       width:100px;
       height:0;
-      margin-left:500px;
+      margin-left:31%;
       margin-top:-30px;
     }
     .input-file-content{
       margin-left:20px;
       border:1px solid #F4F4F6;
-      width:91%;
+      width:90%;
       background-color:#FAFBFC;
       z-index:-1;
       cursor:pointer;
+      overflow: hidden;
     }
     .file-container{
       position:relative;
@@ -71,6 +72,8 @@ const IssueNewContentWrapper = styled.div`
     outline: none;
     padding:3px 3px;
     width:90%;
+    border-radius:5px;
+    pointer-events:none;
     }
 `;
 const IssueNewContent = () =>{
@@ -83,7 +86,6 @@ const IssueNewContent = () =>{
       const timeoutId = setTimeout(() => {
         if (value) setResults(`${value.length} Characters`);
         else setResults(`0 Characters`);
-        
         setTimeout(()=>{
           setResults('');
         },2000);
@@ -100,14 +102,14 @@ const IssueNewContent = () =>{
       <div className="tabnav-tabs">
           <button className="write-btn">Write</button>
       </div>
-      <div className="write-content">
+      <form className="write-content">
           <textarea className="main-content" cols="70" rows="15" placeholder="Leave comment" onChange={onChangeTextarea}></textarea>
           <div className="character-length">{results} </div>
           <div className="file-container">
             <label className="input-label">Attach files by dragging & dropping, selecting or pasting them.</label>
             <input type="file" className="input-file-content"></input>
           </div>
-      </div>
+      </form>
       </IssueNewContentWrapper>
     </>
   );
