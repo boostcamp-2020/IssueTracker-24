@@ -26,11 +26,8 @@ const IssueListPage = () => {
 
   useEffect(async () => {
     let issues = await getData('issues');
-    if(!issues) issues = []; 
     let labels = await getData('labels');
-    if(!labels) labels = [];
     let milestones = await getData('milestones');
-    if(!milestones) milestones = [];
     // TODO
     //const users = await getData('users');
     dispatch({ type: INIT_DATA, data: { issues , labels, milestones } }); // TODO: add users
