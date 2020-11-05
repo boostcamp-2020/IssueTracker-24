@@ -3,26 +3,26 @@ import styled from 'styled-components';
 import Svg from '../../../../utils/svg';
 
 const COLORS = {
-  text: '#586069',
-  svg: '#959da5',
-  hover: '#0366d6',
+  TEXT: '#586069',
+  SVG: '#959da5',
+  HOVER: '#0366d6',
 };
 
 const HeadingWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  color: ${COLORS.text};
+  color: ${COLORS.TEXT};
   font-size: 13px;
   cursor: pointer;
   .svg {
-    fill: ${COLORS.svg};
+    fill: ${COLORS.SVG};
     padding-top: 3px;
   }
   &:hover {
-    color: ${COLORS.hover};
+    color: ${COLORS.HOVER};
   }
   &:hover .svg {
-    fill: ${COLORS.hover};
+    fill: ${COLORS.HOVER};
   }
 `;
 

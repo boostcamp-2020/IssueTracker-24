@@ -13,26 +13,26 @@ const UserOptionWrapper = styled.div`
       border-color: white;
     }
   }
-  .content {
-    display: flex;
-    flex-direction: row;
-  }
-  .image {
-    width: 15px;
-    height: 15px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    margin-right: 5px;
-  }
+`;
+const UserOptionContent = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const UserOptionContentImage = styled.div`
+  width: 15px;
+  height: 15px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-right: 5px;
 `;
 
 const UserOption = ({ data }) => {
   return (
     <UserOptionWrapper>
-      <div className="content">
-        <div className="image"></div>
+      <UserOptionContent>
+        <UserOptionContentImage></UserOptionContentImage>
         <div className="user-id">{data.sns_id}</div>
-      </div>
+      </UserOptionContent>
     </UserOptionWrapper>
   );
 };

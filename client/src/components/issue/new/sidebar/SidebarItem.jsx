@@ -7,16 +7,16 @@ import Dropdown from './Dropdown';
 
 const SidebarItemWrapper = styled.div`
   position: relative;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
   .state-msg {
     color: #586069;
     font-size: 12px;
   }
-
   &:not(:last-child) {
     border-bottom: 1px solid #eaecef;
   }
-  padding-top: 16px;
-  padding-bottom: 16px;
 `;
 
 const labels = [

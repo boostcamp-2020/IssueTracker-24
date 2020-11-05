@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import IssueNewImage from '../../components/issue/new/IssueNewImage';
 import IssueNewContent from '../../components/issue/new/IssueNewContent';
 import Sidebar from '../../components/issue/new/sidebar/Sidebar';
+
 const IssueListNewPageWrapper = styled.div`
   display: flex;
   justify-content: space-between;
