@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import IssueNewTitle from './IssueNewTitle';
 const IssueNewContentWrapper = styled.div`
@@ -16,11 +16,13 @@ const IssueNewContentWrapper = styled.div`
         height:0;
         margin-left:-12px;
         margin-top:30px;
-        transform: scale(3) rotate(-90deg);
-        border-color:rgba(255,255,255,1) transparent;
+        transform: scale(3);
+        border-right-color:#E8E9EC;
+        border-left-color:rgba(255,255,255,0);
+        border-top-color:rgba(255,255,255,0);
+        border-bottom-color:rgba(255,255,255,0);
         border-style:solid solid outset;
       }
-
     .write-btn{
         width:70px;
         height:40px;
@@ -41,8 +43,34 @@ const IssueNewContentWrapper = styled.div`
         margin-top:20px;
         margin-left:20px;
     }
+    .character-length{
+      position:absolute;
+      width:100px;
+      height:0;
+      margin-left:500px;
+      margin-top:-30px;
+    }
 `;
 const IssueNewContent = () =>{
+  const [value, setValue] = useState([0]);
+  const [results, setResults] = useState(['']); 
+  const onChangeTextarea = (e) =>{
+      setValue(e.target.value);
+  }
+  useEffect(()=>{
+      const timeoutId = setTimeout(() => {
+        if (value) setResults(`${value.length} Characters`);
+        else setResults(`0 Characters`);
+        
+        setTimeout(()=>{
+          setResults('');
+        },2000);
+      }, 2000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }, [value]);
+  
   return(
     <>
       <IssueNewContentWrapper>
@@ -51,7 +79,9 @@ const IssueNewContent = () =>{
           <button className="write-btn">Write</button>
       </div>
       <div className="write-content">
-          <textarea className="main-content" cols="70" rows="15" placeholder="Leave a comment"></textarea>
+          <textarea className="main-content" cols="70" rows="15" placeholder="Leave comment" onChange={onChangeTextarea}></textarea>
+          <div className="character-length">{results} </div>
+          <input type="file"></input>
       </div>
       </IssueNewContentWrapper>
     </>
