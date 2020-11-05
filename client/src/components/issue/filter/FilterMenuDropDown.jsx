@@ -4,6 +4,7 @@ import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import {
   FILTER_YOUR_ISSUES,
   FILTER_OPEN_ISSUES,
+  FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER,
 } from '../../../pages/issue-list/reducer';
 import { FilterMenuContext } from '../MenuContainer';
 const Div = styled.div`
@@ -54,13 +55,23 @@ const FilterMenuDropDown = () => {
     onClickFilterButton();
   };
 
+  const onClickAssignedToYou = () => {
+    const userId = state.currentUser.id;
+    dispatch({
+      type: FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER,
+      id: Number(userId),
+    });
+    onClickFilterButton();
+  };
   return (
     <>
       <Div>
         <MenuItem>Filter Issues</MenuItem>
         <MenuItem onClick={onClickOpenIssues}>Open issues</MenuItem>
         <MenuItem onClick={onClickYourIssues}>Your issues</MenuItem>
-        <MenuItem>Everything assigned to you</MenuItem>
+        <MenuItem onClick={onClickAssignedToYou}>
+          Everything assigned to you
+        </MenuItem>
         <MenuItem>Everything mentioning you</MenuItem>
         <MenuItem>Closed issues</MenuItem>
       </Div>
