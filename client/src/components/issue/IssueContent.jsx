@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Label from '../label/Label';
+import Label from '../common/Label';
 import { getTimeInfo } from '../../utils/time';
 import svg from '../../utils/svg';
 

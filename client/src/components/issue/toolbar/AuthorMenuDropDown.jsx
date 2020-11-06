@@ -26,7 +26,7 @@ const DetailsItem = styled.div`
 `;
 
 const DetailsMenuDropDown = styled.div`
-  width: 190px;
+  width: 250px;
   position: absolute;
   top: 70px;
   left: -70px;
