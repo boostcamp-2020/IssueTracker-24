@@ -23,7 +23,6 @@ const initialState = {
 
 const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
   useEffect(async () => {
     const [issues, labels, milestones, currentUser, users] = await Promise.all([
       getAllIssues(),

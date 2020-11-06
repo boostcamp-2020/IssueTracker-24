@@ -7,6 +7,7 @@ const DetailsItem = styled.div`
   height: 32px;
   box-sizing: border-box;
   padding: 5px;
+  padding-left: 20px;
   font-size: 14px;
   cursor: pointer;
   &:hover {
