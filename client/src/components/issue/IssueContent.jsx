@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Label from '../label/Label';
 import { getTimeInfo } from '../../utils/time';
+import svg from '../../utils/svg';
 
 const IssueContentWrapper = styled.div`
   .issue-title {
@@ -36,6 +37,9 @@ const IssueContent = ({ issue }) => {
                   issue.closed_at,
                 )}`}
           </span>
+          &nbsp;&nbsp;
+          {issue.milestone && svg['Milestones']}
+          {issue.milestone && <span>{issue.milestone.title}</span>}
         </div>
       </div>
     </IssueContentWrapper>
