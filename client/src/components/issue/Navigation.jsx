@@ -22,22 +22,25 @@ const NavigationWrapper = styled.div`
   svg {
     margin-right: 5px;
   }
-  .items-num {
-    border-radius: 20px;
-    background-color: #e4e7ea;
-    margin-top: 4px;
-    margin-left: 5px;
-    padding: 0px 8px 0px 8px;
-    font-size: 12px;
-  }
+`;
+const NavigationItemTitle = styled.div`
+  
+`;
+const NavigtaionItemsNum = styled.div`
+  border-radius: 20px;
+  background-color: #e4e7ea;
+  margin-top: 4px;
+  margin-left: 5px;
+  padding: 0px 8px 0px 8px;
+  font-size: 12px;
 `;
 
 const Navigation = ({ title, num }) => {
   return (
     <NavigationWrapper>
       {svg[title]}
-      <div className="nav-title">{title}</div>
-      <div className="items-num">{num}</div>
+      <NavigationItemTitle>{title}</NavigationItemTitle>
+      <NavigtaionItemsNum>{num}</NavigtaionItemsNum>
     </NavigationWrapper>
   );
 };

@@ -4,12 +4,6 @@ import svg from '../../utils/svg';
 const IssueLogoWrapper = styled.div`
   margin-left: 10px;
   fill: green;
-  .close-logo {
-    fill: red;
-  }
-  .open-logo {
-    fill: green;
-  }
 `;
 
 const IssueLogo = ({ issue }) => {
