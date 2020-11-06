@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
       background:#ffffff;
       margin:0;
       padding:0;
+      padding-bottom: 100px;
   }
 `;
 export default () => (
@@ -20,7 +21,7 @@ export default () => (
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/issues" component={IssueListPage} />
-        <Route exact path="/issues/new" component={IssueListNewPage}/>
+        <Route exact path="/issues/new" component={IssueListNewPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </Router>

@@ -55,8 +55,8 @@ const LoginFormContainer = () => {
         <a
           href={
             process.env.NODE_ENV === 'development'
-              ? 'http://127.0.0.1:3000/auth/github/login'
-              : `${process.env.PROD_URL}auth/github/login`
+              ? `${process.env.DEV_AUTH_URL}`
+              : `${process.env.PROD_AUTH_URL}`
           }
         >
           <button>
