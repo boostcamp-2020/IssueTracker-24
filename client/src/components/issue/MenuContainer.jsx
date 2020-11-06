@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import FilterBar from './filter/FilterBar';
 import NavigationContainer from './NavigationContainer';
@@ -21,9 +21,12 @@ const MenuContainer = () => {
   const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
 
   return (
-    <FilterMenuContext.Provider value={{ onClickFilterButton }}>
+    <FilterMenuContext.Provider value={{ onClickFilterButton, setFilterMenu }}>
       <Div>
-        <FilterBar onClickFilterButton={onClickFilterButton} />
+        <FilterBar
+          onClickFilterButton={onClickFilterButton}
+          setFilterMenu={setFilterMenu}
+        />
         <NavigationContainer />
         <CreateButton />
       </Div>

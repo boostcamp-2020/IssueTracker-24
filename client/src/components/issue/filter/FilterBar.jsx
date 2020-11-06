@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 const FilterBarWrapper = styled.div`
@@ -42,11 +42,21 @@ const FilterText = styled.input.attrs({
   width: 85%;
 `;
 
-const FilterBar = ({ onClickFilterButton }) => {
+const FilterBar = ({ onClickFilterButton, setFilterMenu }) => {
+  const filterButtonRef = useRef();
+
+  useEffect(() => {
+    document.body.addEventListener('click', (e) => {
+      if (filterButtonRef.current && filterButtonRef.current.contains(e.target))
+        return;
+      setFilterMenu(false);
+    });
+  }, []);
+
   return (
     <>
       <FilterBarWrapper>
-        <FilterButton onClick={onClickFilterButton}>
+        <FilterButton onClick={onClickFilterButton} ref={filterButtonRef}>
           Filters
           <DropDownIcon className="material-icons">
             arrow_drop_down

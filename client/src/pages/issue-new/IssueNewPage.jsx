@@ -5,7 +5,7 @@ import IssueNewImage from '../../components/issue/new/IssueNewImage';
 import IssueNewContent from '../../components/issue/new/IssueNewContent';
 import Sidebar from '../../components/issue/new/sidebar/Sidebar';
 
-const IssueListNewPageWrapper = styled.div`
+const IssueNewPageWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -24,13 +24,13 @@ const IssueListNewPage = () => {
   return (
     <>
       <Header />
-      <IssueListNewPageWrapper>
+      <IssueNewPageWrapper>
         <div class="content-wrapper">
           <IssueNewImage />
           <IssueNewContent />
         </div>
         <Sidebar />
-      </IssueListNewPageWrapper>
+      </IssueNewPageWrapper>
     </>
   );
 };

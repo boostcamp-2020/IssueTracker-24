@@ -1,0 +1,54 @@
+@mixin colors($color, $backgroundColor, $radius) {
+  color: $color;
+  background-color: $backgroundColor;
+  border-radius: $radius;
+}
+@mixin flexLayout($display, $justify, $align) {
+  display: $display;
+  @if $justify {
+    justify-content: $justify;
+  }
+  @if $align {
+    align-items: $align;
+  }
+}
+.input-container {
+  height: 250px;
+  @include flexLayout(flex, center, center);
+  .input-title {
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .input-value {
+    width: 200px;
+    height: 30px;
+    line-height: normal;
+    font-family: inherit;
+    border: 1px solid #999;
+    border-radius: 0;
+  }
+  button {
+    cursor: pointer;
+    border: 0;
+    @include colors(#fff, #04c584, 4px);
+    &:hover {
+      background-color: #10df99;
+    }
+  }
+  .input-common-button {
+    @include flexLayout(flex, space-around, null);
+    margin: 10px;
+  }
+}
+
+.input-github-button {
+  @include flexLayout(flex, center, null);
+  button {
+    width: 140%;
+    margin-left: -20%;
+    @include colors(#fff, #6e6e6e, 4px);
+    &:hover {
+      background-color: #2e2e2e;
+    }
+  }
+}
