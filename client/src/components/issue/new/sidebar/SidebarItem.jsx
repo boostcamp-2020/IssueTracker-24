@@ -10,15 +10,14 @@ const SidebarItemWrapper = styled.div`
   padding-top: 16px;
   padding-bottom: 16px;
 
-  .state-msg {
-    color: #586069;
-    font-size: 12px;
-  }
   &:not(:last-child) {
     border-bottom: 1px solid #eaecef;
   }
 `;
-
+const StateMsg = styled.div`
+  color: #586069;
+  font-size: 12px;
+`;
 const labels = [
   {
     id: 1,
@@ -100,7 +99,7 @@ const SidebarItem = ({ title, stateMsg, item }) => {
   return (
     <SidebarItemWrapper ref={ref}>
       <Heading title={title} onClick={handleOnClick} />
-      <div className="state-msg">{stateMsg}</div>
+      <StateMsg>{stateMsg}</StateMsg>
       <Dropdown
         show={show}
         item={item}
