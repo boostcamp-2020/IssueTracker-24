@@ -39,14 +39,6 @@ const DetailsMenuDropDown = styled.div`
   border-radius: 4px;
 `;
 
-const ProfileImage = styled.img`
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  margin-right: 10px;
-  margin-left: 15px;
-`;
-
 const AuthorMenuDropDown = () => {
   const { state } = useContext(IssuesContext);
   const { users } = state;
@@ -55,7 +47,6 @@ const AuthorMenuDropDown = () => {
     <>
       <DetailsMenuDropDown>
         <DetailsItem>Filter by author</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
         {users.map((user, index) => (
           <DetailsItem key={index}>
             <SmallProfileImage image={user.profile_image} />

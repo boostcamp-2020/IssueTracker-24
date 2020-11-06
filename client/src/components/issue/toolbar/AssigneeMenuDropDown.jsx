@@ -47,7 +47,6 @@ const AssigneeMenuDropDown = () => {
     <>
       <DetailsMenuDropDown>
         <DetailsItem>Filter by assignee</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
         <DetailsItem>Assigned to nobody</DetailsItem>
         {users.map((user, index) => (
           <DetailsItem key={index}>

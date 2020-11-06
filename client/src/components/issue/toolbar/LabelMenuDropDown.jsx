@@ -45,7 +45,6 @@ const LabelMenuDropDown = () => {
     <>
       <DetailsMenuDropDown>
         <DetailsItem>Filter by label</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
         <DetailsItem>Unlabeled</DetailsItem>
         {labels.map((label, index) => (
           <DetailsItem key={index}>{label.title}</DetailsItem>

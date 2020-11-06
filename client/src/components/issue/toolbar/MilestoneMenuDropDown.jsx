@@ -45,7 +45,6 @@ const MilestoneMenuDropDown = () => {
     <>
       <DetailsMenuDropDown>
         <DetailsItem>Filter by milestone</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
         <DetailsItem>Issues with no milestone</DetailsItem>
         {milestones.map((milestone, index) => (
           <DetailsItem key={index}>{milestone.title}</DetailsItem>
