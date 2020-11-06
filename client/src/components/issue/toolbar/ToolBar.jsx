@@ -19,16 +19,16 @@ const MenuDropDownWrapper = styled.div`
   position: relative;
 `;
 
-const getCheckedIssuesNum = (checkedIssues) => {
-  const checkedIssuesCount = checkedIssues.filter(
-    (checkedIssue) => checkedIssue.checked === true,
+const getCheckedIssuesNum = (renderedIssues) => {
+  const renderedIssuesCount = renderedIssues.filter(
+    (renderedIssue) => renderedIssue.checked === true,
   ).length;
-  return checkedIssuesCount == 0 ? '' : `${checkedIssuesCount} selected`;
+  return renderedIssuesCount == 0 ? '' : `${renderedIssuesCount} selected`;
 };
 
 const ToolBar = () => {
   const { dispatch, state } = useContext(IssuesContext);
-  const { checkedIssues, wholeCheck } = state;
+  const { renderedIssues, wholeCheck } = state;
 
   const onCilckAllCheckbox = () => {
     dispatch({ type: CHECK_WHOLE_ISSUES, wholeCheck: wholeCheck });
@@ -40,13 +40,13 @@ const ToolBar = () => {
         <div>
           <input
             type="checkbox"
-            onClick={onCilckAllCheckbox}
+            onChange={onCilckAllCheckbox}
             checked={wholeCheck}
           />
-          <SelectedCount>{getCheckedIssuesNum(checkedIssues)}</SelectedCount>
+          <SelectedCount>{getCheckedIssuesNum(renderedIssues)}</SelectedCount>
         </div>
         <MenuDropDownWrapper>
-          {getCheckedIssuesNum(checkedIssues) ? (
+          {getCheckedIssuesNum(renderedIssues) ? (
             <MarkAsTool />
           ) : (
             <FourFilterTools />
