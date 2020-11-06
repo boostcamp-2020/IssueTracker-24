@@ -177,5 +177,4 @@ const IssueNewContent = () => {
     </>
   );
 };
-
 export default IssueNewContent;
