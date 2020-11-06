@@ -32,7 +32,7 @@ const IssueItem = ({ issue }) => {
   return (
     <>
       <IssueItemWrapper>
-        <input type="checkbox" onClick={onCheckBoxChange} />
+        <input type="checkbox" onChange={onCheckBoxChange}  checked={issue.checked}/>
         <IssueLogo issue={issue} />
         <IssueContent issue={issue} />
       </IssueItemWrapper>

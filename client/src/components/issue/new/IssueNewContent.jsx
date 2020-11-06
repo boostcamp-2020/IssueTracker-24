@@ -130,6 +130,7 @@ const SubmitBtn = styled.button.attrs({
   border-radius: 5px;
   border: 0;
 `;
+
 const IssueNewContent = () => {
   const [value, setValue] = useState(0);
   const [results, setResults] = useState(['']);
