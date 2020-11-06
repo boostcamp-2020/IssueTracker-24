@@ -6,7 +6,7 @@ import MenuContainer from '../../components/issue/MenuContainer';
 import { getAllIssues } from '../../lib/axios/issue';
 import { getAllLabels } from '../../lib/axios/label';
 import { getAllMilestones } from '../../lib/axios/milestone';
-import { getCurrentUser } from '../../lib/axios/user';
+import { getCurrentUser, getAllUsers } from '../../lib/axios/user';
 import { INIT_DATA } from '../../pages/issue-list/reducer';
 import ToolBarContainer from '../../components/issue/ToolBarContainer';
 export const IssuesContext = React.createContext();
@@ -18,27 +18,25 @@ const initialState = {
   issues: [],
   labels: [],
   milestones: [],
-  users: [
-    { id: 1, sns_id: 'qkrrlgh519' },
-    { id: 2, sns_id: 'mu1616' },
-    { id: 3, sns_id: 'jch422' },
-    { id: 4, sns_id: 'thdwlsgus0' },
-  ],
+  users: [],
 };
 
 const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  console.log(state);
   useEffect(async () => {
-    const issues = await getAllIssues();
-    const labels = await getAllLabels();
-    const milestones = await getAllMilestones();
-    const currentUser = await getCurrentUser();
+    const [issues, labels, milestones, currentUser, users] = await Promise.all([
+      getAllIssues(),
+      getAllLabels(),
+      getAllMilestones(),
+      getCurrentUser(),
+      getAllUsers(),
+    ]);
     // TODO
     //const users = await getData('users');
     dispatch({
       type: INIT_DATA,
-      data: { issues, labels, milestones, currentUser },
+      data: { issues, labels, milestones, currentUser, users },
     }); // TODO: add users
   }, []);
 
