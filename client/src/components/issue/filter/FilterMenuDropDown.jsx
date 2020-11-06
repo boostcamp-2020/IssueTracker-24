@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import {
@@ -44,17 +44,20 @@ const MenuItem = styled.div`
 
 const FilterMenuDropDown = () => {
   const { state, dispatch } = useContext(IssuesContext);
-  const { onClickFilterButton } = useContext(FilterMenuContext);
+  const { setFilterMenu } = useContext(FilterMenuContext);
+  const filterMenuRef = useRef();
 
   const onClickYourIssues = () => {
     const userId = state.currentUser.id;
     dispatch({ type: FILTER_YOUR_ISSUES, id: Number(userId) });
-    onClickFilterButton();
+    setFilterMenu(false);
+    e.stopPropagation();
   };
 
   const onClickOpenIssues = () => {
     dispatch({ type: FILTER_OPEN_ISSUES });
-    onClickFilterButton();
+    setFilterMenu(false);
+    e.stopPropagation();
   };
 
   const onClickAssignedToYou = () => {
@@ -63,17 +66,24 @@ const FilterMenuDropDown = () => {
       type: FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER,
       id: Number(userId),
     });
-    onClickFilterButton();
+    setFilterMenu(false);
+    e.stopPropagation();
   };
 
   const onClickClosedIssues = () => {
     dispatch({ type: FILTER_CLOSED_ISSUES });
-    onClickFilterButton();
+    setFilterMenu(false);
+    e.stopPropagation();
   };
+
+  const onClickFirstItem = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
-      <Div>
-        <MenuItem>Filter Issues</MenuItem>
+      <Div ref={filterMenuRef}>
+        <MenuItem onClick={onClickFirstItem}>Filter Issues</MenuItem>
         <MenuItem onClick={onClickOpenIssues}>Open issues</MenuItem>
         <MenuItem onClick={onClickYourIssues}>Your issues</MenuItem>
         <MenuItem onClick={onClickAssignedToYou}>
