@@ -1,10 +1,18 @@
 import axios from 'axios';
-import { getToken } from '../utils/token';
+import { getToken } from '../../utils/token';
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === 'production'
     ? `${process.env.PROD_URL}`
     : `${process.env.DEV_URL}`;
+
+const informError = (error) => {
+  console.error(error);
+  const message = error.response.data.message
+    ? error.response.data.message
+    : '오류가 발생하여 요청에 실패하였습니다.';
+  alert(message);
+};
 
 const getOptions = (body) => {
   const options = {
@@ -24,36 +32,56 @@ const getOptions = (body) => {
 const getData = async (url) => {
   const options = getOptions();
 
-  const response = await axios.get(url, options);
-  return response.data;
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    informError(error);
+  }
 };
 
 const postData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.post(url, options);
-  return response.data;
+  try {
+    const response = await axios.post(url, options);
+    return response.data;
+  } catch (error) {
+    informError(error);
+  }
 };
 
 const patchData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.patch(url, options);
-  return response.data;
+  try {
+    const response = await axios.patch(url, options);
+    return response.data;
+  } catch (error) {
+    informError(error);
+  }
 };
 
 const putData = async (url, body) => {
   const options = getOptions(body);
 
-  const response = await axios.put(url, options);
-  return response.data;
+  try {
+    const response = await axios.put(url, options);
+    return response.data;
+  } catch (error) {
+    informError(error);
+  }
 };
 
 const deleteData = async (url) => {
   const options = getOptions();
 
-  const response = await axios.delete(url, options);
-  return response.data;
+  try {
+    const response = await axios.delete(url, options);
+    return response.data;
+  } catch (error) {
+    informError(error);
+  }
 };
 
 export { getData, postData, patchData, putData, deleteData };
