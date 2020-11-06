@@ -8,7 +8,7 @@ const IssueNewContentWrapper = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   border: 1px solid #e8e9ec;
-  margin-left: 50px;
+  margin-left: 45px;
   .issue-title {
     width: 85%;
     height: 30px;
@@ -25,7 +25,7 @@ const IssueNewContentWrapper = styled.div`
     content: '';
     width: 0;
     height: 0;
-    margin-left: -12px;
+    margin-left: -10px;
     margin-top: 30px;
     transform: scale(3);
     border-right-color: #e8e9ec;
@@ -59,7 +59,7 @@ const IssueNewContentWrapper = styled.div`
   .character-length {
     position: relative;
     float: right;
-    right: 6%;
+    right: 8%;
     bottom: 30px;
   }
   .input-file-content {

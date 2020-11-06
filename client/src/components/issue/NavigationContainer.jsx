@@ -7,7 +7,7 @@ const NavigationContainerWrapper = styled.div`
   display: flex;
   border: 1px solid #eaecef;
   border-radius: 4px;
-  width: 25%;
+  width: 27%;
 `;
 
 const NavigationContainer = () => {
