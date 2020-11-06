@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
       background:#ffffff;
       margin:0;
       padding:0;
+      padding-bottom: 100px;
   }
 `;
 export default () => (
