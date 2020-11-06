@@ -2,11 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import LoginPage from './pages/LoginPage';
-import IssueListPage from './pages/IssueListPage';
+import IssueListPage from './pages/issue-list/IssueListPage';
+import IssueNewPage from './pages/issue-new/IssueNewPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const GlobalStyle = createGlobalStyle`
   body{
-      background:#e9ecef;
+      background:#ffffff;
+      margin:0;
+      padding:0;
+      padding-bottom: 100px;
   }
 `;
 export default () => (
@@ -16,6 +21,8 @@ export default () => (
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/issues" component={IssueListPage} />
+        <Route exact path="/issues/new" component={IssueNewPage} />
+        <Route component={NotFoundPage} />
       </Switch>
     </Router>
   </>

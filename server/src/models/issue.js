@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       state: {
         type: DataTypes.STRING(100),
+        defaultValue: 'open',
+      },
+      closed_at: {
+        type: DataTypes.DATE,
       },
     },
     {
@@ -38,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'cascade',
     });
     issue.belongsToMany(models.User, {
-      as: 'users',
+      as: 'assignees',
       through: 'issue_user',
       foreignKey: 'issue_id',
       timestamps: false,

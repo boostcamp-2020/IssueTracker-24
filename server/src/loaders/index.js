@@ -6,7 +6,7 @@ const createError = require('http-errors');
 const cors = require('cors');
 const passportConfig = require('../passport');
 const { sequelize } = require('../models');
-const authRouter = require('../routes/auth');
+const indexRouter = require('../routes/index');
 
 module.exports = (app) => {
   sequelize
@@ -27,7 +27,7 @@ module.exports = (app) => {
   app.use(morgan('dev'));
   app.use(cookieParser());
   app.use(cors());
-  app.use('/auth', authRouter);
+  app.use('/', indexRouter);
 
   app.use((req, res, next) => {
     next(createError(404));
@@ -35,6 +35,6 @@ module.exports = (app) => {
 
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.send(err.message);
+    res.json({ message: err.message });
   });
 };
