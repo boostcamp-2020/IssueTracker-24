@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SmallLabel from '../../../common/SmallLabel';
 
 const LabelOptionWrapper = styled.div`
   color: #586069;
@@ -12,21 +13,14 @@ const LabelOptionWrapper = styled.div`
   .header {
     display: flex;
   }
-  .square {
-    width: 10px;
-    height: 10px;
-    margin-top: 4px;
-    margin-right: 6px;
-    background-color: ${(props) => props.color};
-    border-radius: 3px;
-  }
 `;
 
 const LabelOption = ({ data }) => {
+  console.log(SmallLabel);
   return (
     <LabelOptionWrapper color={data.color}>
       <div className="header">
-        <div className="square"></div>
+        <SmallLabel color={data.color} />
         <div className="title">{data.title}</div>
       </div>
       <div className="description">{data.description}</div>
