@@ -14,19 +14,21 @@ const CreateButtonWrapper = styled.div`
   &:hover {
     background-color: #04c584;
   }
-  .create-issue{
-    color:#ffffff;
-  }
+
   .issue-new-btn{
     text-decoration:none;
   }
+`;
+
+const CreateIssueBtn = styled.div`
+    color:#ffffff;
 `;
 
 const CreateButton = () => {
   return (
     <CreateButtonWrapper>
       <Link to="/issues/new" className="issue-new-btn">
-        <div className="create-issue btn">New issue</div>
+        <CreateIssueBtn>New issue</CreateIssueBtn>
       </Link>
     </CreateButtonWrapper>
   );
