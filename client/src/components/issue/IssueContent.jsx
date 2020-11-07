@@ -7,7 +7,7 @@ import svg from '../../utils/svg';
 const IssueContentWrapper = styled.div`
   .issue-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
     margin-left: 20px;
   }
@@ -17,16 +17,24 @@ const IssueContentWrapper = styled.div`
   }
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+`;
+
 const IssueContent = ({ issue }) => {
   return (
     <IssueContentWrapper>
       <div>
-        <div>
-          <a className="issue-title">{issue.title}</a>
-          {issue.labels.map((label) => (
-            <Label key={label.id} label={label} />
-          ))}
-        </div>
+        <TitleWrapper>
+          <div>
+            <a className="issue-title">{issue.title}</a>
+          </div>
+          <div>
+            {issue.labels.map((label) => (
+              <Label key={label.id} label={label} />
+            ))}
+          </div>
+        </TitleWrapper>
         <div className="issue-content">
           <span>
             {issue.state === 'open'

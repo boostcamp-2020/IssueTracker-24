@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const LabelWrapper = styled.button`
   background-color: ${(props) => props.color};
   border: none;
+  height: 25px;
   cursor: pointer;
   border-radius: 10%;
   font-weight: bold;
