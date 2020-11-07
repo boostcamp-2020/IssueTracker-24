@@ -25,7 +25,7 @@ const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
-    const [issues, labels, milestones, currentUser, users] = await Promise.all([
+    const [issues, labels, milestones, users] = await Promise.all([
       getAllIssues(),
       getAllLabels(),
       getAllMilestones(),
