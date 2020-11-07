@@ -1,15 +1,18 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useContext } from 'react';
 import './login-form.scss';
 import { useHistory } from 'react-router-dom';
-import { setCookie, getCookie, deleteCookie } from '../../../utils/cookie';
+import { getCookie, deleteCookie } from '../../../utils/cookie';
 import svg from '../../../utils/svg';
 import { setToken } from '../../../utils/token';
+import { AppContext } from '../../../App';
+import { getCurrentUser } from '../../../lib/axios/user';
 
 const LoginFormContainer = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-  console.log(process.env.NODE_ENV);
+  const { setCurrentUser } = useContext(AppContext);
+
   const onChangeId = (e) => {
     setId(e.target.value);
   };
@@ -19,10 +22,14 @@ const LoginFormContainer = () => {
 
   useLayoutEffect(() => {
     const token = getCookie('jwt');
-    console.log(token);
+
     if (token) {
       setToken(token);
       deleteCookie('jwt');
+      (async function () {
+        const user = await getCurrentUser();
+        setCurrentUser(user);
+      })();
       history.push('/issues');
     }
   }, []);

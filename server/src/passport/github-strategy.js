@@ -12,7 +12,7 @@ module.exports = () => {
         clientSecret: github.clientSecret,
         callbackURL: github.callbackURL,
       },
-      async (accessToken, refreshToken, { username }, done) => {
+      async (accessToken, refreshToken, { username, photos }, done) => {
         try {
           const exUser = await User.findOne({
             where: { sns_id: username, provider: 'github' },
@@ -23,6 +23,7 @@ module.exports = () => {
             const newUser = await User.create({
               sns_id: username,
               provider: 'github',
+              profile_image: photos[0].value,
             });
             done(null, newUser.sns_id);
           }

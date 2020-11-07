@@ -7,7 +7,8 @@ const DetailsItem = styled.div`
   height: 32px;
   box-sizing: border-box;
   padding: 5px;
-  font-size: 14px;
+  padding-left: 20px;
+  font-size: 13px;
   cursor: pointer;
   &:hover {
     background-color: #e9e9e9;
@@ -23,7 +24,7 @@ const DetailsItem = styled.div`
 `;
 
 const DetailsMenuDropDown = styled.div`
-  width: 200px;
+  width: 250px;
   position: absolute;
   top: 70px;
   right: 80px;
@@ -44,7 +45,6 @@ const MilestoneMenuDropDown = () => {
     <>
       <DetailsMenuDropDown>
         <DetailsItem>Filter by milestone</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
         <DetailsItem>Issues with no milestone</DetailsItem>
         {milestones.map((milestone, index) => (
           <DetailsItem key={index}>{milestone.title}</DetailsItem>

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../../components/Header';
 import styled from 'styled-components';
-import IssueNewImage from '../../components/issue/new/IssueNewImage';
+import { AppContext } from '../../App';
 import IssueNewContent from '../../components/issue/new/IssueNewContent';
 import Sidebar from '../../components/issue/new/sidebar/Sidebar';
+import ProfileImage from '../../components/common/ProfileImage';
 
 const IssueNewPageWrapper = styled.div`
   display: flex;
@@ -21,12 +22,13 @@ const IssueNewPageWrapper = styled.div`
 `;
 
 const IssueListNewPage = () => {
+  const { currentUser } = useContext(AppContext);
   return (
     <>
       <Header />
       <IssueNewPageWrapper>
         <div class="content-wrapper">
-          <IssueNewImage />
+          <ProfileImage image={currentUser.profile_image} size={50} />
           <IssueNewContent />
         </div>
         <Sidebar />
