@@ -10,7 +10,7 @@ const DetailsItem = styled.div`
   box-sizing: border-box;
   padding: 5px;
   padding-left: 20px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   &:hover {
     background-color: #e9e9e9;

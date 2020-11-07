@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const Label = styled.div`
   background-color: ${(props) => props.color};
-  width: 20px;
-  height: 20px;
-  border-radius: 15px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
   margin-right: 10px;
 `;
 
