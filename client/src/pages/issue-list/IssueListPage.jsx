@@ -9,11 +9,11 @@ import { getAllMilestones } from '../../lib/axios/milestone';
 import { getCurrentUser, getAllUsers } from '../../lib/axios/user';
 import { INIT_DATA } from '../../pages/issue-list/reducer';
 import ToolBarContainer from '../../components/issue/ToolBarContainer';
+
 export const IssuesContext = React.createContext();
 
 const initialState = {
   wholeCheck: false,
-  currentUser: null,
   renderedIssues: [],
   issues: [],
   labels: [],
@@ -23,20 +23,18 @@ const initialState = {
 
 const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(async () => {
     const [issues, labels, milestones, currentUser, users] = await Promise.all([
       getAllIssues(),
       getAllLabels(),
       getAllMilestones(),
-      getCurrentUser(),
       getAllUsers(),
     ]);
-    // TODO
-    //const users = await getData('users');
     dispatch({
       type: INIT_DATA,
-      data: { issues, labels, milestones, currentUser, users },
-    }); // TODO: add users
+      data: { issues, labels, milestones, users },
+    });
   }, []);
 
   return (

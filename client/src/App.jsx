@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import LoginPage from './pages/LoginPage';
 import IssueListPage from './pages/issue-list/IssueListPage';
 import IssueNewPage from './pages/issue-new/IssueNewPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { getToken } from './utils/token';
+import { getCurrentUser } from './lib//axios/user';
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -14,16 +16,33 @@ const GlobalStyle = createGlobalStyle`
       padding-bottom: 100px;
   }
 `;
-export default () => (
-  <>
-    <Router>
-      <GlobalStyle />
-      <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route exact path="/issues" component={IssueListPage} />
-        <Route exact path="/issues/new" component={IssueNewPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </Router>
-  </>
-);
+
+export const AppContext = React.createContext();
+
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(async () => {
+    const token = getToken();
+    if (token) {
+      const user = await getCurrentUser();
+      setCurrentUser(user);
+    }
+  }, []);
+
+  return (
+    <AppContext.Provider value={{ currentUser, setCurrentUser }}>
+      <Router>
+        <GlobalStyle />
+        <Switch>
+          <Route exact path="/" component={LoginPage} />
+          <Route exact path="/issues" component={IssueListPage} />
+          <Route exact path="/issues/new" component={IssueNewPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Router>
+    </AppContext.Provider>
+  );
+};
+
+export default App;

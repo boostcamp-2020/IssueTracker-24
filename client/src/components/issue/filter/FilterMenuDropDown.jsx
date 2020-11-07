@@ -8,6 +8,7 @@ import {
   FILTER_CLOSED_ISSUES,
 } from '../../../pages/issue-list/reducer';
 import { FilterMenuContext } from '../MenuContainer';
+import { AppContext } from '../../../App';
 
 const Div = styled.div`
   width: 300px;
@@ -44,24 +45,25 @@ const MenuItem = styled.div`
 
 const FilterMenuDropDown = () => {
   const { state, dispatch } = useContext(IssuesContext);
+  const { currentUser } = useContext(AppContext);
   const { setFilterMenu } = useContext(FilterMenuContext);
   const filterMenuRef = useRef();
 
-  const onClickYourIssues = () => {
-    const userId = state.currentUser.id;
+  const onClickYourIssues = (e) => {
+    const userId = currentUser.id;
     dispatch({ type: FILTER_YOUR_ISSUES, id: Number(userId) });
     setFilterMenu(false);
     e.stopPropagation();
   };
 
-  const onClickOpenIssues = () => {
+  const onClickOpenIssues = (e) => {
     dispatch({ type: FILTER_OPEN_ISSUES });
     setFilterMenu(false);
     e.stopPropagation();
   };
 
-  const onClickAssignedToYou = () => {
-    const userId = state.currentUser.id;
+  const onClickAssignedToYou = (e) => {
+    const userId = currentUser.id;
     dispatch({
       type: FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER,
       id: Number(userId),
@@ -70,7 +72,7 @@ const FilterMenuDropDown = () => {
     e.stopPropagation();
   };
 
-  const onClickClosedIssues = () => {
+  const onClickClosedIssues = (e) => {
     dispatch({ type: FILTER_CLOSED_ISSUES });
     setFilterMenu(false);
     e.stopPropagation();
