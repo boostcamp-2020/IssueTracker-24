@@ -6,7 +6,7 @@ import IssueListPage from './pages/issue-list/IssueListPage';
 import IssueNewPage from './pages/issue-new/IssueNewPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { getToken } from './utils/token';
-import { getCurrentUser } from './lib//axios/user';
+import { getCurrentUser } from './lib/axios/user';
 
 const GlobalStyle = createGlobalStyle`
   body{
