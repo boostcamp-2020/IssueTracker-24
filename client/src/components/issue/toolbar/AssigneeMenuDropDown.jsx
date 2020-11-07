@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
-import SmallProfileImage from '../../common/SmallProfileImage';
+import ProfileImage from '../../common/ProfileImage';
 
 const DetailsItem = styled.div`
   display: flex;
@@ -22,6 +22,9 @@ const DetailsItem = styled.div`
     &:hover {
       background-color: #fafbfc;
     }
+  }
+  .user-id {
+    margin-left: 10px;
   }
 `;
 
@@ -50,8 +53,8 @@ const AssigneeMenuDropDown = () => {
         <DetailsItem>Assigned to nobody</DetailsItem>
         {users.map((user, index) => (
           <DetailsItem key={index}>
-            <SmallProfileImage image={user.profile_image} />
-            <div>{user.sns_id}</div>
+            <ProfileImage image={user.profile_image} size={20} />
+            <div className="user-id">{user.sns_id}</div>
           </DetailsItem>
         ))}
       </DetailsMenuDropDown>
