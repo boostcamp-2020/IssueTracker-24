@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import DropDownIcon from '../../common/DropDownIcon';
 
 const FilterBarWrapper = styled.div`
   display: flex;
@@ -20,13 +21,6 @@ const FilterButton = styled.button`
   &:hover {
     background-color: #f3f4f6;
   }
-`;
-
-const DropDownIcon = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
 `;
 
 const FilterText = styled.input.attrs({
@@ -58,9 +52,7 @@ const FilterBar = ({ onClickFilterButton, setFilterMenu }) => {
       <FilterBarWrapper>
         <FilterButton onClick={onClickFilterButton} ref={filterButtonRef}>
           Filters
-          <DropDownIcon className="material-icons">
-            arrow_drop_down
-          </DropDownIcon>
+          <DropDownIcon />
         </FilterButton>
         <FilterText />
       </FilterBarWrapper>

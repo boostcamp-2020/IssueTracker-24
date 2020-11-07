@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import DropDownIcon from '../DropDownIcon';
+import DropDownIcon from '../../common/DropDownIcon';
 
 const DetailsButton = styled.button`
   font-size: 15px;
