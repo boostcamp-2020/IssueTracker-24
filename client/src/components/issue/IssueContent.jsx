@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Label from '../common/Label';
 import { getTimeInfo } from '../../utils/time';
@@ -21,7 +21,7 @@ const TitleWrapper = styled.div`
   display: flex;
 `;
 
-const IssueContent = ({ issue }) => {
+const IssueContent = memo(({ issue }) => {
   return (
     <IssueContentWrapper>
       <div>
@@ -52,5 +52,5 @@ const IssueContent = ({ issue }) => {
       </div>
     </IssueContentWrapper>
   );
-};
+});
 export default IssueContent;
