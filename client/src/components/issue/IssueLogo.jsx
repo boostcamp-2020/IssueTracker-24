@@ -3,11 +3,15 @@ import styled from 'styled-components';
 import svg from '../../utils/svg';
 const IssueLogoWrapper = styled.div`
   margin-left: 10px;
-  fill: green;
+  fill: ${(props) => (props.state == 'open' ? 'green' : 'red')};
 `;
 
-const IssueLogo = ({ issue }) => {
-  return <IssueLogoWrapper>{svg[`${issue.state}Logo`]}</IssueLogoWrapper>;
+const IssueLogo = ({ issueState }) => {
+  return (
+    <IssueLogoWrapper state={issueState}>
+      {svg[`${issueState}Logo`]}
+    </IssueLogoWrapper>
+  );
 };
 
 export default IssueLogo;
