@@ -18,10 +18,11 @@ const FormWrapper = styled.form`
   }
 `;
 
-const FilterInput = styled.input.attrs({
+const FilterInput = styled.input.attrs((props) => ({
   type: 'text',
   placeholder: 'Search all issues',
-})`
+  value: props.value,
+}))`
   font-size: 17px;
   padding-left: 6%;
   height: 29px;
@@ -36,11 +37,11 @@ const FilterInput = styled.input.attrs({
   }
 `;
 
-const FilterForm = () => {
+const FilterForm = ({ searchText }) => {
   return (
     <>
       <FormWrapper>
-        <FilterInput />
+        <FilterInput value={searchText} />
         <svg className="search-svg" width="20" height="20">
           <path
             fillRule="evenodd"

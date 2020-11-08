@@ -24,7 +24,7 @@ const FilterButton = styled.button`
   }
 `;
 
-const FilterBar = ({ onClickFilterButton, setFilterMenu }) => {
+const FilterBar = ({ onClickFilterButton, setFilterMenu, searchText }) => {
   const filterButtonRef = useRef();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const FilterBar = ({ onClickFilterButton, setFilterMenu }) => {
           Filters
           <DropDownIcon />
         </FilterButton>
-        <FilterForm />
+        <FilterForm searchText={searchText} />
       </FilterBarWrapper>
     </>
   );
