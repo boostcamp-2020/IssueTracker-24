@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Label/> matches snapshot 1`] = `
+<div>
+  <button
+    class="sc-dlnjPT JvOQF"
+    color="#ffffff"
+  >
+    <div>
+      bug
+    </div>
+  </button>
+</div>
+`;
+
+exports[`<LabelOption/> matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-gtssRu kbUSdc"
+    color="#ffffff"
+  >
+    <div
+      class="header"
+    >
+      <div
+        class="sc-bdnylx dlRZXl"
+        color="#ffffff"
+      />
+      <div
+        class="title"
+      >
+        bug
+      </div>
+    </div>
+    <div
+      class="description"
+    >
+      버그 라벨
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<SmallLabel/> matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdnylx dlRZXl"
+    color="#ffffff"
+  />
+</div>
+`;

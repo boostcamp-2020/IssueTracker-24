@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileImage/> matches snapshot 1`] = `
+<div>
+  <img
+    class="sc-bdnylx gIESGv"
+    src="jinhyun.png"
+  />
+</div>
+`;

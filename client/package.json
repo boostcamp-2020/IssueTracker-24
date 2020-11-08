@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "main": "webpack.config.js",
   "dependencies": {
+    "@testing-library/react": "^11.1.1",
     "axios": "^0.21.0",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "jest-dom": "^4.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
+    "react-testing-library": "^8.0.1",
     "sass": "^1.27.1",
     "styled-components": "^5.2.0"
   },
@@ -43,7 +48,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
-    "dev": "webpack-dev-server --hot --progress"
+    "dev": "webpack-dev-server --hot --progress",
+    "jest": "jest"
   },
   "eslintConfig": {
     "extends": [
