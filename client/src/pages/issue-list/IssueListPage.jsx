@@ -14,6 +14,7 @@ export const IssuesContext = React.createContext();
 
 const initialState = {
   wholeCheck: false,
+  searchText: 'is:open is:issue ',
   renderedIssues: [],
   issues: [],
   labels: [],
