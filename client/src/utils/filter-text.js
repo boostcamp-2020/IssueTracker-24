@@ -67,3 +67,18 @@ export const filterTextByAssignedToYou = (searchText) => {
     return [...sliceLast(splitedText), 'assignee:@me', ''].join(' ');
   }
 };
+
+export const filterTextByAuthor = (searchText, author) => {
+  const splitedText = searchText.split(' ');
+  let index = -1;
+  splitedText.forEach((v, i) => {
+    if (v.indexOf('author:') !== -1) index = i;
+  });
+
+  if (index !== -1) {
+    splitedText[index] = `author:${author}`;
+    return [...splitedText].join(' ');
+  } else {
+    return [...sliceLast(splitedText), `author:${author}`, ''].join(' ');
+  }
+};
