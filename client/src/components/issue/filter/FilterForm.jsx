@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import svg from '../../../utils/svg';
 
 const FormWrapper = styled.form`
   margin-left: -6px;
@@ -10,7 +11,7 @@ const FormWrapper = styled.form`
   border-radius: 0 4px 4px 0;
   background-color: #fafbfc;
   position: relative;
-  .search-svg {
+  & svg {
     margin: 0 8px 0 8px;
     position: absolute;
     top: 7px;
@@ -42,13 +43,7 @@ const FilterForm = ({ searchText }) => {
     <>
       <FormWrapper>
         <FilterInput value={searchText} />
-        <svg className="search-svg" width="20" height="20">
-          <path
-            fillRule="evenodd"
-            d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"
-            fill="#959da5"
-          ></path>
-        </svg>
+        {svg['magnifyingGlass']}
       </FormWrapper>
     </>
   );
