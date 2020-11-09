@@ -9,6 +9,7 @@ import { getAllMilestones } from '../../lib/axios/milestone';
 import { getCurrentUser, getAllUsers } from '../../lib/axios/user';
 import { INIT_DATA } from '../../pages/issue-list/reducer';
 import ToolBarContainer from '../../components/issue/ToolBarContainer';
+import Spinner from '../../components/common/Spinner';
 
 export const IssuesContext = React.createContext();
 
@@ -42,7 +43,7 @@ const IssueListPage = () => {
       <Header />
       <MenuContainer />
       <ToolBarContainer />
-      <IssueContainer />
+      {state.renderedIssues ? <IssueContainer /> : <Spinner />}
     </IssuesContext.Provider>
   );
 };
