@@ -21,23 +21,24 @@ box-sizing : border-box;
 const OpenDiv = styled.div`
  margin-left:5px;
  padding-left:10px;
+ cursor:pointer;
 `
 const CloseDiv = styled.div`
  margin-left:5px;
  padding-left:10px;
+ cursor:pointer;
 `;
-const MilestoneNav = () =>{
-  const {state} = useContext(MilestoneContext);
-  const {milestones} = state;
+const MilestoneNav = ({milestones}) =>{
+  const openMilestone = milestones.filter(milestone=> milestone.state==="open").length;
+  const closeMilestone = milestones.filter(milestone=>milestone.state==="close").length;
   return(
     <MilestoneNavWrapper>
         <OpenDiv>
-           {svg['Milestones']} 1 Open
+           {svg['Milestones']} {openMilestone} Open
          </OpenDiv>
          <CloseDiv>
-           {svg['closeMilestones']} 0 Closed
+           {svg['closeMilestones']} {closeMilestone} Closed
          </CloseDiv>
-       
     </MilestoneNavWrapper>
   );
 }

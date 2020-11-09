@@ -18,7 +18,6 @@ const MilestonePage = () =>{
     const {milestones} = state;
     useEffect(async () =>{
         const milestones = await getAllMilestones();
-        console.log(milestones);
         dispatch({
             type: INIT_DATA,
             data: milestones,
@@ -29,7 +28,7 @@ const MilestonePage = () =>{
       <MilestoneContext.Provider value={{state, dispatch}}>
        <Header/>
        <MilestoneHeader/>
-       <MilestoneNav/>
+       <MilestoneNav milestones={milestones}/>
        {milestones.map((milestone, index)=>(
          <MilestoneList key={index} milestone={milestone} />)
         )}

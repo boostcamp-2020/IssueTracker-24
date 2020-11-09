@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import styled from 'styled-components';
 import svg from '../../utils/svg';
-
+import {getDueInfo} from '../../utils/time';
 const MilestoneListLeftWrapper = styled.div`
    width:50%;
    height:100%;
@@ -23,12 +23,12 @@ const MilestoneContent = styled.div`
  margin-top:3px;
 `;
 const MilestoneListLeft =  ({milestone}) =>{
-   
+    const milestoneTime = getDueInfo(milestone.due_date);
     return (
       <MilestoneListLeftWrapper>
         <MilestoneTitle>{milestone.title}</MilestoneTitle>
         <MilestoneDate>{svg['dueMilestones']}
-        {milestone.due_date}
+        {milestoneTime}
         </MilestoneDate>
         <MilestoneContent>
             {milestone.description}
