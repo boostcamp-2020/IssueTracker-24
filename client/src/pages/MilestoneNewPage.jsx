@@ -7,6 +7,8 @@ import InputWrapper from '../components/milestone/InputWrapper';
 import InputDate from '../components/milestone/InputDate';
 import DescriptionArea from '../components/milestone/DescriptionArea';
 import GreenButton from '../components/common/GreenButton';
+import { createMilestone } from '../lib/axios/milestone';
+import { useHistory } from 'react-router-dom';
 
 const MilestoneNewPageWrappper = styled.div`
   display: flex;
@@ -27,6 +29,16 @@ const MilestoneNewPage = () => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(null);
   const [description, setDescription] = useState('');
+  const history = useHistory();
+
+  const onClickCreateButton = () => {
+    if (!title) {
+      alert('제목을 입력해주세요');
+      return;
+    }
+    createMilestone({ title, due_date: date, description });
+    history.push('/milestones');
+  };
 
   return (
     <>
@@ -49,7 +61,7 @@ const MilestoneNewPage = () => {
           />
         </InputWrapper>
       </MilestoneNewPageWrappper>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={onClickCreateButton}>
         <GreenButton text={'Create milestone'} />
       </ButtonWrapper>
     </>
