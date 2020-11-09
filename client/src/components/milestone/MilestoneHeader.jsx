@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import MilestoneSelectMenu from '../milestone/MilestoneSelectMenu';
-import CreateMilestone from '../milestone/CreateMilestone';
-
+import GreenButton from '../common/GreenButton';
+import { useHistory } from 'react-router-dom';
 const MilestoneHeaderWrapper = styled.div`
   width:80%;
   display:flex;
@@ -13,13 +13,16 @@ const MilestoneHeaderWrapper = styled.div`
 `;
 
 const MilestoneHeader = () =>{
+    let history = useHistory();
+    const MilestoneCreate = () =>{
+        history.push('/milestones/new');
+    }
     return(
         <>
          <MilestoneHeaderWrapper>
          <MilestoneSelectMenu/>
-         <CreateMilestone>
-             New Milestones
-         </CreateMilestone>
+         <GreenButton text='New Milestones' func={MilestoneCreate}>
+         </GreenButton>
           </MilestoneHeaderWrapper>
         </>
     )
