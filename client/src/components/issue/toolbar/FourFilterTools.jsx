@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import DropDownIcon from '../../common/DropDownIcon';
 import AuthorMenuDropDown from './AuthorMenuDropDown';
@@ -23,42 +23,80 @@ const DetailsButton = styled.button`
 `;
 
 const FourFilterTools = () => {
-  const [isShowAuthorMenu, setShowAuthorMenu] = useState(false);
-  const [isShowLabelMenu, setShowLabelMenu] = useState(false);
-  const [isShowMilestoneMenu, setShowMilestoneMenu] = useState(false);
-  const [isShowAssigneeMenu, setShowAssigneeMenu] = useState(false);
+  const [showAuthorMenu, setShowAuthorMenu] = useState(false);
+  const [showLabelMenu, setShowLabelMenu] = useState(false);
+  const [showMilestoneMenu, setShowMilestoneMenu] = useState(false);
+  const [showAssigneeMenu, setShowAssigneeMenu] = useState(false);
 
-  const onClickAuthorButton = () => setShowAuthorMenu(!isShowAuthorMenu);
-  const onClickLabelButton = () => setShowLabelMenu(!isShowLabelMenu);
-  const onClickMilestoneButton = () =>
-    setShowMilestoneMenu(!isShowMilestoneMenu);
-  const onClickAssigneeButton = () => setShowAssigneeMenu(!isShowAssigneeMenu);
+  const onClickAuthorButton = () => setShowAuthorMenu(!showAuthorMenu);
+  const onClickLabelButton = () => setShowLabelMenu(!showLabelMenu);
+  const onClickMilestoneButton = () => setShowMilestoneMenu(!showMilestoneMenu);
+  const onClickAssigneeButton = () => setShowAssigneeMenu(!showAssigneeMenu);
+
+  const authorMenuRef = useRef();
+  const labelMenuRef = useRef();
+  const milestoneMenuRef = useRef();
+  const assigneeMenuRef = useRef();
+
+  useEffect(() => {
+    document.body.addEventListener('click', (e) => {
+      if (authorMenuRef.current && authorMenuRef.current.contains(e.target))
+        return;
+      setShowAuthorMenu(false);
+    });
+    document.body.addEventListener('click', (e) => {
+      if (labelMenuRef.current && labelMenuRef.current.contains(e.target))
+        return;
+      setShowLabelMenu(false);
+    });
+    document.body.addEventListener('click', (e) => {
+      if (
+        milestoneMenuRef.current &&
+        milestoneMenuRef.current.contains(e.target)
+      )
+        return;
+      setShowMilestoneMenu(false);
+    });
+    document.body.addEventListener('click', (e) => {
+      if (assigneeMenuRef.current && assigneeMenuRef.current.contains(e.target))
+        return;
+      setShowAssigneeMenu(false);
+    });
+  }, []);
 
   return (
     <>
-      <DetailsButton onClick={onClickAuthorButton}>
+      <DetailsButton onClick={onClickAuthorButton} ref={authorMenuRef}>
         Author
         <DropDownIcon />
       </DetailsButton>
-      {isShowAuthorMenu && <AuthorMenuDropDown />}
+      {showAuthorMenu && (
+        <AuthorMenuDropDown setShowAuthorMenu={setShowAuthorMenu} />
+      )}
 
-      <DetailsButton onClick={onClickLabelButton}>
+      <DetailsButton onClick={onClickLabelButton} ref={labelMenuRef}>
         Label
         <DropDownIcon />
       </DetailsButton>
-      {isShowLabelMenu && <LabelMenuDropDown />}
+      {showLabelMenu && (
+        <LabelMenuDropDown setShowLabelMenu={setShowLabelMenu} />
+      )}
 
-      <DetailsButton onClick={onClickMilestoneButton}>
+      <DetailsButton onClick={onClickMilestoneButton} ref={milestoneMenuRef}>
         Milestones
         <DropDownIcon />
       </DetailsButton>
-      {isShowMilestoneMenu && <MilestoneMenuDropDown />}
+      {showMilestoneMenu && (
+        <MilestoneMenuDropDown setShowMilestoneMenu={setShowMilestoneMenu} />
+      )}
 
-      <DetailsButton onClick={onClickAssigneeButton}>
+      <DetailsButton onClick={onClickAssigneeButton} ref={assigneeMenuRef}>
         Assignee
         <DropDownIcon />
       </DetailsButton>
-      {isShowAssigneeMenu && <AssigneeMenuDropDown />}
+      {showAssigneeMenu && (
+        <AssigneeMenuDropDown setShowAssigneeMenu={setShowAssigneeMenu} />
+      )}
     </>
   );
 };
