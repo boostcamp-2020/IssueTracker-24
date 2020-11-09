@@ -114,3 +114,35 @@ export const filterTextByAssignee = (searchText, assignee) => {
     return [...sliceLast(splitedText), `assignee:${assignee}`, ''].join(' ');
   }
 };
+
+export const filterTextByNoMilestone = (searchText) => {
+  const splitedText = searchText.split(' ');
+  let index = -1;
+  splitedText.forEach((v, i) => {
+    if (v.indexOf('no:milestone') !== -1) index = i;
+    else if (v.indexOf('milestone:') !== -1) index = i;
+  });
+
+  if (index !== -1) {
+    splitedText[index] = 'no:milestone';
+    return [...splitedText].join(' ');
+  } else {
+    return [...sliceLast(splitedText), 'no:milestone', ''].join(' ');
+  }
+};
+
+export const filterTextByMilestone = (searchText, milestone) => {
+  const splitedText = searchText.split(' ');
+  let index = -1;
+  splitedText.forEach((v, i) => {
+    if (v.indexOf('no:milestone') !== -1) index = i;
+    else if (v.indexOf('milestone:') !== -1) index = i;
+  });
+
+  if (index !== -1) {
+    splitedText[index] = `milestone:${milestone}`;
+    return [...splitedText].join(' ');
+  } else {
+    return [...sliceLast(splitedText), `milestone:${milestone}`, ''].join(' ');
+  }
+};
