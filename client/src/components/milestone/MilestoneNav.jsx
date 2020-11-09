@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useContext}from 'react';
 import styled from 'styled-components';
 import svg from '../../utils/svg';
+import MilestoneList from '../../components/milestone/MilestoneList';
+import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
+
 const MilestoneNavWrapper = styled.div`
 display:flex;
 width:80%;
@@ -24,6 +27,8 @@ const CloseDiv = styled.div`
  padding-left:10px;
 `;
 const MilestoneNav = () =>{
+  const {state} = useContext(MilestoneContext);
+  const {milestones} = state;
   return(
     <MilestoneNavWrapper>
         <OpenDiv>
@@ -32,6 +37,7 @@ const MilestoneNav = () =>{
          <CloseDiv>
            {svg['closeMilestones']} 0 Closed
          </CloseDiv>
+       
     </MilestoneNavWrapper>
   );
 }
