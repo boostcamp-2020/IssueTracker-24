@@ -29,12 +29,21 @@ const getAllIssues = async (req, res, next) => {
   res.status(200).json(issues);
 };
 const createIssue = async (req, res, next) => {
-  const { title, content, user_id } = { ...req.body };
+  const { title, content, user_id, milestone_id, labels } = { ...req.body };
   const issue = await Issue.create({
     title,
     content,
     user_id,
+    milestone_id,
   });
+
+  if (labels) {
+    const promises = labels.map((label) => {
+      return issue.addLabels(label);
+    });
+    Promise.all(promises);
+  }
+
   res.status(200).json(issue);
 };
 module.exports = { getAllIssues, createIssue };
