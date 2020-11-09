@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
 export const AppContext = React.createContext();
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState('');
 
   useEffect(async () => {
     const token = getToken();
