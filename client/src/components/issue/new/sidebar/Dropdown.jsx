@@ -4,12 +4,6 @@ import AssigneeOption from './UserOption';
 import LabelOption from './LabelOption';
 import MilestoneOption from './MilestoneOption';
 
-const components = {
-  assignees: AssigneeOption,
-  labels: LabelOption,
-  milestones: MilestoneOption,
-};
-
 const DropdownWrapper = styled.div`
   position: absolute;
   top: 40px;
@@ -34,15 +28,17 @@ const DropdownWrapper = styled.div`
   }
 `;
 
-const Dropdown = ({ show, item, data, handleClose }) => {
+const components = {
+  users: AssigneeOption,
+  labels: LabelOption,
+  milestones: MilestoneOption,
+};
+
+const Dropdown = ({ show, item, data }) => {
   const dropdownDisplay = show ? 'display-block' : 'display-none';
   const Component = components[item];
   const options = data.map((option, index) => (
-    <div
-      className="dropdown-option"
-      key={'dropdown' + index}
-      onClick={handleClose}
-    >
+    <div className="dropdown-option" key={'dropdown' + index}>
       <Component data={option} />
     </div>
   ));
