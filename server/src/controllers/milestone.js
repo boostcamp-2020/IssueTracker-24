@@ -20,4 +20,14 @@ const createMilestone = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllMilestone, createMilestone };
+const getMilestone = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const milestone = await Milestone.findByPk(id, { attributes: ['id', 'title', 'description', 'due_date', 'state'] });
+    return res.status(200).json(milestone);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getAllMilestone, createMilestone, getMilestone };
