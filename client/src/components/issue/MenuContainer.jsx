@@ -6,6 +6,9 @@ import GreenButton from '../common/GreenButton';
 import FilterMenuDropDown from './filter/FilterMenuDropDown';
 import { IssuesContext } from '../../pages/issue-list/IssueListPage';
 import { useHistory } from 'react-router-dom';
+import FilterClearButton from './FilterClearButton';
+
+export const FilterMenuContext = React.createContext();
 
 const Div = styled.div`
   display: flex;
@@ -13,10 +16,17 @@ const Div = styled.div`
   margin: 0 auto;
   width: 80%;
   margin-top: 70px;
-  margin-bottom: 40px;
+  margin-bottom: 17px;
 `;
 
-export const FilterMenuContext = React.createContext();
+const FilterButtonWrapper = styled.div`
+  margin: 0 auto;
+  width: 80%;
+  margin-bottom: 17px;
+`;
+
+const showClearButton = (searchText) =>
+  searchText !== 'is:open is:issue ' ? true : false;
 
 const MenuContainer = () => {
   const [showFilterMenu, setFilterMenu] = useState(false);
@@ -39,6 +49,9 @@ const MenuContainer = () => {
         <GreenButton text={'New issue'} func={onClickNewIssue} />
       </Div>
       {showFilterMenu && <FilterMenuDropDown />}
+      <FilterButtonWrapper>
+        {showClearButton(searchText) && <FilterClearButton />}
+      </FilterButtonWrapper>
     </FilterMenuContext.Provider>
   );
 };
