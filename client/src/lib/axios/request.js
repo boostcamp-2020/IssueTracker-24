@@ -22,9 +22,8 @@ const getOptions = (body) => {
   };
 
   const token = getToken();
-  if (token) options.headers = { ...options.headers, Authorization: token };
 
-  if (body) options.body = JSON.stringify(body);
+  if (token) options.headers = { ...options.headers, Authorization: token };
 
   return options;
 };
@@ -42,9 +41,8 @@ const getData = async (url) => {
 
 const postData = async (url, body) => {
   const options = getOptions(body);
-
   try {
-    const response = await axios.post(url, options);
+    const response = await axios.post(url, body, options);
     return response.data;
   } catch (error) {
     informError(error);
@@ -55,7 +53,7 @@ const patchData = async (url, body) => {
   const options = getOptions(body);
 
   try {
-    const response = await axios.patch(url, options);
+    const response = await axios.patch(url, body, options);
     return response.data;
   } catch (error) {
     informError(error);
@@ -66,7 +64,7 @@ const putData = async (url, body) => {
   const options = getOptions(body);
 
   try {
-    const response = await axios.put(url, options);
+    const response = await axios.put(url, body, options);
     return response.data;
   } catch (error) {
     informError(error);

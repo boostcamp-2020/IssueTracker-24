@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import MilestonePage from './pages/milestone-list/MilestonePage';
 import { getToken } from './utils/token';
 import { getCurrentUser } from './lib/axios/user';
+import MilestoneNewPage from './pages/MilestoneNewPage';
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -40,6 +41,7 @@ const App = () => {
           <Route exact path="/issues" component={IssueListPage} />
           <Route exact path="/issues/new" component={IssueNewPage} />
           <Route exact path="/milestones" component={MilestonePage}/>
+          <Route exact path="/milestones/new" component={MilestoneNewPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>
