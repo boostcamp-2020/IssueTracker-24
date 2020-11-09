@@ -19,7 +19,6 @@ const Button = styled.button`
 `;
 
 const GreenButton = ({ text, func, disabled }) => {
-  console.log(disabled);
   return (
     <>
       <Button onClick={func} disabled={disabled}>
