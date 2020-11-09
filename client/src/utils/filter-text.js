@@ -52,3 +52,18 @@ export const filterTextByClosed = (searchText) => {
     return [...sliceLast(splitedText), 'is:closed', ''].join(' ');
   }
 };
+
+export const filterTextByAssignedToYou = (searchText) => {
+  const splitedText = searchText.split(' ');
+  let index = -1;
+  splitedText.forEach((v, i) => {
+    if (v.indexOf('assignee:') !== -1) index = i;
+  });
+
+  if (index !== -1) {
+    splitedText[index] = 'assignee:@me';
+    return [...splitedText].join(' ');
+  } else {
+    return [...sliceLast(splitedText), 'assignee:@me', ''].join(' ');
+  }
+};
