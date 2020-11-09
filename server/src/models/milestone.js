@@ -14,10 +14,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       description: {
         type: DataTypes.STRING(1500),
-        allowNull: false,
+        allowNull: true,
       },
       due_date: {
-        type: 'TIMESTAMP',
+        type: DataTypes.DATE,
+        allowNull: true,
       },
       state: {
         type: DataTypes.STRING(200),
