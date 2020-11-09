@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import LabelComponent from '../common/LabelComponent';
 import MilestoneSelectMenu from '../milestone/MilestoneSelectMenu';
 import CreateMilestone from '../milestone/CreateMilestone';
-import svg from '../../utils/svg';
 
 const MilestoneHeaderWrapper = styled.div`
   width:80%;

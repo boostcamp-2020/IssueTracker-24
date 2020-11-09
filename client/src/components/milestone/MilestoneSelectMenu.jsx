@@ -5,8 +5,7 @@ import svg from '../../utils/svg';
 
 
 const MilestoneSelectMenuWrapper = styled.div`
-display:flex;
-margin-top:
+  display:flex;
 `;
 
 const MilestoneSelectMenu = () =>{

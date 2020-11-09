@@ -5,7 +5,8 @@ const MilestoneNavWrapper = styled.div`
 display:flex;
 width:80%;
 height:50px;
-margin:40px auto;
+margin:0 auto;
+margin-top:40px;
 background-color:#F6F8F4;
 border-top-left-radius:5px;
 border-top-right-radius:5px;
@@ -29,7 +30,7 @@ const MilestoneNav = () =>{
            {svg['Milestones']} 1 Open
          </OpenDiv>
          <CloseDiv>
-           {svg['closeMilestones']} 0 Close
+           {svg['closeMilestones']} 0 Closed
          </CloseDiv>
     </MilestoneNavWrapper>
   );

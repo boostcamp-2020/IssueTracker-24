@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const LabelComponentWrapper = styled.div`
    width:${(props)=>(props.title === "Labels"? "100px":"130px")};
    height:30px;
-   background-color:#EAEAEA;
+   background-color:#fff;
    border:1px solid #E1E4E8;
    cursor:pointer;
    font-weight:bold;
