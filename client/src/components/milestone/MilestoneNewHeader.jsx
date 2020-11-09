@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Header = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #eaecef;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 10px;
