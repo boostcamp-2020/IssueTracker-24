@@ -5,7 +5,6 @@ import {
 } from '../../utils/checkbox';
 
 export const CHECK_ISSUE = 'check issue';
-export const UNCHECK_ISSUE = 'uncheck issue';
 export const INIT_DATA = 'init data';
 export const CHECK_WHOLE_ISSUES = 'check whole issues';
 export const FILTER_YOUR_ISSUES = 'filter issues written by current user';
@@ -17,17 +16,6 @@ export const FILTER_CLOSED_ISSUES = 'filter closed issues';
 const reducer = (state, action) => {
   switch (action.type) {
     case CHECK_ISSUE: {
-      const newCheckedIssues = changeIssueChecked(
-        state.renderedIssues,
-        action.id,
-      );
-
-      return {
-        ...state,
-        renderedIssues: newCheckedIssues,
-      };
-    }
-    case UNCHECK_ISSUE: {
       const newCheckedIssues = changeIssueChecked(
         state.renderedIssues,
         action.id,
