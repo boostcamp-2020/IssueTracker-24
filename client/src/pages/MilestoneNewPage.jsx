@@ -6,6 +6,7 @@ import InputTitle from '../components/milestone/InputTitle';
 import InputWrapper from '../components/milestone/InputWrapper';
 import InputDate from '../components/milestone/InputDate';
 import DescriptionArea from '../components/milestone/DescriptionArea';
+import GreenButton from '../components/common/GreenButton';
 
 const MilestoneNewPageWrappper = styled.div`
   display: flex;
@@ -13,6 +14,13 @@ const MilestoneNewPageWrappper = styled.div`
   margin: 0 auto;
   flex-direction: column;
   border-bottom: 1px solid #eaecef;
+`;
+
+const ButtonWrapper = styled.div`
+  float: right;
+  position: relative;
+  right: 10%;
+  top: 10px;
 `;
 
 const MilestoneNewPage = () => {
@@ -41,6 +49,9 @@ const MilestoneNewPage = () => {
           />
         </InputWrapper>
       </MilestoneNewPageWrappper>
+      <ButtonWrapper>
+        <GreenButton text={'Create milestone'} />
+      </ButtonWrapper>
     </>
   );
 };
