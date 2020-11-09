@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import ProfileImage from '../../common/ProfileImage';
+import { FILTER_ISSUES_BY_AUTHOR } from '../../../pages/issue-list/reducer';
 
 const DetailsItem = styled.div`
   display: flex;
@@ -42,16 +43,35 @@ const DetailsMenuDropDown = styled.div`
   border-radius: 4px;
 `;
 
-const AuthorMenuDropDown = () => {
-  const { state } = useContext(IssuesContext);
+const AuthorMenuDropDown = ({ setShowAuthorMenu }) => {
+  const { state, dispatch } = useContext(IssuesContext);
   const { users } = state;
+
+  const onClickFirstItem = (e) => {
+    e.stopPropagation();
+  };
+
+  const onClickDetailsItem = (e) => {
+    const detailsItem = e.target.closest('.author-item');
+    dispatch({
+      type: FILTER_ISSUES_BY_AUTHOR,
+      author: detailsItem.dataset.name,
+    });
+    setShowAuthorMenu(false);
+    e.stopPropagation();
+  };
 
   return (
     <>
       <DetailsMenuDropDown>
-        <DetailsItem>Filter by author</DetailsItem>
+        <DetailsItem onClick={onClickFirstItem}>Filter by author</DetailsItem>
         {users.map((user, index) => (
-          <DetailsItem key={index}>
+          <DetailsItem
+            className={'author-item'}
+            key={index}
+            onClick={onClickDetailsItem}
+            data-name={user.sns_id}
+          >
             <ProfileImage image={user.profile_image} size={20} />
             <div className="user-id">{user.sns_id}</div>
           </DetailsItem>
