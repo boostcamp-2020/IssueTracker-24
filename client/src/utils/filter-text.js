@@ -82,3 +82,35 @@ export const filterTextByAuthor = (searchText, author) => {
     return [...sliceLast(splitedText), `author:${author}`, ''].join(' ');
   }
 };
+
+export const filterTextByNoAssignee = (searchText) => {
+  const splitedText = searchText.split(' ');
+  let index = -1;
+  splitedText.forEach((v, i) => {
+    if (v.indexOf('no:assignee') !== -1) index = i;
+    else if (v.indexOf('assignee:') !== -1) index = i;
+  });
+
+  if (index !== -1) {
+    splitedText[index] = 'no:assignee';
+    return [...splitedText].join(' ');
+  } else {
+    return [...sliceLast(splitedText), 'no:assignee', ''].join(' ');
+  }
+};
+
+export const filterTextByAssignee = (searchText, assignee) => {
+  const splitedText = searchText.split(' ');
+  let index = -1;
+  splitedText.forEach((v, i) => {
+    if (v.indexOf('no:assignee') !== -1) index = i;
+    else if (v.indexOf('assignee:') !== -1) index = i;
+  });
+
+  if (index !== -1) {
+    splitedText[index] = `assignee:${assignee}`;
+    return [...splitedText].join(' ');
+  } else {
+    return [...sliceLast(splitedText), `assignee:${assignee}`, ''].join(' ');
+  }
+};
