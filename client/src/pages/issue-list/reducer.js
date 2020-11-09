@@ -3,6 +3,12 @@ import {
   changeIssueChecked,
   checkWholeIssues,
 } from '../../utils/checkbox';
+import {
+  filterTextByYourIssues,
+  filterTextByOpen,
+  filterTextByClosed,
+  filterTextByAssignedToYou,
+} from '../../utils/filter-text';
 
 export const CHECK_ISSUE = 'check issue';
 export const INIT_DATA = 'init data';
@@ -53,6 +59,8 @@ const reducer = (state, action) => {
       };
     }
     case FILTER_YOUR_ISSUES: {
+      const searchText = filterTextByYourIssues(state.searchText);
+
       const renderedIssues = state.issues.filter(
         (issue) => issue.user.id === Number(action.id),
       );
@@ -60,11 +68,14 @@ const reducer = (state, action) => {
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
+        searchText,
         renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
     }
     case FILTER_OPEN_ISSUES: {
+      const searchText = filterTextByOpen(state.searchText);
+
       const renderedIssues = state.issues.filter(
         (issue) => issue.state === 'open',
       );
@@ -72,11 +83,14 @@ const reducer = (state, action) => {
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
+        searchText,
         renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
     }
     case FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER: {
+      const searchText = filterTextByAssignedToYou(state.searchText);
+
       const renderedIssues = state.issues.filter((issue) =>
         issue.assignees.some((assignee) => assignee.id === Number(action.id)),
       );
@@ -84,11 +98,14 @@ const reducer = (state, action) => {
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
+        searchText,
         renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
     }
     case FILTER_CLOSED_ISSUES: {
+      const searchText = filterTextByClosed(state.searchText);
+
       const renderedIssues = state.issues.filter(
         (issue) => issue.state === 'close',
       );
@@ -96,6 +113,7 @@ const reducer = (state, action) => {
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
+        searchText,
         renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
