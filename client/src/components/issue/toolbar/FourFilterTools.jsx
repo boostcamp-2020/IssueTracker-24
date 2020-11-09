@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import DropDownIcon from '../DropDownIcon';
+import DropDownIcon from '../../common/DropDownIcon';
 import AuthorMenuDropDown from './AuthorMenuDropDown';
 import LabelMenuDropDown from './LabelMenuDropDown';
 import MilestoneMenuDropDown from './MilestoneMenuDropDown';

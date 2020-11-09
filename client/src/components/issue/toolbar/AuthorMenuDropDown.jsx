@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
+import ProfileImage from '../../common/ProfileImage';
 
 const DetailsItem = styled.div`
+  display: flex;
   border-bottom: 1px solid #eaecef;
   height: 32px;
   box-sizing: border-box;
   padding: 5px;
-  font-size: 14px;
+  padding-left: 20px;
+  font-size: 13px;
   cursor: pointer;
   &:hover {
     background-color: #e9e9e9;
@@ -20,10 +23,13 @@ const DetailsItem = styled.div`
       background-color: #fafbfc;
     }
   }
+  .user-id {
+    margin-left: 10px;
+  }
 `;
 
 const DetailsMenuDropDown = styled.div`
-  width: 190px;
+  width: 250px;
   position: absolute;
   top: 70px;
   left: -70px;
@@ -44,9 +50,11 @@ const AuthorMenuDropDown = () => {
     <>
       <DetailsMenuDropDown>
         <DetailsItem>Filter by author</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
         {users.map((user, index) => (
-          <DetailsItem key={index}>{user.sns_id}</DetailsItem>
+          <DetailsItem key={index}>
+            <ProfileImage image={user.profile_image} size={20} />
+            <div className="user-id">{user.sns_id}</div>
+          </DetailsItem>
         ))}
       </DetailsMenuDropDown>
     </>

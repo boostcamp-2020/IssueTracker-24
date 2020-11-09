@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo, useMemo } from 'react';
 import styled from 'styled-components';
 import IssueLogo from './IssueLogo';
 import IssueContent from './IssueContent';
@@ -18,7 +18,7 @@ const IssueItemWrapper = styled.div`
   border: 1px solid #eaecef;
   box-sizing: border-box;
 `;
-const IssueItem = ({ issue }) => {
+const IssueItem = memo(({ issue }) => {
   const { dispatch } = useContext(IssuesContext);
 
   const onCheckBoxChange = (e) => {
@@ -29,19 +29,22 @@ const IssueItem = ({ issue }) => {
     }
   };
 
-  return (
-    <>
-      <IssueItemWrapper>
-        <input
-          type="checkbox"
-          onChange={onCheckBoxChange}
-          checked={issue.checked}
-        />
-        <IssueLogo issue={issue} />
-        <IssueContent issue={issue} />
-      </IssueItemWrapper>
-    </>
+  return useMemo(
+    () => (
+      <>
+        <IssueItemWrapper>
+          <input
+            type="checkbox"
+            onChange={onCheckBoxChange}
+            checked={issue.checked}
+          />
+          <IssueLogo issueState={issue.state} />
+          <IssueContent issue={issue} />
+        </IssueItemWrapper>
+      </>
+    ),
+    [issue.checked, issue],
   );
-};
+});
 
 export default IssueItem;

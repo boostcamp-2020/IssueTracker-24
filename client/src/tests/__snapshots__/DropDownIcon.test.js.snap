@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DropDownIcon/> matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdnylx gPQxjM material-icons"
+  >
+    arrow_drop_down
+  </div>
+</div>
+`;
