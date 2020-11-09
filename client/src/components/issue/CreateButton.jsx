@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+import { Link, Route, BrowserRouter as Router, useHistory } from "react-router-dom";
 
 const CreateButtonWrapper = styled.div`
   background-color: #2c974b;
@@ -25,11 +25,13 @@ const CreateIssueBtn = styled.div`
 `;
 
 const CreateButton = () => {
+  let history = useHistory();
+  const newHandler = () =>{
+    history.push('/issues/new');
+  }
   return (
-    <CreateButtonWrapper>
-      <Link to="/issues/new" className="issue-new-btn">
+    <CreateButtonWrapper onClick={newHandler}>
         <CreateIssueBtn>New issue</CreateIssueBtn>
-      </Link>
     </CreateButtonWrapper>
   );
 };

@@ -35,9 +35,13 @@ const NavigtaionItemsNum = styled.div`
   font-size: 12px;
 `;
 
-const Navigation = ({ title, num }) => {
+const Navigation = ({ type, title, num, history}) => {
+  const historyHandler = () => {
+     if(type==="milestones")history.push('/milestones');
+     else history.push('/labels');
+  } 
   return (
-    <NavigationWrapper>
+    <NavigationWrapper onClick={historyHandler}>
       {svg[title]}
       <NavigationItemTitle>{title}</NavigationItemTitle>
       <NavigtaionItemsNum>{num}</NavigtaionItemsNum>
