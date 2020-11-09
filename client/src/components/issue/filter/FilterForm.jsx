@@ -24,7 +24,7 @@ const FilterInput = styled.input.attrs((props) => ({
   placeholder: 'Search all issues',
   value: props.value,
 }))`
-  font-size: 17px;
+  font-size: 15px;
   padding-left: 6%;
   height: 29px;
   width: 93.5%;

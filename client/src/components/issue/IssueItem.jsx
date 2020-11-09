@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import IssueLogo from './IssueLogo';
 import IssueContent from './IssueContent';
 import { IssuesContext } from '../../pages/issue-list/IssueListPage';
-import { CHECK_ISSUE, UNCHECK_ISSUE } from '../../pages/issue-list/reducer';
+import { CHECK_ISSUE } from '../../pages/issue-list/reducer';
 
 const IssueItemWrapper = styled.div`
   width: 80%;
@@ -22,11 +22,7 @@ const IssueItem = memo(({ issue }) => {
   const { dispatch } = useContext(IssuesContext);
 
   const onCheckBoxChange = (e) => {
-    if (e.target.checked) {
-      dispatch({ type: CHECK_ISSUE, id: issue.id });
-    } else {
-      dispatch({ type: UNCHECK_ISSUE, id: issue.id });
-    }
+    dispatch({ type: CHECK_ISSUE, id: issue.id });
   };
 
   return useMemo(
