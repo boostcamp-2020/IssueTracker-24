@@ -10,6 +10,9 @@ const IssueContentWrapper = styled.div`
     font-size: 17px;
     cursor: pointer;
     margin-left: 20px;
+    &: hover {
+      color: #0667d5;
+    }
   }
   .issue-content {
     margin-left: 20px;
