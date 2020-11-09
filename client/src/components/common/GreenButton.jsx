@@ -17,10 +17,10 @@ const Button = styled.button`
   }
 `;
 
-const GreenButton = ({ text }) => {
+const GreenButton = ({ text, func }) => {
   return (
     <>
-      <Button>{text}</Button>
+      <Button onClick={func}>{text}</Button>
     </>
   );
 };
