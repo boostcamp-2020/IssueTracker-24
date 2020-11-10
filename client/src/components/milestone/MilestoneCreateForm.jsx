@@ -24,7 +24,7 @@ const Line = styled.div`
   border-bottom: 1px solid #eaecef;
 `;
 
-const MilestoneForm = () => {
+const MilestoneCreateForm = () => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(null);
   const [description, setDescription] = useState('');
@@ -64,4 +64,4 @@ const MilestoneForm = () => {
   );
 };
 
-export default MilestoneForm;
+export default MilestoneCreateForm;
