@@ -1,6 +1,7 @@
 const AUTHOR_POSITION = 1;
 const ASSIGNEE_POSITION = 1;
 const MILESTONE_POSITION = 1;
+const LABEL_POSITION = 1;
 
 const filterOpenClose = (issues, searchText) => {
   if (searchText.indexOf('is:open') !== -1) {
@@ -81,4 +82,43 @@ const filterMilestone = (issues, searchText) => {
   }
 
   return issues;
+};
+
+const filterLabel = (issues, searchText) => {
+  if (searchText.indexOf('no:label') !== -1) {
+    return issues.filter((issue) => issue.labels.length === 0);
+  }
+  if (searchText.indexOf('label:') !== -1) {
+    const splitedText = searchText.split(' ');
+    const checkLabels = [];
+    splitedText.forEach((v) => {
+      if (v.indexOf('label:') !== -1)
+        checkLabels.push(v.split(':')[LABEL_POSITION]);
+    });
+
+    return issues.filter((issue) => {
+      let isFilter = true;
+      checkLabels.forEach((label) => {
+        let isContain = false;
+        issue.labels.forEach((issueLabel) => {
+          if (issueLabel.title === label) isContain = true;
+        });
+
+        if (!isContain) isFilter = false;
+      });
+      return isFilter;
+    });
+  }
+
+  return issues;
+};
+
+export const filterIssues = (issues, searchText, currentUser) => {
+  let filteredIssues = filterOpenClose(issues, searchText);
+  filteredIssues = filterAuthor(filteredIssues, searchText, currentUser);
+  filteredIssues = filterAssignee(filteredIssues, searchText, currentUser);
+  filteredIssues = filterMilestone(filteredIssues, searchText);
+  filteredIssues = filterLabel(filteredIssues, searchText);
+
+  return filteredIssues;
 };
