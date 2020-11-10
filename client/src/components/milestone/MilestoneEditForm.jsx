@@ -56,6 +56,8 @@ const MilestoneEditForm = ({ milestoneId }) => {
     history.push('/milestones');
   };
 
+  const onClickCancel = () => history.push('/milestones');
+
   return (
     <Form>
       <InputWrapper>
@@ -92,7 +94,7 @@ const MilestoneEditForm = ({ milestoneId }) => {
           />
         </div>
         <div className="btn">
-          <GreyButton text={'Cancel'} />
+          <GreyButton text={'Cancel'} func={onClickCancel} />
         </div>
       </ButtonWrapper>
     </Form>
