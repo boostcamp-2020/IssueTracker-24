@@ -10,6 +10,7 @@ import { getToken } from './utils/token';
 import { getCurrentUser } from './lib/axios/user';
 import MilestoneNewPage from './pages/MilestoneNewPage';
 import MilestoneEditPage from './pages/MilestoneEditPage';
+import IssueDetailPage from './pages/IssueDeatilPage';
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -41,6 +42,7 @@ const App = () => {
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/issues" component={IssueListPage} />
           <Route exact path="/issues/new" component={IssueNewPage} />
+          <Route exact path="/issues/:id" component={IssueDetailPage} />
           <Route exact path="/milestones" component={MilestonePage} />
           <Route exact path="/milestones/new" component={MilestoneNewPage} />
           <Route
