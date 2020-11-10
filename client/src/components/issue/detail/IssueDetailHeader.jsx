@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import GreyButton from '../../common/GreyButton';
+import GreenButton from '../../common/GreenButton';
+import svg from '../../../utils/svg';
+import OpenLabel from './OpenLabel';
 
 const IssueDetailHeaderWrapper = styled.div`
   display: flex;
@@ -23,9 +26,13 @@ const TitleWrapper = styled.div`
   }
 `;
 
-const Description = styled.div`
+const DescriptionWrapper = styled.div`
+  display: flex;
   color: grey;
   font-size: 15px;
+  .description {
+    padding-top: 5px;
+  }
 `;
 
 const IssueDetailHeader = () => {
@@ -38,9 +45,12 @@ const IssueDetailHeader = () => {
           </h1>
           <GreyButton text={'Edit'} />
         </TitleWrapper>
-        <Description>
-          Sejungkim opened this issue 3 days ago · 1 comments
-        </Description>
+        <DescriptionWrapper>
+          <OpenLabel />
+          <div className="description">
+            Sejungkim opened this issue 3 days ago · 1 comments
+          </div>
+        </DescriptionWrapper>
       </IssueDetailHeaderWrapper>
     </>
   );
