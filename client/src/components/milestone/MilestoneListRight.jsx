@@ -1,7 +1,8 @@
 import React,{useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
-
+import MilestoneModal from './MilestoneModal';
+import {DELETE_MILESTONE} from '../../pages/milestone-list/reducer';
 const MilestoneListRightWrapper = styled.div`
    width:50%;
    height:100%;
@@ -51,6 +52,11 @@ const MilestoneListRight =  ({milestone, milestoneTitle}) =>{
     const closeIssueNumber = milestoneList.filter(issue=>issue.state==='closed').length;
 
     const ratio = totalIssueNumber!==0? Math.floor(closeIssueNumber/totalIssueNumber*100):0;
+    const deleteClickHandler = () =>{
+       let display = state.display==='block'?'none':'block';
+       display = state.display==='none'?'block':'none';
+       dispatch({type:DELETE_MILESTONE, display:display});
+    }
     return(
       <MilestoneListRightWrapper>
         <MilestoneGageContainer>
@@ -64,8 +70,9 @@ const MilestoneListRight =  ({milestone, milestoneTitle}) =>{
         <MilestoneButtonContainer>
             <MilestoneButton colors='blue'>Edit</MilestoneButton>
             <MilestoneButton colors='blue'>Close</MilestoneButton>
-            <MilestoneButton colors='red'>Delete</MilestoneButton>
+            <MilestoneButton colors='red' onClick={deleteClickHandler}>Delete</MilestoneButton>
         </MilestoneButtonContainer>
+        <MilestoneModal display={state.display}></MilestoneModal>
       </MilestoneListRightWrapper>
     ); 
 }

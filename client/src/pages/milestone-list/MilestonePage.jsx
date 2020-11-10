@@ -18,6 +18,7 @@ const initialState = {
    openclosedState:'open', 
    milestoneList:[],
    issues:[],
+   display:'none',
 }
 
 const MilestonePage =  () =>{
@@ -31,6 +32,7 @@ const MilestonePage =  () =>{
             milestones: milestones,
             milestoneList:milestones.filter(milestone=>milestone.state==='open'),
             issues:issues,
+            display:'none',
           });
     },[]);
     

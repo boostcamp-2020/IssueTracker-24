@@ -1,6 +1,7 @@
 export const INIT_DATA = 'init data';
 export const ROUTING_LABEL = 'routing label';
 export const FILTERING_MILESTONE ='filtering milestone';
+export const DELETE_MILESTONE ='delete milestone';
 const reducer = (state, action) =>{
   switch(action.type){
       case INIT_DATA:{
@@ -9,6 +10,7 @@ const reducer = (state, action) =>{
             milestones:action.milestones,
             milestoneList:action.milestoneList,
             issues:action.issues,
+            display:action.display,
         }
       }
       case ROUTING_LABEL:{
@@ -24,7 +26,13 @@ const reducer = (state, action) =>{
           openclosedState:action.openclosedState,
           milestoneList:action.milestoneList,
         }
-      }     
+      }
+      case DELETE_MILESTONE:{
+        return{
+          ...state,
+          display:action.display,
+        }
+      }   
   }
 }
 export default reducer;
