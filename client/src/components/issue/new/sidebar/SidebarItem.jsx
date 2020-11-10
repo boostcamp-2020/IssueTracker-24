@@ -34,10 +34,13 @@ const SidebarItem = ({ title, type, stateMsg, component, data }) => {
   };
 
   useEffect(() => {
-    document.body.addEventListener('click', (e) => {
+    const clickBody = (e) => {
       if (ref.current && ref.current.contains(e.target)) return;
       setShow(false);
-    });
+    };
+    document.body.addEventListener('click', clickBody);
+
+    return document.body.removeEventListener('click', clickBody);
   }, []);
 
   useEffect(() => {
