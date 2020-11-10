@@ -1,5 +1,6 @@
 const AUTHOR_POSITION = 1;
 const ASSIGNEE_POSITION = 1;
+const MILESTONE_POSITION = 1;
 
 const filterOpenClose = (issues, searchText) => {
   if (searchText.indexOf('is:open') !== -1) {
@@ -56,6 +57,27 @@ const filterAssignee = (issues, searchText, currentUser) => {
         (issueAssignee) => issueAssignee.sns_id === assignee,
       ),
     );
+  }
+
+  return issues;
+};
+
+const filterMilestone = (issues, searchText) => {
+  if (searchText.indexOf('no:milestone') !== -1) {
+    return issues.filter((issue) => issue.milestone === null);
+  }
+  if (searchText.indexOf('milestone:') !== -1) {
+    const splitedText = searchText.split(' ');
+    let milestone = '';
+    splitedText.forEach((v) => {
+      if (v.indexOf('milestone:') !== -1) milestone = v;
+    });
+    milestone = milestone.split(':')[MILESTONE_POSITION];
+
+    return issues.filter((issue) => {
+      if (issue.milestone === null) return false;
+      return issue.milestone.title === milestone;
+    });
   }
 
   return issues;
