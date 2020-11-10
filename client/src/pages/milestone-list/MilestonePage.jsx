@@ -6,16 +6,20 @@ import MilestoneList from '../../components/milestone/MilestoneList';
 import reducer from './reducer';
 import {getAllMilestones} from '../../lib/axios/milestone';
 import {INIT_DATA} from '../../pages/milestone-list/reducer';
+import milestone from '../../../../server/src/models/milestone';
 
 export const MilestoneContext = React.createContext();
+
 
 const initialState = {
    milestones:[],
    labelColor:'#fff',
    labelFontColor:'#242424',
+   openclosedState:'open', 
+   milestoneList:[]
 }
 
-const MilestonePage = () =>{
+const MilestonePage =  () =>{
     const [state, dispatch] = useReducer(reducer, initialState);
     const {milestones} = state;
     useEffect(async () =>{
@@ -23,15 +27,16 @@ const MilestonePage = () =>{
         dispatch({
             type: INIT_DATA,
             milestones: milestones,
+            milestoneList:milestones.filter(milestone=>milestone.state==='open')
         });
     },[]);
-   
+    
     return (
       <MilestoneContext.Provider value={{state, dispatch}}>
        <Header/>
        <MilestoneHeader/>
        <MilestoneNav milestones={milestones}/>
-       {milestones.map((milestone, index)=>(
+       {state.milestoneList.map((milestone, index)=>(
          <MilestoneList key={index} milestone={milestone} />)
         )}
       </MilestoneContext.Provider>

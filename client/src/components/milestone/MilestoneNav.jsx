@@ -1,8 +1,9 @@
-import React, {useContext}from 'react';
+import React, {useContext, useEffect}from 'react';
 import styled from 'styled-components';
 import svg from '../../utils/svg';
-import MilestoneList from '../../components/milestone/MilestoneList';
 import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
+import {FILTERING_MILESTONE} from '../../pages/milestone-list/reducer';
+import {getAllMilestones} from '../../lib/axios/milestone';
 
 const MilestoneNavWrapper = styled.div`
 display:flex;
@@ -31,12 +32,21 @@ const CloseDiv = styled.div`
 const MilestoneNav = ({milestones}) =>{
   const openMilestone = milestones.filter(milestone=> milestone.state==="open").length;
   const closeMilestone = milestones.filter(milestone=>milestone.state==="close").length;
+  const {state, dispatch} = useContext(MilestoneContext);
+  const onClickHandler = async (e) =>{
+    const milestoneList = milestones.filter(milestone=>milestone.state===e.target.title);
+    dispatch({
+       type:FILTERING_MILESTONE, 
+       openclosedState:e.target.title,
+       milestoneList: milestoneList
+    })
+  }
   return(
     <MilestoneNavWrapper>
-        <OpenDiv>
+        <OpenDiv onClick={onClickHandler} title='open'>
            {svg['Milestones']} {openMilestone} Open
          </OpenDiv>
-         <CloseDiv>
+         <CloseDiv onClick={onClickHandler} title='close'>
            {svg['closeMilestones']} {closeMilestone} Closed
          </CloseDiv>
     </MilestoneNavWrapper>

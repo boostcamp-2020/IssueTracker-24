@@ -33,7 +33,7 @@ const MenuContainer = () => {
   const { state } = useContext(IssuesContext);
   const { searchText } = state;
   const history = useHistory();
-
+  
   const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
   const onClickNewIssue = () => history.push('/issues/new');
 
