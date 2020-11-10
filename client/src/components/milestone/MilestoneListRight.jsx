@@ -50,8 +50,7 @@ const MilestoneListRight =  ({milestone, milestoneTitle}) =>{
     const openIssueNumber = milestoneList.filter(issue=>issue.state==='open').length;
     const closeIssueNumber = milestoneList.filter(issue=>issue.state==='closed').length;
 
-    const ratio = totalIssueNumber!==0? Math.floor(openIssueNumber/totalIssueNumber*100):0;
-    console.log(ratio);
+    const ratio = totalIssueNumber!==0? Math.floor(closeIssueNumber/totalIssueNumber*100):0;
     return(
       <MilestoneListRightWrapper>
         <MilestoneGageContainer>
