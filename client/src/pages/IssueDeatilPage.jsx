@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import IssueDetailHeader from '../components/issue/detail/IssueDetailHeader';
 import { getIssue } from '../lib/axios/issue';
+import Spinner from '../components/common/Spinner';
 
 const IssueDetailPageWrapper = styled.div`
   margin: 0 auto;
@@ -21,6 +22,7 @@ const initialIssue = {
   milestone: null,
   user: null,
 };
+
 export const IssueContext = React.createContext();
 
 const IssueDetailPage = ({ match }) => {
@@ -32,7 +34,7 @@ const IssueDetailPage = ({ match }) => {
   }, []);
 
   if (!issue) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (
