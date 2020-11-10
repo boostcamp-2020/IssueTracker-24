@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import GreyButton from '../../common/GreyButton';
-import GreenButton from '../../common/GreenButton';
-import svg from '../../../utils/svg';
+import CloseLabel from './CloseLabel';
 import OpenLabel from './OpenLabel';
 
 const IssueDetailHeaderWrapper = styled.div`
@@ -36,6 +35,7 @@ const DescriptionWrapper = styled.div`
 `;
 
 const IssueDetailHeader = () => {
+  const state = 'close';
   return (
     <>
       <IssueDetailHeaderWrapper>
@@ -46,7 +46,7 @@ const IssueDetailHeader = () => {
           <GreyButton text={'Edit'} />
         </TitleWrapper>
         <DescriptionWrapper>
-          <OpenLabel />
+          {state === 'close' ? <CloseLabel /> : <OpenLabel />}
           <div className="description">
             Sejungkim opened this issue 3 days ago · 1 comments
           </div>
