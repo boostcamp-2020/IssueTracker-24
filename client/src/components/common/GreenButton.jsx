@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
+  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   background-color: #2c974b;
   border: 0;
   color: #ffffff;
@@ -11,16 +13,18 @@ const Button = styled.button`
   outline: 0;
   font-weight: bold;
   padding: 0px 15px 0px 15px;
-  cursor: pointer;
   &:hover {
     background-color: #04c584;
   }
 `;
 
-const GreenButton = ({ text, func}) => {
+
+const GreenButton = ({ text, func, disabled }) => {
   return (
     <>
-      <Button onClick={func}>{text}</Button>
+      <Button onClick={func} disabled={disabled}>
+        {text}
+      </Button>
     </>
   );
 };

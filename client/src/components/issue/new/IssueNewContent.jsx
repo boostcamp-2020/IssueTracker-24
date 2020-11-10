@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import GreenButton from '../../common/GreenButton';
 
 const IssueNewContentWrapper = styled.div`
   width: 100%;
@@ -27,7 +28,8 @@ const IssueNewContentWrapper = styled.div`
   }
 `;
 const IssueTitle = styled.input.attrs({
-  type:'text',
+  type: 'text',
+  placeholder: 'Title',
 })`
   width: 85%;
   height: 30px;
@@ -35,10 +37,8 @@ const IssueTitle = styled.input.attrs({
   margin: 20px 20px;
   background-color: #fafbfc;
   font-weight: bold;
-  color: #d7dadd;
   padding: 0 20px;
 `;
-
 
 const WriteBtn = styled.button`
   width: 70px;
@@ -52,20 +52,20 @@ const WriteBtn = styled.button`
   cursor: pointer;
 `;
 
-const WriteContent = styled.form`
-    border: 1px solid #f4f4f6;
-    margin-top: -2px;
-    border-bottom: 0px;
+const WriteContent = styled.div`
+  border: 1px solid #f4f4f6;
+  margin-top: -2px;
+  border-bottom: 0px;
 `;
 
 const MainContent = styled.textarea.attrs({
-  rows:"15",
-  placeholder:"Leave comment",
+  rows: '15',
+  placeholder: 'Leave comment',
 })`
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-left: 20px;
-    width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 90%;
 `;
 
 const CharacterLength = styled.div`
@@ -94,7 +94,7 @@ const InputLabel = styled.div`
 `;
 
 const InputFileContent = styled.input.attrs({
-   type:'file',
+  type: 'file',
 })`
   margin-left: 20px;
   border: 1px solid #f4f4f6;
@@ -111,34 +111,26 @@ const BtnContent = styled.div`
   margin-top: 20px;
 `;
 const CancelBtn = styled.button.attrs({
-  type:"button",
+  type: 'button',
 })`
   font-weight: bold;
-  font-size: 15px;  
+  font-size: 15px;
   border: 0px;
   border-radius: 5px;
   padding: 5px;
-`;
-const SubmitBtn = styled.button.attrs({
-  type:"button",
-})`
-  background-color: ${(props) =>
-    props.disabled === '' ? '#30C453' : '#94D3A2'}; 
-  width: 150px;
-  height: 30px;
-  color: #ffffff;
-  border-radius: 5px;
-  border: 0;
+  cursor: pointer;
+  outline: 0;
+  height: 35px;
 `;
 
 const IssueNewContent = () => {
   const [value, setValue] = useState(0);
   const [results, setResults] = useState(['']);
-  const [activeBtn, setActiveBtn] = useState('disabled');
-  const [title, setTitle] = useState('Title');
+  const [isDisabledBtn, setIsDisabledBtn] = useState(true);
+  const [title, setTitle] = useState('');
   const onChangeTitle = (e) => {
-    if (e.target.value.length > 0) setActiveBtn('');
-    else setActiveBtn('disabled');
+    if (e.target.value.length > 0) setIsDisabledBtn(false);
+    else setIsDisabledBtn(true);
     setTitle(e.target.value);
   };
   const onChangeTextarea = (e) => {
@@ -159,27 +151,23 @@ const IssueNewContent = () => {
 
   return (
     <>
-      <IssueNewContentWrapper disabled={activeBtn}>
-        <IssueTitle onChange={onChangeTitle} value={title}/>
+      <IssueNewContentWrapper>
+        <IssueTitle onChange={onChangeTitle} value={title} />
         <WriteBtn>Write</WriteBtn>
         <WriteContent>
-          <MainContent  onChange={onChangeTextarea}/>
+          <MainContent onChange={onChangeTextarea} />
           <CharacterLength>{results}</CharacterLength>
           <FileContainer>
             <InputLabel>
-               Attach files by dragging & dropping, selecting or pasting them.
+              Attach files by dragging & dropping, selecting or pasting them.
             </InputLabel>
-            <InputFileContent/>
+            <InputFileContent />
           </FileContainer>
           <BtnContent>
-           <Link to="/issues">
-             <CancelBtn>
-                Cancel
-             </CancelBtn>
-           </Link>
-             <SubmitBtn disabled={activeBtn}>
-             Submit new issue
-             </SubmitBtn>
+            <Link to="/issues">
+              <CancelBtn>Cancel</CancelBtn>
+            </Link>
+            <GreenButton text={'Submit new issue'} disabled={isDisabledBtn} />
           </BtnContent>
         </WriteContent>
       </IssueNewContentWrapper>

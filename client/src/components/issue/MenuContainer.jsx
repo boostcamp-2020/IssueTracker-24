@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import FilterBar from './filter/FilterBar';
 import NavigationContainer from './NavigationContainer';
-import CreateButton from './CreateButton';
+import GreenButton from '../common/GreenButton';
 import FilterMenuDropDown from './filter/FilterMenuDropDown';
 import { IssuesContext } from '../../pages/issue-list/IssueListPage';
+import { useHistory } from 'react-router-dom';
 import FilterClearButton from './FilterClearButton';
 
 export const FilterMenuContext = React.createContext();
@@ -31,8 +32,10 @@ const MenuContainer = () => {
   const [showFilterMenu, setFilterMenu] = useState(false);
   const { state } = useContext(IssuesContext);
   const { searchText } = state;
+  const history = useHistory();
 
   const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
+  const onClickNewIssue = () => history.push('/issues/new');
 
   return (
     <FilterMenuContext.Provider value={{ onClickFilterButton, setFilterMenu }}>
@@ -43,7 +46,7 @@ const MenuContainer = () => {
           searchText={searchText}
         />
         <NavigationContainer />
-        <CreateButton />
+        <GreenButton text={'New issue'} func={onClickNewIssue} />
       </Div>
       {showFilterMenu && <FilterMenuDropDown />}
       <FilterButtonWrapper>
