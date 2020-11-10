@@ -5,20 +5,20 @@ const reducer = (state, action) => {
         ...state,
         ...action.data,
       };
-    case 'ADD_ASSIGNEE':
+    case 'ADD_ASSIGNEES':
       return {
         ...state,
-        addedAssignees: [state.addedAssignees, action.assignee],
+        addedAssignees: [...state.addedAssignees, ...action.toAdd],
       };
-    case 'ADD_LABEL':
+    case 'ADD_LABELS':
       return {
         ...state,
-        addedLabels: [state.addedLabels, action.label],
+        addedLabels: [...state.addedLabels, ...action.toAdd],
       };
     case 'SET_MILESTONE':
       return {
         ...state,
-        addedMilestone: action.milestone,
+        addedMilestone: action.toAdd,
       };
   }
 };
