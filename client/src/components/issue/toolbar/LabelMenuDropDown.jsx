@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import SmallLabel from '../../common/SmallLabel';
+import { FILTER_ISSUES_BY_LABEL } from '../../../pages/issue-list/reducer';
 
 const DetailsItem = styled.div`
   display: flex;
@@ -51,7 +52,7 @@ const LabelWrapper = styled.div`
 `;
 
 const LabelMenuDropDown = ({ setShowLabelMenu }) => {
-  const { state } = useContext(IssuesContext);
+  const { state, dispatch } = useContext(IssuesContext);
   const { labels } = state;
 
   const onClickFirstItem = (e) => {
@@ -59,11 +60,19 @@ const LabelMenuDropDown = ({ setShowLabelMenu }) => {
   };
 
   const onClickUnlabel = (e) => {
+    dispatch({
+      type: FILTER_ISSUES_BY_LABEL,
+    });
     setShowLabelMenu();
     e.stopPropagation();
   };
 
   const onClickDetailsItem = (e) => {
+    const detailsItem = e.target.closest('.label-item');
+    dispatch({
+      type: FILTER_ISSUES_BY_LABEL,
+      label: detailsItem.dataset.name,
+    });
     setShowLabelMenu();
     e.stopPropagation();
   };
@@ -74,7 +83,12 @@ const LabelMenuDropDown = ({ setShowLabelMenu }) => {
         <DetailsItem onClick={onClickFirstItem}>Filter by label</DetailsItem>
         <DetailsItem onClick={onClickUnlabel}>Unlabeled</DetailsItem>
         {labels.map((label, index) => (
-          <DetailsItem key={index} onClick={onClickDetailsItem}>
+          <DetailsItem
+            key={index}
+            onClick={onClickDetailsItem}
+            className={'label-item'}
+            data-name={label.title}
+          >
             <SmallLabel color={label.color} />
             <LabelWrapper>
               <div>{label.title}</div>
