@@ -11,6 +11,8 @@ export const MilestoneContext = React.createContext();
 
 const initialState = {
    milestones:[],
+   labelColor:'#fff',
+   labelFontColor:'#242424',
 }
 
 const MilestonePage = () =>{

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
+import {ROUTING_LABEL} from '../../pages/milestone-list/reducer';
 const LabelComponentWrapper = styled.div`
    width:${(props)=>(props.title === "Labels"? "100px":"130px")};
    height:30px;
@@ -16,9 +18,21 @@ const LabelComponentWrapper = styled.div`
 `;
 
 const LabelComponent = ({svg, title}) =>{
+   const {state, dispatch} = useContext(MilestoneContext);
+   const onClickHandler = (e) =>{
+        let color = state.labelColor ==='#fff'?'#1066D6':'#fff';
+        let fontColor = state.labelFontColor ==='#242424'?'#fff':'#242424';
+        dispatch({
+          type:ROUTING_LABEL,
+          labelColor:color,
+          labelFontColor:fontColor
+        })
+        e.target.style.backgroundColor=state.labelColor;
+        e.target.style.color=state.labelFontColor;
+      }
     return (
       <>
-        <LabelComponentWrapper title={title}>
+        <LabelComponentWrapper title={title}  onClick={onClickHandler}>
             {svg}
             {title}
         </LabelComponentWrapper>
