@@ -40,7 +40,9 @@ const SidebarItem = ({ title, type, stateMsg, component, data }) => {
     };
     document.body.addEventListener('click', clickBody);
 
-    return document.body.removeEventListener('click', clickBody);
+    return () => {
+      document.body.removeEventListener('click', clickBody);
+    };
   }, []);
 
   useEffect(() => {

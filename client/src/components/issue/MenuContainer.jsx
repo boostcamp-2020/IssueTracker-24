@@ -40,11 +40,6 @@ const MenuContainer = () => {
   return (
     <FilterMenuContext.Provider value={{ onClickFilterButton, setFilterMenu }}>
       <Div>
-        <FilterBar
-          onClickFilterButton={onClickFilterButton}
-          setFilterMenu={setFilterMenu}
-          searchText={searchText}
-        />
         <NavigationContainer />
         <GreenButton text={'New issue'} func={onClickNewIssue} />
       </Div>
