@@ -23,6 +23,7 @@ const Sidebar = () => {
     {
       title: 'Assignees',
       type: ADD_ASSIGNEES,
+      header: 'Assign up to 10 people to this issue',
       stateMsg: 'No one',
       component: AssigneeOption,
       data: state.users,
@@ -31,6 +32,7 @@ const Sidebar = () => {
     {
       title: 'Labels',
       type: ADD_LABELS,
+      header: 'Apply labels to this issue',
       stateMsg: 'None yet',
       component: LabelOption,
       data: state.labels,
@@ -39,6 +41,7 @@ const Sidebar = () => {
     {
       title: 'Milestone',
       type: SET_MILESTONE,
+      header: 'Set milestone',
       stateMsg: 'No milestone',
       component: MilestoneOption,
       data: state.milestones,
@@ -52,6 +55,7 @@ const Sidebar = () => {
         key={'sidebar-item' + index}
         title={item.title}
         type={item.type}
+        header={item.header}
         stateMsg={item.stateMsg}
         component={item.component}
         data={item.data}
