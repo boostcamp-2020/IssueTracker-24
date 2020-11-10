@@ -33,7 +33,6 @@ const getMilestone = async (req, res, next) => {
 const updateMilestone = async (req, res, next) => {
   const { id } = req.params;
   const { title, due_date, description, state } = req.body;
-  console.log('update!');
   await Milestone.update(
     {
       title,
@@ -47,4 +46,18 @@ const updateMilestone = async (req, res, next) => {
   return res.status(200).json(milestone);
 };
 
-module.exports = { getAllMilestone, createMilestone, getMilestone, updateMilestone };
+const patchMilestone = async (req, res, next) => {
+  const { id } = req.params;
+  const { title, due_date, description, state } = req.body;
+  const patchedMilestone = {};
+  if (title) patchedMilestone.title = title;
+  if (due_date) patchedMilestone.due_datet = due_date;
+  if (description) patchedMilestone.description = description;
+  if (state) patchedMilestone.state = state;
+
+  await Milestone.update(patchedMilestone, { where: { id } });
+  const milestone = await Milestone.findByPk(id, { attributes: ['id', 'title', 'description', 'due_date', 'state'] });
+  return res.status(200).json(milestone);
+};
+
+module.exports = { getAllMilestone, createMilestone, getMilestone, updateMilestone, patchMilestone };
