@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import svg from '../../utils/svg';
-
-
+import {getDueInfo} from '../../utils/time';
 const MilestoneListLeftWrapper = styled.div`
    width:50%;
    height:100%;
@@ -23,15 +22,16 @@ const MilestoneDate = styled.div`
 const MilestoneContent = styled.div`
  margin-top:3px;
 `;
-const MilestoneListLeft =  () =>{
+const MilestoneListLeft =  ({milestone}) =>{
+    const milestoneTime = getDueInfo(milestone.due_date);
     return (
       <MilestoneListLeftWrapper>
-        <MilestoneTitle>스프린트2</MilestoneTitle>
+        <MilestoneTitle>{milestone.title}</MilestoneTitle>
         <MilestoneDate>{svg['dueMilestones']}
-        Due by November 15, 2020
+        {milestoneTime}
         </MilestoneDate>
         <MilestoneContent>
-            다음 배포를 위한 스프린트
+            {milestone.description}
         </MilestoneContent>
       </MilestoneListLeftWrapper>
     );

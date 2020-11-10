@@ -8,6 +8,11 @@ import {
   filterTextByOpen,
   filterTextByClosed,
   filterTextByAssignedToYou,
+  filterTextByAuthor,
+  filterTextByNoAssignee,
+  filterTextByAssignee,
+  filterTextByNoMilestone,
+  filterTextByMilestone,
 } from '../../utils/filter-text';
 
 export const CHECK_ISSUE = 'check issue';
@@ -18,6 +23,9 @@ export const FILTER_OPEN_ISSUES = 'filter open issues';
 export const FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER =
   'filter issues assigned to current user';
 export const FILTER_CLOSED_ISSUES = 'filter closed issues';
+export const FILTER_ISSUES_BY_AUTHOR = 'filter issues by author';
+export const FILTER_ISSUES_BY_ASSIGNEE = 'filter issues by assignee';
+export const FILTER_ISSUES_BY_MILESTONE = 'filter issues by milestone';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -115,6 +123,38 @@ const reducer = (state, action) => {
         ...state,
         searchText,
         renderedIssues: addedRenderedIssues,
+        wholeCheck: false,
+      };
+    }
+    case FILTER_ISSUES_BY_AUTHOR: {
+      const searchText = filterTextByAuthor(state.searchText, action.author);
+      //[TODO] renderedIssues 생성
+      //[TODO] addChecked
+      return {
+        ...state,
+        searchText,
+        wholeCheck: false,
+      };
+    }
+    case FILTER_ISSUES_BY_ASSIGNEE: {
+      const searchText = action.assignee
+        ? filterTextByAssignee(state.searchText, action.assignee)
+        : filterTextByNoAssignee(state.searchText);
+
+      return {
+        ...state,
+        searchText,
+        wholeCheck: false,
+      };
+    }
+    case FILTER_ISSUES_BY_MILESTONE: {
+      const searchText = action.milestone
+        ? filterTextByMilestone(state.searchText, action.milestone)
+        : filterTextByNoMilestone(state.searchText);
+
+      return {
+        ...state,
+        searchText,
         wholeCheck: false,
       };
     }

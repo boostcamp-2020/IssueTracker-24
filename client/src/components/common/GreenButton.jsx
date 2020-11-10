@@ -18,6 +18,7 @@ const Button = styled.button`
   }
 `;
 
+
 const GreenButton = ({ text, func, disabled }) => {
   return (
     <>

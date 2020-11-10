@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MilestoneListLeft from './MilestoneListLeft';
 import MilestoneListRight from './MilestoneListRight';
+
 const MilestoneListWrapper = styled.div`
   display:flex;
   width:80%;
@@ -11,14 +12,12 @@ const MilestoneListWrapper = styled.div`
   margin:0 auto;
 `;
 
-const MilestoneList = () =>{
+const MilestoneList = ({milestone}) =>{
    return (
-     <>
        <MilestoneListWrapper>
-            <MilestoneListLeft/>
-            <MilestoneListRight/>
+            <MilestoneListLeft milestone={milestone}/>
+            <MilestoneListRight milestone={milestone}/>
        </MilestoneListWrapper>
-     </>
    );
 }
 
