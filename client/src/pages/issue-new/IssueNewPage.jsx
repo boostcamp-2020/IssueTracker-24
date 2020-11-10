@@ -9,6 +9,7 @@ import ProfileImage from '../../components/common/ProfileImage';
 import { getAllLabels } from '../../lib/axios/label';
 import { getAllMilestones } from '../../lib/axios/milestone';
 import { getAllUsers } from '../../lib/axios/user';
+import { INIT_DATA } from './reducer';
 
 const IssueNewPageWrapper = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const IssueListNewPage = () => {
       getAllUsers(),
     ]);
     dispatch({
-      type: 'INIT_DATA',
+      type: INIT_DATA,
       data: { labels, milestones, users },
     });
   }, []);
