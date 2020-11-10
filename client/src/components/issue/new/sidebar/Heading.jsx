@@ -20,15 +20,21 @@ const HeadingWrapper = styled.div`
   }
   &:hover {
     color: ${COLORS.HOVER};
+    .svg {
+      fill: ${COLORS.HOVER};
+    }
   }
-  &:hover .svg {
-    fill: ${COLORS.HOVER};
+  &.isClicked {
+    color: ${COLORS.HOVER};
+    .svg {
+      fill: ${COLORS.HOVER};
+    }
   }
 `;
 
-const Heading = ({ title, onClick }) => {
+const Heading = ({ title, onClick, show }) => {
   return (
-    <HeadingWrapper onClick={onClick}>
+    <HeadingWrapper className={show ? 'isClicked' : ''} onClick={onClick}>
       <div>{title}</div>
       <div className="svg">{Svg.SidebarIcon}</div>
     </HeadingWrapper>

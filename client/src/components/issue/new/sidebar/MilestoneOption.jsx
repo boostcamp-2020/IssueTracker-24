@@ -14,11 +14,11 @@ const MilestoneOptionWrapper = styled.div`
   }
 `;
 
-const MilestoneOption = ({ data }) => {
+const MilestoneOption = ({ option }) => {
   return (
     <MilestoneOptionWrapper>
-      <div className="title">{data.title}</div>
-      <div className="description">{data.description}</div>
+      <div className="title">{option.title}</div>
+      <div className="description">{option.description}</div>
     </MilestoneOptionWrapper>
   );
 };

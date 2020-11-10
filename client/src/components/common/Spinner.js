@@ -1,11 +1,7 @@
 import React from 'react';
 
 const Spinner = () => {
-  return (
-    <div className="ui active dimmer">
-      <div className="ui big text loader">Loading...</div>
-    </div>
-  );
+  return <div>로딩중...</div>;
 };
 
 export default Spinner;

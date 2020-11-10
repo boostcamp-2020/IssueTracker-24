@@ -1,24 +1,29 @@
+export const INIT_DATA = 'init data';
+export const ADD_ASSIGNEES = 'add assignees';
+export const ADD_LABELS = 'add labels';
+export const SET_MILESTONE = 'set milestone';
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'INIT_DATA':
+    case INIT_DATA:
       return {
         ...state,
         ...action.data,
       };
-    case 'ADD_ASSIGNEE':
+    case ADD_ASSIGNEES:
       return {
         ...state,
-        addedAssignees: [state.addedAssignees, action.assignee],
+        addedAssignees: [...state.addedAssignees, ...action.toAdd],
       };
-    case 'ADD_LABEL':
+    case ADD_LABELS:
       return {
         ...state,
-        addedLabels: [state.addedLabels, action.label],
+        addedLabels: [...state.addedLabels, ...action.toAdd],
       };
-    case 'SET_MILESTONE':
+    case SET_MILESTONE:
       return {
         ...state,
-        addedMilestone: action.milestone,
+        addedMilestone: action.toAdd,
       };
   }
 };

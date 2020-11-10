@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
+import SelectedLabel from './SelectedLabel';
 import styled from 'styled-components';
 import Heading from './Heading';
 import Dropdown from './Dropdown';
-import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
 
 const SidebarItemWrapper = styled.div`
   position: relative;
@@ -18,10 +19,19 @@ const StateMsg = styled.div`
   font-size: 12px;
 `;
 
-const SidebarItem = ({ title, stateMsg, item }) => {
-  const { state } = useContext(IssueOptionContext);
-  const [show, setShow] = useState(false);
+const SidebarItem = ({ title, type, stateMsg, component, data }) => {
   const ref = useRef();
+  const [show, setShow] = useState(false);
+  const [checked, setChecked] = useState([]);
+  const { dispatch } = useContext(IssueOptionContext);
+  const Component = component;
+
+  const addChecked = (newChecked) => {
+    setChecked([...checked, newChecked]);
+  };
+  const removeChecked = (newUnchecked) => {
+    setChecked(checked.filter((item) => item.id !== newUnchecked.id));
+  };
 
   useEffect(() => {
     document.body.addEventListener('click', (e) => {
@@ -30,15 +40,53 @@ const SidebarItem = ({ title, stateMsg, item }) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!show && checked.length > 0) {
+      dispatch({
+        type,
+        toAdd: checked,
+      });
+    }
+  }, [show]);
+
   const handleOnClick = () => {
     setShow(!show);
   };
 
+  const renderedAddedList = (Component, title) => {
+    switch (title) {
+      case 'Assignees':
+        return checked.map((addedItem, index) => (
+          <Component
+            key={'addedList' + index}
+            option={addedItem}
+            fontSize={12}
+          />
+        ));
+      case 'Labels':
+        return checked.map((addedItem, index) => (
+          <SelectedLabel key={'addedLabel' + index} label={addedItem} />
+        ));
+      case 'Milestone':
+        return;
+    }
+  };
+
   return (
     <SidebarItemWrapper ref={ref}>
-      <Heading title={title} onClick={handleOnClick} />
-      <StateMsg>{stateMsg}</StateMsg>
-      <Dropdown show={show} item={item} data={state[item]} />
+      <Heading title={title} onClick={handleOnClick} show={show} />
+      {checked && checked.length > 0 ? (
+        renderedAddedList(Component, title)
+      ) : (
+        <StateMsg>{stateMsg}</StateMsg>
+      )}
+      <Dropdown
+        show={show}
+        add={addChecked}
+        remove={removeChecked}
+        component={component}
+        data={data}
+      />
     </SidebarItemWrapper>
   );
 };

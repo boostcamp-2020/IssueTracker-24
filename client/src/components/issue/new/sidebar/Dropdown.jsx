@@ -1,8 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import AssigneeOption from './UserOption';
-import LabelOption from './LabelOption';
-import MilestoneOption from './MilestoneOption';
 
 const DropdownWrapper = styled.div`
   position: absolute;
@@ -28,18 +25,18 @@ const DropdownWrapper = styled.div`
   }
 `;
 
-const components = {
-  users: AssigneeOption,
-  labels: LabelOption,
-  milestones: MilestoneOption,
-};
-
-const Dropdown = ({ show, item, data }) => {
+const Dropdown = ({ show, add, remove, component, data }) => {
   const dropdownDisplay = show ? 'display-block' : 'display-none';
-  const Component = components[item];
+  const Component = component;
   const options = data.map((option, index) => (
     <div className="dropdown-option" key={'dropdown' + index}>
-      <Component data={option} />
+      <Component
+        option={option}
+        add={add}
+        remove={remove}
+        padding={5}
+        size={18}
+      />
     </div>
   ));
 
