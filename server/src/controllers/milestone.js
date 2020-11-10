@@ -19,5 +19,17 @@ const createMilestone = async (req, res, next) => {
     next(err);
   }
 };
+const deleteMilestone = async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id);
 
-module.exports = { getAllMilestone, createMilestone };
+  try {
+    const milestone = await Milestone.destroy({
+      where: { id },
+    });
+    return res.status(201).json(milestone);
+  } catch (err) {
+    next(err);
+  }
+};
+module.exports = { getAllMilestone, createMilestone, deleteMilestone };
