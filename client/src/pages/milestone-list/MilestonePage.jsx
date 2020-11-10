@@ -6,7 +6,6 @@ import MilestoneList from '../../components/milestone/MilestoneList';
 import reducer from './reducer';
 import {getAllMilestones} from '../../lib/axios/milestone';
 import {INIT_DATA} from '../../pages/milestone-list/reducer';
-import milestone from '../../../../server/src/models/milestone';
 
 export const MilestoneContext = React.createContext();
 
@@ -16,7 +15,7 @@ const initialState = {
    labelColor:'#fff',
    labelFontColor:'#242424',
    openclosedState:'open', 
-   milestoneList:[]
+   milestoneList:[],
 }
 
 const MilestonePage =  () =>{
@@ -28,7 +27,8 @@ const MilestonePage =  () =>{
             type: INIT_DATA,
             milestones: milestones,
             milestoneList:milestones.filter(milestone=>milestone.state==='open')
-        });
+           
+          });
     },[]);
     
     return (

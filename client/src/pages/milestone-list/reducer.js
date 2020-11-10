@@ -21,7 +21,7 @@ const reducer = (state, action) =>{
         return{
           ...state,
           openclosedState:action.openclosedState,
-          milestoneList:action.milestoneList
+          milestoneList:action.milestoneList,
         }
       }     
   }
