@@ -50,17 +50,31 @@ const LabelWrapper = styled.div`
   }
 `;
 
-const LabelMenuDropDown = () => {
+const LabelMenuDropDown = ({ setShowLabelMenu }) => {
   const { state } = useContext(IssuesContext);
   const { labels } = state;
+
+  const onClickFirstItem = (e) => {
+    e.stopPropagation();
+  };
+
+  const onClickUnlabel = (e) => {
+    setShowLabelMenu();
+    e.stopPropagation();
+  };
+
+  const onClickDetailsItem = (e) => {
+    setShowLabelMenu();
+    e.stopPropagation();
+  };
 
   return (
     <>
       <DetailsMenuDropDown>
-        <DetailsItem>Filter by label</DetailsItem>
-        <DetailsItem>Unlabeled</DetailsItem>
+        <DetailsItem onClick={onClickFirstItem}>Filter by label</DetailsItem>
+        <DetailsItem onClick={onClickUnlabel}>Unlabeled</DetailsItem>
         {labels.map((label, index) => (
-          <DetailsItem key={index}>
+          <DetailsItem key={index} onClick={onClickDetailsItem}>
             <SmallLabel color={label.color} />
             <LabelWrapper>
               <div>{label.title}</div>

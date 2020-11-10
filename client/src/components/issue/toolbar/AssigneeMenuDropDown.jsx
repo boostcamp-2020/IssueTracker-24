@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
+import { FILTER_ISSUES_BY_ASSIGNEE } from '../../../pages/issue-list/reducer';
 import ProfileImage from '../../common/ProfileImage';
 
 const DetailsItem = styled.div`
@@ -42,17 +43,44 @@ const DetailsMenuDropDown = styled.div`
   border-radius: 4px;
 `;
 
-const AssigneeMenuDropDown = () => {
-  const { state } = useContext(IssuesContext);
+const AssigneeMenuDropDown = ({ setShowAssigneeMenu }) => {
+  const { state, dispatch } = useContext(IssuesContext);
   const { users } = state;
+
+  const onClickFirstItem = (e) => {
+    e.stopPropagation();
+  };
+
+  const onClickNobody = (e) => {
+    dispatch({
+      type: FILTER_ISSUES_BY_ASSIGNEE,
+    });
+    setShowAssigneeMenu();
+    e.stopPropagation();
+  };
+
+  const onClickDetailsItem = (e) => {
+    const detailsItem = e.target.closest('.assignee-item');
+    dispatch({
+      type: FILTER_ISSUES_BY_ASSIGNEE,
+      assignee: detailsItem.dataset.name,
+    });
+    setShowAssigneeMenu();
+    e.stopPropagation();
+  };
 
   return (
     <>
       <DetailsMenuDropDown>
-        <DetailsItem>Filter by assignee</DetailsItem>
-        <DetailsItem>Assigned to nobody</DetailsItem>
+        <DetailsItem onClick={onClickFirstItem}>Filter by assignee</DetailsItem>
+        <DetailsItem onClick={onClickNobody}>Assigned to nobody</DetailsItem>
         {users.map((user, index) => (
-          <DetailsItem key={index}>
+          <DetailsItem
+            key={index}
+            onClick={onClickDetailsItem}
+            className={'assignee-item'}
+            data-name={user.sns_id}
+          >
             <ProfileImage image={user.profile_image} size={20} />
             <div className="user-id">{user.sns_id}</div>
           </DetailsItem>
