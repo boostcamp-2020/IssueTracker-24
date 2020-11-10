@@ -25,8 +25,7 @@ const FilterButtonWrapper = styled.div`
   margin-bottom: 17px;
 `;
 
-const showClearButton = (searchText) =>
-  searchText !== 'is:open is:issue ' ? true : false;
+const showClearButton = (searchText) => searchText !== 'is:open is:issue ';
 
 const MenuContainer = () => {
   const [showFilterMenu, setFilterMenu] = useState(false);
