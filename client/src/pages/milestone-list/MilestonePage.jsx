@@ -20,7 +20,7 @@ const MilestonePage = () =>{
         const milestones = await getAllMilestones();
         dispatch({
             type: INIT_DATA,
-            data: milestones,
+            milestones: milestones,
         });
     },[]);
    

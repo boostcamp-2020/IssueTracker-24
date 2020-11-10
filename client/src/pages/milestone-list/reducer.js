@@ -4,7 +4,7 @@ const reducer = (state, action) =>{
       case INIT_DATA:{
         return{
             ...state,
-            milestones: action.data,
+            milestones: action.milestones,
         }
       }     
   }
