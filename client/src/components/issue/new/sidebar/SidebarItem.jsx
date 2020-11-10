@@ -65,7 +65,7 @@ const SidebarItem = ({ title, type, stateMsg, component, data }) => {
         ));
       case 'Labels':
         return checked.map((addedItem, index) => (
-          <SelectedLabel label={addedItem} />
+          <SelectedLabel key={'addedLabel' + index} label={addedItem} />
         ));
       case 'Milestone':
         return;
