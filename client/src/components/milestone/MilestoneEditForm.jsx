@@ -6,7 +6,7 @@ import InputTitle from './InputTitle';
 import DescriptionArea from './DescriptionArea';
 import GreenButton from '../common/GreenButton';
 import GreyButton from '../common/GreyButton';
-import { getMilestone } from '../../lib/axios/milestone';
+import { getMilestone, updateMilestone } from '../../lib/axios/milestone';
 import { useHistory } from 'react-router-dom';
 import { getFormattedDate } from '../../utils/time';
 
@@ -46,6 +46,16 @@ const MilestoneEditForm = ({ milestoneId }) => {
     setId(milestone.id);
   }, []);
 
+  const onClickSave = async () => {
+    await updateMilestone(milestoneId, {
+      title,
+      description,
+      due_date: date,
+      state,
+    });
+    history.push('/milestones');
+  };
+
   return (
     <Form>
       <InputWrapper>
@@ -74,7 +84,7 @@ const MilestoneEditForm = ({ milestoneId }) => {
       <Line />
       <ButtonWrapper>
         <div className="btn">
-          <GreenButton text={'Save changes'} />
+          <GreenButton text={'Save changes'} func={onClickSave} />
         </div>
         <div className="btn">
           <GreyButton
