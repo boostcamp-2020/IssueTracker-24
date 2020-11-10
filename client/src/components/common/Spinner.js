@@ -3,8 +3,9 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   text-align: center;
-  margin: auto;
-  margin-top: 20%;
+  position: absolute;
+  left: 48%;
+  top: 42%;
 `;
 
 const Spinner = () => (

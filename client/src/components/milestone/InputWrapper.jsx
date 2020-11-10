@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -12,12 +12,12 @@ const Wrapper = styled.div`
   }
 `;
 
-const InputWrapper = ({ children }) => {
+const InputWrapper = memo(({ children }) => {
   return (
     <>
       <Wrapper>{children}</Wrapper>
     </>
   );
-};
+});
 
 export default InputWrapper;
