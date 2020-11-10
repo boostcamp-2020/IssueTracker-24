@@ -137,15 +137,17 @@ const IssueNewContent = () => {
     setValue(e.target.value);
   };
   useEffect(() => {
+    let innerTimeoutId;
     const timeoutId = setTimeout(() => {
       if (value) setResults(`${value.length} Characters`);
       else setResults(`0 Characters`);
-      setTimeout(() => {
+      innerTimeoutId = setTimeout(() => {
         setResults('');
       }, 2000);
     }, 2000);
     return () => {
       clearTimeout(timeoutId);
+      clearTimeout(innerTimeoutId);
     };
   }, [value]);
 

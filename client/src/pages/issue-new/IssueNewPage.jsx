@@ -57,7 +57,7 @@ const IssueListNewPage = () => {
     <IssueOptionContext.Provider value={{ state, dispatch }}>
       <Header />
       <IssueNewPageWrapper>
-        <div class="content-wrapper">
+        <div className="content-wrapper">
           <ProfileImage image={currentUser.profile_image} size={50} />
           <IssueNewContent />
         </div>

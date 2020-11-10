@@ -39,29 +39,32 @@ const FourFilterTools = () => {
   const assigneeMenuRef = useRef();
 
   useEffect(() => {
-    document.body.addEventListener('click', (e) => {
-      if (authorMenuRef.current && authorMenuRef.current.contains(e.target))
-        return;
-      setShowAuthorMenu(false);
-    });
-    document.body.addEventListener('click', (e) => {
-      if (labelMenuRef.current && labelMenuRef.current.contains(e.target))
-        return;
-      setShowLabelMenu(false);
-    });
-    document.body.addEventListener('click', (e) => {
+    const clickBody = (e) => {
+      if (!authorMenuRef.current || !authorMenuRef.current.contains(e.target)) {
+        setShowAuthorMenu(false);
+      }
+      if (!labelMenuRef.current || !labelMenuRef.current.contains(e.target)) {
+        setShowLabelMenu(false);
+      }
       if (
-        milestoneMenuRef.current &&
-        milestoneMenuRef.current.contains(e.target)
-      )
-        return;
-      setShowMilestoneMenu(false);
-    });
-    document.body.addEventListener('click', (e) => {
-      if (assigneeMenuRef.current && assigneeMenuRef.current.contains(e.target))
-        return;
-      setShowAssigneeMenu(false);
-    });
+        !milestoneMenuRef.current ||
+        !milestoneMenuRef.current.contains(e.target)
+      ) {
+        setShowMilestoneMenu(false);
+      }
+      if (
+        !assigneeMenuRef.current ||
+        !assigneeMenuRef.current.contains(e.target)
+      ) {
+        setShowAssigneeMenu(false);
+      }
+    };
+
+    document.body.addEventListener('click', clickBody);
+
+    return () => {
+      document.body.removeEventListener('click', clickBody);
+    };
   }, []);
 
   return (
