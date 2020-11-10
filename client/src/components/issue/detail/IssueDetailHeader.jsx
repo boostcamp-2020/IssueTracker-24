@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import GreyButton from '../../common/GreyButton';
 import CloseLabel from './CloseLabel';
 import OpenLabel from './OpenLabel';
+import { getTimeInfo } from '../../../utils/time';
 
 const IssueDetailHeaderWrapper = styled.div`
   display: flex;
@@ -34,26 +35,29 @@ const DescriptionWrapper = styled.div`
   }
 `;
 
-const IssueDetailHeader = () => {
-  const state = 'close';
-  return (
-    <>
-      <IssueDetailHeaderWrapper>
-        <TitleWrapper>
-          <h1 className="title">
-            레이블 목록 보기 구현 <span className="issue-id">#1</span>
-          </h1>
-          <GreyButton text={'Edit'} />
-        </TitleWrapper>
-        <DescriptionWrapper>
-          {state === 'close' ? <CloseLabel /> : <OpenLabel />}
-          <div className="description">
-            Sejungkim opened this issue 3 days ago · 1 comments
-          </div>
-        </DescriptionWrapper>
-      </IssueDetailHeaderWrapper>
-    </>
-  );
-};
+const IssueDetailHeader = memo(
+  ({ user, title, createdDate, commentsLength, state }) => {
+    return (
+      <>
+        <IssueDetailHeaderWrapper>
+          <TitleWrapper>
+            <h1 className="title">
+              {title} <span className="issue-id">#1</span>
+            </h1>
+            <GreyButton text={'Edit'} />
+          </TitleWrapper>
+          <DescriptionWrapper>
+            {state === 'close' ? <CloseLabel /> : <OpenLabel />}
+            <div className="description">
+              {user && user.id} opened this issue {getTimeInfo(createdDate)}{' '}
+              ·&nbsp;
+              {commentsLength} comments
+            </div>
+          </DescriptionWrapper>
+        </IssueDetailHeaderWrapper>
+      </>
+    );
+  },
+);
 
 export default IssueDetailHeader;
