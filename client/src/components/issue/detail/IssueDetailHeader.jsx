@@ -1,9 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import styled from 'styled-components';
 import GreyButton from '../../common/GreyButton';
 import CloseLabel from './CloseLabel';
 import OpenLabel from './OpenLabel';
 import { getTimeInfo } from '../../../utils/time';
+import { IssueContext } from '../../../pages/IssueDeatilPage';
 
 const IssueDetailHeaderWrapper = styled.div`
   display: flex;
@@ -35,29 +36,28 @@ const DescriptionWrapper = styled.div`
   }
 `;
 
-const IssueDetailHeader = memo(
-  ({ user, title, createdDate, commentsLength, state }) => {
-    return (
-      <>
-        <IssueDetailHeaderWrapper>
-          <TitleWrapper>
-            <h1 className="title">
-              {title} <span className="issue-id">#1</span>
-            </h1>
-            <GreyButton text={'Edit'} />
-          </TitleWrapper>
-          <DescriptionWrapper>
-            {state === 'close' ? <CloseLabel /> : <OpenLabel />}
-            <div className="description">
-              {user && user.id} opened this issue {getTimeInfo(createdDate)}{' '}
-              ·&nbsp;
-              {commentsLength} comments
-            </div>
-          </DescriptionWrapper>
-        </IssueDetailHeaderWrapper>
-      </>
-    );
-  },
-);
+const IssueDetailHeader = memo(() => {
+  const { issue, setIssue } = useContext(IssueContext);
+  return (
+    <>
+      <IssueDetailHeaderWrapper>
+        <TitleWrapper>
+          <h1 className="title">
+            {issue.title} <span className="issue-id">#1</span>
+          </h1>
+          <GreyButton text={'Edit'} />
+        </TitleWrapper>
+        <DescriptionWrapper>
+          {issue.state === 'close' ? <CloseLabel /> : <OpenLabel />}
+          <div className="description">
+            {issue.user.id} opened this issue {getTimeInfo(issue.created_at)}{' '}
+            ·&nbsp;
+            {issue.comments.length} comments
+          </div>
+        </DescriptionWrapper>
+      </IssueDetailHeaderWrapper>
+    </>
+  );
+});
 
 export default IssueDetailHeader;

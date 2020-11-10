@@ -21,27 +21,28 @@ const initialIssue = {
   milestone: null,
   user: null,
 };
+export const IssueContext = React.createContext();
 
 const IssueDetailPage = ({ match }) => {
   const issueId = match.params.id;
-  const [issue, setIssue] = useState(initialIssue);
+  const [issue, setIssue] = useState(null);
 
   useEffect(async () => {
     setIssue(await getIssue(issueId));
   }, []);
 
+  if (!issue) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Header />
-      <IssueDetailPageWrapper>
-        <IssueDetailHeader
-          user={issue.user}
-          commentsLength={issue.comments.length}
-          title={issue.title}
-          createdDate={issue.created_at}
-          state={issue.state}
-        />
-      </IssueDetailPageWrapper>
+      <IssueContext.Provider value={{ issue: issue }}>
+        <IssueDetailPageWrapper>
+          <IssueDetailHeader />
+        </IssueDetailPageWrapper>
+      </IssueContext.Provider>
     </>
   );
 };
