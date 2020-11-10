@@ -14,10 +14,10 @@ const SelectedLabelWrapper = styled.div`
 
 const getContrastYIQ = (background) => {
   background = background.replace('#', '');
-  var r = parseInt(background.substr(0, 2), 16);
-  var g = parseInt(background.substr(2, 2), 16);
-  var b = parseInt(background.substr(4, 2), 16);
-  var yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  const r = parseInt(background.substr(0, 2), 16);
+  const g = parseInt(background.substr(2, 2), 16);
+  const b = parseInt(background.substr(4, 2), 16);
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
 
   return yiq >= 128 ? 'black' : 'white';
 };
