@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import SidebarItem from './SidebarItem';
-//
 import AssigneeOption from './UserOption';
 import LabelOption from './LabelOption';
 import MilestoneOption from './MilestoneOption';
-// component, selected 전부 다 하위로 내려주기
-//
+import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
+
 const SidebarWrapper = styled.div`
   flex-basis: 23%;
   width: 16%;
 `;
 
 const Sidebar = () => {
+  const { state } = useContext(IssueOptionContext);
   const defaultItems = [
-    { title: 'Assignees', stateMsg: 'No one', data: 'users' },
-    { title: 'Labels', stateMsg: 'None yet', data: 'labels' },
-    { title: 'Milestone', stateMsg: 'No milestone', data: 'milestones' },
+    {
+      title: 'Assignees',
+      type: 'ADD_ASSIGNEES',
+      stateMsg: 'No one',
+      component: AssigneeOption,
+      data: state.users,
+      added: state.addedAssignees,
+    },
+    {
+      title: 'Labels',
+      type: 'ADD_LABELS',
+      stateMsg: 'None yet',
+      component: LabelOption,
+      data: state.labels,
+      added: state.addedLabels,
+    },
+    {
+      title: 'Milestone',
+      type: 'SET_MILESTONE',
+      stateMsg: 'No milestone',
+      component: MilestoneOption,
+      data: state.milestones,
+      added: state.addedMilestone,
+    },
   ];
 
   const SidebarItems = defaultItems.map((item, index) => {
@@ -24,8 +45,11 @@ const Sidebar = () => {
       <SidebarItem
         key={'sidebar-item' + index}
         title={item.title}
+        type={item.type}
         stateMsg={item.stateMsg}
-        item={item.data}
+        component={item.component}
+        data={item.data}
+        added={item.added}
       />
     );
   });
