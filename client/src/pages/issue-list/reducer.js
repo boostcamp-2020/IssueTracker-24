@@ -13,7 +13,10 @@ import {
   filterTextByAssignee,
   filterTextByNoMilestone,
   filterTextByMilestone,
+  filterTextByLabel,
+  filterTextByNoLabel,
 } from '../../utils/filter-text';
+import { filterIssues } from '../../utils/filter-issue';
 
 export const CHECK_ISSUE = 'check issue';
 export const INIT_DATA = 'init data';
@@ -26,6 +29,8 @@ export const FILTER_CLOSED_ISSUES = 'filter closed issues';
 export const FILTER_ISSUES_BY_AUTHOR = 'filter issues by author';
 export const FILTER_ISSUES_BY_ASSIGNEE = 'filter issues by assignee';
 export const FILTER_ISSUES_BY_MILESTONE = 'filter issues by milestone';
+export const FILTER_ISSUES_BY_LABEL = 'filter issues by label';
+export const CLEAR_FILTER_ISSUES = 'clear filter issues';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -41,16 +46,21 @@ const reducer = (state, action) => {
       };
     }
     case INIT_DATA: {
-      const { issues, labels, milestones, users } = action.data;
-      const addedRenderedIssues = addChecked(issues);
-      const renderedIssues = [...addedRenderedIssues];
+      const { issues, labels, milestones, users, currentUser } = action.data;
+      const renderedIssues = filterIssues(
+        issues,
+        state.searchText,
+        currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
         issues,
         labels,
         milestones,
-        renderedIssues,
+        renderedIssues: addedRenderedIssues,
         users,
+        currentUser,
       }; // TODO: add users
     }
     case CHECK_WHOLE_ISSUES: {
@@ -69,10 +79,11 @@ const reducer = (state, action) => {
     case FILTER_YOUR_ISSUES: {
       const searchText = filterTextByYourIssues(state.searchText);
 
-      const renderedIssues = state.issues.filter(
-        (issue) => issue.user.id === Number(action.id),
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
       );
-
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
@@ -84,10 +95,11 @@ const reducer = (state, action) => {
     case FILTER_OPEN_ISSUES: {
       const searchText = filterTextByOpen(state.searchText);
 
-      const renderedIssues = state.issues.filter(
-        (issue) => issue.state === 'open',
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
       );
-
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
@@ -99,10 +111,11 @@ const reducer = (state, action) => {
     case FILTER_ISSUES_ASSIGNED_TO_CURRENT_USER: {
       const searchText = filterTextByAssignedToYou(state.searchText);
 
-      const renderedIssues = state.issues.filter((issue) =>
-        issue.assignees.some((assignee) => assignee.id === Number(action.id)),
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
       );
-
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
@@ -114,10 +127,11 @@ const reducer = (state, action) => {
     case FILTER_CLOSED_ISSUES: {
       const searchText = filterTextByClosed(state.searchText);
 
-      const renderedIssues = state.issues.filter(
-        (issue) => issue.state === 'close',
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
       );
-
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
@@ -128,11 +142,17 @@ const reducer = (state, action) => {
     }
     case FILTER_ISSUES_BY_AUTHOR: {
       const searchText = filterTextByAuthor(state.searchText, action.author);
-      //[TODO] renderedIssues 생성
-      //[TODO] addChecked
+
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
         searchText,
+        renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
     }
@@ -141,9 +161,16 @@ const reducer = (state, action) => {
         ? filterTextByAssignee(state.searchText, action.assignee)
         : filterTextByNoAssignee(state.searchText);
 
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
         searchText,
+        renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
     }
@@ -152,9 +179,50 @@ const reducer = (state, action) => {
         ? filterTextByMilestone(state.searchText, action.milestone)
         : filterTextByNoMilestone(state.searchText);
 
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
       return {
         ...state,
         searchText,
+        renderedIssues: addedRenderedIssues,
+        wholeCheck: false,
+      };
+    }
+    case FILTER_ISSUES_BY_LABEL: {
+      const searchText = action.label
+        ? filterTextByLabel(state.searchText, action.label)
+        : filterTextByNoLabel(state.searchText);
+
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
+      return {
+        ...state,
+        searchText,
+        renderedIssues: addedRenderedIssues,
+        wholeCheck: false,
+      };
+    }
+    case CLEAR_FILTER_ISSUES: {
+      const searchText = 'is:open is:issue ';
+
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
+      return {
+        ...state,
+        searchText,
+        renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
     }
