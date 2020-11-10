@@ -35,11 +35,20 @@ const MenuContainer = () => {
   const history = useHistory();
 
   const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
-  const onClickNewIssue = () => history.push('/issues/new');
+  const onClickNewIssue = (e) => {
+    history.push('/issues/new');
+    e.stopPropagation();
+  };
 
   return (
     <FilterMenuContext.Provider value={{ onClickFilterButton, setFilterMenu }}>
       <Div>
+        <FilterBar
+          onClickFilterButton={onClickFilterButton}
+          setFilterMenu={setFilterMenu}
+          showFilterMenu={showFilterMenu}
+          searchText={searchText}
+        />
         <NavigationContainer />
         <GreenButton text={'New issue'} func={onClickNewIssue} />
       </Div>
