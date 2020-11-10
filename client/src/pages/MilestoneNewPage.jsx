@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import MilestoneNewHeader from '../components/milestone/MilestoneNewHeader';
 import Header from '../components/Header';
-import MilestoneForm from '../components/milestone/MilestoneForm';
+import MilestoneCreateForm from '../components/milestone/MilestoneCreateForm';
 
 const MilestoneNewPageWrappper = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const MilestoneNewPage = () => {
       <Header />
       <MilestoneNewPageWrappper>
         <MilestoneNewHeader />
-        <MilestoneForm />
+        <MilestoneCreateForm />
       </MilestoneNewPageWrappper>
     </>
   );
