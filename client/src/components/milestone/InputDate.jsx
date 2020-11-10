@@ -24,11 +24,11 @@ const Input = styled.input.attrs((props) => ({
   }
 `;
 
-const InputDate = memo(({ setDate }) => {
+const InputDate = memo(({ setDate, value }) => {
   const onChangeInput = (e) => {
     setDate(e.target.value);
   };
-  return <Input onChange={onChangeInput} />;
+  return <Input onChange={onChangeInput} value={value} />;
 });
 
 export default InputDate;

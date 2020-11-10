@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { getMilestone } from '../lib/axios/milestone';
 import { useHistory } from 'react-router-dom';
 import MilestoneEditForm from '../components/milestone/MilestoneEditForm';
 import LabelComponent from '../components/common/LabelComponent';
@@ -44,7 +43,7 @@ const MilestoneEditPage = ({ match }) => {
             func={onClickMilestoneMenu}
           />
         </SelectMenuWrapper>
-        <MilestoneEditForm />
+        <MilestoneEditForm milestoneId={match.params.id} />
       </MilestoneNewPageWrappper>
     </>
   );

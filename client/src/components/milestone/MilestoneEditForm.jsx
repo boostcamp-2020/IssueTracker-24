@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputWrapper from './InputWrapper';
 import InputDate from './InputDate';
@@ -6,8 +6,9 @@ import InputTitle from './InputTitle';
 import DescriptionArea from './DescriptionArea';
 import GreenButton from '../common/GreenButton';
 import GreyButton from '../common/GreyButton';
-import { createMilestone } from '../../lib/axios/milestone';
+import { getMilestone } from '../../lib/axios/milestone';
 import { useHistory } from 'react-router-dom';
+import { getFormattedDate } from '../../utils/time';
 
 const Form = styled.div`
   display: flex;
@@ -28,11 +29,22 @@ const Line = styled.div`
   border-bottom: 1px solid #eaecef;
 `;
 
-const MilestoneEditForm = () => {
+const MilestoneEditForm = ({ milestoneId }) => {
+  const [id, setId] = useState(null);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(null);
   const [description, setDescription] = useState('');
+  const [state, setState] = useState('');
   const history = useHistory();
+
+  useEffect(async () => {
+    const milestone = await getMilestone(milestoneId);
+    setTitle(milestone.title);
+    setDate(milestone.due_date);
+    setDescription(milestone.description);
+    setState(milestone.state);
+    setId(milestone.id);
+  }, []);
 
   return (
     <Form>
@@ -42,7 +54,15 @@ const MilestoneEditForm = () => {
       </InputWrapper>
       <InputWrapper>
         <div className="title">Due date (optional)</div>
-        <InputDate date={date} setDate={setDate} />
+        <InputDate
+          date={date}
+          setDate={setDate}
+          value={
+            date
+              ? getFormattedDate({ date: new Date(date), format: '-' })
+              : '연도-월-일'
+          }
+        />
       </InputWrapper>
       <InputWrapper>
         <div className="title">Description</div>
@@ -57,7 +77,9 @@ const MilestoneEditForm = () => {
           <GreenButton text={'Save changes'} />
         </div>
         <div className="btn">
-          <GreyButton text={'Close milestone'} />
+          <GreyButton
+            text={state === 'open' ? 'Close milestone' : 'Reopen milestone'}
+          />
         </div>
         <div className="btn">
           <GreyButton text={'Cancel'} />
