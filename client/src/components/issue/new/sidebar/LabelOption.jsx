@@ -5,8 +5,7 @@ import svg from '../../../../utils/svg.js';
 
 const LabelOptionWrapper = styled.div`
   display: flex;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px 0;
   color: #586069;
   font-size: 12px;
 
@@ -29,7 +28,7 @@ const LabelOptionContent = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
-const LabelOptionContenHeader = styled.div`
+const LabelOptionContentHeader = styled.div`
   display: flex;
 `;
 const LabelOptionTitle = styled.div``;
@@ -61,10 +60,10 @@ const LabelOption = ({ option, add, remove }) => {
     <LabelOptionWrapper onClick={handleOnClick} color={option.color}>
       <CheckWrapper className={checkDisplay}>{svg.checkIcon}</CheckWrapper>
       <LabelOptionContent>
-        <LabelOptionContenHeader>
+        <LabelOptionContentHeader>
           <SmallLabel color={option.color} size={14} marginTop={2} />
           <LabelOptionTitle>{option.title}</LabelOptionTitle>
-        </LabelOptionContenHeader>
+        </LabelOptionContentHeader>
         <LabelOptionDescription>{option.description}</LabelOptionDescription>
       </LabelOptionContent>
       <CancelWrapper className={checkDisplay}>{svg.cancelButton}</CancelWrapper>
