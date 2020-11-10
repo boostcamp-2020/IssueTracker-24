@@ -5,6 +5,12 @@ import AssigneeOption from './UserOption';
 import LabelOption from './LabelOption';
 import MilestoneOption from './MilestoneOption';
 import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
+import {
+  INIT_DATA,
+  ADD_ASSIGNEES,
+  ADD_LABELS,
+  SET_MILESTONE,
+} from '../../../../pages/issue-new/reducer';
 
 const SidebarWrapper = styled.div`
   flex-basis: 23%;
@@ -16,7 +22,7 @@ const Sidebar = () => {
   const defaultItems = [
     {
       title: 'Assignees',
-      type: 'ADD_ASSIGNEES',
+      type: ADD_ASSIGNEES,
       stateMsg: 'No one',
       component: AssigneeOption,
       data: state.users,
@@ -24,7 +30,7 @@ const Sidebar = () => {
     },
     {
       title: 'Labels',
-      type: 'ADD_LABELS',
+      type: ADD_LABELS,
       stateMsg: 'None yet',
       component: LabelOption,
       data: state.labels,
@@ -32,7 +38,7 @@ const Sidebar = () => {
     },
     {
       title: 'Milestone',
-      type: 'SET_MILESTONE',
+      type: SET_MILESTONE,
       stateMsg: 'No milestone',
       component: MilestoneOption,
       data: state.milestones,
