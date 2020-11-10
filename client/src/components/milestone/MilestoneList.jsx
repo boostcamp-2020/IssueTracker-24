@@ -12,11 +12,11 @@ const MilestoneListWrapper = styled.div`
   margin:0 auto;
 `;
 
-const MilestoneList = ({milestone}) =>{
+const MilestoneList = ({milestone, milestoneTitle}) =>{
    return (
        <MilestoneListWrapper>
             <MilestoneListLeft milestone={milestone}/>
-            <MilestoneListRight milestone={milestone}/>
+            <MilestoneListRight milestone={milestone} milestoneTitle={milestoneTitle}/>
        </MilestoneListWrapper>
    );
 }

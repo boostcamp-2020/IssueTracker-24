@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import svg from '../../utils/svg';
 import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
 import {FILTERING_MILESTONE} from '../../pages/milestone-list/reducer';
-import {getAllMilestones} from '../../lib/axios/milestone';
 
 const MilestoneNavWrapper = styled.div`
 display:flex;

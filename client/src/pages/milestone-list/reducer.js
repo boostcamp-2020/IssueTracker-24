@@ -7,7 +7,8 @@ const reducer = (state, action) =>{
         return{
             ...state,
             milestones:action.milestones,
-            milestoneList:action.milestoneList
+            milestoneList:action.milestoneList,
+            issues:action.issues,
         }
       }
       case ROUTING_LABEL:{
