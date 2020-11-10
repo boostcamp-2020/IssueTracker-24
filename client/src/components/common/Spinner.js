@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import oc from 'open-color';
 
 const Wrapper = styled.div`
   text-align: center;
@@ -15,7 +14,7 @@ const Spinner = () => (
       height="64"
       viewBox="0 0 38 38"
       xmlns="http://www.w3.org/2000/svg"
-      stroke={oc.gray[7]}
+      stroke="#666666"
     >
       <g fill="none" fillRule="evenodd">
         <g transform="translate(1 1)" strokeWidth="2">
