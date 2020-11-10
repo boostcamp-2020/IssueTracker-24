@@ -1,4 +1,4 @@
-const { Issue, User, Label, Milestone } = require('../models');
+const { Issue, User, Label, Milestone, Comment } = require('../models');
 
 const getAllIssues = async (req, res, next) => {
   const issues = await Issue.findAll({
@@ -71,6 +71,12 @@ const getIssue = async (req, res, next) => {
       {
         model: Milestone,
         attributes: ['id', 'title', 'description', 'due_date', 'state'],
+      },
+      {
+        model: Comment,
+        as: 'comments',
+        attributes: ['id', 'content', 'created_at'],
+        include: [{ model: User }],
       },
     ],
   });
