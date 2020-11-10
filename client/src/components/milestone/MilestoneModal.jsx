@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useContext}from 'react';
+import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
 import styled from 'styled-components';
+import {DELETE_MILESTONE} from '../../pages/milestone-list/reducer';
+
 const MilestoneModalWrapper=styled.div`
   display:${(props)=>props.display};
   position:fixed;
@@ -23,8 +26,10 @@ const MilestoneModalTitle = styled.div`
   font-weight:bold;
   padding: 20px;
 `;
-const MilestoneModalClose = styled.div`
+const MilestoneModalClose = styled.button`
  float:right;
+ border:0;
+ background:#F6F8FA;
  &:hover{
      cursor:pointer;
      color:#0366D6;
@@ -76,14 +81,20 @@ const MilestoneDeleteButton = styled.button`
     }
 `;
 const MilestoneModal = ({display}) =>{
+    const {state, dispatch} = useContext(MilestoneContext);
+    const closeHandler = () =>{
+       let display = state.display==='block'?'none':'block';
+       display = state.display==='none'?'block':'none';
+       dispatch({type:DELETE_MILESTONE, display:display});
+    }
     return(
       <MilestoneModalWrapper display={display}>
          <MilestoneModalContent>
             <MilestoneModalTitle>
                Are you sure?
-               <MilestoneModalClose>
+               <MilestoneModalClose onClick={closeHandler}>
                 &times;
-            </MilestoneModalClose>
+               </MilestoneModalClose>
             </MilestoneModalTitle>
             
             <MilestoneModalNav>
