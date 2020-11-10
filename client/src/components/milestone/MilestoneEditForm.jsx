@@ -6,9 +6,14 @@ import InputTitle from './InputTitle';
 import DescriptionArea from './DescriptionArea';
 import GreenButton from '../common/GreenButton';
 import GreyButton from '../common/GreyButton';
-import { getMilestone, updateMilestone } from '../../lib/axios/milestone';
+import {
+  getMilestone,
+  updateMilestone,
+  patchMilestone,
+} from '../../lib/axios/milestone';
 import { useHistory } from 'react-router-dom';
 import { getFormattedDate } from '../../utils/time';
+import milestone from '../../../../server/src/models/milestone';
 
 const Form = styled.div`
   display: flex;
@@ -58,6 +63,12 @@ const MilestoneEditForm = ({ milestoneId }) => {
 
   const onClickCancel = () => history.push('/milestones');
 
+  const onClickChangeState = async () => {
+    const changedState = state === 'open' ? 'close' : 'open';
+    await patchMilestone(milestoneId, { state: changedState });
+    history.push('/milestones');
+  };
+
   return (
     <Form>
       <InputWrapper>
@@ -91,6 +102,7 @@ const MilestoneEditForm = ({ milestoneId }) => {
         <div className="btn">
           <GreyButton
             text={state === 'open' ? 'Close milestone' : 'Reopen milestone'}
+            func={onClickChangeState}
           />
         </div>
         <div className="btn">
