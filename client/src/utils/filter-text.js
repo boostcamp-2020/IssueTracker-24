@@ -57,7 +57,8 @@ export const filterTextByAssignedToYou = (searchText) => {
   const splitedText = searchText.split(' ');
   let index = -1;
   splitedText.forEach((v, i) => {
-    if (v.indexOf('assignee:') !== -1) index = i;
+    if (v.indexOf('no:assignee') !== -1) index = i;
+    else if (v.indexOf('assignee:') !== -1) index = i;
   });
 
   if (index !== -1) {
