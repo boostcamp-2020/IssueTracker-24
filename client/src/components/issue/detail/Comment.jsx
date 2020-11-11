@@ -25,12 +25,13 @@ const CommentContent = styled.textarea`
   padding-right: 10px;
   padding-top: 20px;
   padding-bottom: 15px;
-  font-size: 15px;
+  font-size: 14px;
   cursor: default;
   outline: 0;
   resize: none;
   overflow: hidden;
   white-space: pre-line;
+  font-family: sans;
 `;
 
 const Comment = memo(({ comment }) => {

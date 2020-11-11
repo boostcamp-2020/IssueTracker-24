@@ -8,7 +8,7 @@ import GreyButton from '../../common/GreyButton';
 import { patchIssue } from '../../../lib/axios/issue';
 import FileContainer from './FileContainer';
 
-const IssueContentWrapper = styled.div`
+export const IssueContentWrapper = styled.div`
   width: 100%;
   border: 1px solid #e8e9ec;
   border-top: 0;
@@ -18,7 +18,7 @@ const IssueContentWrapper = styled.div`
   font-size: 15px;
 `;
 
-const WriteLabel = styled.div`
+export const WriteLabel = styled.div`
   width: 80px;
   text-align: center;
   position: relative;
