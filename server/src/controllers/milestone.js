@@ -21,8 +21,6 @@ const createMilestone = async (req, res, next) => {
 };
 const deleteMilestone = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
-
   try {
     const milestone = await Milestone.destroy({
       where: { id },

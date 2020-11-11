@@ -1,4 +1,4 @@
-import React, {useContext}from 'react';
+import React, {useContext, useEffect}from 'react';
 import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
 import styled from 'styled-components';
 import {DELETE_MILESTONE} from '../../pages/milestone-list/reducer';
@@ -30,6 +30,7 @@ const MilestoneModalClose = styled.button`
  float:right;
  border:0;
  background:#F6F8FA;
+ outline:0;
  &:hover{
      cursor:pointer;
      color:#0366D6;
@@ -80,12 +81,15 @@ const MilestoneDeleteButton = styled.button`
         transition:0.2s;
     }
 `;
-const MilestoneModal = ({display}) =>{
+const MilestoneModal = ({display, milestoneId}) =>{
     const {state, dispatch} = useContext(MilestoneContext);
     const closeHandler = () =>{
        let display = state.display==='block'?'none':'block';
        display = state.display==='none'?'block':'none';
        dispatch({type:DELETE_MILESTONE, display:display});
+    }
+    const deleteHandler = () =>{
+       console.log(milestoneId);
     }
     return(
       <MilestoneModalWrapper display={display}>
@@ -96,7 +100,6 @@ const MilestoneModal = ({display}) =>{
                 &times;
                </MilestoneModalClose>
             </MilestoneModalTitle>
-            
             <MilestoneModalNav>
               Deletions are final!
              </MilestoneModalNav>
@@ -106,11 +109,10 @@ const MilestoneModal = ({display}) =>{
             </MilestonModalParagraph>
             <MilestonModalParagraph>Deleting this milestone will not delete or close the associated issues.</MilestonModalParagraph>
             <MilestoneModalFooter>
-                 <MilestoneDeleteButton>Delete this milestone</MilestoneDeleteButton>
+                 <MilestoneDeleteButton onClick={deleteHandler}>Delete this milestone</MilestoneDeleteButton>
             </MilestoneModalFooter>
              </MilestoneModalSection>
          </MilestoneModalContent>
-
       </MilestoneModalWrapper>
     );
 }

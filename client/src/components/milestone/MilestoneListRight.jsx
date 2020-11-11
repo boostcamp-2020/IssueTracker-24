@@ -44,7 +44,7 @@ const MilestoneOpenClose = styled.div`
     margin-top:10px;
     margin-left:20px;
 `;
-const MilestoneListRight =  ({milestone, milestoneTitle}) =>{
+const MilestoneListRight =  ({milestoneId, milestone, milestoneTitle}) =>{
     const {state, dispatch} = useContext(MilestoneContext);
     const milestoneList = state.issues.filter(issue=>issue.milestone!==null && issue.milestone.title === milestoneTitle);
     const totalIssueNumber = milestoneList.length;
@@ -52,6 +52,7 @@ const MilestoneListRight =  ({milestone, milestoneTitle}) =>{
     const closeIssueNumber = milestoneList.filter(issue=>issue.state==='closed').length;
 
     const ratio = totalIssueNumber!==0? Math.floor(closeIssueNumber/totalIssueNumber*100):0;
+
     const deleteClickHandler = () =>{
        let display = state.display==='block'?'none':'block';
        display = state.display==='none'?'block':'none';
@@ -72,7 +73,7 @@ const MilestoneListRight =  ({milestone, milestoneTitle}) =>{
             <MilestoneButton colors='blue'>Close</MilestoneButton>
             <MilestoneButton colors='red' onClick={deleteClickHandler}>Delete</MilestoneButton>
         </MilestoneButtonContainer>
-        <MilestoneModal display={state.display}></MilestoneModal>
+        <MilestoneModal display={state.display} milestoneId={milestoneId}></MilestoneModal>
       </MilestoneListRightWrapper>
     ); 
 }

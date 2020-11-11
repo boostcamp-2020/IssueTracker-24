@@ -18,21 +18,10 @@ const LabelComponentWrapper = styled.div`
 `;
 
 const LabelComponent = ({svg, title}) =>{
-   const {state, dispatch} = useContext(MilestoneContext);
-   const onClickHandler = (e) =>{
-        let color = state.labelColor ==='#fff'?'#1066D6':'#fff';
-        let fontColor = state.labelFontColor ==='#242424'?'#fff':'#242424';
-        dispatch({
-          type:ROUTING_LABEL,
-          labelColor:color,
-          labelFontColor:fontColor
-        })
-        e.target.style.backgroundColor=state.labelColor;
-        e.target.style.color=state.labelFontColor;
-      }
+
     return (
       <>
-        <LabelComponentWrapper title={title}  onClick={onClickHandler}>
+        <LabelComponentWrapper title={title}>
             {svg}
             {title}
         </LabelComponentWrapper>

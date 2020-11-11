@@ -16,7 +16,7 @@ const MilestoneList = ({milestone, milestoneTitle}) =>{
    return (
        <MilestoneListWrapper>
             <MilestoneListLeft milestone={milestone}/>
-            <MilestoneListRight milestone={milestone} milestoneTitle={milestoneTitle}/>
+            <MilestoneListRight milestoneId={milestone.id}milestone={milestone} milestoneTitle={milestoneTitle}/>
        </MilestoneListWrapper>
    );
 }

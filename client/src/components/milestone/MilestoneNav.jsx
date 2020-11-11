@@ -22,7 +22,7 @@ const OpenDiv = styled.div`
  margin-left:5px;
  padding-left:10px;
  cursor:pointer;
- font-weight:bold;
+ font-weight:${(props)=>props.fontWeight==='bold'?'bold':'normal'};
 `
 const CloseDiv = styled.div`
  margin-left:5px;
