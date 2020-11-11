@@ -6,10 +6,12 @@ const LabelWrapper = styled.button`
   border: none;
   height: 25px;
   cursor: pointer;
-  border-radius: 10%;
+  border-radius: 360px;
   font-weight: bold;
   margin-left: 5px;
   outline: 0;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 const Label = ({ label }) => {
