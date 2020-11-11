@@ -10,19 +10,6 @@ const IssueDetailPageWrapper = styled.div`
   width: 80%;
 `;
 
-const initialIssue = {
-  id: 0,
-  title: '',
-  content: '',
-  state: '',
-  created_at: new Date(),
-  comments: [],
-  labels: [],
-  assignees: [],
-  milestone: null,
-  user: null,
-};
-
 export const IssueContext = React.createContext();
 
 const IssueDetailPage = ({ match }) => {
