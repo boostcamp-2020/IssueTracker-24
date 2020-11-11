@@ -32,6 +32,7 @@ export const FILTER_ISSUES_BY_MILESTONE = 'filter issues by milestone';
 export const FILTER_ISSUES_BY_LABEL = 'filter issues by label';
 export const CLEAR_FILTER_ISSUES = 'clear filter issues';
 export const FILTER_ISSUES_BY_TEXT = 'filter issues by text';
+export const CHANGE_ISSUES_OPEN_CLOSE = 'change issues open close';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -239,6 +240,20 @@ const reducer = (state, action) => {
       return {
         ...state,
         searchText,
+        renderedIssues: addedRenderedIssues,
+        wholeCheck: false,
+      };
+    }
+    case CHANGE_ISSUES_OPEN_CLOSE: {
+      const renderedIssues = filterIssues(
+        action.issues,
+        state.searchText,
+        state.currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
+      return {
+        ...state,
+        issues: action.issues,
         renderedIssues: addedRenderedIssues,
         wholeCheck: false,
       };
