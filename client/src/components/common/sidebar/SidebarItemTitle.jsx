@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getAllLabels } from '../../../lib/axios/label';
 import svg from '../../../utils/svg';
 const COLORS = {
     TEXT: '#586069',
