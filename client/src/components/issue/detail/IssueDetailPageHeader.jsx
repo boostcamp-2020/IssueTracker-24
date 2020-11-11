@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CloseLabel from './CloseLabel';
 import OpenLabel from './OpenLabel';
 import { getTimeInfo } from '../../../utils/time';
-import { IssueContext } from '../../../pages/IssueDeatilPage';
+import { IssueContext } from '../../../pages/IssueDetailPage';
 import TitleWrapper from './TitleWrapper';
 
 const IssueDetailHeaderWrapper = styled.div`
@@ -23,7 +23,7 @@ const DescriptionWrapper = styled.div`
   }
 `;
 
-const IssueDetailHeader = memo(() => {
+const IssueDetailPageHeader = memo(() => {
   const { issue, setIssue } = useContext(IssueContext);
   return (
     <>
@@ -42,4 +42,4 @@ const IssueDetailHeader = memo(() => {
   );
 });
 
-export default IssueDetailHeader;
+export default IssueDetailPageHeader;

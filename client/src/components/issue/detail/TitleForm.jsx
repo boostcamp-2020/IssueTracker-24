@@ -1,7 +1,8 @@
 import React, { useMemo, useContext, useState } from 'react';
 import styled from 'styled-components';
-import { IssueContext } from '../../../pages/IssueDeatilPage';
+import { IssueContext } from '../../../pages/IssueDetailPage';
 import GreyButton from '../../common/GreyButton';
+import { patchIssue } from '../../../lib/axios/issue';
 
 const Form = styled.div`
   display: flex;
@@ -51,11 +52,18 @@ const TitleForm = ({ onClickCancel }) => {
   const onChangeInput = (e) => {
     setTitle(e.target.value);
   };
+
+  const onClickSave = async () => {
+    await patchIssue(issue.id, { title });
+    setIssue({ ...issue, title });
+    onClickCancel();
+  };
+
   return (
     <Form>
       <Input onChange={onChangeInput} value={title} />
       <div>
-        <GreyButton text={'Save'} />
+        <GreyButton text={'Save'} func={onClickSave} />
         <CancelButton className="cancel-btn" onClick={onClickCancel}>
           Cancel
         </CancelButton>

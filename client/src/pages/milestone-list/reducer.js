@@ -31,6 +31,7 @@ const reducer = (state, action) =>{
         return{
           ...state,
           display:action.display,
+          milestoneId:action.milestoneId,
         }
       }   
   }

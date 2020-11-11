@@ -22,13 +22,14 @@ const OpenDiv = styled.div`
  margin-left:5px;
  padding-left:10px;
  cursor:pointer;
- font-weight:${(props)=>props.fontWeight==='bold'?'bold':'normal'};
+ font-weight:bold;
 `
 const CloseDiv = styled.div`
  margin-left:5px;
  padding-left:10px;
  cursor:pointer;
 `;
+
 const MilestoneNav = ({milestones}) =>{
   const openMilestone = milestones.filter(milestone=> milestone.state==="open").length;
   const closeMilestone = milestones.filter(milestone=>milestone.state==="close").length;

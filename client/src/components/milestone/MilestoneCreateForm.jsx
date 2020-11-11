@@ -37,6 +37,7 @@ const MilestoneCreateForm = () => {
     }
     createMilestone({ title, due_date: date, description });
     history.push('/milestones');
+    location.reload();
   };
 
   return (

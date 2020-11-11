@@ -10,7 +10,7 @@ import { getToken } from './utils/token';
 import { getCurrentUser } from './lib/axios/user';
 import MilestoneNewPage from './pages/MilestoneNewPage';
 import MilestoneEditPage from './pages/MilestoneEditPage';
-import IssueDetailPage from './pages/IssueDeatilPage';
+import IssueDetailPage from './pages/IssueDetailPage';
 
 const GlobalStyle = createGlobalStyle`
   body{
