@@ -32,7 +32,7 @@ const MenuContainer = () => {
   const { state } = useContext(IssuesContext);
   const { searchText } = state;
   const history = useHistory();
-  
+
   const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
   const onClickNewIssue = (e) => {
     history.push('/issues/new');
@@ -46,7 +46,6 @@ const MenuContainer = () => {
           onClickFilterButton={onClickFilterButton}
           setFilterMenu={setFilterMenu}
           showFilterMenu={showFilterMenu}
-          searchText={searchText}
         />
         <NavigationContainer />
         <GreenButton text={'New issue'} func={onClickNewIssue} />

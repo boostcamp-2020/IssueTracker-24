@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import svg from '../../../utils/svg';
+import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
+import { FILTER_ISSUES_BY_TEXT } from '../../../pages/issue-list/reducer';
 
 const FormWrapper = styled.form`
   margin-left: -6px;
@@ -19,10 +21,9 @@ const FormWrapper = styled.form`
   }
 `;
 
-const FilterInput = styled.input.attrs((props) => ({
+const FilterInput = styled.input.attrs(() => ({
   type: 'text',
   placeholder: 'Search all issues',
-  value: props.value,
 }))`
   font-size: 15px;
   padding-left: 6%;
@@ -38,11 +39,26 @@ const FilterInput = styled.input.attrs((props) => ({
   }
 `;
 
-const FilterForm = ({ searchText }) => {
+const FilterForm = () => {
+  const { state, dispatch } = useContext(IssuesContext);
+  const { searchText } = state;
+  const [filterText, setFilterText] = useState(searchText);
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    dispatch({ type: FILTER_ISSUES_BY_TEXT, filterText });
+  };
+
+  const onChangeInput = (e) => setFilterText(e.target.value);
+
+  useEffect(() => {
+    setFilterText(searchText);
+  }, [searchText]);
+
   return (
     <>
-      <FormWrapper>
-        <FilterInput value={searchText} />
+      <FormWrapper onSubmit={onSubmitForm}>
+        <FilterInput value={filterText} onChange={onChangeInput} />
         {svg['magnifyingGlass']}
       </FormWrapper>
     </>

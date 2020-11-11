@@ -31,6 +31,7 @@ export const FILTER_ISSUES_BY_ASSIGNEE = 'filter issues by assignee';
 export const FILTER_ISSUES_BY_MILESTONE = 'filter issues by milestone';
 export const FILTER_ISSUES_BY_LABEL = 'filter issues by label';
 export const CLEAR_FILTER_ISSUES = 'clear filter issues';
+export const FILTER_ISSUES_BY_TEXT = 'filter issues by text';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,11 +47,12 @@ const reducer = (state, action) => {
       };
     }
     case INIT_DATA: {
-      const { issues, labels, milestones, users, currentUser } = action.data;
+      const { issues, labels, milestones, users } = action.data;
+
       const renderedIssues = filterIssues(
         issues,
         state.searchText,
-        currentUser,
+        state.currentUser,
       );
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
@@ -60,8 +62,7 @@ const reducer = (state, action) => {
         milestones,
         renderedIssues: addedRenderedIssues,
         users,
-        currentUser,
-      }; // TODO: add users
+      };
     }
     case CHECK_WHOLE_ISSUES: {
       const wholeCheck = !action.wholeCheck;
@@ -212,6 +213,22 @@ const reducer = (state, action) => {
     }
     case CLEAR_FILTER_ISSUES: {
       const searchText = 'is:open is:issue ';
+
+      const renderedIssues = filterIssues(
+        state.issues,
+        searchText,
+        state.currentUser,
+      );
+      const addedRenderedIssues = addChecked(renderedIssues);
+      return {
+        ...state,
+        searchText,
+        renderedIssues: addedRenderedIssues,
+        wholeCheck: false,
+      };
+    }
+    case FILTER_ISSUES_BY_TEXT: {
+      const searchText = action.filterText;
 
       const renderedIssues = filterIssues(
         state.issues,
