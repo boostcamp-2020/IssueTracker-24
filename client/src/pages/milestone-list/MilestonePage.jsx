@@ -3,10 +3,11 @@ import Header from '../../components/Header';
 import MilestoneHeader  from '../../components/milestone/MilestoneHeader'
 import MilestoneNav from '../../components/milestone/MilestoneNav';
 import MilestoneList from '../../components/milestone/MilestoneList';
+import MilestoneModal from '../../components/milestone/MilestoneModal';
 import reducer from './reducer';
 import {getAllMilestones} from '../../lib/axios/milestone';
 import {getAllIssues} from '../../lib/axios/issue';
-import {INIT_DATA} from '../../pages/milestone-list/reducer';
+import {INIT_DATA} from './reducer';
 
 export const MilestoneContext = React.createContext();
 
@@ -44,6 +45,7 @@ const MilestonePage =  () =>{
        {state.milestoneList.map((milestone, index)=>(
          <MilestoneList key={index} milestone={milestone} milestoneTitle={milestone.title}/>)
         )}
+      <MilestoneModal display={state.display} milestoneId={state.milestoneId}></MilestoneModal>
       </MilestoneContext.Provider>
     );
 }

@@ -1,4 +1,4 @@
-import { getData, postData, putData, patchData } from './request';
+import { getData, postData, putData, patchData, deleteData} from './request';
 
 const url = {
   GET_ALL_MILESTONES: 'milestones',
@@ -6,6 +6,7 @@ const url = {
   GET_MILESTONE: 'milestones/',
   UPDATE_MILESTONE: 'milestones/',
   PATCH_MILESTONE: 'milestones/',
+  DELETE_MILESTONE:'milestones/'
 };
 
 export const getAllMilestones = async () => {
@@ -32,3 +33,8 @@ export const patchMilestone = async (id, body) => {
   const milestone = await patchData(`${url.GET_MILESTONE}${id}`, body);
   return milestone;
 };
+
+export const deleteMilestone = async (id) =>{
+  const milestone = await deleteData(`${url.DELETE_MILESTONE}${id}`);
+  return milestone;
+}
