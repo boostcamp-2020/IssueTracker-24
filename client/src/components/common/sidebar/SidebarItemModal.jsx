@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Assignee from './Assignee';
 import Label from './Label';
 import Milestone from './milestone';
+import {getDueInfo} from '../../../utils/time';
 const SidebarItemModalWrapper = styled.div`
   position:absolute;
   width:100%;
@@ -31,7 +32,7 @@ const SidebarItemModal = ({title, header, component}) =>{
         )):null}
         {title==='Milestone'?
          component.map((item)=>(
-            <Milestone></Milestone>
+            <Milestone title={item.title} dueDate={item.due_date}></Milestone>
          )):null} 
     </SidebarItemModalWrapper>
   );
