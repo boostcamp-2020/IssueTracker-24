@@ -6,6 +6,7 @@ import IssueListPage from './pages/issue-list/IssueListPage';
 import IssueNewPage from './pages/issue-new/IssueNewPage';
 import NotFoundPage from './pages/NotFoundPage';
 import MilestonePage from './pages/milestone-list/MilestonePage';
+import LabelListPage from './pages/label-list/LabelListPage';
 import { getToken } from './utils/token';
 import { getCurrentUser } from './lib/axios/user';
 import MilestoneNewPage from './pages/MilestoneNewPage';
@@ -50,6 +51,7 @@ const App = () => {
             path="/milestones/:id/edit"
             component={MilestoneEditPage}
           />
+          <Route exact path="/labels" component={LabelListPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

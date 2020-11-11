@@ -9,6 +9,7 @@ const LabelOptionWrapper = styled.div`
   padding: 5px 0;
   color: #586069;
   font-size: 12px;
+  width: 100%;
 
   &:hover {
     background-color: #0366d6;
@@ -23,23 +24,24 @@ const LabelOptionWrapper = styled.div`
     visibility: hidden;
   }
 `;
-const LabelOptionContent = styled.div``;
+const LabelOptionContent = styled.div`
+  flex-basis: 80%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 const LabelOptionContentHeader = styled.div`
   display: flex;
-  width: 187px;
 `;
 const LabelOptionTitle = styled.div``;
-const LabelOptionDescription = styled.div`
-  width: 187px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
+const LabelOptionDescription = styled.div``;
 const CheckWrapper = styled.div`
   text-align: center;
+  flex-basis: 10%;
 `;
 const CancelWrapper = styled.div`
   text-align: center;
+  flex-basis: 10%;
 `;
 
 const LabelOption = ({ option, add, remove }) => {

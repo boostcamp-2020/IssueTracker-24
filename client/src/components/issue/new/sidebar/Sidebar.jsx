@@ -6,7 +6,6 @@ import LabelOption from './LabelOption';
 import MilestoneOption from './MilestoneOption';
 import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
 import {
-  INIT_DATA,
   ADD_ASSIGNEES,
   ADD_LABELS,
   SET_MILESTONE,
@@ -44,7 +43,7 @@ const Sidebar = () => {
       header: 'Set milestone',
       stateMsg: 'No milestone',
       component: MilestoneOption,
-      data: state.milestones,
+      data: state.milestones.filter((milestone) => milestone.state === 'open'),
       added: state.addedMilestone,
     },
   ];

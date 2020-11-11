@@ -7,8 +7,10 @@ const SelectedLabelWrapper = styled.div`
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
   font-size: 12px;
+  font-weight: bold;
   margin-right: 5px;
-
+  height: 20px;
+  line-height: 20px;
   padding: 0px 10px 3px 10px;
 `;
 
