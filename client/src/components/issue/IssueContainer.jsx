@@ -10,7 +10,9 @@ const IssueContainer = () => {
   const { renderedIssues } = state;
 
   return isExistRenderedIssues(renderedIssues) ? (
-    renderedIssues.map((issue) => <IssueItem key={issue.id} issue={issue} />)
+    renderedIssues
+      .reverse()
+      .map((issue) => <IssueItem key={issue.id} issue={issue} />)
   ) : (
     <NoIssueContent />
   );
