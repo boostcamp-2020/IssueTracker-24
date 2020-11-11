@@ -29,12 +29,17 @@ const LabelOptionContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 180px;
 `;
 const LabelOptionContentHeader = styled.div`
   display: flex;
 `;
 const LabelOptionTitle = styled.div``;
-const LabelOptionDescription = styled.div``;
+const LabelOptionDescription = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 const CheckWrapper = styled.div`
   text-align: center;
   flex-basis: 10%;
