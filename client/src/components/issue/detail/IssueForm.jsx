@@ -25,6 +25,7 @@ const IssueContent = styled.textarea`
   border: 1px solid #eaecef;
   border-radius: 4px;
   background-color: #fafbfc;
+  font-size: 15px;
   &:focus {
     outline: none;
     border: 0.5px solid #0366d6;

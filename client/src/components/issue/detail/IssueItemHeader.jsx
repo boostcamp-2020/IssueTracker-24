@@ -6,7 +6,8 @@ const Header = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 50px;
-  background-color: #f1f8ff;
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : '#f1f8ff'};
   border-radius: 4px 4px 0px 0px;
   border: 1px solid #e8e9ec;
   padding-left: 10px;
@@ -31,8 +32,8 @@ const Header = styled.div`
   }
 `;
 
-const IssueItemHeader = ({ children }) => {
-  return <Header>{children}</Header>;
+const IssueItemHeader = ({ children, backgroundColor }) => {
+  return <Header backgroundColor={backgroundColor}>{children}</Header>;
 };
 
 export default IssueItemHeader;

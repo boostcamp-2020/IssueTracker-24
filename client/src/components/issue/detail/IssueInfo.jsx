@@ -41,7 +41,7 @@ const IssueContent = styled.textarea`
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   font-size: 15px;
   cursor: default;
   outline: 0;
