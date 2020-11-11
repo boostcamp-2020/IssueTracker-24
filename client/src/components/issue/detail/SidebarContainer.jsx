@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Sidebar from '../../common/sidebar/Sidebar';
 const Container = styled.div`
   display: flex;
   width: 29%;
@@ -10,7 +10,11 @@ const Container = styled.div`
 `;
 
 const SideBarContainer = () => {
-  return <Container></Container>;
+  return (
+   <Container>
+      <Sidebar></Sidebar>
+   </Container>
+  );
 };
 
 export default SideBarContainer;

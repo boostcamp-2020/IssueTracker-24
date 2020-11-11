@@ -10,7 +10,7 @@ width:80%;
 height:50px;
 margin:0 auto;
 margin-top:40px;
-background-color:#F6F8F4;
+background-color:#E6E6E6;
 border-top-left-radius:5px;
 border-top-right-radius:5px;
 border:1px solid #E1E4E8;
