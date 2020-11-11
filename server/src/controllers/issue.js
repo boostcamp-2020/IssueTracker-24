@@ -69,11 +69,11 @@ const patchIssue = async (req, res, next) => {
 };
 
 const createComment = async (req, res, next) => {
-  console.log('hi');
-  const { id } = req.params;
+  const issueId = req.params.id;
   const { content, user_id } = req.body;
-  const issue = await Issue.findByPk(id);
-  const comment = await issue.createComment({ content, user_id });
+  const issue = await Issue.findByPk(issueId);
+  const { id } = await issue.createComment({ content, user_id });
+  const comment = await Comment.findByPk(id, { include: [{ model: User }] });
   res.status(201).json(comment);
 };
 module.exports = { getAllIssues, createIssue, getIssue, patchIssue, createComment };
