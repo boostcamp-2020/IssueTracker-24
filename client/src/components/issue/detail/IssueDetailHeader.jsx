@@ -1,10 +1,10 @@
 import React, { memo, useContext } from 'react';
 import styled from 'styled-components';
-import GreyButton from '../../common/GreyButton';
 import CloseLabel from './CloseLabel';
 import OpenLabel from './OpenLabel';
 import { getTimeInfo } from '../../../utils/time';
 import { IssueContext } from '../../../pages/IssueDeatilPage';
+import TitleWrapper from './TitleWrapper';
 
 const IssueDetailHeaderWrapper = styled.div`
   display: flex;
@@ -12,19 +12,6 @@ const IssueDetailHeaderWrapper = styled.div`
   border-bottom: 1px solid #eaecef;
   padding-bottom: 10px;
   margin-top: 17px;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  .issue-id {
-    color: grey;
-  }
-  .title {
-    margin: 0;
-    margin-bottom: 7px;
-    font-weight: 500;
-  }
 `;
 
 const DescriptionWrapper = styled.div`
@@ -41,12 +28,7 @@ const IssueDetailHeader = memo(() => {
   return (
     <>
       <IssueDetailHeaderWrapper>
-        <TitleWrapper>
-          <h1 className="title">
-            {issue.title} <span className="issue-id">#1</span>
-          </h1>
-          <GreyButton text={'Edit'} />
-        </TitleWrapper>
+        <TitleWrapper />
         <DescriptionWrapper>
           {issue.state === 'close' ? <CloseLabel /> : <OpenLabel />}
           <div className="description">

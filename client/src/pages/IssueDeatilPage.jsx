@@ -40,7 +40,7 @@ const IssueDetailPage = ({ match }) => {
   return (
     <>
       <Header />
-      <IssueContext.Provider value={{ issue: issue }}>
+      <IssueContext.Provider value={{ issue, setIssue }}>
         <IssueDetailPageWrapper>
           <IssueDetailHeader />
         </IssueDetailPageWrapper>
