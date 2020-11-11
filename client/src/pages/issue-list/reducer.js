@@ -47,11 +47,12 @@ const reducer = (state, action) => {
       };
     }
     case INIT_DATA: {
-      const { issues, labels, milestones, users, currentUser } = action.data;
+      const { issues, labels, milestones, users } = action.data;
+
       const renderedIssues = filterIssues(
         issues,
         state.searchText,
-        currentUser,
+        state.currentUser,
       );
       const addedRenderedIssues = addChecked(renderedIssues);
       return {
@@ -61,8 +62,7 @@ const reducer = (state, action) => {
         milestones,
         renderedIssues: addedRenderedIssues,
         users,
-        currentUser,
-      }; // TODO: add users
+      };
     }
     case CHECK_WHOLE_ISSUES: {
       const wholeCheck = !action.wholeCheck;
