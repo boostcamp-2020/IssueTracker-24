@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import { AppContext } from '../../App';
@@ -6,10 +6,12 @@ import IssueNewContent from '../../components/issue/new/IssueNewContent';
 import reducer from './reducer.js';
 import Sidebar from '../../components/issue/new/sidebar/Sidebar';
 import ProfileImage from '../../components/common/ProfileImage';
+import { getAllIssues } from '../../lib/axios/issue';
 import { getAllLabels } from '../../lib/axios/label';
 import { getAllMilestones } from '../../lib/axios/milestone';
 import { getAllUsers } from '../../lib/axios/user';
 import { INIT_DATA } from './reducer';
+import Spinner from '../../components/common/Spinner';
 
 const IssueNewPageWrapper = styled.div`
   display: flex;
@@ -30,6 +32,7 @@ export const IssueOptionContext = React.createContext();
 
 const initialState = {
   users: [],
+  issues: [],
   labels: [],
   milestones: [],
   addedAssignees: [],
@@ -38,20 +41,25 @@ const initialState = {
 };
 
 const IssueListNewPage = () => {
+  const [isCompleteRequest, setIsCompleteRequest] = useState(false);
   const { currentUser } = useContext(AppContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
-    const [labels, milestones, users] = await Promise.all([
+    const [issues, labels, milestones, users] = await Promise.all([
+      getAllIssues(),
       getAllLabels(),
       getAllMilestones(),
       getAllUsers(),
     ]);
     dispatch({
       type: INIT_DATA,
-      data: { labels, milestones, users },
+      data: { issues, labels, milestones, users },
     });
+    setIsCompleteRequest(true);
   }, []);
+
+  if (!isCompleteRequest) return <Spinner />;
 
   return (
     <IssueOptionContext.Provider value={{ state, dispatch }}>

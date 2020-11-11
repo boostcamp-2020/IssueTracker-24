@@ -8,4 +8,8 @@ const { isAuth } = require('../middlewares/auth');
 router.get('/', isAuth, milestoneController.getAllMilestone);
 router.post('/', isAuth, milestoneController.createMilestone);
 router.delete('/:id', isAuth, milestoneController.deleteMilestone);
+router.get('/:id', isAuth, milestoneController.getMilestone);
+router.put('/:id', isAuth, milestoneController.updateMilestone);
+router.patch('/:id', isAuth, milestoneController.patchMilestone);
+
 module.exports = router;

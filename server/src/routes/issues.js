@@ -4,7 +4,7 @@ const { isAuth } = require('../middlewares/auth');
 
 const router = express.Router();
 
-// TODO: isAuth 미들웨어 추가
 router.get('/', isAuth, issueController.getAllIssues);
 router.post('/', isAuth, issueController.createIssue);
+router.get('/:id', isAuth, issueController.getIssue);
 module.exports = router;

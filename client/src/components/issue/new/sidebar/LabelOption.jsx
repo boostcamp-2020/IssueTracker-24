@@ -5,6 +5,7 @@ import svg from '../../../../utils/svg.js';
 
 const LabelOptionWrapper = styled.div`
   display: flex;
+  justify-content: space-around;
   padding: 5px 0;
   color: #586069;
   font-size: 12px;
@@ -12,6 +13,7 @@ const LabelOptionWrapper = styled.div`
   &:hover {
     background-color: #0366d6;
     color: white;
+    cursor: pointer;
   }
 
   .display-visible {
@@ -21,24 +23,22 @@ const LabelOptionWrapper = styled.div`
     visibility: hidden;
   }
 `;
-const LabelOptionContent = styled.div`
-  flex-grow: 8;
-  max-width: 160px;
+const LabelOptionContent = styled.div``;
+const LabelOptionContentHeader = styled.div`
+  display: flex;
+  width: 187px;
+`;
+const LabelOptionTitle = styled.div``;
+const LabelOptionDescription = styled.div`
+  width: 187px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
-const LabelOptionContentHeader = styled.div`
-  display: flex;
-`;
-const LabelOptionTitle = styled.div``;
-const LabelOptionDescription = styled.div``;
 const CheckWrapper = styled.div`
-  flex-grow: 1;
   text-align: center;
 `;
 const CancelWrapper = styled.div`
-  flex-grow: 1;
   text-align: center;
 `;
 
