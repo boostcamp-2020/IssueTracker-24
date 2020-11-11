@@ -1,8 +1,9 @@
 import React,{useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
-import MilestoneModal from './MilestoneModal';
-import {DELETE_MILESTONE} from '../../pages/milestone-list/reducer';
+import {DELETE_MILESTONE, FILTERING_MILESTONE} from '../../pages/milestone-list/reducer';
+import {patchMilestone} from '../../lib/axios/milestone';
+import {useHistory} from 'react-router-dom';
 const MilestoneListRightWrapper = styled.div`
    width:50%;
    height:100%;
@@ -44,19 +45,30 @@ const MilestoneOpenClose = styled.div`
     margin-top:10px;
     margin-left:20px;
 `;
-const MilestoneListRight =  ({milestoneId, milestone, milestoneTitle}) =>{
+const MilestoneListRight =  ({milestone}) =>{
     const {state, dispatch} = useContext(MilestoneContext);
-    const milestoneList = state.issues.filter(issue=>issue.milestone!==null && issue.milestone.title === milestoneTitle);
+    const history = useHistory();
+    const milestoneList = state.issues.filter(issue=>issue.milestone!==null && issue.milestone.title === milestone.title);
     const totalIssueNumber = milestoneList.length;
     const openIssueNumber = milestoneList.filter(issue=>issue.state==='open').length;
     const closeIssueNumber = milestoneList.filter(issue=>issue.state==='closed').length;
-
     const ratio = totalIssueNumber!==0? Math.floor(closeIssueNumber/totalIssueNumber*100):0;
+    const openReopenMessage = state.openclosedState === 'open'?'close':'Reopen';
 
     const deleteClickHandler = () =>{
-       let display = state.display==='block'?'none':'block';
-       display = state.display==='none'?'block':'none';
-       dispatch({type:DELETE_MILESTONE, display:display});
+       const display = state.display==='block'?'none':'block';
+       dispatch({type:DELETE_MILESTONE, display:display, milestoneId:milestone.id});
+    }
+    const changeStateHandler = async () =>{
+        const stateValue = {
+          state: state.openclosedState ==='open'?'close':'open'
+        }
+        await patchMilestone(milestone.id, stateValue);
+        dispatch({type:FILTERING_MILESTONE, openclosedState:stateValue, milestoneList:milestoneList});
+        location.reload();
+    }
+    const moveMilestoneCreatePage = async () =>{
+        history.push(`/milestones/${milestone.id}/edit`);
     }
     return(
       <MilestoneListRightWrapper>
@@ -69,11 +81,10 @@ const MilestoneListRight =  ({milestoneId, milestone, milestoneTitle}) =>{
             <MilestoneOpenClose>{closeIssueNumber} Closed</MilestoneOpenClose>
         </MilestoneCompletedContainer>
         <MilestoneButtonContainer>
-            <MilestoneButton colors='blue'>Edit</MilestoneButton>
-            <MilestoneButton colors='blue'>Close</MilestoneButton>
+            <MilestoneButton colors='blue' onClick={moveMilestoneCreatePage}>Edit</MilestoneButton>
+            <MilestoneButton colors='blue' onClick={changeStateHandler}>{openReopenMessage}</MilestoneButton>
             <MilestoneButton colors='red' onClick={deleteClickHandler}>Delete</MilestoneButton>
         </MilestoneButtonContainer>
-        <MilestoneModal display={state.display} milestoneId={milestoneId}></MilestoneModal>
       </MilestoneListRightWrapper>
     ); 
 }

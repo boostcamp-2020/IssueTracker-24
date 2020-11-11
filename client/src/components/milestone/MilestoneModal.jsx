@@ -2,8 +2,11 @@ import React, {useContext, useEffect}from 'react';
 import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
 import styled from 'styled-components';
 import {DELETE_MILESTONE} from '../../pages/milestone-list/reducer';
-
+import {deleteMilestone} from '../../lib/axios/milestone';
+import {INIT_DATA} from '../../pages/milestone-list/reducer';
+import { Redirect } from 'react-router-dom';
 const MilestoneModalWrapper=styled.div`
+  
   display:${(props)=>props.display};
   position:fixed;
   width:100%;
@@ -21,6 +24,20 @@ const MilestoneModalContent =styled.div`
   border: 1px solid #888; 
   width: 30%; /* Could be more or less, depending on screen size */
   border-radius:5px; 
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  animation-name: fadein;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.2s;
+  @keyframes fadein {
+   from {
+       opacity:0;
+   }
+   to {
+       opacity:1;
+   }
+}
 `;
 const MilestoneModalTitle = styled.div`
   font-weight:bold;
@@ -57,7 +74,7 @@ const MilestonModalParagraph = styled.p`
  padding-top:10px;
 `;
 const MilestoneModalFooter = styled.div`
-  border-top:1px solid #E1E4E8;
+  border-top:1px solid #888;
   width:98%;
   display:flex;
   justify-content:center;
@@ -83,13 +100,20 @@ const MilestoneDeleteButton = styled.button`
 `;
 const MilestoneModal = ({display, milestoneId}) =>{
     const {state, dispatch} = useContext(MilestoneContext);
+    const {milestones} = state;
     const closeHandler = () =>{
        let display = state.display==='block'?'none':'block';
        display = state.display==='none'?'block':'none';
-       dispatch({type:DELETE_MILESTONE, display:display});
+       dispatch({type:DELETE_MILESTONE, display:display, milestoneId:milestoneId});
     }
-    const deleteHandler = () =>{
-       console.log(milestoneId);
+    const deleteHandler = async () =>{
+       await deleteMilestone(milestoneId);
+       dispatch( {type: INIT_DATA,
+         milestones: milestones,
+         milestoneList:milestones.filter(milestone=>milestone.state==='open'),
+         issues:[],
+         display:'none'});
+         location.reload();
     }
     return(
       <MilestoneModalWrapper display={display}>
