@@ -6,7 +6,6 @@ import LabelOption from './LabelOption';
 import MilestoneOption from './MilestoneOption';
 import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
 import {
-  INIT_DATA,
   ADD_ASSIGNEES,
   ADD_LABELS,
   SET_MILESTONE,
