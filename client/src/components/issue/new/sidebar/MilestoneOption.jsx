@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getDueInfo } from '../../../../utils/time.js';
 import svg from '../../../../utils/svg.js';
 
 const MilestoneOptionWrapper = styled.div`
@@ -75,20 +76,16 @@ const MilestoneOption = ({ option, setShow, set, get }) => {
     setShow(false);
   };
 
-  return option.state === 'open' ? (
+  return (
     <MilestoneOptionWrapper onClick={handleOnClick}>
       <CheckWrapper className={checkDisplay}>{svg.checkIcon}</CheckWrapper>
       <MilestoneContent>
         <MilestoneTitle>{option.title}</MilestoneTitle>
-        <MilestoneDate>
-          {year && month && date
-            ? `Due by ${months[month]} ${date}, ${year}`
-            : '기한미정'}
-        </MilestoneDate>
+        <MilestoneDate>{getDueInfo(option.due_date)}</MilestoneDate>
       </MilestoneContent>
       <CancelWrapper className={checkDisplay}>{svg.cancelButton}</CancelWrapper>
     </MilestoneOptionWrapper>
-  ) : null;
+  );
 };
 
 export default MilestoneOption;
