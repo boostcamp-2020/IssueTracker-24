@@ -1,4 +1,5 @@
 const { Issue, User, Label, Milestone, Comment } = require('../models');
+const issueService = require('../services/issue');
 
 const getAllIssues = async (req, res, next) => {
   const issues = await Issue.findAll({
@@ -49,37 +50,22 @@ const createIssue = async (req, res, next) => {
 
 const getIssue = async (req, res, next) => {
   const { id } = req.params;
-  const issue = await Issue.findByPk(id, {
-    attributes: ['id', 'title', 'content', 'state', 'created_at', 'closed_at'],
-    include: [
-      {
-        model: User,
-        attributes: ['id', 'user_id', 'sns_id', 'profile_image'],
-      },
-      {
-        model: Label,
-        as: 'labels',
-        attributes: ['id', 'title', 'description', 'color'],
-        through: { attributes: [] },
-      },
-      {
-        model: User,
-        as: 'assignees',
-        attributes: ['id', 'user_id', 'sns_id', 'profile_image'],
-        through: { attributes: [] },
-      },
-      {
-        model: Milestone,
-        attributes: ['id', 'title', 'description', 'due_date', 'state'],
-      },
-      {
-        model: Comment,
-        as: 'comments',
-        attributes: ['id', 'content', 'created_at'],
-        include: [{ model: User }],
-      },
-    ],
-  });
+  const issue = await issueService.getIssue(id);
   res.status(200).json(issue);
 };
-module.exports = { getAllIssues, createIssue, getIssue };
+
+const patchIssue = async (req, res, next) => {
+  const { id } = req.params;
+  const { title, content, state, closed_at, milestone_id } = req.body;
+  const patchedIssue = {};
+  if (title) patchedIssue.title = title;
+  if (content) patchedIssue.content = content;
+  if (state) patchedIssue.state = state;
+  if (closed_at) patchedIssue.closed_at = new Date(closed_at);
+  if (milestone_id || milestone_id == null) patchedIssue.milestone_id = milestone_id;
+
+  await Issue.update(patchedIssue, { where: { id } });
+  const issue = await issueService.getIssue(id);
+  return res.status(200).json(issue);
+};
+module.exports = { getAllIssues, createIssue, getIssue, patchIssue };
