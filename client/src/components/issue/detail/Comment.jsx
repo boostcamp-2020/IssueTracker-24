@@ -45,7 +45,7 @@ const Comment = memo(({ comment }) => {
       <IssueItemHeader backgroundColor={'#f7f8fa'}>
         <HeaderContent>
           {comment.user.sns_id}&nbsp;
-          <span class="timeInfo">
+          <span className="timeInfo">
             commented {getTimeInfo(comment.created_at)}
           </span>
         </HeaderContent>

@@ -17,9 +17,26 @@ const IssueContentWrapper = styled.div`
   font-size: 15px;
 `;
 
+const WriteLabel = styled.div`
+  width: 80px;
+  text-align: center;
+  position: relative;
+  bottom: 60px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid #e8e9ec;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 0;
+  box-sizing: border-box;
+  padding-top: 9px;
+  padding-left: 7px;
+  padding-right: 7px;
+`;
+
 const IssueContent = styled.textarea`
   width: 100%;
   height: 150px;
+  margin-top: -40px;
   resize: none;
   box-sizing: border-box;
   border: 1px solid #eaecef;
@@ -73,6 +90,7 @@ const IssueForm = ({ onClickCancel }) => {
     <>
       <IssueItemHeader />
       <IssueContentWrapper>
+        <WriteLabel>Write</WriteLabel>
         <IssueContent value={content} onChange={onChangeContent} />
         <FileContainer>
           <FileText htmlFor={'file'}>Attach files by clicking here.</FileText>
