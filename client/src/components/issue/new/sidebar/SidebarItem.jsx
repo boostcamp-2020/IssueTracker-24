@@ -22,9 +22,9 @@ const StateMsg = styled.div`
 
 const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
   const ref = useRef();
+  const { dispatch } = useContext(IssueOptionContext);
   const [show, setShow] = useState(false);
   const [checked, setChecked] = useState([]);
-  const { dispatch } = useContext(IssueOptionContext);
   const Component = component;
 
   const addChecked = (newChecked) => {
