@@ -4,8 +4,16 @@ import { getAllIssues } from '../../lib/axios/issue';
 import { getAllLabels } from '../../lib/axios/label';
 import Header from '../../components/Header';
 import LabelListContainer from '../../components/label/LabelListContainer';
-import Navigation from '../../components/label/Navigation';
+import Navigation from '../../components/common/Navigation';
+import GreenButton from '../../components/common/GreenButton';
 import PageBody from '../../components/label/PageBody';
+import styled from 'styled-components';
+
+const NavigationWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
 
 export const LabelsContext = React.createContext();
 
@@ -32,7 +40,10 @@ const LabelListPage = () => {
     <LabelsContext.Provider value={{ state, dispatch }}>
       <Header />
       <PageBody>
-        <Navigation />
+        <NavigationWrapper>
+          <Navigation cur={'labels'} />
+          <GreenButton text={'New label'} />
+        </NavigationWrapper>
         <LabelListContainer />
       </PageBody>
     </LabelsContext.Provider>
