@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import reducer, { INIT_DATA } from './reducer';
 import { getAllIssues } from '../../lib/axios/issue';
 import { getAllLabels } from '../../lib/axios/label';
@@ -6,6 +6,7 @@ import Header from '../../components/Header';
 import LabelListContainer from '../../components/label/LabelListContainer';
 import Navigation from '../../components/label/Navigation';
 import PageBody from '../../components/label/PageBody';
+import LabelCreateContainer from '../../components/label/LabelCreateContainer';
 
 export const LabelsContext = React.createContext();
 
@@ -15,6 +16,7 @@ const initialState = {
 };
 
 const LabelListPage = () => {
+  const [isCreate, setCreate] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
@@ -32,7 +34,8 @@ const LabelListPage = () => {
     <LabelsContext.Provider value={{ state, dispatch }}>
       <Header />
       <PageBody>
-        <Navigation />
+        <Navigation isCreate={isCreate} setCreate={setCreate} />
+        {isCreate && <LabelCreateContainer setCreate={setCreate} />}
         <LabelListContainer />
       </PageBody>
     </LabelsContext.Provider>
