@@ -16,6 +16,7 @@ const IssueDetailPageWrapper = styled.div`
 
 const ContentWrapper = styled.div`
   display: flex;
+  margin-top: 20px;
 `;
 
 export const IssueContext = React.createContext();
