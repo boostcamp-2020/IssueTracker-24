@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { IssueContext } from '../../../pages/IssueDetailPage';
+import { getTimeInfo } from '../../../utils/time';
+import IssueItemHeader from './IssueItemHeader';
 
 const IssueWrapper = styled.div`
   display: flex;
@@ -9,30 +11,10 @@ const IssueWrapper = styled.div`
   width: 100%;
 `;
 
-const IssueHeader = styled.div`
-  width: 100%;
-  height: 50px;
-  background-color: #f1f8ff;
-  border-radius: 4px 4px 0px 0px;
-  border: 1px solid #e8e9ec;
-  padding-left: 10px;
-  padding-top: 10px;
-  box-sizing: border-box;
-
-  &:before {
-    position: absolute;
-    display: block;
-    content: '';
-    width: 0;
-    height: 0;
-    margin-left: -20px;
-    margin-top: 11px;
-    transform: scale(3);
-    border-right-color: #e8e9ec;
-    border-left-color: rgba(255, 255, 255, 0);
-    border-top-color: rgba(255, 255, 255, 0);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    border-style: solid solid outset;
+const HeaderContent = styled.div`
+  display: flex;
+  .grey {
+    color: grey;
   }
 `;
 
@@ -64,7 +46,12 @@ const Issue = () => {
 
   return (
     <IssueWrapper>
-      <IssueHeader>MinsuKang commented 3 days ago</IssueHeader>
+      <IssueItemHeader>
+        <HeaderContent>
+          <div>{issue.user.sns_id}</div>&nbsp;
+          <div class="grey">commented {getTimeInfo(issue.created_at)}</div>
+        </HeaderContent>
+      </IssueItemHeader>
       <IssueContent
         readOnly={true}
         value={issue.content}

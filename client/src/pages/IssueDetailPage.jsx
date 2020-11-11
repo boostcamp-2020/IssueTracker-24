@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import IssueDetailHeader from '../components/issue/detail/IssueDetailHeader';
+import IssueDetailPageHeader from '../components/issue/detail/IssueDetailPageHeader';
 import { getIssue } from '../lib/axios/issue';
 import Spinner from '../components/common/Spinner';
 import IssueContainer from '../components/issue/detail/IssueContainer';
@@ -38,7 +38,7 @@ const IssueDetailPage = ({ match }) => {
       <Header />
       <IssueContext.Provider value={{ issue, setIssue }}>
         <IssueDetailPageWrapper>
-          <IssueDetailHeader />
+          <IssueDetailPageHeader />
           <ContentWrapper>
             <IssueContainer />
             <SidebarContainer />
