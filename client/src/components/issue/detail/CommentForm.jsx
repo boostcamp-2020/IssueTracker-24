@@ -35,8 +35,14 @@ const CloseButton = styled.button`
 
 const CommentForm = () => {
   const [content, setContent] = useState('');
+  const [canSave, setCanSave] = useState(false);
   const { issue, setIssue } = useContext(IssueContext);
-  const onChangeContent = (e) => setContent(e.target.value);
+
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+    if (e.target.value.length > 0) setCanSave(true);
+    else setCanSave(false);
+  };
   const onClickChangeState = async () => {
     const changedState = issue.state === 'open' ? 'close' : 'open';
     await patchIssue(issue.id, { state: changedState });
@@ -62,7 +68,7 @@ const CommentForm = () => {
           ) : (
             <GreyButton text={'Reopen issue'} func={onClickChangeState} />
           )}
-          <GreenButton text={'Comment'}></GreenButton>
+          <GreenButton text={'Comment'} disabled={!canSave}></GreenButton>
         </ContentButtonContainer>
       </IssueContentWrapper>
     </CommentFormWrapper>
