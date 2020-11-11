@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Label from '../common/Label';
 import { getTimeInfo } from '../../utils/time';
 import svg from '../../utils/svg';
-
+import {useHistory} from 'react-router-dom';
 const IssueContentWrapper = styled.div`
   .issue-title {
     font-weight: bold;
@@ -25,12 +25,16 @@ const TitleWrapper = styled.div`
 `;
 
 const IssueContent = memo(({ issue }) => {
+  const history = useHistory();
+  const moveIssueDetailPage =() =>{
+    history.push(`/issues/${issue.id}`);
+  }
   return (
     <IssueContentWrapper>
       <div>
         <TitleWrapper>
           <div>
-            <a className="issue-title">{issue.title}</a>
+            <a className="issue-title" onClick={moveIssueDetailPage}>{issue.title}</a>
           </div>
           <div>
             {issue.labels.map((label) => (
