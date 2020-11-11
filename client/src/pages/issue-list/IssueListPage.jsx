@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useContext } from 'react';
 import IssueContainer from '../../components/issue/IssueContainer';
 import Header from '../../components/Header';
 import reducer from './reducer';
@@ -13,6 +13,7 @@ import ToolBarContainer from '../../components/issue/ToolBarContainer';
 export const IssuesContext = React.createContext();
 
 const initialState = {
+  currentUser: '',
   wholeCheck: false,
   searchText: 'is:open is:issue ',
   renderedIssues: [],
@@ -26,15 +27,16 @@ const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
-    const [issues, labels, milestones, users] = await Promise.all([
+    const [issues, labels, milestones, users, currentUser] = await Promise.all([
       getAllIssues(),
       getAllLabels(),
       getAllMilestones(),
       getAllUsers(),
+      getCurrentUser(),
     ]);
     dispatch({
       type: INIT_DATA,
-      data: { issues, labels, milestones, users },
+      data: { issues, labels, milestones, users, currentUser },
     });
   }, []);
 
