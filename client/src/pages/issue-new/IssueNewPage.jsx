@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import { AppContext } from '../../App';
@@ -11,6 +11,7 @@ import { getAllLabels } from '../../lib/axios/label';
 import { getAllMilestones } from '../../lib/axios/milestone';
 import { getAllUsers } from '../../lib/axios/user';
 import { INIT_DATA } from './reducer';
+import Spinner from '../../components/common/Spinner';
 
 const IssueNewPageWrapper = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ const initialState = {
 };
 
 const IssueListNewPage = () => {
+  const [isCompleteRequest, setIsCompleteRequest] = useState(false);
   const { currentUser } = useContext(AppContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -54,7 +56,10 @@ const IssueListNewPage = () => {
       type: INIT_DATA,
       data: { issues, labels, milestones, users },
     });
+    setIsCompleteRequest(true);
   }, []);
+
+  if (!isCompleteRequest) return <Spinner />;
 
   return (
     <IssueOptionContext.Provider value={{ state, dispatch }}>

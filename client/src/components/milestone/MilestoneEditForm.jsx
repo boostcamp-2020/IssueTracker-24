@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import InputWrapper from './InputWrapper';
 import InputDate from './InputDate';
@@ -6,14 +6,9 @@ import InputTitle from './InputTitle';
 import DescriptionArea from './DescriptionArea';
 import GreenButton from '../common/GreenButton';
 import GreyButton from '../common/GreyButton';
-import {
-  getMilestone,
-  updateMilestone,
-  patchMilestone,
-} from '../../lib/axios/milestone';
+import { updateMilestone, patchMilestone } from '../../lib/axios/milestone';
 import { useHistory } from 'react-router-dom';
 import { getFormattedDate } from '../../utils/time';
-import milestone from '../../../../server/src/models/milestone';
 
 const Form = styled.div`
   display: flex;
@@ -34,25 +29,20 @@ const Line = styled.div`
   border-bottom: 1px solid #eaecef;
 `;
 
-const MilestoneEditForm = ({ milestoneId }) => {
-  const [id, setId] = useState(null);
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState(null);
-  const [description, setDescription] = useState('');
-  const [state, setState] = useState('');
+const MilestoneEditForm = ({
+  id,
+  title,
+  date,
+  description,
+  state,
+  setTitle,
+  setDate,
+  setDescription,
+}) => {
   const history = useHistory();
 
-  useEffect(async () => {
-    const milestone = await getMilestone(milestoneId);
-    setTitle(milestone.title);
-    setDate(milestone.due_date);
-    setDescription(milestone.description);
-    setState(milestone.state);
-    setId(milestone.id);
-  }, []);
-
   const onClickSave = async () => {
-    await updateMilestone(milestoneId, {
+    await updateMilestone(id, {
       title,
       description,
       due_date: date,
