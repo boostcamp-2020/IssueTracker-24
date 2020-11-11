@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import IssueItemHeader from './IssueItemHeader';
 import { WriteLabel, IssueContent, IssueContentWrapper } from './IssueForm';
 import FileContainer from './FileContainer';
 import ContentButtonContainer from './ContentButtonContainer';
 import GreenButton from '../../common/GreenButton';
+import GreyButton from '../../common/GreyButton';
 import svg from '../../../utils/svg';
+import { IssueContext } from '../../../pages/IssueDetailPage';
+import { patchIssue } from '../../../lib/axios/issue';
 
 const CommentFormWrapper = styled.div`
   display: flex;
@@ -32,7 +35,13 @@ const CloseButton = styled.button`
 
 const CommentForm = () => {
   const [content, setContent] = useState('');
+  const { issue, setIssue } = useContext(IssueContext);
   const onChangeContent = (e) => setContent(e.target.value);
+  const onClickChangeState = async () => {
+    const changedState = issue.state === 'open' ? 'close' : 'open';
+    await patchIssue(issue.id, { state: changedState });
+    setIssue({ ...issue, state: changedState });
+  };
 
   return (
     <CommentFormWrapper>
@@ -46,7 +55,13 @@ const CommentForm = () => {
         />
         <FileContainer />
         <ContentButtonContainer>
-          <CloseButton>{svg['closeLogo']}&nbsp;Close Issue</CloseButton>
+          {issue.state === 'open' ? (
+            <CloseButton onClick={onClickChangeState}>
+              {svg['closeLogo']}&nbsp;Close Issue
+            </CloseButton>
+          ) : (
+            <GreyButton text={'Reopen issue'} func={onClickChangeState} />
+          )}
           <GreenButton text={'Comment'}></GreenButton>
         </ContentButtonContainer>
       </IssueContentWrapper>
