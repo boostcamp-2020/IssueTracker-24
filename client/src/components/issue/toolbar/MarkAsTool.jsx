@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import DropDownIcon from '../../common/DropDownIcon';
 
@@ -54,10 +54,23 @@ const DetailsItem = styled.div`
 const MarkAsTool = () => {
   const [isShowMarkAs, setShowMarkAs] = useState(false);
   const onClickDetailsButton = () => setShowMarkAs(!isShowMarkAs);
+  const markAsRef = useRef();
+
+  useEffect(() => {
+    const clickBody = (e) => {
+      if (!markAsRef.current || !markAsRef.current.contains(e.target))
+        setShowMarkAs(false);
+    };
+
+    document.body.addEventListener('click', clickBody);
+    return () => {
+      document.body.removeEventListener('click', clickBody);
+    };
+  }, []);
 
   return (
     <>
-      <DetailsButton onClick={onClickDetailsButton}>
+      <DetailsButton onClick={onClickDetailsButton} ref={markAsRef}>
         Mark as
         <DropDownIcon />
       </DetailsButton>
