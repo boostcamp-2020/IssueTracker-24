@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import IssueItemHeader from './IssueItemHeader';
 import { WriteLabel, IssueContent, IssueContentWrapper } from './IssueForm';
@@ -31,12 +31,19 @@ const CloseButton = styled.button`
 `;
 
 const CommentForm = () => {
+  const [content, setContent] = useState('');
+  const onChangeContent = (e) => setContent(e.target.value);
+
   return (
     <CommentFormWrapper>
       <IssueItemHeader backgroundColor={'#f7f8fa'} />
       <IssueContentWrapper>
         <WriteLabel>Write</WriteLabel>
-        <IssueContent placeholder={'Leave a comment'} />
+        <IssueContent
+          placeholder={'Leave a comment'}
+          onChange={onChangeContent}
+          value={content}
+        />
         <FileContainer />
         <ContentButtonContainer>
           <CloseButton>{svg['closeLogo']}&nbsp;Close Issue</CloseButton>
