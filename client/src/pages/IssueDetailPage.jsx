@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import IssueDetailHeader from '../components/issue/detail/IssueDetailHeader';
+import IssueDetailPageHeader from '../components/issue/detail/IssueDetailPageHeader';
 import { getIssue } from '../lib/axios/issue';
 import Spinner from '../components/common/Spinner';
+import IssueContainer from '../components/issue/detail/IssueContainer';
+import SidebarContainer from '../components/issue/detail/SidebarContainer';
 
 const IssueDetailPageWrapper = styled.div`
   margin: 0 auto;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  margin-top: 20px;
 `;
 
 export const IssueContext = React.createContext();
@@ -29,7 +38,11 @@ const IssueDetailPage = ({ match }) => {
       <Header />
       <IssueContext.Provider value={{ issue, setIssue }}>
         <IssueDetailPageWrapper>
-          <IssueDetailHeader />
+          <IssueDetailPageHeader />
+          <ContentWrapper>
+            <IssueContainer />
+            <SidebarContainer />
+          </ContentWrapper>
         </IssueDetailPageWrapper>
       </IssueContext.Provider>
     </>
