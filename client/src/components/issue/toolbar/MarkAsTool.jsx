@@ -1,6 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import DropDownIcon from '../../common/DropDownIcon';
+import { axiosAll } from '../../../lib/axios/request';
+import { patchIssue, getAllIssues } from '../../../lib/axios/issue';
+import { CHANGE_ISSUES_OPEN_CLOSE } from '../../../pages/issue-list/reducer';
 
 const DetailsButton = styled.button`
   font-size: 15px;
@@ -52,6 +56,8 @@ const DetailsItem = styled.div`
 `;
 
 const MarkAsTool = () => {
+  const { state, dispatch } = useContext(IssuesContext);
+  const { renderedIssues } = state;
   const [isShowMarkAs, setShowMarkAs] = useState(false);
   const onClickDetailsButton = () => setShowMarkAs(!isShowMarkAs);
   const markAsRef = useRef();
@@ -68,6 +74,25 @@ const MarkAsTool = () => {
     };
   }, []);
 
+  const onClickOpenOrClosed = async (e) => {
+    const AFTER = e.target.innerText;
+    const BEFORE = AFTER === 'open' ? 'close' : 'open';
+
+    const axioses = [];
+    renderedIssues.forEach((issue) => {
+      if (issue.checked && issue.state === BEFORE)
+        axioses.push(
+          patchIssue(issue.id, { state: AFTER, closed_at: new Date() }),
+        );
+    });
+    if (axioses.length > 0) await axiosAll(axioses);
+    const issues = await getAllIssues();
+
+    dispatch({ type: CHANGE_ISSUES_OPEN_CLOSE, issues: issues });
+    setShowMarkAs(false);
+    e.stopPropagation();
+  };
+
   return (
     <>
       <DetailsButton onClick={onClickDetailsButton} ref={markAsRef}>
@@ -77,8 +102,8 @@ const MarkAsTool = () => {
       {isShowMarkAs && (
         <DetailsMenuDropDown>
           <DetailsItem>Actions</DetailsItem>
-          <DetailsItem>open</DetailsItem>
-          <DetailsItem>closed</DetailsItem>
+          <DetailsItem onClick={onClickOpenOrClosed}>open</DetailsItem>
+          <DetailsItem onClick={onClickOpenOrClosed}>close</DetailsItem>
         </DetailsMenuDropDown>
       )}
     </>
