@@ -43,7 +43,7 @@ const Sidebar = () => {
       header: 'Set milestone',
       stateMsg: 'No milestone',
       component: MilestoneOption,
-      data: state.milestones,
+      data: state.milestones.filter((milestone) => milestone.state === 'open'),
       added: state.addedMilestone,
     },
   ];
