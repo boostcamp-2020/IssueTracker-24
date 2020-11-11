@@ -67,4 +67,13 @@ const patchIssue = async (req, res, next) => {
   const issue = await issueService.getIssue(id);
   return res.status(200).json(issue);
 };
-module.exports = { getAllIssues, createIssue, getIssue, patchIssue };
+
+const createComment = async (req, res, next) => {
+  console.log('hi');
+  const { id } = req.params;
+  const { content, user_id } = req.body;
+  const issue = await Issue.findByPk(id);
+  const comment = await issue.createComment({ content, user_id });
+  res.status(201).json(comment);
+};
+module.exports = { getAllIssues, createIssue, getIssue, patchIssue, createComment };
