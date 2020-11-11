@@ -82,4 +82,13 @@ const deleteData = async (url) => {
   }
 };
 
-export { getData, postData, patchData, putData, deleteData };
+const axiosAll = async (axioses) => {
+  try {
+    const responses = await axios.all(axioses);
+    return responses;
+  } catch (error) {
+    informError(error);
+  }
+};
+
+export { getData, postData, patchData, putData, deleteData, axiosAll };
