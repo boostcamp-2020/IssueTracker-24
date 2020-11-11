@@ -4,10 +4,18 @@ import Header from '../components/Header';
 import IssueDetailHeader from '../components/issue/detail/IssueDetailHeader';
 import { getIssue } from '../lib/axios/issue';
 import Spinner from '../components/common/Spinner';
+import IssueContainer from '../components/issue/detail/IssueContainer';
+import SidebarContainer from '../components/issue/detail/SidebarContainer';
 
 const IssueDetailPageWrapper = styled.div`
   margin: 0 auto;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
 `;
 
 export const IssueContext = React.createContext();
@@ -30,6 +38,10 @@ const IssueDetailPage = ({ match }) => {
       <IssueContext.Provider value={{ issue, setIssue }}>
         <IssueDetailPageWrapper>
           <IssueDetailHeader />
+          <ContentWrapper>
+            <IssueContainer />
+            <SidebarContainer />
+          </ContentWrapper>
         </IssueDetailPageWrapper>
       </IssueContext.Provider>
     </>
