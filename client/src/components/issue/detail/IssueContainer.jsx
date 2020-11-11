@@ -36,6 +36,7 @@ const CommentContainer = styled.div`
 const IssueContainer = () => {
   const { issue } = useContext(IssueContext);
   const { currentUser } = useContext(AppContext);
+
   return (
     <Container>
       <ContentWrapper>
