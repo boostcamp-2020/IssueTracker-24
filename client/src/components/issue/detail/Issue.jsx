@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { IssueContext } from '../../../pages/IssueDetailPage';
 import IssueInfo from './IssueInfo';
+import IssueForm from './IssueForm';
 
 const IssueWrapper = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const Issue = () => {
 
   return (
     <IssueWrapper>
-      <IssueInfo onClickEdit={onClickEdit} />
+      {isEditMode ? <IssueForm /> : <IssueInfo onClickEdit={onClickEdit} />}
     </IssueWrapper>
   );
 };
