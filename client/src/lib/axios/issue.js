@@ -20,3 +20,8 @@ export const patchIssue = async (id, body) => {
   const issue = await patchData(`${url.PATCH_ISSUE}${id}`, body);
   return issue;
 };
+
+export const createComment = async (id, body) => {
+  const comment = await postData(`issues/${id}/comments`, body);
+  return comment;
+};
