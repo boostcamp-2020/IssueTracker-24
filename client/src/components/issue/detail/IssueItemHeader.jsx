@@ -3,12 +3,14 @@ import styled from 'styled-components';
 
 const Header = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 100%;
   height: 50px;
   background-color: #f1f8ff;
   border-radius: 4px 4px 0px 0px;
   border: 1px solid #e8e9ec;
   padding-left: 10px;
+  padding-right: 10px;
   padding-top: 10px;
   box-sizing: border-box;
 
