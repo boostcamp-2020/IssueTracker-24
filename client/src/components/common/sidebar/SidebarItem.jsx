@@ -12,7 +12,7 @@ const SidebarItemWrapper = styled.div`
 const SidebarStateMsg = styled.div`
   margin-top:10px;
 `;
-const SidebarItem = ({title, header, stateMsg}) =>{
+const SidebarItem = ({title, header, stateMsg, component}) =>{
    const [stateMessage, setStateMsg] = useState(stateMsg);
    const [show, setShow] = useState(false);
 
@@ -24,7 +24,7 @@ const SidebarItem = ({title, header, stateMsg}) =>{
         <SidebarItemTitle title={title} onClick={handleOnClick}></SidebarItemTitle>
         {!show? 
          <SidebarStateMsg>{stateMessage}</SidebarStateMsg>
-        : <SidebarItemModal header={header}/>
+        : <SidebarItemModal title={title} header={header} component={component}/>
         }
     </SidebarItemWrapper>
    );
