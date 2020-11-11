@@ -25,8 +25,7 @@ const FilterButtonWrapper = styled.div`
   margin-bottom: 17px;
 `;
 
-const showClearButton = (searchText) =>
-  searchText !== 'is:open is:issue ' ? true : false;
+const showClearButton = (searchText) => searchText !== 'is:open is:issue ';
 
 const MenuContainer = () => {
   const [showFilterMenu, setFilterMenu] = useState(false);
@@ -35,7 +34,10 @@ const MenuContainer = () => {
   const history = useHistory();
 
   const onClickFilterButton = () => setFilterMenu(!showFilterMenu);
-  const onClickNewIssue = () => history.push('/issues/new');
+  const onClickNewIssue = (e) => {
+    history.push('/issues/new');
+    e.stopPropagation();
+  };
 
   return (
     <FilterMenuContext.Provider value={{ onClickFilterButton, setFilterMenu }}>
@@ -43,6 +45,7 @@ const MenuContainer = () => {
         <FilterBar
           onClickFilterButton={onClickFilterButton}
           setFilterMenu={setFilterMenu}
+          showFilterMenu={showFilterMenu}
           searchText={searchText}
         />
         <NavigationContainer />

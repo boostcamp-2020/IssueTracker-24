@@ -6,6 +6,7 @@ import IssueNewContent from '../../components/issue/new/IssueNewContent';
 import reducer from './reducer.js';
 import Sidebar from '../../components/issue/new/sidebar/Sidebar';
 import ProfileImage from '../../components/common/ProfileImage';
+import { getAllIssues } from '../../lib/axios/issue';
 import { getAllLabels } from '../../lib/axios/label';
 import { getAllMilestones } from '../../lib/axios/milestone';
 import { getAllUsers } from '../../lib/axios/user';
@@ -31,6 +32,7 @@ export const IssueOptionContext = React.createContext();
 
 const initialState = {
   users: [],
+  issues: [],
   labels: [],
   milestones: [],
   addedAssignees: [],
@@ -44,14 +46,15 @@ const IssueListNewPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
-    const [labels, milestones, users] = await Promise.all([
+    const [issues, labels, milestones, users] = await Promise.all([
+      getAllIssues(),
       getAllLabels(),
       getAllMilestones(),
       getAllUsers(),
     ]);
     dispatch({
       type: INIT_DATA,
-      data: { labels, milestones, users },
+      data: { issues, labels, milestones, users },
     });
     setIsCompleteRequest(true);
   }, []);

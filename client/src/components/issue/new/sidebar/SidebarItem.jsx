@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
 import SelectedLabel from './SelectedLabel';
+import SelectedMilestone from './SelectedMilestone';
 import styled from 'styled-components';
 import Heading from './Heading';
 import Dropdown from './Dropdown';
@@ -19,7 +20,7 @@ const StateMsg = styled.div`
   font-size: 12px;
 `;
 
-const SidebarItem = ({ title, type, stateMsg, component, data }) => {
+const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
   const ref = useRef();
   const [show, setShow] = useState(false);
   const [checked, setChecked] = useState([]);
@@ -40,7 +41,9 @@ const SidebarItem = ({ title, type, stateMsg, component, data }) => {
     };
     document.body.addEventListener('click', clickBody);
 
-    return document.body.removeEventListener('click', clickBody);
+    return () => {
+      document.body.removeEventListener('click', clickBody);
+    };
   }, []);
 
   useEffect(() => {
@@ -71,22 +74,26 @@ const SidebarItem = ({ title, type, stateMsg, component, data }) => {
           <SelectedLabel key={'addedLabel' + index} label={addedItem} />
         ));
       case 'Milestone':
-        return;
+        return <SelectedMilestone milestone={checked[0]} />;
     }
   };
 
   return (
     <SidebarItemWrapper ref={ref}>
       <Heading title={title} onClick={handleOnClick} show={show} />
-      {checked && checked.length > 0 ? (
+      {!show && checked && checked.length > 0 ? (
         renderedAddedList(Component, title)
       ) : (
         <StateMsg>{stateMsg}</StateMsg>
       )}
       <Dropdown
         show={show}
+        setShow={setShow}
         add={addChecked}
         remove={removeChecked}
+        set={setChecked}
+        get={checked[0]}
+        header={header}
         component={component}
         data={data}
       />

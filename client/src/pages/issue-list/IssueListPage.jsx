@@ -14,6 +14,7 @@ import Spinner from '../../components/common/Spinner';
 export const IssuesContext = React.createContext();
 
 const initialState = {
+  currentUser: '',
   wholeCheck: false,
   searchText: 'is:open is:issue ',
   renderedIssues: [],
@@ -28,16 +29,17 @@ const IssueListPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(async () => {
-    const [issues, labels, milestones, users] = await Promise.all([
+    const [issues, labels, milestones, users, currentUser] = await Promise.all([
       getAllIssues(),
       getAllLabels(),
       getAllMilestones(),
       getAllUsers(),
+      getCurrentUser(),
     ]);
     setIsCompleteRequest(true);
     dispatch({
       type: INIT_DATA,
-      data: { issues, labels, milestones, users },
+      data: { issues, labels, milestones, users, currentUser },
     });
   }, []);
 

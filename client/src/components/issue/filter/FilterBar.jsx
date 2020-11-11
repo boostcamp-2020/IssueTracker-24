@@ -27,12 +27,13 @@ const FilterButton = styled.button`
 const FilterBar = ({ onClickFilterButton, setFilterMenu, searchText }) => {
   const filterButtonRef = useRef();
 
-  const clickBody = (e) => {
-    if (filterButtonRef.current && filterButtonRef.current.contains(e.target))
-      return;
-    setFilterMenu(false);
-  };
   useEffect(() => {
+    const clickBody = (e) => {
+      if (filterButtonRef.current && filterButtonRef.current.contains(e.target))
+        return;
+      setFilterMenu(false);
+    };
+
     document.body.addEventListener('click', clickBody);
 
     return () => {
