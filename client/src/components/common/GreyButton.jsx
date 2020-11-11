@@ -11,12 +11,15 @@ const Button = styled.button`
   font-weight: bold;
   padding: 0px 15px 0px 15px;
   cursor: pointer;
+  color: ${(props) => (props.color ? props.color : 'black')};
 `;
 
-const GreyButton = ({ text, func }) => {
+const GreyButton = ({ text, func, color }) => {
   return (
     <>
-      <Button onClick={func}>{text}</Button>
+      <Button onClick={func} color={color}>
+        {text}
+      </Button>
     </>
   );
 };

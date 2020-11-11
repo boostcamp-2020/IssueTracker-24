@@ -2,6 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import IssueItemHeader from './IssueItemHeader';
 import { IssueContext } from '../../../pages/IssueDetailPage';
+import ContentButtonContainer from './ContentButtonContainer';
+import GreenButton from '../../common/GreenButton';
+import GreyButton from '../../common/GreyButton';
 
 const IssueContentWrapper = styled.div`
   width: 100%;
@@ -17,6 +20,7 @@ const IssueContent = styled.textarea`
   width: 100%;
   height: 150px;
   resize: none;
+  box-sizing: border-box;
   border: 1px solid #eaecef;
   border-radius: 4px;
   background-color: #fafbfc;
@@ -66,6 +70,10 @@ const IssueForm = () => {
           <FileText htmlFor={'file'}>Attach files by clicking here.</FileText>
           <InputFile id={'file'} />
         </FileContainer>
+        <ContentButtonContainer>
+          <GreyButton text={'Cancel'} color={'red'} />
+          <GreenButton text={'Update comment'} />
+        </ContentButtonContainer>
       </IssueContentWrapper>
     </>
   );

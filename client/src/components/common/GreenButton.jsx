@@ -1,4 +1,4 @@
-import React, {memo}from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -17,7 +17,6 @@ const Button = styled.button`
     background-color: #04c584;
   }
 `;
-
 
 const GreenButton = memo(({ text, func, disabled }) => {
   return (
