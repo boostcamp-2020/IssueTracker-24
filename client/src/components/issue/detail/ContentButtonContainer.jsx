@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -10,8 +10,8 @@ const Container = styled.div`
   }
 `;
 
-const ContentButtonContainer = ({ children }) => {
+const ContentButtonContainer = memo(({ children }) => {
   return <Container>{children}</Container>;
-};
+});
 
 export default ContentButtonContainer;

@@ -5,6 +5,7 @@ import { IssueContext } from '../../../pages/IssueDetailPage';
 import ContentButtonContainer from './ContentButtonContainer';
 import GreenButton from '../../common/GreenButton';
 import GreyButton from '../../common/GreyButton';
+import { patchIssue } from '../../../lib/axios/issue';
 
 const IssueContentWrapper = styled.div`
   width: 100%;
@@ -61,6 +62,12 @@ const IssueForm = ({ onClickCancel }) => {
 
   const onChangeContent = (e) => setContent(e.target.value);
 
+  const onClickUpdate = async () => {
+    await patchIssue(issue.id, { content });
+    setIssue({ ...issue, content });
+    onClickCancel();
+  };
+
   return (
     <>
       <IssueItemHeader />
@@ -72,7 +79,7 @@ const IssueForm = ({ onClickCancel }) => {
         </FileContainer>
         <ContentButtonContainer>
           <GreyButton text={'Cancel'} color={'red'} func={onClickCancel} />
-          <GreenButton text={'Update comment'} />
+          <GreenButton text={'Update comment'} func={onClickUpdate} />
         </ContentButtonContainer>
       </IssueContentWrapper>
     </>
