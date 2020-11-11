@@ -52,7 +52,7 @@ const FileText = styled.label`
   border-radius: 4px;
   font-size: 14px;
 `;
-const IssueForm = () => {
+const IssueForm = ({ onClickCancel }) => {
   const [content, setContent] = useState('');
   const { issue, setIssue } = useContext(IssueContext);
   useEffect(() => {
@@ -71,7 +71,7 @@ const IssueForm = () => {
           <InputFile id={'file'} />
         </FileContainer>
         <ContentButtonContainer>
-          <GreyButton text={'Cancel'} color={'red'} />
+          <GreyButton text={'Cancel'} color={'red'} func={onClickCancel} />
           <GreenButton text={'Update comment'} />
         </ContentButtonContainer>
       </IssueContentWrapper>

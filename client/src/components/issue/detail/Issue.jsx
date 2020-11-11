@@ -14,10 +14,15 @@ const IssueWrapper = styled.div`
 const Issue = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const onClickEdit = () => setIsEditMode(true);
+  const onClickCancel = () => setIsEditMode(false);
 
   return (
     <IssueWrapper>
-      {isEditMode ? <IssueForm /> : <IssueInfo onClickEdit={onClickEdit} />}
+      {isEditMode ? (
+        <IssueForm onClickCancel={onClickCancel} />
+      ) : (
+        <IssueInfo onClickEdit={onClickEdit} />
+      )}
     </IssueWrapper>
   );
 };
