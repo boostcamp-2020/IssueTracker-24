@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import IssueItemHeader from './IssueItemHeader';
+import { IssueContext } from '../../../pages/IssueDetailPage';
 
 const IssueContentWrapper = styled.div`
   width: 100%;
@@ -42,18 +43,25 @@ const FileText = styled.label`
   cursor: pointer;
   color: grey;
   display: block;
-  min-width: 300px;
   height: 25px;
   border: 1px solid #eaecef;
   border-radius: 4px;
   font-size: 14px;
 `;
 const IssueForm = () => {
+  const [content, setContent] = useState('');
+  const { issue, setIssue } = useContext(IssueContext);
+  useEffect(() => {
+    setContent(issue.content);
+  }, []);
+
+  const onChangeContent = (e) => setContent(e.target.value);
+
   return (
     <>
       <IssueItemHeader />
       <IssueContentWrapper>
-        <IssueContent />
+        <IssueContent value={content} onChange={onChangeContent} />
         <FileContainer>
           <FileText htmlFor={'file'}>Attach files by clicking here.</FileText>
           <InputFile id={'file'} />
