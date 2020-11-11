@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import GreyButton from '../../common/GreyButton';
-import { IssueContext } from '../../../pages/IssueDeatilPage';
+import { IssueContext } from '../../../pages/IssueDetailPage';
 import TitleForm from './TitleForm';
 import TitleDiv from './TitleDiv';
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CloseLabel from './CloseLabel';
 import OpenLabel from './OpenLabel';
 import { getTimeInfo } from '../../../utils/time';
-import { IssueContext } from '../../../pages/IssueDeatilPage';
+import { IssueContext } from '../../../pages/IssueDetailPage';
 import TitleWrapper from './TitleWrapper';
 
 const IssueDetailHeaderWrapper = styled.div`

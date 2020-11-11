@@ -1,6 +1,6 @@
 import React, { useMemo, useContext, useState } from 'react';
 import styled from 'styled-components';
-import { IssueContext } from '../../../pages/IssueDeatilPage';
+import { IssueContext } from '../../../pages/IssueDetailPage';
 import GreyButton from '../../common/GreyButton';
 import { patchIssue } from '../../../lib/axios/issue';
 
