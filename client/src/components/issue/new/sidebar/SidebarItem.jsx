@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
-import SelectedLabel from './SelectedLabel';
+import SelectedLabel from '../../../common/SelectedLabel';
 import SelectedMilestone from './SelectedMilestone';
 import styled from 'styled-components';
 import Heading from './Heading';
