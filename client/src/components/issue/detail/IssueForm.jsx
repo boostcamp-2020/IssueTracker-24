@@ -6,6 +6,7 @@ import ContentButtonContainer from './ContentButtonContainer';
 import GreenButton from '../../common/GreenButton';
 import GreyButton from '../../common/GreyButton';
 import { patchIssue } from '../../../lib/axios/issue';
+import FileContainer from './FileContainer';
 
 const IssueContentWrapper = styled.div`
   width: 100%;
@@ -33,7 +34,7 @@ const WriteLabel = styled.div`
   padding-right: 7px;
 `;
 
-const IssueContent = styled.textarea`
+export const IssueContent = styled.textarea`
   width: 100%;
   height: 150px;
   margin-top: -40px;
@@ -51,26 +52,6 @@ const IssueContent = styled.textarea`
   }
 `;
 
-const FileContainer = styled.div`
-  width: 100%;
-`;
-const InputFile = styled.input.attrs({
-  type: 'file',
-})`
-  opacity: 0;
-  position: absolute;
-  z-index: -1;
-`;
-
-const FileText = styled.label`
-  cursor: pointer;
-  color: grey;
-  display: block;
-  height: 25px;
-  border: 1px solid #eaecef;
-  border-radius: 4px;
-  font-size: 14px;
-`;
 const IssueForm = ({ onClickCancel }) => {
   const [content, setContent] = useState('');
   const { issue, setIssue } = useContext(IssueContext);
@@ -92,10 +73,7 @@ const IssueForm = ({ onClickCancel }) => {
       <IssueContentWrapper>
         <WriteLabel>Write</WriteLabel>
         <IssueContent value={content} onChange={onChangeContent} />
-        <FileContainer>
-          <FileText htmlFor={'file'}>Attach files by clicking here.</FileText>
-          <InputFile id={'file'} />
-        </FileContainer>
+        <FileContainer />
         <ContentButtonContainer>
           <GreyButton text={'Cancel'} color={'red'} func={onClickCancel} />
           <GreenButton text={'Update comment'} func={onClickUpdate} />
