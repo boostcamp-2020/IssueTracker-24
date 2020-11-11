@@ -9,6 +9,7 @@ const DropdownWrapper = styled.div`
   box-shadow: 1px 1px 5px 0px #e7e7e7;
   background-color: white;
   width: 105%;
+  min-width: 240px;
   z-index: 2;
 
   &.display-block {
