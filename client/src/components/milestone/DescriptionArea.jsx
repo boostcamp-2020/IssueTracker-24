@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const TextArea = styled.textarea`
   display: block;
-  padding-3px;
   font-size: 17px;
   padding: 3px;
   padding-left: 10px;
