@@ -1,8 +1,8 @@
-import React, {useContext}from 'react';
+import React, {useContext, useEffect}from 'react';
 import styled from 'styled-components';
 import svg from '../../utils/svg';
-import MilestoneList from '../../components/milestone/MilestoneList';
 import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
+import {FILTERING_MILESTONE} from '../../pages/milestone-list/reducer';
 
 const MilestoneNavWrapper = styled.div`
 display:flex;
@@ -22,6 +22,7 @@ const OpenDiv = styled.div`
  margin-left:5px;
  padding-left:10px;
  cursor:pointer;
+ font-weight:${(props)=>props.fontWeight==='bold'?'bold':'normal'};
 `
 const CloseDiv = styled.div`
  margin-left:5px;
@@ -31,12 +32,29 @@ const CloseDiv = styled.div`
 const MilestoneNav = ({milestones}) =>{
   const openMilestone = milestones.filter(milestone=> milestone.state==="open").length;
   const closeMilestone = milestones.filter(milestone=>milestone.state==="close").length;
+  const {state, dispatch} = useContext(MilestoneContext);
+  const onClickHandler = async (e) =>{
+    const milestoneList = milestones.filter(milestone=>milestone.state===e.target.title);
+
+    const openDiv = document.querySelector('.open');
+    openDiv.style.fontWeight='normal';
+
+    const closeDiv = document.querySelector('.close');
+    closeDiv.style.fontWeight='normal';
+
+    e.target.style.fontWeight='bold';
+    dispatch({
+       type:FILTERING_MILESTONE, 
+       openclosedState:e.target.title,
+       milestoneList: milestoneList,
+    })
+  }
   return(
     <MilestoneNavWrapper>
-        <OpenDiv>
+        <OpenDiv onClick={onClickHandler} className='open' title='open'>
            {svg['Milestones']} {openMilestone} Open
          </OpenDiv>
-         <CloseDiv>
+         <CloseDiv onClick={onClickHandler} className='close' title='close'>
            {svg['closeMilestones']} {closeMilestone} Closed
          </CloseDiv>
     </MilestoneNavWrapper>

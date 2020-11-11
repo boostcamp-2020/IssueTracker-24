@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const createError = require('http-errors');
 const cors = require('cors');
+const helmet = require('helmet');
 const passportConfig = require('../passport');
 const { sequelize } = require('../models');
 const indexRouter = require('../routes/index');
@@ -27,6 +28,7 @@ module.exports = (app) => {
   app.use(morgan('dev'));
   app.use(cookieParser());
   app.use(cors());
+  app.use(helmet());
   app.use('/', indexRouter);
 
   app.use((req, res, next) => {

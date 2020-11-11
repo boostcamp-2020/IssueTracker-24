@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components';
 
 const DropDownWrapper = styled.div`
@@ -8,12 +8,12 @@ const DropDownWrapper = styled.div`
   vertical-align: middle;
 `;
 
-const DropDownIcon = () => {
+const DropDownIcon = memo(() => {
   return (
     <DropDownWrapper className="material-icons">
       arrow_drop_down
     </DropDownWrapper>
   );
-};
+});
 
 export default DropDownIcon;

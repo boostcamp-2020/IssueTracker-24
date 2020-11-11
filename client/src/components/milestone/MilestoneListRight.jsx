@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useContext, useEffect} from 'react';
 import styled from 'styled-components';
-
-
+import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
+import MilestoneModal from './MilestoneModal';
+import {DELETE_MILESTONE} from '../../pages/milestone-list/reducer';
 const MilestoneListRightWrapper = styled.div`
    width:50%;
    height:100%;
@@ -15,7 +16,7 @@ const MilestoneGageContainer = styled.div`
     background-color:#E1E4E8;
 `;
 const MilestoneGageContent = styled.div`
-    width:66.6%;
+    width:${(props)=>(props.ratio)}%;
     height:20px;
     border-radius:10px;
     background-color:#2CBE4E;
@@ -43,22 +44,36 @@ const MilestoneOpenClose = styled.div`
     margin-top:10px;
     margin-left:20px;
 `;
-const MilestoneListRight = () =>{
+const MilestoneListRight =  ({milestoneId, milestone, milestoneTitle}) =>{
+    const {state, dispatch} = useContext(MilestoneContext);
+    const milestoneList = state.issues.filter(issue=>issue.milestone!==null && issue.milestone.title === milestoneTitle);
+    const totalIssueNumber = milestoneList.length;
+    const openIssueNumber = milestoneList.filter(issue=>issue.state==='open').length;
+    const closeIssueNumber = milestoneList.filter(issue=>issue.state==='closed').length;
+
+    const ratio = totalIssueNumber!==0? Math.floor(closeIssueNumber/totalIssueNumber*100):0;
+
+    const deleteClickHandler = () =>{
+       let display = state.display==='block'?'none':'block';
+       display = state.display==='none'?'block':'none';
+       dispatch({type:DELETE_MILESTONE, display:display});
+    }
     return(
       <MilestoneListRightWrapper>
         <MilestoneGageContainer>
-            <MilestoneGageContent/>
+            <MilestoneGageContent ratio={ratio}/>
         </MilestoneGageContainer>
         <MilestoneCompletedContainer>
-            <MilestoneComplete>70% complete</MilestoneComplete>
-            <MilestoneOpenClose>2 Open</MilestoneOpenClose>
-            <MilestoneOpenClose>1 Closed</MilestoneOpenClose>
+            <MilestoneComplete>{ratio}% complete</MilestoneComplete>
+            <MilestoneOpenClose>{openIssueNumber} Open</MilestoneOpenClose>
+            <MilestoneOpenClose>{closeIssueNumber} Closed</MilestoneOpenClose>
         </MilestoneCompletedContainer>
         <MilestoneButtonContainer>
             <MilestoneButton colors='blue'>Edit</MilestoneButton>
             <MilestoneButton colors='blue'>Close</MilestoneButton>
-            <MilestoneButton colors='red'>Delete</MilestoneButton>
+            <MilestoneButton colors='red' onClick={deleteClickHandler}>Delete</MilestoneButton>
         </MilestoneButtonContainer>
+        <MilestoneModal display={state.display} milestoneId={milestoneId}></MilestoneModal>
       </MilestoneListRightWrapper>
     ); 
 }

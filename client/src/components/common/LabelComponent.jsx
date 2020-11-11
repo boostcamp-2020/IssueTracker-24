@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import {MilestoneContext} from '../../pages/milestone-list/MilestonePage';
+import {ROUTING_LABEL} from '../../pages/milestone-list/reducer';
 const LabelComponentWrapper = styled.div`
   width: ${(props) => (props.title === 'Labels' ? '100px' : '140px')};
   height: 30px;
@@ -29,5 +31,6 @@ const LabelComponent = ({ svg, title, func }) => {
     </>
   );
 };
+
 
 export default LabelComponent;
