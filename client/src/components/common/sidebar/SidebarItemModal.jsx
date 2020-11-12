@@ -29,6 +29,7 @@ const SidebarItemModal = ({ title, header, component, setShow }) => {
       {title === 'Assignees'
         ? component.map((item) => (
             <Assignee
+              id={item.id}
               snsId={item.sns_id}
               profile={item.profile_image}
               key={'assignee' + item.id}
@@ -42,6 +43,7 @@ const SidebarItemModal = ({ title, header, component, setShow }) => {
               color={item.color}
               title={item.title}
               description={item.description}
+              id={item.id}
             ></Label>
           ))
         : null}
