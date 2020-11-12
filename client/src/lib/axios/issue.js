@@ -1,4 +1,4 @@
-import { getData, patchData, postData, putData, deleteData } from './request';
+import { getData, patchData, postData, putData, deleteData} from './request';
 
 const url = {
   GET_ALL_ISSUES: 'issues',

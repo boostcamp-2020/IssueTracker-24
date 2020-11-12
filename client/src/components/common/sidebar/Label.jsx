@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import styled from 'styled-components'; 
 import SmallLabel from '../SmallLabel';
 import svg from '../../../utils/svg';
+import {addLabel, removeLabel} from '../../../lib/axios/issue';
+import {IssueContext} from '../../../pages/IssueDetailPage';
 const LabelWrapper = styled.div`
   border-bottom: 1px solid #eaecef;
   cursor:pointer;
@@ -36,13 +38,26 @@ const CancelWrapper = styled.div`
 const LabelHeader = styled.div`
   display:flex;
 `;
-const Label = ({color, title, description}) =>{
+const Label = ({id, color, title, description}) =>{
+  const {issue, setIssue} = useContext(IssueContext);
   const [checked, setCheck] = useState(false);
   const checkDisplay = checked ? 'display-visible' : 'display-hidden';
-  const handleOnClick = () =>{
+  const handleOnClick = async () =>{
+    let patchedLabel;
+    if(!checked){
+       patchedLabel = await addLabel(issue.id, id);
+    }else{
+       patchedLabel = await removeLabel(issue.id, id);
+    }
+  
+    setIssue(patchedLabel);
     setCheck(!checked);
   }
-  
+  useEffect(()=>{
+    if(issue.labels.some((label)=>label.id===id)){
+       setCheck(true);
+    }
+ }, []);
   return (
         <LabelWrapper onClick={handleOnClick}>
           <LabelOptionContent>

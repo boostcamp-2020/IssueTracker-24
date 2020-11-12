@@ -6,7 +6,7 @@ import { IssueContext } from '../../../pages/IssueDetailPage';
 import ProfileImage from '../ProfileImage';
 import ProgressBar from '../../issue/new/sidebar/ProgressBar';
 import { getAllIssues } from '../../../lib/axios/issue';
-
+import Label from '../../common/Label'; 
 const SidebarItemWrapper = styled.div`
   position: relative;
   padding-top: 16px;
@@ -33,8 +33,9 @@ const SidebarItem = ({ title, header, stateMsg, component }) => {
   const { issue, setIssue } = useContext(IssueContext);
   const [show, setShow] = useState(false);
   const [issues, setIssues] = useState([]);
-
+  console.log(issue.labels);
   const handleOnClick = () => {
+   
     setShow(!show);
   };
   useEffect(async () => {
@@ -79,6 +80,17 @@ const SidebarItem = ({ title, header, stateMsg, component }) => {
         return `${stateMsg}`;
       }
     }
+    if(title === 'Labels'){
+      if(issue.labels.length>0){
+        return issue.labels.map((item)=>(
+          <Label label={item}></Label>
+        ));
+      }else{
+        return `${stateMsg}`;
+      }
+    }
+
+    
   };
   return (
     <SidebarItemWrapper>
