@@ -23,20 +23,27 @@ const LabelOptionContent = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 5px;
 `;
 const CheckWrapper = styled.div`
   text-align: center;
-  flex-basis: 10%;
+  flex-basis: 9%;
 `;
 const LabelOptionTitle = styled.div``;
 const LabelOptionDescription = styled.div`
   display: flex;
-  justify-content: center;
 `;
-const CancelWrapper = styled.div``;
+const CancelWrapper = styled.div`
+  flex-basis: 9%;
+`;
 const LabelHeader = styled.div`
   display: flex;
+  margin-bottom: 3px;
 `;
+const ContentWrapper = styled.div`
+  flex-basis: 80%;
+`;
+
 const Label = ({ id, color, title, description }) => {
   const { issue, setIssue } = useContext(IssueContext);
   const [checked, setCheck] = useState(false);
@@ -61,15 +68,17 @@ const Label = ({ id, color, title, description }) => {
     <LabelWrapper onClick={handleOnClick}>
       <LabelOptionContent>
         <CheckWrapper className={checkDisplay}>{svg.checkIcon}</CheckWrapper>
-        <LabelHeader>
-          <SmallLabel color={color} size={14} marginTop={2}></SmallLabel>
-          <LabelOptionTitle>{title}</LabelOptionTitle>
-        </LabelHeader>
+        <ContentWrapper>
+          <LabelHeader>
+            <SmallLabel color={color} size={14} marginTop={2}></SmallLabel>
+            <LabelOptionTitle>{title}</LabelOptionTitle>
+          </LabelHeader>
+          <LabelOptionDescription>{description}</LabelOptionDescription>
+        </ContentWrapper>
         <CancelWrapper className={checkDisplay}>
           {svg.cancelButton}
         </CancelWrapper>
       </LabelOptionContent>
-      <LabelOptionDescription>{description}</LabelOptionDescription>
     </LabelWrapper>
   );
 };
