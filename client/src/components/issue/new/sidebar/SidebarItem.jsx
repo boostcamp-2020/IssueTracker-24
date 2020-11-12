@@ -86,6 +86,7 @@ const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
       ) : (
         <StateMsg>{stateMsg}</StateMsg>
       )}
+
       <Dropdown
         show={show}
         setShow={setShow}

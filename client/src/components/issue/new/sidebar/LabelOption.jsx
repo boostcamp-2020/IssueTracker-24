@@ -62,7 +62,7 @@ const LabelOption = ({ option, add, remove }) => {
     }
     setCheck(!checked);
   };
-  console.log(option.description);
+
   return (
     <LabelOptionWrapper onClick={handleOnClick} color={option.color}>
       <CheckWrapper className={checkDisplay}>{svg.checkIcon}</CheckWrapper>
