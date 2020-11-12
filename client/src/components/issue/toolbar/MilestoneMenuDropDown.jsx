@@ -1,42 +1,8 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import { FILTER_ISSUES_BY_MILESTONE } from '../../../pages/issue-list/reducer';
-
-const DetailsItem = styled.div`
-  border-bottom: 1px solid #eaecef;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 5px;
-  padding-left: 20px;
-  font-size: 13px;
-  cursor: pointer;
-  &:hover {
-    background-color: #e9e9e9;
-  }
-  &:nth-child(1) {
-    font-weight: 600;
-    background-color: #fafbfc;
-    cursor: auto;
-    &:hover {
-      background-color: #fafbfc;
-    }
-  }
-`;
-
-const DetailsMenuDropDown = styled.div`
-  width: 250px;
-  position: absolute;
-  top: 70px;
-  right: 80px;
-  z-index: 10;
-  border: 1px solid #eaecef;
-  margin-top: -30px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 4px;
-`;
+import DetailsMenuDropDown from './common/DetailsMenuDropDown';
+import DetailsItem from './common/DetailsItem';
 
 const MilestoneMenuDropDown = ({ setShowMilestoneMenu }) => {
   const { state, dispatch } = useContext(IssuesContext);
@@ -66,7 +32,7 @@ const MilestoneMenuDropDown = ({ setShowMilestoneMenu }) => {
 
   return (
     <>
-      <DetailsMenuDropDown>
+      <DetailsMenuDropDown right={'80px'}>
         <DetailsItem onClick={onClickFirstItem}>
           Filter by milestone
         </DetailsItem>
@@ -78,7 +44,7 @@ const MilestoneMenuDropDown = ({ setShowMilestoneMenu }) => {
             key={index}
             onClick={onClickDetailsItem}
             className={'milestone-item'}
-            data-name={milestone.title}
+            data={milestone.title}
           >
             {milestone.title}
           </DetailsItem>
