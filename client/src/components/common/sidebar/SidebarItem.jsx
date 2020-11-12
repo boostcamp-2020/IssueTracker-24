@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SidebarItemTitle from './SidebarItemTitle';
 import SidebarItemModal from './SidebarItemModal';
+import ProgressBar from '../../issue/new/sidebar/ProgressBar';
+
 const SidebarItemWrapper = styled.div`
   position: relative;
   padding-top: 16px;

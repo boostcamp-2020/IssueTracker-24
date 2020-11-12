@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { getDueInfo } from '../../../utils/time';
 import svg from '../../../utils/svg';
 import { IssueContext } from '../../../pages/IssueDetailPage';
+import { patchIssue } from '../../../lib/axios/issue';
 
 const MilestoneWrapper = styled.div`
   cursor: pointer;
@@ -35,15 +36,22 @@ const MilestoneHeader = styled.div``;
 
 const Milestone = ({ milestone, setShow }) => {
   const [checked, setCheck] = useState(false);
-  const { issue } = useContext(IssueContext);
+  const { issue, setIssue } = useContext(IssueContext);
   const checkDisplay = checked ? 'display-visible' : 'display-hidden';
 
   useEffect(() => {
-    if (issue.milestone.id === Number(milestone.id)) setCheck(true);
+    if (issue.milestone && issue.milestone.id === Number(milestone.id))
+      setCheck(true);
   }, []);
 
-  const handleOnClick = () => {
-    setCheck(!checked);
+  const handleOnClick = async () => {
+    let patchedIssue;
+    if (checked)
+      patchedIssue = await patchIssue(issue.id, { milestone_id: null });
+    else
+      patchedIssue = await patchIssue(issue.id, { milestone_id: milestone.id });
+
+    setIssue(patchedIssue);
     setShow(false);
   };
   return (
