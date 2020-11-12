@@ -22,24 +22,27 @@ const AssignWrapper = styled.div`
   .display-hidden {
     visibility: hidden;
   }
+  padding: 5px;
+  box-sizing: border-box;
 `;
-const CheckWrapper = styled.div``;
+const CheckWrapper = styled.div`
+  flex-basis: 10%;
+`;
 const AssigneeContent = styled.div`
   display: flex;
-  flex-basis: 60%;
+  flex-basis: 89%;
 `;
 const AssigneeHeader = styled.div`
+  margin-left: 2px;
   display: flex;
-  justify-content: center;
-  margin-top: 5px;
-  margin-left: 5px;
+  line-height: 1;
   &:hover {
     background-color: 0366d6;
   }
 `;
 const ProfileId = styled.div`
-  font-size: 18px;
   margin-left: 5px;
+  font-size: 16px;
 `;
 
 const Assignee = ({ id, snsId, profile }) => {
