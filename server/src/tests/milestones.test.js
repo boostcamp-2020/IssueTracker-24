@@ -1,6 +1,6 @@
 const httpMocks = require('node-mocks-http');
 const milestone = require('../controllers/milestone');
-const errorCode = require('../utils/error-code');
+const responseCode = require('../utils/response-code');
 
 const req = httpMocks.createRequest();
 const res = httpMocks.createResponse();
@@ -9,7 +9,7 @@ const token = process.env.TOKEN;
 describe('Get /milestones 마일스톤 조회 API 테스트', () => {
   it('정상 요청일 경우 200 status code를 응답한다', async (done) => {
     await milestone.getAllMilestone(req, res);
-    expect(res.statusCode).toEqual(errorCode.RESPONSE_OK);
+    expect(res.statusCode).toEqual(responseCode.RESPONSE_OK);
     done();
   });
 });

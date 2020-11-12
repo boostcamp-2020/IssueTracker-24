@@ -1,5 +1,5 @@
 const passport = require('passport');
-const errorCode = require('../utils/error-code');
+const responseCode = require('../utils/response-code');
 
 const isAuth = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user, info) => {
@@ -7,13 +7,13 @@ const isAuth = (req, res, next) => {
 
     if (info) {
       const error = new Error(info.message);
-      error.status = errorCode.UNAUTHORIZED; // 401 Unauthorized
+      error.status = responseCode.UNAUTHORIZED; // 401 Unauthorized
       return next(error);
     }
 
     if (!user) {
       const error = new Error('Authentication failed');
-      error.status = errorCode.UNAUTHORIZED;
+      error.status = responseCode.UNAUTHORIZED;
       return next(error);
     }
 

@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const passportConfig = require('../passport');
 const { sequelize } = require('../models');
 const indexRouter = require('../routes/index');
-const errorCode = require('../utils/error-code');
+const responseCode = require('../utils/response-code');
 
 module.exports = (app) => {
   sequelize
@@ -33,11 +33,11 @@ module.exports = (app) => {
   app.use('/', indexRouter);
 
   app.use((req, res, next) => {
-    next(createError(errorCode.NOT_FOUND_ERROR));
+    next(createError(responseCode.NOT_FOUND_ERROR));
   });
 
   app.use((err, req, res, next) => {
-    res.status(err.status || errorCode.INTERNAL_SERVER_ERROR);
+    res.status(err.status || responseCode.INTERNAL_SERVER_ERROR);
     res.json({ message: err.message });
   });
 };

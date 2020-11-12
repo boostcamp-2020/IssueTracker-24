@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const errorCode = require('../utils/error-code');
+const responseCode = require('../utils/response-code');
 
 const githubAuth = async (req, res, next) => {
   passport.authenticate('github', { session: false }, (err, sns_id) => {
@@ -14,6 +14,6 @@ const githubAuth = async (req, res, next) => {
   })(req, res, next);
 };
 
-const logout = (req, res, next) => res.status(errorCode.RESPONSE_OK).json({ msg: '로그아웃 성공' });
+const logout = (req, res, next) => res.status(responseCode.RESPONSE_OK).json({ msg: '로그아웃 성공' });
 
 module.exports = { githubAuth, logout };
