@@ -146,14 +146,12 @@ const IssueNewContent = () => {
   };
 
   const onClickSubmit = (e) => {
-    console.log(state);
-    console.log(currentUser);
-
     createIssue({
       title: title,
       content: value,
       user_id: currentUser.id,
-      milestone_id: state.addedMilestone[0].id,
+      milestone_id:
+        state.addedMilestone.length > 0 ? state.addedMilestone[0].id : null,
       labels: state.addedLabels,
       assignees: state.addedAssignees,
     });
