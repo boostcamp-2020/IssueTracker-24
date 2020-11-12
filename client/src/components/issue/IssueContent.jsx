@@ -4,7 +4,7 @@ import Label from '../common/Label';
 import { getTimeInfo } from '../../utils/time';
 import svg from '../../utils/svg';
 import { useHistory } from 'react-router-dom';
-import { getContrastYIQ } from '../../utils/color';
+
 const IssueContentWrapper = styled.div`
   .issue-title {
     font-weight: bold;
@@ -17,7 +17,7 @@ const IssueContentWrapper = styled.div`
   }
   .issue-content {
     margin-left: 20px;
-    color: grey;
+    color: #586069;
   }
   .milestone-title {
     margin-left: 4px;
@@ -25,6 +25,7 @@ const IssueContentWrapper = styled.div`
   svg {
     position: relative;
     top: 2px;
+    fill: #586069;
   }
 `;
 
