@@ -12,14 +12,18 @@ const NavigationTab = styled.div`
   display: flex;
 `;
 
-const Navigation = () => {
+const Navigation = ({ isCreate, setCreate }) => {
+  const onClickCreate = () => {
+    setCreate(!isCreate);
+  };
+
   return (
     <NavigationWrapper>
       <NavigationTab>
         <NavigationTabItem category={'Labels'} />
         <NavigationTabItem category={'Milestones'} />
       </NavigationTab>
-      <GreenButton text={'New label'} />
+      <GreenButton text={'New label'} func={onClickCreate} />
     </NavigationWrapper>
   );
 };
