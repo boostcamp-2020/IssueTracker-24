@@ -41,3 +41,8 @@ export const removeAssginee = async (issueId, userId) => {
   const issue = await deleteData(`issues/${issueId}/users/${userId}`);
   return issue;
 };
+
+export const addLabgel = async (issueId, labelId) => {
+  const issue = await putData(`issues/${issueId}/labels/${labelId}`);
+  return issue;
+};
