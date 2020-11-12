@@ -54,7 +54,7 @@ const MilestoneEditForm = ({
   const onClickCancel = () => history.push('/milestones');
 
   const onClickChangeState = async () => {
-    const changedState = state === 'open' ? 'close' : 'open';
+    const changedState = state === 'open' ? 'closed' : 'open';
     await patchMilestone(milestoneId, { state: changedState });
     history.push('/milestones');
   };

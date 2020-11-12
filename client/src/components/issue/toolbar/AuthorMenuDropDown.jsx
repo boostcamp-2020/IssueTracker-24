@@ -52,7 +52,7 @@ const AuthorMenuDropDown = ({ setShowAuthorMenu }) => {
   };
 
   const onClickDetailsItem = (e) => {
-    const detailsItem = e.target.closest('.author-item');
+    const detailsItem = e.target.closedst('.author-item');
     dispatch({
       type: FILTER_ISSUES_BY_AUTHOR,
       author: detailsItem.dataset.name,

@@ -18,7 +18,7 @@ const CommentFormWrapper = styled.div`
   width: 100%;
 `;
 
-const CloseButton = styled.button`
+const ClosedButton = styled.button`
   background-color: #fafbfc;
   border: 1.5px solid #eaecef;
   border-radius: 4px;
@@ -47,7 +47,7 @@ const CommentForm = memo(() => {
   };
 
   const onClickChangeState = async () => {
-    const changedState = issue.state === 'open' ? 'close' : 'open';
+    const changedState = issue.state === 'open' ? 'closed' : 'open';
     await patchIssue(issue.id, { state: changedState });
     setIssue({ ...issue, state: changedState });
   };
@@ -75,9 +75,9 @@ const CommentForm = memo(() => {
         <FileContainer />
         <ContentButtonContainer>
           {issue.state === 'open' ? (
-            <CloseButton onClick={onClickChangeState}>
-              {svg['closeLogo']}&nbsp;Close Issue
-            </CloseButton>
+            <ClosedButton onClick={onClickChangeState}>
+              {svg['closedLogo']}&nbsp;Close Issue
+            </ClosedButton>
           ) : (
             <GreyButton text={'Reopen issue'} func={onClickChangeState} />
           )}

@@ -4,7 +4,7 @@ import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import DropDownIcon from '../../common/DropDownIcon';
 import { axiosAll } from '../../../lib/axios/request';
 import { patchIssue, getAllIssues } from '../../../lib/axios/issue';
-import { CHANGE_ISSUES_OPEN_CLOSE } from '../../../pages/issue-list/reducer';
+import { CHANGE_ISSUES_OPEN_CLOSED } from '../../../pages/issue-list/reducer';
 
 const DetailsButton = styled.button`
   font-size: 15px;
@@ -76,7 +76,7 @@ const MarkAsTool = () => {
 
   const onClickOpenOrClosed = async (e) => {
     const AFTER = e.target.innerText;
-    const BEFORE = AFTER === 'open' ? 'close' : 'open';
+    const BEFORE = AFTER === 'open' ? 'closed' : 'open';
 
     const axioses = [];
     renderedIssues.forEach((issue) => {
@@ -88,7 +88,7 @@ const MarkAsTool = () => {
     if (axioses.length > 0) await axiosAll(axioses);
     const issues = await getAllIssues();
 
-    dispatch({ type: CHANGE_ISSUES_OPEN_CLOSE, issues: issues });
+    dispatch({ type: CHANGE_ISSUES_OPEN_CLOSED, issues: issues });
     setShowMarkAs(false);
     e.stopPropagation();
   };

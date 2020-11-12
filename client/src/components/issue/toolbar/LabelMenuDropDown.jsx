@@ -68,7 +68,7 @@ const LabelMenuDropDown = ({ setShowLabelMenu }) => {
   };
 
   const onClickDetailsItem = (e) => {
-    const detailsItem = e.target.closest('.label-item');
+    const detailsItem = e.target.closedst('.label-item');
     dispatch({
       type: FILTER_ISSUES_BY_LABEL,
       label: detailsItem.dataset.name,

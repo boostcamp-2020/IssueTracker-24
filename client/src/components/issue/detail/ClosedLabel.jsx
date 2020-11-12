@@ -17,15 +17,15 @@ const Button = styled.div`
   }
 `;
 
-const CloseLabel = () => {
+const ClosedLabel = () => {
   return (
     <>
       <Button>
-        {svg['closeLogo']}
-        &nbsp;Close
+        {svg['closedLogo']}
+        &nbsp;Closed
       </Button>
     </>
   );
 };
 
-export default CloseLabel;
+export default ClosedLabel;

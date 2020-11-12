@@ -3,12 +3,12 @@ const ASSIGNEE_POSITION = 1;
 const MILESTONE_POSITION = 1;
 const LABEL_POSITION = 1;
 
-const filterOpenClose = (issues, searchText) => {
+const filterOpenClosed = (issues, searchText) => {
   if (searchText.indexOf('is:open') !== -1) {
     return issues.filter((issue) => issue.state === 'open');
   }
-  if (searchText.indexOf('is:close') !== -1) {
-    return issues.filter((issue) => issue.state === 'close');
+  if (searchText.indexOf('is:closed') !== -1) {
+    return issues.filter((issue) => issue.state === 'closed');
   }
 
   return issues;
@@ -114,7 +114,7 @@ const filterLabel = (issues, searchText) => {
 };
 
 export const filterIssues = (issues, searchText, currentUser) => {
-  let filteredIssues = filterOpenClose(issues, searchText);
+  let filteredIssues = filterOpenClosed(issues, searchText);
   filteredIssues = filterAuthor(filteredIssues, searchText, currentUser);
   filteredIssues = filterAssignee(filteredIssues, searchText, currentUser);
   filteredIssues = filterMilestone(filteredIssues, searchText);

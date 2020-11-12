@@ -45,7 +45,7 @@ const MilestoneComplete = styled.div`
   margin-top: 10px;
   margin-left: 3px;
 `;
-const MilestoneOpenClose = styled.div`
+const MilestoneOpenClosed = styled.div`
   margin-top: 10px;
   margin-left: 20px;
 `;
@@ -60,12 +60,12 @@ const MilestoneListRight = ({ milestone }) => {
   const openIssueNumber = milestoneList.filter(
     (issue) => issue.state === 'open',
   ).length;
-  const closeIssueNumber = milestoneList.filter(
+  const closedIssueNumber = milestoneList.filter(
     (issue) => issue.state === 'closed',
   ).length;
   const ratio =
     totalIssueNumber !== 0
-      ? Math.floor((closeIssueNumber / totalIssueNumber) * 100)
+      ? Math.floor((closedIssueNumber / totalIssueNumber) * 100)
       : 0;
   const openReopenMessage =
     state.openclosedState === 'open' ? 'close' : 'Reopen';
@@ -80,7 +80,7 @@ const MilestoneListRight = ({ milestone }) => {
   };
   const changeStateHandler = async () => {
     const stateValue = {
-      state: state.openclosedState === 'open' ? 'close' : 'open',
+      state: state.openclosedState === 'open' ? 'closed' : 'open',
     };
     await patchMilestone(milestone.id, stateValue);
     dispatch({
@@ -100,8 +100,8 @@ const MilestoneListRight = ({ milestone }) => {
       </MilestoneGageContainer>
       <MilestoneCompletedContainer>
         <MilestoneComplete>{ratio}% complete</MilestoneComplete>
-        <MilestoneOpenClose>{openIssueNumber} Open</MilestoneOpenClose>
-        <MilestoneOpenClose>{closeIssueNumber} Closed</MilestoneOpenClose>
+        <MilestoneOpenClosed>{openIssueNumber} Open</MilestoneOpenClosed>
+        <MilestoneOpenClosed>{closedIssueNumber} Closed</MilestoneOpenClosed>
       </MilestoneCompletedContainer>
       <MilestoneButtonContainer>
         <MilestoneButton colors="blue" onClick={moveMilestoneCreatePage}>

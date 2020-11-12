@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import MilestoneEditForm from '../components/milestone/MilestoneEditForm';
-import LabelComponent from '../components/common/LabelComponent';
-import svg from '../utils/svg';
 import Header from '../components/Header';
 import { getMilestone } from '../lib/axios/milestone';
 import Spinner from '../components/common/Spinner';
+import Navigation from '../components/common/Navigation';
 
 const MilestoneNewPageWrappper = styled.div`
   display: flex;
@@ -17,8 +15,8 @@ const MilestoneNewPageWrappper = styled.div`
 
 const SelectMenuWrapper = styled.div`
   display: flex;
-  height: 40px;
-  border-bottom: 1px solid black;
+  height: 35px;
+  border-bottom: 1px solid #eaecef;
   margin-top: 15px;
   margin-bottom: 13px;
   padding-bottom: 10px;
@@ -40,10 +38,6 @@ const MilestoneEditPage = ({ match }) => {
     setIsCompleteRequest(true);
   }, []);
 
-  const history = useHistory();
-  const onClickMilestoneMenu = () => history.push('/milestones');
-  const onClickLabelMenu = () => history.push('/labels');
-
   if (!isCompleteRequest) return <Spinner />;
 
   return (
@@ -51,16 +45,7 @@ const MilestoneEditPage = ({ match }) => {
       <Header />
       <MilestoneNewPageWrappper>
         <SelectMenuWrapper>
-          <LabelComponent
-            svg={svg['Labels']}
-            title="Labels"
-            func={onClickLabelMenu}
-          />
-          <LabelComponent
-            svg={svg['Milestones']}
-            title="Milestones"
-            func={onClickMilestoneMenu}
-          />
+          <Navigation cur={'milestones'} />
         </SelectMenuWrapper>
         <MilestoneEditForm
           id={match.params.id}

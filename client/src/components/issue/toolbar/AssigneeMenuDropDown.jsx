@@ -60,7 +60,7 @@ const AssigneeMenuDropDown = ({ setShowAssigneeMenu }) => {
   };
 
   const onClickDetailsItem = (e) => {
-    const detailsItem = e.target.closest('.assignee-item');
+    const detailsItem = e.target.closedst('.assignee-item');
     dispatch({
       type: FILTER_ISSUES_BY_ASSIGNEE,
       assignee: detailsItem.dataset.name,
