@@ -23,6 +23,8 @@ const LabelItemWrapper = styled.div`
     font-size: 12px;
     &:hover {
       cursor: pointer;
+      text-decoration: underline;
+      color: #0366d6;
     }
   }
 `;
@@ -39,6 +41,11 @@ const LabelEdit = styled.div`
   text-align: center;
   color: #586069;
   font-size: 12px;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0366d6;
+  }
 `;
 
 const LabelItem = ({ label }) => {
@@ -46,7 +53,7 @@ const LabelItem = ({ label }) => {
 
   const onClickEdit = () => {
     dispatch({ type: CHANGE_LABEL_EDIT, id: label.id });
-  }
+  };
   const [deleteModalDisplay, setDeleteModalDisplay] = useState(false);
   const onDeleteBtnClick = () => {
     setDeleteModalDisplay(!deleteModalDisplay);
@@ -58,7 +65,7 @@ const LabelItem = ({ label }) => {
         <SelectedLabel label={label} />
       </LabelTitle>
       <LabelDescription>{label.description}</LabelDescription>
-      <LabelEdit onClick={onClickEdit}>Edit</LabelEdit>   
+      <LabelEdit onClick={onClickEdit}>Edit</LabelEdit>
       <div className="delete-btn" onClick={onDeleteBtnClick}>
         Delete
       </div>

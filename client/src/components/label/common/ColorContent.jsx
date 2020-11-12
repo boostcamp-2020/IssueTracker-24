@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const ColorButton = styled.button`
   height: 27px;
   margin-right: 10px;
-  padding-top: 3px;
+  line-height: 0;
   border: 0;
   outline: 0;
   border-radius: 5px;
