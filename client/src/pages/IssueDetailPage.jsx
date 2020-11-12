@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import IssueDetailPageHeader from '../components/issue/detail/IssueDetailPageHeader';
 import { getIssue } from '../lib/axios/issue';
+import {getAllLabels} from '../lib/axios/label';
+import {getAllMilestones} from '../lib/axios/milestone';
+import {getAllUsers} from '../lib/axios/user';
 import Spinner from '../components/common/Spinner';
 import IssueContainer from '../components/issue/detail/IssueContainer';
 import SidebarContainer from '../components/issue/detail/SidebarContainer';
@@ -24,9 +27,14 @@ export const IssueContext = React.createContext();
 const IssueDetailPage = ({ match }) => {
   const issueId = match.params.id;
   const [issue, setIssue] = useState(null);
-
+  const [assignee, setAssignee] = useState(null);
+  const [milestone, setMilestone] = useState(null);
+  const [label, setLabel] = useState(null);
   useEffect(async () => {
     setIssue(await getIssue(issueId));
+    setAssignee(await getAllUsers());
+    setLabel(await getAllLabels());
+    setMilestone(await getAllMilestones());
   }, []);
 
   if (!issue) {
@@ -36,7 +44,7 @@ const IssueDetailPage = ({ match }) => {
   return (
     <>
       <Header />
-      <IssueContext.Provider value={{ issue, setIssue }}>
+      <IssueContext.Provider value={{ issue, setIssue, assignee, setAssignee, label, setLabel, milestone, setMilestone}}>
         <IssueDetailPageWrapper>
           <IssueDetailPageHeader />
           <ContentWrapper>
