@@ -1,4 +1,5 @@
 const { Label } = require('../models');
+const errorCode = require('../utils/error-code');
 
 const getAllLabels = async (req, res, next) => {
   const lables = await Label.findAll({});
@@ -13,7 +14,7 @@ const createLabel = async (req, res, next) => {
       description,
       color,
     });
-    res.status(200).json(label);
+    res.status(errorCode.RESPONSE_CREATED).json(label);
   } catch (err) {
     next(err);
   }
@@ -25,7 +26,7 @@ const deleteLabel = async (req, res, next) => {
     const label = await Label.destroy({
       where: { id },
     });
-    return res.status(201).json(label);
+    return res.status(errorCode.RESPONSE_OK).json(label);
   } catch (err) {
     next(err);
   }
@@ -41,7 +42,7 @@ const patchLabel = async (req, res, next) => {
 
   await Label.update(patchedLabel, { where: { id } });
   const label = await Label.findByPk(id, { attributes: ['id', 'title', 'description', 'color'] });
-  return res.status(200).json(label);
+  return res.status(errorCode.RESPONSE_OK).json(label);
 };
 
 module.exports = { getAllLabels, createLabel, patchLabel, deleteLabel };

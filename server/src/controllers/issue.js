@@ -1,5 +1,6 @@
 const { Issue, User, Label, Milestone, Comment } = require('../models');
 const issueService = require('../services/issue');
+const errorCode = require('../utils/error-code');
 
 const getAllIssues = async (req, res, next) => {
   const issues = await Issue.findAll({
@@ -28,7 +29,7 @@ const getAllIssues = async (req, res, next) => {
       },
     ],
   });
-  res.status(200).json(issues);
+  res.status(errorCode.RESPONSE_OK).json(issues);
 };
 const createIssue = async (req, res, next) => {
   const { title, content, user_id, milestone_id, labels, assignees } = { ...req.body };
@@ -53,13 +54,13 @@ const createIssue = async (req, res, next) => {
     await Promise.all(promises);
   }
 
-  res.status(200).json(issue);
+  res.status(errorCode.RESPONSE_CREATED).json(issue);
 };
 
 const getIssue = async (req, res, next) => {
   const { id } = req.params;
   const issue = await issueService.getIssue(id);
-  res.status(200).json(issue);
+  res.status(errorCode.RESPONSE_OK).json(issue);
 };
 
 const patchIssue = async (req, res, next) => {
@@ -74,7 +75,7 @@ const patchIssue = async (req, res, next) => {
 
   await Issue.update(patchedIssue, { where: { id } });
   const issue = await issueService.getIssue(id);
-  return res.status(200).json(issue);
+  return res.status(errorCode.RESPONSE_OK).json(issue);
 };
 
 const createComment = async (req, res, next) => {
@@ -83,7 +84,7 @@ const createComment = async (req, res, next) => {
   const issue = await Issue.findByPk(issueId);
   const { id } = await issue.createComment({ content, user_id });
   const comment = await Comment.findByPk(id, { include: [{ model: User }] });
-  res.status(201).json(comment);
+  res.status(errorCode.RESPONSE_CREATED).json(comment);
 };
 
 const addAssignee = async (req, res, next) => {
@@ -92,7 +93,7 @@ const addAssignee = async (req, res, next) => {
     const issue = await Issue.findByPk(issueId);
     await issue.addAssignees(userId);
     const issueResult = await issueService.getIssue(issueId);
-    return res.status(200).json(issueResult);
+    return res.status(errorCode.RESPONSE_CREATED).json(issueResult);
   } catch (err) {
     return next(err);
   }
@@ -104,7 +105,7 @@ const removeAssignee = async (req, res, next) => {
     const issue = await Issue.findByPk(issueId);
     await issue.removeAssignees(userId);
     const issueResult = await issueService.getIssue(issueId);
-    return res.status(200).json(issueResult);
+    return res.status(errorCode.RESPONSE_OK).json(issueResult);
   } catch (err) {
     return next(err);
   }
@@ -116,7 +117,7 @@ const addLabel = async (req, res, next) => {
     const issue = await Issue.findByPk(issueId);
     await issue.addLabels(labelId);
     const issueResult = await issueService.getIssue(issueId);
-    return res.status(200).json(issueResult);
+    return res.status(errorCode.RESPONSE_CREATED).json(issueResult);
   } catch (err) {
     return next(err);
   }
@@ -128,7 +129,7 @@ const removeLabel = async (req, res, next) => {
     const issue = await Issue.findByPk(issueId);
     await issue.removeLabels(labelId);
     const issueResult = await issueService.getIssue(issueId);
-    return res.status(200).json(issueResult);
+    return res.status(errorCode.RESPONSE_OK).json(issueResult);
   } catch (err) {
     return next(err);
   }
