@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { MilestoneContext } from '../../pages/milestone-list/MilestonePage';
 import {
   DELETE_MILESTONE,
-  FILTERING_MILESTONE,
+  CHANGE_STATE,
 } from '../../pages/milestone-list/reducer';
 import { patchMilestone } from '../../lib/axios/milestone';
 import { useHistory } from 'react-router-dom';
@@ -82,13 +82,12 @@ const MilestoneListRight = ({ milestone }) => {
     const stateValue = {
       state: state.openclosedState === 'open' ? 'closed' : 'open',
     };
-    await patchMilestone(milestone.id, stateValue);
+    const patchedMilestone = await patchMilestone(milestone.id, stateValue);
+
     dispatch({
-      type: FILTERING_MILESTONE,
-      openclosedState: stateValue,
-      milestoneList: milestoneList,
+      type: CHANGE_STATE,
+      patchedMilestone: patchedMilestone,
     });
-    location.reload();
   };
   const moveMilestoneCreatePage = async () => {
     history.push(`/milestones/${milestone.id}/edit`);

@@ -43,14 +43,14 @@ const createIssue = async (req, res, next) => {
     const promises = labels.map((label) => {
       return issue.addLabels(label.id);
     });
-    Promise.all(promises);
+    await Promise.all(promises);
   }
 
   if (assignees) {
     const promises = assignees.map((assignee) => {
       return issue.addAssignees(assignee.id);
     });
-    Promise.all(promises);
+    await Promise.all(promises);
   }
 
   res.status(200).json(issue);
@@ -84,4 +84,63 @@ const createComment = async (req, res, next) => {
   const comment = await Comment.findByPk(id, { include: [{ model: User }] });
   res.status(201).json(comment);
 };
-module.exports = { getAllIssues, createIssue, getIssue, patchIssue, createComment };
+
+const addAssignee = async (req, res, next) => {
+  const { issueId, userId } = req.params;
+  try {
+    const issue = await Issue.findByPk(issueId);
+    await issue.addAssignees(userId);
+    const issueResult = await issueService.getIssue(issueId);
+    return res.status(200).json(issueResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const removeAssignee = async (req, res, next) => {
+  const { issueId, userId } = req.params;
+  try {
+    const issue = await Issue.findByPk(issueId);
+    await issue.removeAssignees(userId);
+    const issueResult = await issueService.getIssue(issueId);
+    return res.status(200).json(issueResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const addLabel = async (req, res, next) => {
+  const { issueId, labelId } = req.params;
+  try {
+    const issue = await Issue.findByPk(issueId);
+    await issue.addLabels(labelId);
+    const issueResult = await issueService.getIssue(issueId);
+    return res.status(200).json(issueResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const removeLabel = async (req, res, next) => {
+  const { issueId, labelId } = req.params;
+  try {
+    const issue = await Issue.findByPk(issueId);
+    await issue.removeLabels(labelId);
+    const issueResult = await issueService.getIssue(issueId);
+    return res.status(200).json(issueResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+module.exports = {
+  getAllIssues,
+  createIssue,
+  getIssue,
+  patchIssue,
+  createComment,
+  addAssignee,
+  removeAssignee,
+  addLabel,
+  removeLabel,
+};
