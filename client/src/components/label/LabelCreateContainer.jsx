@@ -35,7 +35,7 @@ const LabelCreateContainer = ({ setCreate }) => {
   const isDisabled = (title) => title.length <= 0;
 
   return (
-    <WriteContainer edit={false}>
+    <WriteContainer edit={false} isCreate={true}>
       <div>
         <SelectedLabel label={{ title: getTitle(title), color }} />
       </div>
