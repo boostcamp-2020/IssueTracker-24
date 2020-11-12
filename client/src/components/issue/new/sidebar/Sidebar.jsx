@@ -6,8 +6,8 @@ import LabelOption from './LabelOption';
 import MilestoneOption from './MilestoneOption';
 import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
 import {
-  ADD_ASSIGNEES,
-  ADD_LABELS,
+  SET_ASSIGNEES,
+  SET_LABELS,
   SET_MILESTONE,
 } from '../../../../pages/issue-new/reducer';
 
@@ -21,7 +21,7 @@ const Sidebar = () => {
   const defaultItems = [
     {
       title: 'Assignees',
-      type: ADD_ASSIGNEES,
+      type: SET_ASSIGNEES,
       header: 'Assign up to 10 people to this issue',
       stateMsg: 'No one',
       component: AssigneeOption,
@@ -30,7 +30,7 @@ const Sidebar = () => {
     },
     {
       title: 'Labels',
-      type: ADD_LABELS,
+      type: SET_LABELS,
       header: 'Apply labels to this issue',
       stateMsg: 'None yet',
       component: LabelOption,

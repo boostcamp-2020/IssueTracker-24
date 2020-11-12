@@ -4,6 +4,7 @@ const url = {
   GET_ALL_ISSUES: 'issues',
   GET_ISSUES: 'issues/',
   PATCH_ISSUE: 'issues/',
+  CREATE_ISSUE: 'issues',
 };
 
 export const getAllIssues = async () => {
@@ -24,4 +25,9 @@ export const patchIssue = async (id, body) => {
 export const createComment = async (id, body) => {
   const comment = await postData(`issues/${id}/comments`, body);
   return comment;
+}
+
+  export const createIssue = async (body) => {
+  const issue = await postData(url.CREATE_ISSUE, body);
+  return issue;
 };

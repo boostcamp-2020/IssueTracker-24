@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { IssueOptionContext } from '../../../pages/issue-new/IssueNewPage';
+import { AppContext } from '../../../App';
 import styled from 'styled-components';
 import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import GreenButton from '../../common/GreenButton';
+import { createIssue } from '../../../lib/axios/issue';
 
 const IssueNewContentWrapper = styled.div`
   width: 100%;
@@ -128,6 +132,10 @@ const IssueNewContent = () => {
   const [results, setResults] = useState(['']);
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [title, setTitle] = useState('');
+  const { state } = useContext(IssueOptionContext);
+  const { currentUser } = useContext(AppContext);
+  const history = useHistory();
+
   const onChangeTitle = (e) => {
     if (e.target.value.length > 0) setIsDisabledBtn(false);
     else setIsDisabledBtn(true);
@@ -136,6 +144,24 @@ const IssueNewContent = () => {
   const onChangeTextarea = (e) => {
     setValue(e.target.value);
   };
+
+  const onClickSubmit = (e) => {
+    console.log(state);
+    console.log(currentUser);
+
+    createIssue({
+      title: title,
+      content: value,
+      user_id: currentUser.id,
+      milestone_id: state.addedMilestone[0].id,
+      labels: state.addedLabels,
+      assignees: state.addedAssignees,
+    });
+    e.stopPropagation();
+    history.push('/issues'); // TODO: 이슈 상세화면으로 이동해야 한다. 일단은 목록으로
+    location.reload();
+  };
+
   useEffect(() => {
     let innerTimeoutId;
     const timeoutId = setTimeout(() => {
@@ -169,7 +195,11 @@ const IssueNewContent = () => {
             <Link to="/issues">
               <CancelBtn>Cancel</CancelBtn>
             </Link>
-            <GreenButton text={'Submit new issue'} disabled={isDisabledBtn} />
+            <GreenButton
+              text={'Submit new issue'}
+              disabled={isDisabledBtn}
+              func={onClickSubmit}
+            />
           </BtnContent>
         </WriteContent>
       </IssueNewContentWrapper>

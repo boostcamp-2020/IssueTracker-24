@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PageBodyWrapper = styled.div`
-  margin: 50px 70px 100px 70px;
-  box-sizing: border-box;
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 40px;
 `;
 
 const PageBody = ({ children }) => {

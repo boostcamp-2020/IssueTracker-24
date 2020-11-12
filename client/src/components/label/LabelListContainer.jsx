@@ -19,8 +19,8 @@ const LabelListHeader = styled.div`
 
 const LabelListContainer = () => {
   const { state } = useContext(LabelsContext);
-  const renderedLabelList = state.labels.map((label) => {
-    return <LabelItem label={label} />;
+  const renderedLabelList = state.labels.map((label, index) => {
+    return <LabelItem key={'label' + index} label={label} />;
   });
 
   return (
