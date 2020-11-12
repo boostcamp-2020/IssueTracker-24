@@ -4,7 +4,7 @@ const issueService = require('../services/issue');
 const getAllIssues = async (req, res, next) => {
   const issues = await Issue.findAll({
     attributes: ['id', 'title', 'content', 'state', 'created_at', 'closed_at'],
-    order: [['id', 'ASC']],
+    order: [['id', 'DESC']],
     include: [
       {
         model: User,
