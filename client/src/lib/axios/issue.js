@@ -25,9 +25,14 @@ export const patchIssue = async (id, body) => {
 export const createComment = async (id, body) => {
   const comment = await postData(`issues/${id}/comments`, body);
   return comment;
-}
+};
 
-  export const createIssue = async (body) => {
+export const createIssue = async (body) => {
   const issue = await postData(url.CREATE_ISSUE, body);
+  return issue;
+};
+
+export const addAssginee = async (issueId, userId) => {
+  const issue = await putData(`issues/${issueId}/users/${userId}`);
   return issue;
 };
