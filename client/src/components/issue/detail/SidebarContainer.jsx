@@ -13,7 +13,7 @@ const Container = styled.div`
 const SideBarContainer = () => {
   return (
     <Container>
-      <Sidebar></Sidebar>
+      <Sidebar />
     </Container>
   );
 };

@@ -64,12 +64,13 @@ const getIssue = async (req, res, next) => {
 
 const patchIssue = async (req, res, next) => {
   const { id } = req.params;
-  const { title, content, state, closed_at } = req.body;
+  const { title, content, state, closed_at, milestone_id } = req.body;
   const patchedIssue = {};
   if (title) patchedIssue.title = title;
   if (content) patchedIssue.content = content;
   if (state) patchedIssue.state = state;
   if (closed_at) patchedIssue.closed_at = new Date(closed_at);
+  if (milestone_id || milestone_id == null) patchedIssue.milestone_id = milestone_id;
 
   await Issue.update(patchedIssue, { where: { id } });
   const issue = await issueService.getIssue(id);
