@@ -83,8 +83,7 @@ const MilestoneListRight = ({ milestone }) => {
       state: state.openclosedState === 'open' ? 'closed' : 'open',
     };
     const patchedMilestone = await patchMilestone(milestone.id, stateValue);
-    console.log(state.milestones);
-    console.log(state.milestoneList);
+
     dispatch({
       type: CHANGE_STATE,
       patchedMilestone: patchedMilestone,
