@@ -38,13 +38,15 @@ const LabelListPage = () => {
     });
   }, []);
 
+  const onClickCreate = () => setCreate(!isCreate);
+
   return (
     <LabelsContext.Provider value={{ state, dispatch }}>
       <Header />
       <PageBody>
         <NavigationWrapper>
           <Navigation cur={'labels'} />
-          <GreenButton text={'New label'} />
+          <GreenButton text={'New label'} func={onClickCreate} />
         </NavigationWrapper>
         {isCreate && <LabelCreateContainer setCreate={setCreate} />}
         <LabelListContainer />

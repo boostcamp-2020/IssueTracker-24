@@ -31,14 +31,15 @@ const NavigationItemWrapper = styled.div`
     border-left: 1px solid #eaecef;
     border-right: 1px solid #eaecef;
 
-    background-color: ${({ cur }) => (cur === 'labels' ? 'white' : '#0366d6')};
-    color: ${({ cur }) => (cur === 'labels' ? 'black' : 'white')};
+    background-color: ${({ cur }) =>
+      cur === 'milestones' ? '#0366d6' : 'white'};
+    color: ${({ cur }) => (cur === 'milestones' ? 'white' : 'black')};
     svg {
-      fill: ${({ cur }) => (cur === 'labels' ? 'black' : 'white')};
+      fill: ${({ cur }) => (cur === 'milestones' ? 'white' : 'black')};
     }
     &:hover {
       background-color: ${({ cur }) =>
-        cur === 'labels' ? '#f6f8fa' : '#0366d6'};
+        cur === 'milestones' ? '#0366d6' : '#f6f8fa'};
     }
   }
   .NavItemInnerWrapper {
@@ -50,12 +51,23 @@ const NavigationItemWrapper = styled.div`
   }
 `;
 
-const NavigationItem = ({ category, cur, onClick }) => {
+const NavigtaionItemsNum = styled.div`
+  height: 18px;
+  line-height: 18px;
+  border-radius: 20px;
+  background-color: #e4e7ea;
+  margin-left: 5px;
+  padding: 0px 8px 0px 8px;
+  font-size: 12px;
+`;
+
+const NavigationItem = ({ category, cur, onClick, num }) => {
   return (
     <NavigationItemWrapper cur={cur}>
       <div className="NavItemInnerWrapper" onClick={onClick}>
         {svg[category]}
         {category}
+        {num && <NavigtaionItemsNum>{num}</NavigtaionItemsNum>}
       </div>
     </NavigationItemWrapper>
   );

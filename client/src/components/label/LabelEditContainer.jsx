@@ -2,40 +2,38 @@ import React, { useState, useContext } from 'react';
 import SelectedLabel from '../common/SelectedLabel';
 import GreenButton from '../common/GreenButton';
 import GreyButton from '../common/GreyButton';
-import { getRandomColor } from '../../utils/color';
 import WriteContainer from './common/WriteContainer';
 import LabelContent from './common/LabelContent';
 import DescriptionContent from './common/DescriptionContent';
 import ColorContent from './common/ColorContent';
 import ButtonContent from './common/ButtonContent';
-import { getAllLabels, createLabel } from '../../lib/axios/label';
+import { patchLabel } from '../../lib/axios/label';
 import { LabelsContext } from '../../pages/label-list/LabelListPage';
-import { RENEW_LABEL } from '../../pages/label-list/reducer';
+import { CHANGE_LABEL_EDIT, EDIT_LABEL } from '../../pages/label-list/reducer';
 import ContentWrapper from './common/ContentWrapper';
 
 const getTitle = (title) => (title.length > 0 ? title : 'Label preview');
 
-const LabelCreateContainer = ({ setCreate }) => {
+const LabelEditContainer = ({ label }) => {
   const { dispatch } = useContext(LabelsContext);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [color, setColor] = useState(getRandomColor());
+  const [title, setTitle] = useState(label.title);
+  const [description, setDescription] = useState(label.description);
+  const [color, setColor] = useState(label.color);
 
-  const onClickCancel = (e) => setCreate(false);
-
-  const onClickCreate = async (e) => {
+  const onClickCancel = (e) => {
+    dispatch({ type: CHANGE_LABEL_EDIT, id: label.id });
+  };
+  const onClickSave = async (e) => {
     const body = { title, description, color };
-    const label = await createLabel(body);
-    const labels = await getAllLabels();
+    const patchedLabel = await patchLabel(label.id, body);
 
-    dispatch({ type: RENEW_LABEL, data: { labels } });
-    setCreate(false);
+    dispatch({ type: EDIT_LABEL, data: { label: patchedLabel } });
   };
 
   const isDisabled = (title) => title.length <= 0;
 
   return (
-    <WriteContainer edit={false}>
+    <WriteContainer edit={true}>
       <div>
         <SelectedLabel label={{ title: getTitle(title), color }} />
       </div>
@@ -52,8 +50,8 @@ const LabelCreateContainer = ({ setCreate }) => {
         <ButtonContent>
           <GreyButton text="Cancel" func={onClickCancel} />
           <GreenButton
-            text="Create label"
-            func={onClickCreate}
+            text="Save Changes"
+            func={onClickSave}
             disabled={isDisabled(title)}
           />
         </ButtonContent>
@@ -62,4 +60,4 @@ const LabelCreateContainer = ({ setCreate }) => {
   );
 };
 
-export default LabelCreateContainer;
+export default LabelEditContainer;
