@@ -4,7 +4,7 @@ import ProfileImage from '../../common/ProfileImage';
 import svg from '../../../utils/svg';
 const AssignWrapper = styled.div`
    display:flex;
-   justify-content:center;
+   justify-content:space-between;
    width:100%;
    height:30px;
    border-bottom : 1px solid #eaecef;
@@ -21,14 +21,22 @@ const AssignWrapper = styled.div`
     }
 `;
 const CheckWrapper = styled.div`
-  flex-grow: 1;
-  text-align: center;
+
 `;
 const CancelWrapper = styled.div`
-  flex-grow: 1;
-  text-align: center;
+  
 `;
-
+const AssigneeContent = styled.div`
+  display: flex;
+  justify-content:space-between;
+  width: 100%;
+`;
+const AssigneeHeader = styled.div`
+  display:flex;
+  justify-content:center;
+`;
+const ProfileId = styled.div`
+`;
 const Assignee = ({snsId, profile}) =>{
    const [checked, setCheck] = useState(false);
    const checkDisplay = checked ? 'display-visible' : 'display-hidden';
@@ -37,10 +45,14 @@ const Assignee = ({snsId, profile}) =>{
    }
   return(
      <AssignWrapper onClick={handleOnClick}>
-         <CheckWrapper className={checkDisplay}>{svg.checkIcon}</CheckWrapper>
-         <ProfileImage image={profile} size='15'></ProfileImage>
-         {snsId}
-         <CancelWrapper className={checkDisplay}>{svg.cancelButton}</CancelWrapper>
+        <AssigneeContent>
+           <CheckWrapper className={checkDisplay}>{svg.checkIcon}</CheckWrapper>
+           <AssigneeHeader>
+             <ProfileImage image={profile} size='15'></ProfileImage>
+             <ProfileId>{snsId}</ProfileId>
+           </AssigneeHeader>
+           <CancelWrapper className={checkDisplay}>{svg.cancelButton}</CancelWrapper>
+        </AssigneeContent>  
      </AssignWrapper>
   );
 }

@@ -17,16 +17,14 @@ const MilestoneWrapper = styled.div`
 }
 `;
 const MilestoneContent = styled.div`
-  display:flex;
-  justify-content:center;
+ flex-basis: 80%;
+ display: flex;
+ justify-content:space-between;
+ width: 100%;
 `;
 const CheckWrapper = styled.div`
-  flex-grow: 1;
-  text-align: center;
 `;
 const CancelWrapper = styled.div`
-  flex-grow: 1;
-  text-align: center;
 `;
 const MilestoneTitle = styled.div`
 `;
