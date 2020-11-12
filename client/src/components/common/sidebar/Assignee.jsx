@@ -1,7 +1,9 @@
-import React,{useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../../common/ProfileImage';
 import svg from '../../../utils/svg';
+import {IssueContext} from '../../../pages/IssueDetailPage';
+import {addAssignee, removeAssignee} from '../../../lib/axios/issue';
 const AssignWrapper = styled.div`
    display:flex;
    justify-content:space-between;
@@ -37,12 +39,24 @@ const AssigneeHeader = styled.div`
 `;
 const ProfileId = styled.div`
 `;
-const Assignee = ({snsId, profile}) =>{
+
+const Assignee = ({id, snsId, profile}) =>{
    const [checked, setCheck] = useState(false);
+   const {issue, setIssue} = useContext(IssueContext);
    const checkDisplay = checked ? 'display-visible' : 'display-hidden';
-   const handleOnClick = () =>{
-     setCheck(!checked);
+   const handleOnClick = async () =>{
+      if(!checked){
+        setIssue(await addAssignee(issue.id, id));
+      }else{
+        setIssue(await removeAssignee(issue.id, id));
+      }
+      setCheck(!checked);
    }
+   useEffect(()=>{
+      if(issue.assignees.some((assignee)=>assignee.id===id)){
+         setCheck(true);
+      }
+   }, []);
   return(
      <AssignWrapper onClick={handleOnClick}>
         <AssigneeContent>

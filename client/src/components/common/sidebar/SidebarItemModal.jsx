@@ -23,7 +23,7 @@ const SidebarItemModal = ({title, header, component}) =>{
         <ModalTitle>{header}</ModalTitle>
         {title==='Assignees'? 
         component.map((item)=>(
-            <Assignee snsId={item.sns_id} profile={item.profile_image}></Assignee>
+            <Assignee id={item.id} snsId={item.sns_id} profile={item.profile_image}></Assignee>
         )):null}
        {title==='Labels'?
         component.map((item)=>(
