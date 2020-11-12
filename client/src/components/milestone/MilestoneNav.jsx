@@ -24,7 +24,7 @@ const OpenDiv = styled.div`
   cursor: pointer;
   font-weight: bold;
 `;
-const CloseDiv = styled.div`
+const Closediv = styled.div`
   margin-left: 5px;
   padding-left: 10px;
   cursor: pointer;
@@ -34,8 +34,8 @@ const MilestoneNav = ({ milestones }) => {
   const openMilestone = milestones.filter(
     (milestone) => milestone.state === 'open',
   ).length;
-  const closeMilestone = milestones.filter(
-    (milestone) => milestone.state === 'close',
+  const closedMilestone = milestones.filter(
+    (milestone) => milestone.state === 'closed',
   ).length;
   const { state, dispatch } = useContext(MilestoneContext);
   const onClickHandler = async (e) => {
@@ -46,8 +46,8 @@ const MilestoneNav = ({ milestones }) => {
     const openDiv = document.querySelector('.open');
     openDiv.style.fontWeight = 'normal';
 
-    const closeDiv = document.querySelector('.close');
-    closeDiv.style.fontWeight = 'normal';
+    const closediv = document.querySelector('.closed');
+    closediv.style.fontWeight = 'normal';
 
     e.target.style.fontWeight = 'bold';
     dispatch({
@@ -61,9 +61,9 @@ const MilestoneNav = ({ milestones }) => {
       <OpenDiv onClick={onClickHandler} className="open" title="open">
         {svg['Milestones']} {openMilestone} Open
       </OpenDiv>
-      <CloseDiv onClick={onClickHandler} className="close" title="close">
-        {svg['closeMilestones']} {closeMilestone} Closed
-      </CloseDiv>
+      <Closediv onClick={onClickHandler} className="closed" title="closed">
+        {svg['closedMilestones']} {closedMilestone} Closed
+      </Closediv>
     </MilestoneNavWrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React, { memo, useContext } from 'react';
 import styled from 'styled-components';
-import CloseLabel from './CloseLabel';
+import ClosedLabel from './ClosedLabel';
 import OpenLabel from './OpenLabel';
 import { getTimeInfo } from '../../../utils/time';
 import { IssueContext } from '../../../pages/IssueDetailPage';
@@ -30,7 +30,7 @@ const IssueDetailPageHeader = memo(() => {
       <IssueDetailHeaderWrapper>
         <TitleWrapper />
         <DescriptionWrapper>
-          {issue.state === 'close' ? <CloseLabel /> : <OpenLabel />}
+          {issue.state === 'closed' ? <ClosedLabel /> : <OpenLabel />}
           <div className="description">
             {issue.user.id} opened this issue {getTimeInfo(issue.created_at)}{' '}
             ·&nbsp;
