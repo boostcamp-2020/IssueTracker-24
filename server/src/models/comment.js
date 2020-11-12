@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(1000),
         allowNull: false,
       },
+      created_at: {
+        type: DataTypes.DATE,
+      },
     },
     {
       tableName: 'comment',

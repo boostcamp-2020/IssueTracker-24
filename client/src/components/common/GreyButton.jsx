@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -11,14 +11,17 @@ const Button = styled.button`
   font-weight: bold;
   padding: 0px 15px 0px 15px;
   cursor: pointer;
+  color: ${(props) => (props.color ? props.color : 'black')};
 `;
 
-const GreyButton = ({ text, func }) => {
+const GreyButton = memo(({ text, func, color }) => {
   return (
     <>
-      <Button onClick={func}>{text}</Button>
+      <Button onClick={func} color={color}>
+        {text}
+      </Button>
     </>
   );
-};
+});
 
 export default GreyButton;

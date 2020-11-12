@@ -4,6 +4,7 @@ const issueService = require('../services/issue');
 const getAllIssues = async (req, res, next) => {
   const issues = await Issue.findAll({
     attributes: ['id', 'title', 'content', 'state', 'created_at', 'closed_at'],
+    order: [['id', 'ASC']],
     include: [
       {
         model: User,
@@ -74,4 +75,13 @@ const patchIssue = async (req, res, next) => {
   const issue = await issueService.getIssue(id);
   return res.status(200).json(issue);
 };
-module.exports = { getAllIssues, createIssue, getIssue, patchIssue };
+
+const createComment = async (req, res, next) => {
+  const issueId = req.params.id;
+  const { content, user_id } = req.body;
+  const issue = await Issue.findByPk(issueId);
+  const { id } = await issue.createComment({ content, user_id });
+  const comment = await Comment.findByPk(id, { include: [{ model: User }] });
+  res.status(201).json(comment);
+};
+module.exports = { getAllIssues, createIssue, getIssue, patchIssue, createComment };

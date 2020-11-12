@@ -8,4 +8,5 @@ router.get('/', isAuth, issueController.getAllIssues);
 router.post('/', isAuth, issueController.createIssue);
 router.get('/:id', isAuth, issueController.getIssue);
 router.patch('/:id', isAuth, issueController.patchIssue);
+router.post('/:id/comments', isAuth, issueController.createComment);
 module.exports = router;
