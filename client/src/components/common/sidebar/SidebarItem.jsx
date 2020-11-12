@@ -80,7 +80,9 @@ const SidebarItem = ({ title, header, stateMsg, component }) => {
     }
     if (title === 'Labels') {
       if (issue.labels.length > 0) {
-        return issue.labels.map((item) => <Label label={item}></Label>);
+        return issue.labels.map((item) => (
+          <Label key={'label' + item.id} label={item}></Label>
+        ));
       } else {
         return `${stateMsg}`;
       }
