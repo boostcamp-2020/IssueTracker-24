@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { LabelsContext } from '../../pages/label-list/LabelListPage';
 import LabelItem from './LabelItem';
 import styled from 'styled-components';
+import LabelEditContainer from './LabelEditContainer';
 
 const LabelListContainerWrapper = styled.div``;
 const LabelListHeader = styled.div`
@@ -19,9 +20,13 @@ const LabelListHeader = styled.div`
 
 const LabelListContainer = () => {
   const { state } = useContext(LabelsContext);
-  const renderedLabelList = state.labels.map((label, index) => {
-    return <LabelItem key={'label' + index} label={label} />;
-  });
+  const renderedLabelList = state.labels.map((label, index) =>
+    label.edit ? (
+      <LabelEditContainer key={'edit' + index} label={label} />
+    ) : (
+      <LabelItem key={'label' + index} label={label} />
+    ),
+  );
 
   return (
     <LabelListContainerWrapper>

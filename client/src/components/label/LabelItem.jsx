@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { LabelsContext } from '../../pages/label-list/LabelListPage';
+import { CHANGE_LABEL_EDIT } from '../../pages/label-list/reducer';
 import SelectedLabel from '../common/SelectedLabel';
 import DeleteModal from './DeleteModal';
 
@@ -40,6 +42,11 @@ const LabelEdit = styled.div`
 `;
 
 const LabelItem = ({ label }) => {
+  const { dispatch } = useContext(LabelsContext);
+
+  const onClickEdit = () => {
+    dispatch({ type: CHANGE_LABEL_EDIT, id: label.id });
+  }
   const [deleteModalDisplay, setDeleteModalDisplay] = useState(false);
   const onDeleteBtnClick = () => {
     setDeleteModalDisplay(!deleteModalDisplay);
@@ -51,7 +58,7 @@ const LabelItem = ({ label }) => {
         <SelectedLabel label={label} />
       </LabelTitle>
       <LabelDescription>{label.description}</LabelDescription>
-      <LabelEdit>Edit</LabelEdit>
+      <LabelEdit onClick={onClickEdit}>Edit</LabelEdit>   
       <div className="delete-btn" onClick={onDeleteBtnClick}>
         Delete
       </div>

@@ -12,6 +12,9 @@ const Button = styled.button`
   padding: 0px 15px 0px 15px;
   cursor: pointer;
   color: ${(props) => (props.color ? props.color : 'black')};
+  &: hover {
+    background-color: #f3f4f6;
+  }
 `;
 
 const GreyButton = memo(({ text, func, color }) => {
