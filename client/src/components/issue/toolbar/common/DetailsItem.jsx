@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   border-bottom: 1px solid #eaecef;
-  height: 32px;
+  min-height: 32px;
   box-sizing: border-box;
   padding: 5px;
   padding-left: 20px;
