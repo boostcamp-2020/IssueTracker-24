@@ -7,6 +7,10 @@ const MilestoneWrapper = styled.div`
  .dueDate{
      margin-left:10px;
  }
+ &:hover{
+  background-color:#0366D6;
+  color:#fff;
+}
 `;
 const MilestoneContent = styled.div`
   display:flex;

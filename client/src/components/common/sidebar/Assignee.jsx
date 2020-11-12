@@ -8,10 +8,13 @@ const AssignWrapper = styled.div`
    height:30px;
    border-bottom : 1px solid #eaecef;
    cursor:pointer;
+   &:hover{
+      background-color:#0366D6;
+      color:#fff;
+   }
 `;
 
 const Assignee = ({snsId, profile}) =>{
-  console.log(profile);
   return(
      <AssignWrapper>
          <ProfileImage image={profile} size='15'></ProfileImage>
