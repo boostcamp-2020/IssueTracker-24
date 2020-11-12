@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Assignee from './Assignee';
 import Label from './Label';
 import Milestone from './milestone';
-import {getDueInfo} from '../../../utils/time';
+
 const SidebarItemModalWrapper = styled.div`
   position:absolute;
   width:100%;
-  height:300px;
+  height:500px;
   background-color:#fff;
   z-index:2;
   border:1px solid #e4e6e9;
@@ -18,7 +18,6 @@ const ModalTitle = styled.div`
 `;
 
 const SidebarItemModal = ({title, header, component}) =>{
-  console.log(component);
   return(
     <SidebarItemModalWrapper>
         <ModalTitle>{header}</ModalTitle>
