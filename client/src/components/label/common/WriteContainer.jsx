@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const WriteWrapper = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => (props.edit ? '0px' : '20px')};
   background-color: #f6f8fa;
   border: 1px solid #eaecef;
   border-radius: 7px;
@@ -13,8 +13,8 @@ const WriteWrapper = styled.div`
   flex-direction: column;
 `;
 
-const WriteContainer = ({ children }) => {
-  return <WriteWrapper>{children}</WriteWrapper>;
+const WriteContainer = ({ edit, children }) => {
+  return <WriteWrapper edit={edit}>{children}</WriteWrapper>;
 };
 
 export default WriteContainer;
