@@ -18,4 +18,18 @@ const createLabel = async (req, res, next) => {
     next(err);
   }
 };
-module.exports = { getAllLabels, createLabel };
+
+const patchLabel = async (req, res, next) => {
+  const { id } = req.params;
+  const { title, description, color } = req.body;
+  const patchedLabel = {};
+  if (title) patchedLabel.title = title;
+  if (description) patchedLabel.description = description;
+  if (color) patchedLabel.color = color;
+
+  await Label.update(patchedLabel, { where: { id } });
+  const label = await Label.findByPk(id, { attributes: ['id', 'title', 'description', 'color'] });
+  return res.status(200).json(label);
+};
+
+module.exports = { getAllLabels, createLabel, patchLabel };
