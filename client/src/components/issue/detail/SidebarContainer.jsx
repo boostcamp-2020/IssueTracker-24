@@ -5,15 +5,16 @@ const Container = styled.div`
   display: flex;
   width: 29%;
   flex-direction: column;
-  border: 1px solid black;
-  min-height: 500px;
+  padding-left: 5%;
+  color: #586069;
+  font-size: 13px;
 `;
 
 const SideBarContainer = () => {
   return (
-   <Container>
+    <Container>
       <Sidebar></Sidebar>
-   </Container>
+    </Container>
   );
 };
 
