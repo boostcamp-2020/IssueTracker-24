@@ -4,6 +4,7 @@ import Label from '../common/Label';
 import { getTimeInfo } from '../../utils/time';
 import svg from '../../utils/svg';
 import { useHistory } from 'react-router-dom';
+import { getContrastYIQ } from '../../utils/color';
 const IssueContentWrapper = styled.div`
   .issue-title {
     font-weight: bold;
@@ -17,6 +18,13 @@ const IssueContentWrapper = styled.div`
   .issue-content {
     margin-left: 20px;
     color: grey;
+  }
+  .milestone-title {
+    margin-left: 4px;
+  }
+  svg {
+    position: relative;
+    top: 2px;
   }
 `;
 
@@ -55,8 +63,12 @@ const IssueContent = memo(({ issue }) => {
                 )}`}
           </span>
           &nbsp;&nbsp;
-          {issue.milestone && svg['Milestones']}
-          {issue.milestone && <span>{issue.milestone.title}</span>}
+          <span className="svg-container">
+            {issue.milestone && svg['Milestones']}
+          </span>
+          {issue.milestone && (
+            <span className="milestone-title">{issue.milestone.title}</span>
+          )}
         </div>
       </div>
     </IssueContentWrapper>
