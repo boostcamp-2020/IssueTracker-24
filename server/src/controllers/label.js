@@ -19,6 +19,18 @@ const createLabel = async (req, res, next) => {
   }
 };
 
+const deleteLabel = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const label = await Label.destroy({
+      where: { id },
+    });
+    return res.status(201).json(label);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const patchLabel = async (req, res, next) => {
   const { id } = req.params;
   const { title, description, color } = req.body;
@@ -32,4 +44,4 @@ const patchLabel = async (req, res, next) => {
   return res.status(200).json(label);
 };
 
-module.exports = { getAllLabels, createLabel, patchLabel };
+module.exports = { getAllLabels, createLabel, patchLabel, deleteLabel };

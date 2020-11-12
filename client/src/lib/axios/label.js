@@ -1,9 +1,10 @@
-import { getData, postData, patchData } from './request';
+import { getData, postData, patchData, deleteData } from './request';
 
 const url = {
   GET_ALL_LABELS: 'labels',
   POST_LABEL: 'labels',
   PATCH_LABEL: 'labels/',
+  DELETE_LABEL: 'labels/',
 };
 
 export const getAllLabels = async () => {
@@ -18,5 +19,10 @@ export const createLabel = async (body) => {
 
 export const patchLabel = async (id, body) => {
   const label = await patchData(`${url.PATCH_LABEL}${id}`, body);
+  return label; 
+};
+
+export const deleteLabel = async (id) => {
+  const label = await deleteData(`${url.DELETE_LABEL}${id}`);
   return label;
 };

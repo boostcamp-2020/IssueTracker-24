@@ -4,6 +4,7 @@ export const INIT_DATA = 'init data';
 export const RENEW_LABEL = 'renew label';
 export const CHANGE_LABEL_EDIT = 'change label edit';
 export const EDIT_LABEL = 'edit label';
+export const REMOVE_LABEL = 'remove label';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -36,6 +37,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         labels: changedLabels,
+      };
+    }
+    case REMOVE_LABEL: {
+      return {
+        ...state,
+        labels: state.labels.filter((label) => label.id !== action.id),
       };
     }
   }
