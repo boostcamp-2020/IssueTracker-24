@@ -28,13 +28,8 @@ const SidebarItem = ({title, header, stateMsg, component}) =>{
    console.log(issue.assignees);
    const handleOnClick = () =>{
        setShow(!show);
-     
    }
-   useEffect(()=>{
-    if(issue.user.sns_id && title==='Assignees'){
-      setStateMsg(issue.user.sns_id);
-    }
-   },[]);
+
    const sidebarSeleteTitle = () =>{
       if(title==='Assignees'){
         return(

@@ -30,14 +30,20 @@ const CancelWrapper = styled.div`
 `;
 const AssigneeContent = styled.div`
   display: flex;
-  justify-content:space-between;
-  width: 100%;
+  flex-basis:60%;
 `;
 const AssigneeHeader = styled.div`
   display:flex;
   justify-content:center;
+  margin-top:5px;
+  margin-left:5px;
+  &:hover{
+     background-color:0366D6;
+  }
 `;
 const ProfileId = styled.div`
+font-size:18px;
+margin-left:5px;
 `;
 
 const Assignee = ({id, snsId, profile}) =>{
@@ -65,7 +71,6 @@ const Assignee = ({id, snsId, profile}) =>{
              <ProfileImage image={profile} size='15'></ProfileImage>
              <ProfileId>{snsId}</ProfileId>
            </AssigneeHeader>
-           <CancelWrapper className={checkDisplay}>{svg.cancelButton}</CancelWrapper>
         </AssigneeContent>  
      </AssignWrapper>
   );

@@ -6,15 +6,18 @@ import Milestone from './milestone';
 
 const SidebarItemModalWrapper = styled.div`
   position:absolute;
+  border-radius:5px;
   width:100%;
-  height:500px;
   background-color:#fff;
   z-index:2;
   border:1px solid #e4e6e9;
+  box-shadow: 1px 1px 5px 0px #e7e7e7;
 `;
 const ModalTitle = styled.div`
-  margin-top:10px;
-  border-bottom : 1px solid #eaecef;
+ font-size: 12px;
+ font-weight: bold;
+ padding: 5px 0px 5px 8px; 
+ border-bottom: 1px solid #eaecef;
 `;
 
 const SidebarItemModal = ({title, header, component}) =>{
