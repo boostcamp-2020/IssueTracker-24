@@ -108,4 +108,25 @@ const removeAssignee = async (req, res, next) => {
     return next(err);
   }
 };
-module.exports = { getAllIssues, createIssue, getIssue, patchIssue, createComment, addAssignee, removeAssignee };
+
+const addLabel = async (req, res, next) => {
+  const { issueId, labelId } = req.params;
+  try {
+    const issue = await Issue.findByPk(issueId);
+    await issue.addLabels(labelId);
+    const issueResult = await issueService.getIssue(issueId);
+    return res.status(200).json(issueResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+module.exports = {
+  getAllIssues,
+  createIssue,
+  getIssue,
+  patchIssue,
+  createComment,
+  addAssignee,
+  removeAssignee,
+  addLabel,
+};
