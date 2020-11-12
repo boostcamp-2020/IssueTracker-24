@@ -85,7 +85,7 @@ const createComment = async (req, res, next) => {
   res.status(201).json(comment);
 };
 
-const addAssignees = async (req, res, next) => {
+const addAssignee = async (req, res, next) => {
   const { issueId, userId } = req.params;
   try {
     const issue = await Issue.findByPk(issueId);
@@ -96,4 +96,16 @@ const addAssignees = async (req, res, next) => {
     return next(err);
   }
 };
-module.exports = { getAllIssues, createIssue, getIssue, patchIssue, createComment, addAssignees };
+
+const removeAssignee = async (req, res, next) => {
+  const { issueId, userId } = req.params;
+  try {
+    const issue = await Issue.findByPk(issueId);
+    await issue.removeAssignees(userId);
+    const issueResult = await issueService.getIssue(issueId);
+    return res.status(200).json(issueResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+module.exports = { getAllIssues, createIssue, getIssue, patchIssue, createComment, addAssignee, removeAssignee };
