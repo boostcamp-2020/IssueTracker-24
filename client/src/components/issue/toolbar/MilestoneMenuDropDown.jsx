@@ -55,7 +55,7 @@ const MilestoneMenuDropDown = ({ setShowMilestoneMenu }) => {
   };
 
   const onClickDetailsItem = (e) => {
-    const detailsItem = e.target.closedst('.milestone-item');
+    const detailsItem = e.target.closest('.milestone-item');
     dispatch({
       type: FILTER_ISSUES_BY_MILESTONE,
       milestone: detailsItem.dataset.name,

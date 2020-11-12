@@ -103,7 +103,7 @@ const MarkAsTool = () => {
         <DetailsMenuDropDown>
           <DetailsItem>Actions</DetailsItem>
           <DetailsItem onClick={onClickOpenOrClosed}>open</DetailsItem>
-          <DetailsItem onClick={onClickOpenOrClosed}>close</DetailsItem>
+          <DetailsItem onClick={onClickOpenOrClosed}>closed</DetailsItem>
         </DetailsMenuDropDown>
       )}
     </>
