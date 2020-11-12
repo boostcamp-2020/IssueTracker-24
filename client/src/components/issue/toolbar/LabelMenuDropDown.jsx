@@ -15,6 +15,7 @@ const LabelWrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    height: 20px;
   }
 `;
 

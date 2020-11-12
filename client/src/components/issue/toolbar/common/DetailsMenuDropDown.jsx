@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   left: ${(props) => props.left};
   right: ${(props) => props.right};
+  overflow-y: ${(props) => props.overflow};
   width: 250px;
   position: absolute;
   top: 70px;
@@ -17,8 +18,16 @@ const Wrapper = styled.div`
 `;
 
 const DetailsMenuDropDown = ({ left, right, children }) => {
+  const [overflow, setOverflow] = useState('auto');
+  const wrapperRef = useRef();
+  useEffect(() => {
+    if (wrapperRef.current.clientHeight > 300) {
+      wrapperRef.current.style.height = '300px';
+      setOverflow('scroll');
+    }
+  }, []);
   return (
-    <Wrapper left={left} right={right}>
+    <Wrapper ref={wrapperRef} left={left} right={right} overflow={overflow}>
       {children}
     </Wrapper>
   );
