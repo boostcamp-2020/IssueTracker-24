@@ -23,9 +23,7 @@ const NavigationWrapper = styled.div`
     margin-right: 5px;
   }
 `;
-const NavigationItemTitle = styled.div`
-  
-`;
+const NavigationItemTitle = styled.div``;
 const NavigtaionItemsNum = styled.div`
   border-radius: 20px;
   background-color: #e4e7ea;
@@ -35,11 +33,12 @@ const NavigtaionItemsNum = styled.div`
   font-size: 12px;
 `;
 
-const Navigation = ({ type, title, num, history}) => {
-  const historyHandler = () => {
-     if(type==="milestones")history.push('/milestones');
-     else history.push('/labels');
-  } 
+const Navigation = ({ type, title, num, history }) => {
+  const historyHandler = (e) => {
+    if (type === 'milestones') history.push('/milestones');
+    else history.push('/labels');
+    e.stopPropagation();
+  };
   return (
     <NavigationWrapper onClick={historyHandler}>
       {svg[title]}
