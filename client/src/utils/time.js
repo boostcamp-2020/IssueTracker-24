@@ -52,7 +52,7 @@ export const getFormattedDate = ({ date, format }) => {
   if (format === '-') {
     const year = date.getFullYear();
     const month = String(date.getMonth()).padStart(2, 0);
-    const day = String(date.getDate()).padStart(2, 0);
+    const day = String(date.getDate()+1).padStart(2, 0);
     return `${year}-${month}-${day}`;
   }
 };
