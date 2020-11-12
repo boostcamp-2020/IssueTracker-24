@@ -1,4 +1,4 @@
-import { getData, patchData, postData } from './request';
+import { getData, patchData, postData, putData, deleteData } from './request';
 
 const url = {
   GET_ALL_ISSUES: 'issues',
@@ -34,5 +34,10 @@ export const createIssue = async (body) => {
 
 export const addAssginee = async (issueId, userId) => {
   const issue = await putData(`issues/${issueId}/users/${userId}`);
+  return issue;
+};
+
+export const removeAssginee = async (issueId, userId) => {
+  const issue = await deleteData(`issues/${issueId}/users/${userId}`);
   return issue;
 };
