@@ -54,7 +54,6 @@ const Label = ({color, title, description}) =>{
              <CancelWrapper className={checkDisplay}>{svg.cancelButton}</CancelWrapper>
           </LabelOptionContent> 
           <LabelOptionDescription>{description}</LabelOptionDescription>
-       
         </LabelWrapper>
   );
 }

@@ -7,7 +7,7 @@ import Milestone from './milestone';
 const SidebarItemModalWrapper = styled.div`
   position:absolute;
   width:100%;
-  height:300px;
+  height:500px;
   background-color:#fff;
   z-index:2;
   border:1px solid #e4e6e9;
