@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { LabelsContext } from '../../pages/label-list/LabelListPage';
+import { CHANGE_LABEL_EDIT } from '../../pages/label-list/reducer';
 import SelectedLabel from '../common/SelectedLabel';
 
 const LabelItemWrapper = styled.div`
@@ -36,13 +38,19 @@ const LabelDelete = styled.div`
 `;
 
 const LabelItem = ({ label }) => {
+  const { dispatch } = useContext(LabelsContext);
+
+  const onClickEdit = () => {
+    dispatch({ type: CHANGE_LABEL_EDIT, id: label.id });
+  };
+
   return (
     <LabelItemWrapper>
       <LabelTitle>
         <SelectedLabel label={label} />
       </LabelTitle>
       <LabelDescription>{label.description}</LabelDescription>
-      <LabelEdit>Edit</LabelEdit>
+      <LabelEdit onClick={onClickEdit}>Edit</LabelEdit>
       <LabelDelete>Delete</LabelDelete>
     </LabelItemWrapper>
   );
