@@ -24,15 +24,22 @@ const MilestoneContent = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 5px;
 `;
-const CheckWrapper = styled.div``;
-const CancelWrapper = styled.div``;
+const CheckWrapper = styled.div`
+  flex-basis: 9%;
+`;
+const CancelWrapper = styled.div`
+  flex-basis: 9%;
+`;
 const MilestoneTitle = styled.div`
   color: black;
   font-size: 15px;
 `;
 const MilestoneDueDate = styled.div``;
-const MilestoneHeader = styled.div``;
+const MilestoneHeader = styled.div`
+  flex-basis: 80%;
+`;
 
 const Milestone = ({ milestone, setShow }) => {
   const [checked, setCheck] = useState(false);

@@ -5,6 +5,8 @@ import DropDownIcon from '../../common/DropDownIcon';
 import { axiosAll } from '../../../lib/axios/request';
 import { patchIssue, getAllIssues } from '../../../lib/axios/issue';
 import { CHANGE_ISSUES_OPEN_CLOSED } from '../../../pages/issue-list/reducer';
+import DetailsMenuDropDown from './common/DetailsMenuDropDown';
+import DetailsItem from './common/DetailsItem';
 
 const DetailsButton = styled.button`
   font-size: 15px;
@@ -18,40 +20,6 @@ const DetailsButton = styled.button`
   &:hover {
     cursor: pointer;
     color: black;
-  }
-`;
-
-const DetailsMenuDropDown = styled.div`
-  width: 140px;
-  position: absolute;
-  top: 70px;
-  left: -20px;
-  z-index: 10;
-  border: 1px solid #eaecef;
-  margin-top: -30px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 4px;
-`;
-
-const DetailsItem = styled.div`
-  border-bottom: 1px solid #eaecef;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  &:hover {
-    background-color: #e9e9e9;
-  }
-  &:nth-child(1) {
-    font-weight: 600;
-    background-color: #fafbfc;
-    cursor: auto;
-    &:hover {
-      background-color: #fafbfc;
-    }
   }
 `;
 
@@ -100,7 +68,7 @@ const MarkAsTool = () => {
         <DropDownIcon />
       </DetailsButton>
       {isShowMarkAs && (
-        <DetailsMenuDropDown>
+        <DetailsMenuDropDown left={'-120px'}>
           <DetailsItem>Actions</DetailsItem>
           <DetailsItem onClick={onClickOpenOrClosed}>open</DetailsItem>
           <DetailsItem onClick={onClickOpenOrClosed}>closed</DetailsItem>
