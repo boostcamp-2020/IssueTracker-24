@@ -20,7 +20,7 @@ const ModalTitle = styled.div`
   font-weight: 550;
 `;
 
-const SidebarItemModal = ({ title, header, component }) => {
+const SidebarItemModal = ({ title, header, component, setShow }) => {
   return (
     <SidebarItemModalWrapper>
       <ModalTitle>{header}</ModalTitle>
@@ -45,7 +45,11 @@ const SidebarItemModal = ({ title, header, component }) => {
         : null}
       {title === 'Milestone'
         ? component.map((item) => (
-            <Milestone key={'milestone' + item.id} milestone={item}></Milestone>
+            <Milestone
+              key={'milestone' + item.id}
+              milestone={item}
+              setShow={setShow}
+            ></Milestone>
           ))
         : null}
     </SidebarItemModalWrapper>

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { getDueInfo } from '../../../utils/time';
 import svg from '../../../utils/svg';
+import { IssueContext } from '../../../pages/IssueDetailPage';
+
 const MilestoneWrapper = styled.div`
   cursor: pointer;
   border-bottom: 1px solid #eaecef;
@@ -30,11 +32,19 @@ const MilestoneTitle = styled.div`
 `;
 const MilestoneDueDate = styled.div``;
 const MilestoneHeader = styled.div``;
-const Milestone = ({ milestone }) => {
+
+const Milestone = ({ milestone, setShow }) => {
   const [checked, setCheck] = useState(false);
+  const { issue } = useContext(IssueContext);
   const checkDisplay = checked ? 'display-visible' : 'display-hidden';
+
+  useEffect(() => {
+    if (issue.milestone.id === Number(milestone.id)) setCheck(true);
+  }, []);
+
   const handleOnClick = () => {
     setCheck(!checked);
+    setShow(false);
   };
   return (
     <MilestoneWrapper onClick={handleOnClick}>
