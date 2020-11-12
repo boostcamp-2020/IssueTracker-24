@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
 import ProfileImage from '../../common/ProfileImage';
 import { FILTER_ISSUES_BY_AUTHOR } from '../../../pages/issue-list/reducer';
