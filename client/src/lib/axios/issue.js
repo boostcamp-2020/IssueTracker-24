@@ -32,12 +32,12 @@ export const createIssue = async (body) => {
   return issue;
 };
 
-export const addAssginee = async (issueId, userId) => {
+export const addAssignee = async (issueId, userId) => {
   const issue = await putData(`issues/${issueId}/users/${userId}`);
   return issue;
 };
 
-export const removeAssginee = async (issueId, userId) => {
+export const removeAssignee = async (issueId, userId) => {
   const issue = await deleteData(`issues/${issueId}/users/${userId}`);
   return issue;
 };
