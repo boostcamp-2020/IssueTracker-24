@@ -41,28 +41,11 @@ const CancelWrapper = styled.div`
   flex-grow: 1;
   text-align: center;
 `;
-const months = [
-  'null',
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
 
 const MilestoneOption = ({ option, setShow, set, get }) => {
   const checkDisplay =
     (get && get.id) === option.id ? 'display-visible' : 'display-hidden';
-  const getYearMonthDate = (str) =>
-    str ? str.split('T')[0].split('-') : [null, null, null];
-  const [year, month, date] = getYearMonthDate(option.due_date);
+
   const handleOnClick = () => {
     if (get) {
       if (get.id === option.id) {

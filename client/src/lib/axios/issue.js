@@ -1,9 +1,10 @@
-import { getData, patchData } from './request';
+import { getData, patchData, postData } from './request';
 
 const url = {
   GET_ALL_ISSUES: 'issues',
   GET_ISSUES: 'issues/',
   PATCH_ISSUE: 'issues/',
+  CREATE_ISSUE: 'issues',
 };
 
 export const getAllIssues = async () => {
@@ -18,5 +19,10 @@ export const getIssue = async (id) => {
 
 export const patchIssue = async (id, body) => {
   const issue = await patchData(`${url.PATCH_ISSUE}${id}`, body);
+  return issue;
+};
+
+export const createIssue = async (body) => {
+  const issue = await postData(url.CREATE_ISSUE, body);
   return issue;
 };
