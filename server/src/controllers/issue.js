@@ -47,7 +47,7 @@ const createIssue = async (req, res, next) => {
 
   if (assignees) {
     const promises = assignees.map((assignee) => {
-      return issue.addUsers(assignee.id);
+      return issue.addAssignees(assignee.id);
     });
     Promise.all(promises);
   }
