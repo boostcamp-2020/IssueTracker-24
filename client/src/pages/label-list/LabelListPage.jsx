@@ -9,6 +9,7 @@ import GreenButton from '../../components/common/GreenButton';
 import PageBody from '../../components/label/PageBody';
 import LabelCreateContainer from '../../components/label/LabelCreateContainer';
 import styled from 'styled-components';
+import Spinner from '../../components/common/Spinner';
 
 const NavigationWrapper = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ const initialState = {
 };
 
 const LabelListPage = () => {
+  const [isCompleteRequest, setIsCompleteRequest] = useState(false);
   const [isCreate, setCreate] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -36,9 +38,12 @@ const LabelListPage = () => {
       type: INIT_DATA,
       data: { issues, labels },
     });
+    setIsCompleteRequest(true);
   }, []);
 
   const onClickCreate = () => setCreate(!isCreate);
+
+  if (!isCompleteRequest) return <Spinner />;
 
   return (
     <LabelsContext.Provider value={{ state, dispatch }}>
