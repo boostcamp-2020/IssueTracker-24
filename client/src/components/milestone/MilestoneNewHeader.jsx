@@ -26,11 +26,11 @@ const MilestoneNewHeader = memo(() => {
     <Header>
       <h2>New milestone</h2>
       <Description>
-        <span class="grey">
+        <span className="grey">
           Create a new milestone to help organize your issues and pull requests.
           Learn more about
         </span>
-        <span class="blue"> milestones and issues.</span>
+        <span className="blue"> milestones and issues.</span>
       </Description>
     </Header>
   );
