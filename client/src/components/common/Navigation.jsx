@@ -7,7 +7,7 @@ const NavigationWrapper = styled.div`
   display: flex;
 `;
 
-const Navigation = ({ cur }) => {
+const Navigation = ({ cur, labelsNum, milestonesNum }) => {
   const history = useHistory();
 
   const onClickLabels = (e) => {
@@ -22,11 +22,17 @@ const Navigation = ({ cur }) => {
 
   return (
     <NavigationWrapper>
-      <NavigationItem onClick={onClickLabels} category={'Labels'} cur={cur} />
+      <NavigationItem
+        onClick={onClickLabels}
+        category={'Labels'}
+        cur={cur}
+        num={labelsNum}
+      />
       <NavigationItem
         onClick={onClickMilestones}
         category={'Milestones'}
         cur={cur}
+        num={milestonesNum}
       />
     </NavigationWrapper>
   );

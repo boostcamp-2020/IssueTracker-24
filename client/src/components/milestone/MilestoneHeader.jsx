@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import MilestoneSelectMenu from '../milestone/MilestoneSelectMenu';
 import Navigation from '../common/Navigation';
 import GreenButton from '../common/GreenButton';
 import { useHistory } from 'react-router-dom';
@@ -25,7 +24,7 @@ const MilestoneHeader = () => {
   return (
     <MilestoneHeaderWrapper>
       <NavigationWrapper>
-        <Navigation cur={'milestone'} />
+        <Navigation cur={'milestones'} />
         <GreenButton text="New Milestones" func={MilestoneCreate} />
       </NavigationWrapper>
     </MilestoneHeaderWrapper>
