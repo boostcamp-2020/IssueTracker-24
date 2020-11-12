@@ -35,8 +35,9 @@ const TitleWrapper = styled.div`
 
 const IssueContent = memo(({ issue }) => {
   const history = useHistory();
-  const moveIssueDetailPage = () => {
+  const moveIssueDetailPage = (e) => {
     history.push(`/issues/${issue.id}`);
+    e.stopPropagation();
   };
   return (
     <IssueContentWrapper>
