@@ -18,7 +18,7 @@ const DeleteModalWrapper = styled.div`
     padding: 0 20px;
     background: white;
     width: 50%;
-    height: 140px;
+    height: 135px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

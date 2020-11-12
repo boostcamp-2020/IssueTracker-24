@@ -47,7 +47,7 @@ const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
   }, []);
 
   useEffect(() => {
-    if (!show && checked.length > 0) {
+    if (!show) {
       dispatch({
         type,
         toAdd: checked,
