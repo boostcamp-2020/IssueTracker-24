@@ -120,6 +120,19 @@ const addLabel = async (req, res, next) => {
     return next(err);
   }
 };
+
+const removeLabel = async (req, res, next) => {
+  const { issueId, labelId } = req.params;
+  try {
+    const issue = await Issue.findByPk(issueId);
+    await issue.removeLabels(labelId);
+    const issueResult = await issueService.getIssue(issueId);
+    return res.status(200).json(issueResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 module.exports = {
   getAllIssues,
   createIssue,
@@ -129,4 +142,5 @@ module.exports = {
   addAssignee,
   removeAssignee,
   addLabel,
+  removeLabel,
 };
