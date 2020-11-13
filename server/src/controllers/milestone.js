@@ -1,8 +1,9 @@
 const { Milestone } = require('../models');
+const responseCode = require('../utils/response-code');
 
 const getAllMilestone = async (req, res, next) => {
   const milestones = await Milestone.findAll({});
-  res.status(200).json(milestones);
+  res.status(responseCode.RESPONSE_OK).json(milestones);
 };
 
 const createMilestone = async (req, res, next) => {
@@ -14,7 +15,7 @@ const createMilestone = async (req, res, next) => {
       due_date: due_date ? new Date(due_date) : null,
       state: 'open',
     });
-    return res.status(201).json(milestone);
+    return res.status(responseCode.RESPONSE_CREATED).json(milestone);
   } catch (err) {
     next(err);
   }
@@ -26,7 +27,7 @@ const deleteMilestone = async (req, res, next) => {
     const milestone = await Milestone.destroy({
       where: { id },
     });
-    return res.status(201).json(milestone);
+    return res.status(responseCode.RESPONSE_OK).json(milestone);
   } catch (err) {
     next(err);
   }
@@ -36,7 +37,7 @@ const getMilestone = async (req, res, next) => {
   const { id } = req.params;
   try {
     const milestone = await Milestone.findByPk(id, { attributes: ['id', 'title', 'description', 'due_date', 'state'] });
-    return res.status(200).json(milestone);
+    return res.status(responseCode.RESPONSE_OK).json(milestone);
   } catch (err) {
     next(err);
   }
@@ -55,7 +56,7 @@ const updateMilestone = async (req, res, next) => {
     { where: { id } },
   );
   const milestone = await Milestone.findByPk(id, { attributes: ['id', 'title', 'description', 'due_date', 'state'] });
-  return res.status(200).json(milestone);
+  return res.status(responseCode.RESPONSE_OK).json(milestone);
 };
 
 const patchMilestone = async (req, res, next) => {
@@ -69,8 +70,7 @@ const patchMilestone = async (req, res, next) => {
 
   await Milestone.update(patchedMilestone, { where: { id } });
   const milestone = await Milestone.findByPk(id, { attributes: ['id', 'title', 'description', 'due_date', 'state'] });
-  return res.status(200).json(milestone);
+  return res.status(responseCode.RESPONSE_OK).json(milestone);
 };
 
 module.exports = { getAllMilestone, createMilestone, getMilestone, updateMilestone, patchMilestone, deleteMilestone };
-

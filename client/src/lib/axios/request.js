@@ -62,7 +62,6 @@ const patchData = async (url, body) => {
 
 const putData = async (url, body) => {
   const options = getOptions(body);
-
   try {
     const response = await axios.put(url, body, options);
     return response.data;

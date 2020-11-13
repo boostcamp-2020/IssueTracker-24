@@ -6,6 +6,9 @@ import { IssueContext } from '../../../pages/IssueDetailPage';
 import ProfileImage from '../ProfileImage';
 import ProgressBar from '../../issue/new/sidebar/ProgressBar';
 import { getAllIssues } from '../../../lib/axios/issue';
+import Label from '../../common/Label';
+import { addAssignee } from '../../../lib/axios/issue';
+import { AppContext } from '../../../App';
 
 const SidebarItemWrapper = styled.div`
   position: relative;
@@ -13,6 +16,12 @@ const SidebarItemWrapper = styled.div`
   padding-bottom: 16px;
   width: 100%;
   border-bottom: 1px solid #eaecef;
+  .self {
+    cursor: pointer;
+    &:hover {
+      color: blue;
+    }
+  }
 `;
 const SidebarStateMsg = styled.div`
   margin-top: 10px;
@@ -31,9 +40,9 @@ const ProgressBarWrapper = styled.div`
 const SidebarItem = ({ title, header, stateMsg, component }) => {
   const [stateMessage, setStateMsg] = useState(stateMsg);
   const { issue, setIssue } = useContext(IssueContext);
+  const { currentUser } = useContext(AppContext);
   const [show, setShow] = useState(false);
   const [issues, setIssues] = useState([]);
-
   const handleOnClick = () => {
     setShow(!show);
   };
@@ -42,20 +51,30 @@ const SidebarItem = ({ title, header, stateMsg, component }) => {
     setIssues(issues);
   }, []);
 
+  const onClickAssignSelf = async () => {
+    setIssue(await addAssignee(issue.id, currentUser.id));
+  };
   const sidebarSeleteTitle = () => {
     if (title === 'Assignees') {
-      return issue.assignees.length > 0
-        ? issue.assignees.map((item) => (
-            <SidebarContainer key={'assignee-item' + item.id}>
-              <ProfileImage
-                ofileImage
-                image={item.profile_image}
-                size={15}
-              ></ProfileImage>
-              <SidebarUserName>{item.sns_id}</SidebarUserName>
-            </SidebarContainer>
-          ))
-        : `${stateMsg}`;
+      return issue.assignees.length > 0 ? (
+        issue.assignees.map((item) => (
+          <SidebarContainer key={'assignee-item' + item.id}>
+            <ProfileImage
+              ofileImage
+              image={item.profile_image}
+              size={15}
+            ></ProfileImage>
+            <SidebarUserName>{item.sns_id}</SidebarUserName>
+          </SidebarContainer>
+        ))
+      ) : (
+        <>
+          <span>{stateMsg}</span>
+          <span className="self" onClick={onClickAssignSelf}>
+            -assign yourself
+          </span>
+        </>
+      );
     }
     if (title === 'Milestone') {
       if (issue.milestone) {
@@ -75,6 +94,15 @@ const SidebarItem = ({ title, header, stateMsg, component }) => {
             <div>{issue.milestone.title}</div>
           </ProgressBarWrapper>
         );
+      } else {
+        return `${stateMsg}`;
+      }
+    }
+    if (title === 'Labels') {
+      if (issue.labels.length > 0) {
+        return issue.labels.map((item) => (
+          <Label key={'label' + item.id} label={item}></Label>
+        ));
       } else {
         return `${stateMsg}`;
       }

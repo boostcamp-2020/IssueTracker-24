@@ -44,7 +44,6 @@ const IssueListNewPage = () => {
   const [isCompleteRequest, setIsCompleteRequest] = useState(false);
   const { currentUser } = useContext(AppContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-
   useEffect(async () => {
     const [issues, labels, milestones, users] = await Promise.all([
       getAllIssues(),

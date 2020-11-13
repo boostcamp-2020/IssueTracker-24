@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import styled from 'styled-components';
 
 const DropdownWrapper = styled.div`
+  overflow-y: ${(props) => props.overflow};
   position: absolute;
   top: 40px;
   border: 1px solid #eaecef;
@@ -11,6 +12,7 @@ const DropdownWrapper = styled.div`
   width: 105%;
   min-width: 240px;
   z-index: 2;
+  max-height: 300px;
 
   &.display-block {
     display: block;
@@ -33,46 +35,60 @@ const DropdownHeader = styled.div`
   border-bottom: 1px solid #eaecef;
 `;
 
-const Dropdown = ({
-  show,
-  setShow,
-  add,
-  remove,
-  added,
-  set,
-  get,
-  header,
-  component,
-  data,
-}) => {
-  const dropdownDisplay = show ? 'display-block' : 'display-none';
-  const Component = component;
-  const options = data.map((option, index) => {
-    const isAdded = added.some((assignee) => assignee.id === option.id);
+const Dropdown = memo(
+  ({
+    show,
+    setShow,
+    add,
+    remove,
+    added,
+    set,
+    get,
+    header,
+    component,
+    data,
+  }) => {
+    const [overflow, setOverflow] = useState('auto');
+    const wrapperRef = useRef();
+    const dropdownDisplay = show ? 'display-block' : 'display-none';
+    const Component = component;
+    const options = data.map((option, index) => {
+      const isAdded = added.some((assignee) => assignee.id === option.id);
+      return (
+        <div className="dropdown-option" key={'dropdown' + index}>
+          <Component
+            option={option}
+            setShow={setShow}
+            add={add}
+            remove={remove}
+            set={set}
+            get={get}
+            padding={5}
+            size={18}
+            isAdded={isAdded}
+          />
+        </div>
+      );
+    });
+
+    useEffect(() => {
+      if (wrapperRef.current.clientHeight > 300) {
+        setOverflow('scroll');
+        wrapperRef.current.style.height = '300px';
+      }
+    }, [show]);
 
     return (
-      <div className="dropdown-option" key={'dropdown' + index}>
-        <Component
-          option={option}
-          setShow={setShow}
-          add={add}
-          remove={remove}
-          set={set}
-          get={get}
-          padding={5}
-          size={18}
-          isAdded={isAdded}
-        />
-      </div>
+      <DropdownWrapper
+        className={dropdownDisplay}
+        ref={wrapperRef}
+        overflow={overflow}
+      >
+        <DropdownHeader>{header}</DropdownHeader>
+        {options}
+      </DropdownWrapper>
     );
-  });
-
-  return (
-    <DropdownWrapper className={dropdownDisplay}>
-      <DropdownHeader>{header}</DropdownHeader>
-      {options}
-    </DropdownWrapper>
-  );
-};
+  },
+);
 
 export default Dropdown;
