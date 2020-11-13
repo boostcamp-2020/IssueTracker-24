@@ -38,6 +38,7 @@ const Dropdown = ({
   setShow,
   add,
   remove,
+  added,
   set,
   get,
   header,
@@ -46,20 +47,25 @@ const Dropdown = ({
 }) => {
   const dropdownDisplay = show ? 'display-block' : 'display-none';
   const Component = component;
-  const options = data.map((option, index) => (
-    <div className="dropdown-option" key={'dropdown' + index}>
-      <Component
-        option={option}
-        setShow={setShow}
-        add={add}
-        remove={remove}
-        set={set}
-        get={get}
-        padding={5}
-        size={18}
-      />
-    </div>
-  ));
+  const options = data.map((option, index) => {
+    const isAdded = added.some((assignee) => assignee.id === option.id);
+
+    return (
+      <div className="dropdown-option" key={'dropdown' + index}>
+        <Component
+          option={option}
+          setShow={setShow}
+          add={add}
+          remove={remove}
+          set={set}
+          get={get}
+          padding={5}
+          size={18}
+          isAdded={isAdded}
+        />
+      </div>
+    );
+  });
 
   return (
     <DropdownWrapper className={dropdownDisplay}>

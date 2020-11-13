@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../../../common/ProfileImage';
 import svg from '../../../../utils/svg.js';
@@ -37,22 +37,18 @@ const UserOption = ({
   option,
   add,
   remove,
+  isAdded,
   fontSize = 16,
   padding = 2,
   size = 15,
 }) => {
-  const [checked, setCheck] = useState(false);
-  const checkDisplay = checked ? 'display-visible' : 'display-hidden';
+  const checkDisplay = isAdded ? 'display-visible' : 'display-hidden';
   const isSelectable = add && remove ? true : false;
+
   const handleOnClick = () => {
     if (!add || !remove) return;
-    if (!checked) {
-      add(option);
-    }
-    if (checked) {
-      remove(option);
-    }
-    setCheck(!checked);
+    if (isAdded) remove(option);
+    else add(option);
   };
 
   return (

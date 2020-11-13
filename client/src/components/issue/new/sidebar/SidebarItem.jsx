@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
+import { AppContext } from '../../../../App';
 import SelectedLabel from '../../../common/SelectedLabel';
 import SelectedMilestone from './SelectedMilestone';
 import styled from 'styled-components';
@@ -14,6 +15,16 @@ const SidebarItemWrapper = styled.div`
   &:not(:last-child) {
     border-bottom: 1px solid #eaecef;
   }
+  .assigneesInnerDiv {
+    display: flex;
+    .assignSelfBtn {
+      color: #586069;
+      font-size: 12px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 `;
 const StateMsg = styled.div`
   color: #586069;
@@ -23,6 +34,7 @@ const StateMsg = styled.div`
 const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
   const ref = useRef();
   const { dispatch } = useContext(IssueOptionContext);
+  const { currentUser } = useContext(AppContext);
   const [show, setShow] = useState(false);
   const [checked, setChecked] = useState([]);
   const Component = component;
@@ -59,6 +71,14 @@ const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
     setShow(!show);
   };
 
+  const onAssignSelfClick = () => {
+    dispatch({
+      type,
+      toAdd: [currentUser],
+    });
+    addChecked(currentUser);
+  };
+
   const renderedAddedList = (Component, title) => {
     switch (title) {
       case 'Assignees':
@@ -83,6 +103,13 @@ const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
       <Heading title={title} onClick={handleOnClick} show={show} />
       {!show && checked && checked.length > 0 ? (
         renderedAddedList(Component, title)
+      ) : title === 'Assignees' ? (
+        <div className="assigneesInnerDiv">
+          <StateMsg>{stateMsg}—</StateMsg>
+          <div className="assignSelfBtn" onClick={onAssignSelfClick}>
+            assign yourself
+          </div>
+        </div>
       ) : (
         <StateMsg>{stateMsg}</StateMsg>
       )}
@@ -91,6 +118,7 @@ const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
         setShow={setShow}
         add={addChecked}
         remove={removeChecked}
+        added={checked}
         set={setChecked}
         get={checked[0]}
         header={header}
