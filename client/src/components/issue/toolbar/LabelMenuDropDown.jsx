@@ -1,53 +1,68 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
+import SmallLabel from '../../common/SmallLabel';
+import { FILTER_ISSUES_BY_LABEL } from '../../../pages/issue-list/reducer';
+import DetailsMenuDropDown from './common/DetailsMenuDropDown';
+import DetailsItem from './common/DetailsItem';
 
-const DetailsItem = styled.div`
-  border-bottom: 1px solid #eaecef;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  &:hover {
-    background-color: #e9e9e9;
-  }
-  &:nth-child(1) {
-    font-weight: 600;
-    background-color: #fafbfc;
-    cursor: auto;
-    &:hover {
-      background-color: #fafbfc;
-    }
-  }
-`;
-
-const DetailsMenuDropDown = styled.div`
-  width: 200px;
-  position: absolute;
-  top: 70px;
-  left: 20px;
-  z-index: 10;
-  border: 1px solid #eaecef;
-  margin-top: -30px;
+const LabelWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: white;
-  border-radius: 4px;
+  .description {
+    width: 185px;
+    color: grey;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 20px;
+  }
 `;
 
-const LabelMenuDropDown = () => {
-  const { state } = useContext(IssuesContext);
+const LabelMenuDropDown = ({ setShowLabelMenu }) => {
+  const { state, dispatch } = useContext(IssuesContext);
   const { labels } = state;
+
+  const onClickFirstItem = (e) => {
+    e.stopPropagation();
+  };
+
+  const onClickUnlabel = (e) => {
+    dispatch({
+      type: FILTER_ISSUES_BY_LABEL,
+    });
+    setShowLabelMenu();
+    e.stopPropagation();
+  };
+
+  const onClickDetailsItem = (e) => {
+    const detailsItem = e.target.closest('.label-item');
+    dispatch({
+      type: FILTER_ISSUES_BY_LABEL,
+      label: detailsItem.dataset.name,
+    });
+    setShowLabelMenu();
+    e.stopPropagation();
+  };
 
   return (
     <>
-      <DetailsMenuDropDown>
-        <DetailsItem>Filter by label</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
-        <DetailsItem>Unlabeled</DetailsItem>
+      <DetailsMenuDropDown left={'20px'}>
+        <DetailsItem onClick={onClickFirstItem}>Filter by label</DetailsItem>
+        <DetailsItem onClick={onClickUnlabel}>Unlabeled</DetailsItem>
         {labels.map((label, index) => (
-          <DetailsItem key={index}>{label.title}</DetailsItem>
+          <DetailsItem
+            key={index}
+            onClick={onClickDetailsItem}
+            className={'label-item'}
+            data={label.title}
+          >
+            <SmallLabel color={label.color} size={14}/>
+            <LabelWrapper>
+              <div>{label.title}</div>
+              <div className="description">{label.description}</div>
+            </LabelWrapper>
+          </DetailsItem>
         ))}
       </DetailsMenuDropDown>
     </>

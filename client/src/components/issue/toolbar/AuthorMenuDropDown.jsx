@@ -1,52 +1,47 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssuesContext } from '../../../pages/issue-list/IssueListPage';
+import ProfileImage from '../../common/ProfileImage';
+import { FILTER_ISSUES_BY_AUTHOR } from '../../../pages/issue-list/reducer';
+import DetailsMenuDropDown from './common/DetailsMenuDropDown';
+import DetailsItem from './common/DetailsItem';
 
-const DetailsItem = styled.div`
-  border-bottom: 1px solid #eaecef;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  &:hover {
-    background-color: #e9e9e9;
-  }
-  &:nth-child(1) {
-    font-weight: 600;
-    background-color: #fafbfc;
-    cursor: auto;
-    &:hover {
-      background-color: #fafbfc;
-    }
-  }
+const IdWrapper = styled.div`
+  margin-left: 10px;
 `;
 
-const DetailsMenuDropDown = styled.div`
-  width: 190px;
-  position: absolute;
-  top: 70px;
-  left: -70px;
-  z-index: 10;
-  border: 1px solid #eaecef;
-  margin-top: -30px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 4px;
-`;
-
-const AuthorMenuDropDown = () => {
-  const { state } = useContext(IssuesContext);
+const AuthorMenuDropDown = ({ setShowAuthorMenu }) => {
+  const { state, dispatch } = useContext(IssuesContext);
   const { users } = state;
+
+  const onClickFirstItem = (e) => {
+    e.stopPropagation();
+  };
+
+  const onClickDetailsItem = (e) => {
+    const detailsItem = e.target.closest('.author-item');
+    dispatch({
+      type: FILTER_ISSUES_BY_AUTHOR,
+      author: detailsItem.dataset.name,
+    });
+    setShowAuthorMenu(false);
+    e.stopPropagation();
+  };
 
   return (
     <>
-      <DetailsMenuDropDown>
-        <DetailsItem>Filter by author</DetailsItem>
-        <DetailsItem>검색창</DetailsItem>
+      <DetailsMenuDropDown left={'-70px'}>
+        <DetailsItem onClick={onClickFirstItem}>Filter by author</DetailsItem>
         {users.map((user, index) => (
-          <DetailsItem key={index}>{user.sns_id}</DetailsItem>
+          <DetailsItem
+            className={'author-item'}
+            key={index}
+            onClick={onClickDetailsItem}
+            data={user.sns_id}
+          >
+            <ProfileImage image={user.profile_image} size={20} />
+            <IdWrapper>{user.sns_id}</IdWrapper>
+          </DetailsItem>
         ))}
       </DetailsMenuDropDown>
     </>

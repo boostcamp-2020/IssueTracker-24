@@ -1,6 +1,7 @@
 export const getTimeInfo = (time) => {
   const date = new Date(time);
   const currentDate = new Date();
+
   const timeDiff = currentDate - date; // milliseconds
   const oneSecond = 1000;
   const oneMinute = oneSecond * 60;
@@ -24,4 +25,34 @@ export const getTimeInfo = (time) => {
 
   const daysDiff = Math.round(timeDiff / oneDay);
   return `${daysDiff} days ago`;
+};
+
+export const getDueInfo = (time) => {
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const date = new Date(time);
+  return `Due by ${
+    monthNames[date.getMonth()]
+  } ${date.getDate()}, ${date.getFullYear()}`;
+};
+
+export const getFormattedDate = ({ date, format }) => {
+  if (format === '-') {
+    const year = date.getFullYear();
+    const month = String(date.getMonth()+1).padStart(2, 0);
+    const day = String(date.getDate()).padStart(2, 0);
+    return `${year}-${month}-${day}`;
+  }
 };

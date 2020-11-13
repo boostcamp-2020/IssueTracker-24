@@ -1,111 +1,130 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { IssueOptionContext } from '../../../../pages/issue-new/IssueNewPage';
+import { AppContext } from '../../../../App';
+import SelectedLabel from '../../../common/SelectedLabel';
+import SelectedMilestone from './SelectedMilestone';
 import styled from 'styled-components';
 import Heading from './Heading';
 import Dropdown from './Dropdown';
-// import { getAllLabels } from '../../../../lib/axios/label';
-// import { getAllMilestones } from '../../../../lib/axios/milestone.js';
 
 const SidebarItemWrapper = styled.div`
   position: relative;
   padding-top: 16px;
   padding-bottom: 16px;
 
-  .state-msg {
-    color: #586069;
-    font-size: 12px;
-  }
   &:not(:last-child) {
     border-bottom: 1px solid #eaecef;
   }
+  .assigneesInnerDiv {
+    display: flex;
+    .assignSelfBtn {
+      color: #586069;
+      font-size: 12px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+`;
+const StateMsg = styled.div`
+  color: #586069;
+  font-size: 12px;
 `;
 
-const labels = [
-  {
-    id: 1,
-    title: 'Frontend',
-    description: 'Something in Frontend',
-    color: '#AAED8B',
-  },
-  {
-    id: 2,
-    title: 'Backend',
-    description: 'Something in Backend : 백엔드',
-    color: '#0052CC',
-  },
-  { id: 3, title: 'Environment', description: '환경설정', color: '#F9D0C4' },
-  {
-    id: 4,
-    title: 'Bugfix: build',
-    description: '빌드 관련 버그 수정',
-    color: '#D73A4A',
-  },
-  { id: 5, title: '🥇Must', description: '우선순위: 상', color: '#E57559' },
-  { id: 6, title: '🥈Should', description: '우선순위: 중', color: '#E57559' },
-  { id: 7, title: '🥉Could', description: '우선순위: 하', color: '#E57559' },
-];
-const milestones = [
-  {
-    id: 1,
-    title: 'sprint-1',
-    description: 'sprint 1주차',
-    due_date: '2020-11-03 24:00:00',
-    state: 'closed',
-  },
-  {
-    id: 2,
-    title: 'sprint-2',
-    description: 'sprint 2주차',
-    due_date: '2020-11-10 24:00:00',
-    state: 'open',
-  },
-  {
-    id: 3,
-    title: 'sprint-3',
-    description: 'sprint 3주차',
-    due_date: '2020-11-17 24:00:00',
-    state: 'open',
-  },
-];
-const users = [
-  { id: 1, sns_id: 'qkrrlgh519' },
-  { id: 2, sns_id: 'mu1616' },
-  { id: 3, sns_id: 'jch422' },
-  { id: 4, sns_id: 'thdwlsgus0' },
-];
-const data = {
-  assignees: users,
-  labels,
-  milestones,
-};
-
-const SidebarItem = ({ title, stateMsg, item }) => {
-  const [show, setShow] = useState(false);
-
+const SidebarItem = ({ title, type, header, stateMsg, component, data }) => {
   const ref = useRef();
+  const { dispatch } = useContext(IssueOptionContext);
+  const { currentUser } = useContext(AppContext);
+  const [show, setShow] = useState(false);
+  const [checked, setChecked] = useState([]);
+  const Component = component;
+
+  const addChecked = (newChecked) => {
+    setChecked([...checked, newChecked]);
+  };
+  const removeChecked = (newUnchecked) => {
+    setChecked(checked.filter((item) => item.id !== newUnchecked.id));
+  };
 
   useEffect(() => {
-    document.body.addEventListener('click', (e) => {
+    const clickBody = (e) => {
       if (ref.current && ref.current.contains(e.target)) return;
       setShow(false);
-    });
+    };
+    document.body.addEventListener('click', clickBody);
+
+    return () => {
+      document.body.removeEventListener('click', clickBody);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!show) {
+      dispatch({
+        type,
+        toAdd: checked,
+      });
+    }
+  }, [show]);
 
   const handleOnClick = () => {
     setShow(!show);
   };
-  const hideDropdown = () => {
-    setShow(false);
+
+  const onAssignSelfClick = () => {
+    dispatch({
+      type,
+      toAdd: [currentUser],
+    });
+    addChecked(currentUser);
+  };
+
+  const renderedAddedList = (Component, title) => {
+    switch (title) {
+      case 'Assignees':
+        return checked.map((addedItem, index) => (
+          <Component
+            key={'addedList' + index}
+            option={addedItem}
+            fontSize={12}
+          />
+        ));
+      case 'Labels':
+        return checked.map((addedItem, index) => (
+          <SelectedLabel key={'addedLabel' + index} label={addedItem} />
+        ));
+      case 'Milestone':
+        return <SelectedMilestone milestone={checked[0]} />;
+    }
   };
 
   return (
     <SidebarItemWrapper ref={ref}>
-      <Heading title={title} onClick={handleOnClick} />
-      <div className="state-msg">{stateMsg}</div>
+      <Heading title={title} onClick={handleOnClick} show={show} />
+      {!show && checked && checked.length > 0 ? (
+        renderedAddedList(Component, title)
+      ) : title === 'Assignees' ? (
+        <div className="assigneesInnerDiv">
+          <StateMsg>{stateMsg}—</StateMsg>
+          <div className="assignSelfBtn" onClick={onAssignSelfClick}>
+            assign yourself
+          </div>
+        </div>
+      ) : (
+        <StateMsg>{stateMsg}</StateMsg>
+      )}
+
       <Dropdown
         show={show}
-        item={item}
-        data={data[item]}
-        handleClose={hideDropdown}
+        setShow={setShow}
+        add={addChecked}
+        remove={removeChecked}
+        added={checked}
+        set={setChecked}
+        get={checked[0]}
+        header={header}
+        component={component}
+        data={data}
       />
     </SidebarItemWrapper>
   );

@@ -1,31 +1,59 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
-import Label from '../label/Label';
+import Label from '../common/Label';
 import { getTimeInfo } from '../../utils/time';
+import svg from '../../utils/svg';
+import { useHistory } from 'react-router-dom';
 
 const IssueContentWrapper = styled.div`
   .issue-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
     margin-left: 20px;
+    &: hover {
+      color: #0667d5;
+    }
   }
   .issue-content {
     margin-left: 20px;
-    color: grey;
+    color: #586069;
+  }
+  .milestone-title {
+    margin-left: 4px;
+  }
+  svg {
+    position: relative;
+    top: 2px;
+    fill: #586069;
   }
 `;
 
-const IssueContent = ({ issue }) => {
+const TitleWrapper = styled.div`
+  display: flex;
+`;
+
+const IssueContent = memo(({ issue }) => {
+  const history = useHistory();
+  const moveIssueDetailPage = (e) => {
+    history.push(`/issues/${issue.id}`);
+    e.stopPropagation();
+  };
   return (
     <IssueContentWrapper>
       <div>
-        <div>
-          <a className="issue-title">{issue.title}</a>
-          {issue.labels.map((label) => (
-            <Label key={label.id} label={label} />
-          ))}
-        </div>
+        <TitleWrapper>
+          <div>
+            <a className="issue-title" onClick={moveIssueDetailPage}>
+              {issue.title}
+            </a>
+          </div>
+          <div>
+            {issue.labels.map((label) => (
+              <Label key={label.id} label={label} />
+            ))}
+          </div>
+        </TitleWrapper>
         <div className="issue-content">
           <span>
             {issue.state === 'open'
@@ -36,9 +64,16 @@ const IssueContent = ({ issue }) => {
                   issue.closed_at,
                 )}`}
           </span>
+          &nbsp;&nbsp;
+          <span className="svg-container">
+            {issue.milestone && svg['Milestones']}
+          </span>
+          {issue.milestone && (
+            <span className="milestone-title">{issue.milestone.title}</span>
+          )}
         </div>
       </div>
     </IssueContentWrapper>
   );
-};
+});
 export default IssueContent;
