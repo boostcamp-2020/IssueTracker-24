@@ -12,6 +12,7 @@ const DropdownWrapper = styled.div`
   width: 105%;
   min-width: 240px;
   z-index: 2;
+  max-height: 300px;
 
   &.display-block {
     display: block;
