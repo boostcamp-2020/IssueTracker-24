@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Assignee from './Assignee';
 import Label from './Label';
-import Milestone from './milestone';
+import Milestone from './Milestone';
 
 const SidebarItemModalWrapper = styled.div`
   position: absolute;
