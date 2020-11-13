@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import Header from '../../components/Header';
 import MilestoneHeader from '../../components/milestone/MilestoneHeader';
 import MilestoneNav from '../../components/milestone/MilestoneNav';
@@ -8,6 +8,7 @@ import reducer from './reducer';
 import { getAllMilestones } from '../../lib/axios/milestone';
 import { getAllIssues } from '../../lib/axios/issue';
 import { INIT_DATA } from './reducer';
+import Spinner from '../../components/common/Spinner';
 
 export const MilestoneContext = React.createContext();
 
@@ -22,6 +23,7 @@ const initialState = {
 };
 
 const MilestonePage = () => {
+  const [isCompleteRequest, setIsCompleteRequest] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { milestones } = state;
   useEffect(async () => {
@@ -36,7 +38,10 @@ const MilestonePage = () => {
       issues: issues,
       display: 'none',
     });
+    setIsCompleteRequest(true);
   }, []);
+
+  if (!isCompleteRequest) return <Spinner />;
 
   return (
     <MilestoneContext.Provider value={{ state, dispatch }}>
