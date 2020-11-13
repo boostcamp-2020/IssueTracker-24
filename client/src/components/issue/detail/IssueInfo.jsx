@@ -8,6 +8,10 @@ const HeaderContent = styled.div`
   display: flex;
   .grey {
     color: grey;
+    line-height:27px;
+  }
+  .nickname{
+    line-height:27px;
   }
 `;
 const ButtonWrapper = styled.div`
@@ -16,6 +20,7 @@ const ButtonWrapper = styled.div`
     outline: 0;
     border: 1px solid grey;
     height: 27px;
+    line-height:27px;
     box-sizing: border-box;
     padding-left: 5px;
     padding-right: 5px;
@@ -24,6 +29,7 @@ const ButtonWrapper = styled.div`
   }
   .edit {
     cursor: pointer;
+    line-height:27px;
     margin-left: 10px;
     height: 27px;
     &:hover {
@@ -63,7 +69,7 @@ const IssueInfo = ({ onClickEdit }) => {
     <>
       <IssueItemHeader>
         <HeaderContent>
-          <div>{issue.user.sns_id}</div>&nbsp;
+          <div className="nickname">{issue.user.sns_id}</div>&nbsp;
           <div className="grey">commented {getTimeInfo(issue.created_at)}</div>
         </HeaderContent>
         <ButtonWrapper>

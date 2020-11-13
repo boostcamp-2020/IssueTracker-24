@@ -17,7 +17,6 @@ const LabelWrapper = styled.button`
 `;
 
 const Label = ({ label }) => {
-
   const { id, title, color } = label;
   const textColor = getContrastYIQ(color);
   return (
