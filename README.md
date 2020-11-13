@@ -4,6 +4,9 @@
 - [제품 백로그](https://docs.google.com/spreadsheets/d/1wukp65G0J8GofRCyOa-qqhg4Cei2ReM6sOE9rPNDIJc/edit#gid=503039929)
 - [Wiki](https://github.com/boostcamp-2020/IssueTracker-24/wiki)  
 
+## :watch: 프로젝트 기간
+- 2020.10.26 ~ 2020.11.13
+
 ## :exclamation: 배포 Link 
 - [IssueTracker-24](http://49.50.162.165/)    
 
