@@ -21,7 +21,7 @@ const Header = styled.div`
     content: '';
     width: 0;
     height: 0;
-    margin-left: -20px;
+    margin-left: -23px;
     margin-top: 11px;
     transform: scale(3);
     border-right-color: #e8e9ec;

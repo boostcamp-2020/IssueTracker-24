@@ -21,7 +21,7 @@ const IssueNewContentWrapper = styled.div`
     content: '';
     width: 0;
     height: 0;
-    margin-left: -10px;
+    margin-left: -13px;
     margin-top: 30px;
     transform: scale(3);
     border-right-color: #e8e9ec;
