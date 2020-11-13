@@ -58,13 +58,16 @@ const SidebarItemModal = ({ title, header, component, setShow }) => {
           ))
         : null}
       {title === 'Milestone'
-        ? component.map((item) => (
-            <Milestone
-              key={'milestone' + item.id}
-              milestone={item}
-              setShow={setShow}
-            ></Milestone>
-          ))
+        ? component.map((item) => {
+            if (item.state === 'open')
+              return (
+                <Milestone
+                  key={'milestone' + item.id}
+                  milestone={item}
+                  setShow={setShow}
+                ></Milestone>
+              );
+          })
         : null}
     </SidebarItemModalWrapper>
   );
