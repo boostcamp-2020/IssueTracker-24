@@ -7,10 +7,6 @@
 ## :exclamation: 배포 Link 
 - [IssueTracker-24](http://49.50.162.165/)    
 
-## :exclamation: 배포 Link
-
-- [IssueTracker-24](http://49.50.162.165/)
-
 ## :coffee: API 문서
 
 - [API 문서](https://github.com/boostcamp-2020/IssueTracker-24/wiki/API-Docs)
