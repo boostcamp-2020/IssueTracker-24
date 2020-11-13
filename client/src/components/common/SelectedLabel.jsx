@@ -13,6 +13,7 @@ const SelectedLabelWrapper = styled.div`
   height: 20px;
   line-height: 20px;
   padding: 0px 10px 3px 10px;
+  box-sizing: border-box;
 `;
 
 const SelectedLabel = ({ label }) => {
