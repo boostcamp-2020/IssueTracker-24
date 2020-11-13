@@ -57,7 +57,7 @@ const LabelMenuDropDown = ({ setShowLabelMenu }) => {
             className={'label-item'}
             data={label.title}
           >
-            <SmallLabel color={label.color} />
+            <SmallLabel color={label.color} size={14}/>
             <LabelWrapper>
               <div>{label.title}</div>
               <div className="description">{label.description}</div>
