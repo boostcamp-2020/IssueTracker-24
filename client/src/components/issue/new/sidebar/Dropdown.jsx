@@ -36,26 +36,40 @@ const DropdownHeader = styled.div`
 `;
 
 const Dropdown = memo(
-  ({ show, setShow, add, remove, set, get, header, component, data }) => {
+  ({
+    show,
+    setShow,
+    add,
+    remove,
+    added,
+    set,
+    get,
+    header,
+    component,
+    data,
+  }) => {
     const [overflow, setOverflow] = useState('auto');
     const wrapperRef = useRef();
     const dropdownDisplay = show ? 'display-block' : 'display-none';
     const Component = component;
-
-    const options = data.map((option, index) => (
-      <div className="dropdown-option" key={'dropdown' + index}>
-        <Component
-          option={option}
-          setShow={setShow}
-          add={add}
-          remove={remove}
-          set={set}
-          get={get}
-          padding={5}
-          size={18}
-        />
-      </div>
-    ));
+    const options = data.map((option, index) => {
+      const isAdded = added.some((assignee) => assignee.id === option.id);
+      return (
+        <div className="dropdown-option" key={'dropdown' + index}>
+          <Component
+            option={option}
+            setShow={setShow}
+            add={add}
+            remove={remove}
+            set={set}
+            get={get}
+            padding={5}
+            size={18}
+            isAdded={isAdded}
+          />
+        </div>
+      );
+    });
 
     useEffect(() => {
       if (wrapperRef.current.clientHeight > 300) {
