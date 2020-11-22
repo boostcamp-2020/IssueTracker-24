@@ -31,7 +31,7 @@
 ![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
 
 - Frontend: React, Sass, Webpack, Babel
-- Backend: Express, Mysql, Sequlize ORM
+- Backend: Express, Mysql, Sequelize ORM
 - Auth: Passport-Github, JWT
 - Infra: NCloud, Nginx
 
