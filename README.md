@@ -43,7 +43,7 @@
 
 ## 기능구현사항
 
-- github oauth 로그인
+- GitHub OAuth 로그인
    <img width="577" alt="스크린샷 2020-11-15 오후 7 48 42" src="https://user-images.githubusercontent.com/22065725/99182944-aead8480-277b-11eb-8ac8-88e197b909e5.png">
    
 - 이슈 생성 페이지
